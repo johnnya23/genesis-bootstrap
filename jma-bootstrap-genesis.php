@@ -28,15 +28,16 @@ add_action('genesis_setup', 'JMA_GBS_load_lib_files', 15);
 
 function JMA_GBS_load_lib_files()
 {
-    foreach (glob(dirname(__FILE__) . '/lib/*.php') as $file) {
+    foreach (glob(JMA_GBS_BASE_DIRECTORY . '/lib/*.php') as $file) {
         include $file;
     }
 }
-function jma_gbs_add_customizer()
+function jma_gbs_add_blocks()
 {
-    require_once trailingslashit(dirname(__FILE__)) . 'customizer/functions.php';
+    require_once JMA_GBS_BASE_DIRECTORY . 'blocks/menu/index.php';
+    require_once JMA_GBS_BASE_DIRECTORY . 'blocks/logo/index.php';
 }
-//add_action('after_setup_theme', 'jma_gbs_add_customizer');
+add_action('after_setup_theme', 'jma_gbs_add_blocks');
 
 function jma_gbs_customizer($wp_customize)
 {
@@ -64,3 +65,28 @@ function jma_gbs_customizer($wp_customize)
     );
 }
 add_action('customize_register', 'jma_gbs_customizer', 9999);
+
+/**
+ *
+
+ */
+function bsg_unload_framework()
+{
+    //echo get_theme_mod('jma_gbs_header_page'). 'dddd';
+    if (defined('GENESIS_LOADED_FRAMEWORK') && get_theme_mod('jma_gbs_header_page') != 0) {
+        remove_action('genesis_after_header', 'genesis_do_subnav');
+        remove_action('genesis_after_header', 'genesis_do_nav');
+
+        remove_action('genesis_header', 'genesis_do_header');
+
+        if (!is_page(get_theme_mod('jma_gbs_header_page'))) {
+            add_action('genesis_header', 'jma_gbs_do_header');
+        }
+    }
+}
+add_action('genesis_init', 'bsg_unload_framework', 99);
+
+function jma_gbs_do_header()
+{
+    echo apply_filters('the_content', get_the_content(null, false, get_theme_mod('jma_gbs_header_page')));
+}
