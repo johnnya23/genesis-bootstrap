@@ -11,15 +11,17 @@ registerBlockType('jma-gbs/menu-block', {
     icon: 'universal-access-alt',
 
     category: 'layout',
+    supports: {
+        align: true,
+        alignWide: true
+    },
 
     attributes: {
         nav_val: {
-            type: 'string',
-            default: 'genesis_do_nav',
+            type: 'string'
         },
         use_bg: {
-            type: 'string',
-            default: '1',
+            type: 'string'
         },
         menu_bg: {
             type: 'string'
@@ -67,11 +69,11 @@ registerBlockType('jma-gbs/menu-block', {
                         selected: nav_val,
                         options: [{
                                 label: 'Primary',
-                                value: '1'
+                                value: 'primary'
                             },
                             {
                                 label: 'Secondary',
-                                value: '0'
+                                value: 'second'
                             }
                         ],
                         onChange: function(newValue) {
@@ -87,11 +89,11 @@ registerBlockType('jma-gbs/menu-block', {
                         selected: use_bg,
                         options: [{
                                 label: 'Yes',
-                                value: '1'
+                                value: 'yes'
                             },
                             {
                                 label: 'No',
-                                value: '0'
+                                value: 'no'
                             }
                         ],
                         onChange: function(newValue) {

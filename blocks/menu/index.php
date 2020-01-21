@@ -64,6 +64,9 @@
             'menu_font_active' => array(
                 'type' => 'string',
             ),
+            'align' => array(
+                'type' => 'string',
+            ),
             'className' => array(
                 'type' => 'string',
             )
@@ -78,10 +81,12 @@
 
 function jma_gbs_menu($input)
 {
-    //print_r($input);
     ob_start();
+    /*foreach ($input as $i => $item) {
+        echo $i . '=>' . $item;
+    }*/
     if (isset($input['nav_val'])) {//genesis_do_subnav();
-        if ($input['nav_val']) {
+        if ($input['nav_val'] == 'primary') {
             genesis_do_nav();
         } else {
             genesis_do_subnav();

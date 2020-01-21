@@ -35,7 +35,8 @@ function JMA_GBS_load_lib_files()
 function jma_gbs_add_blocks()
 {
     require_once JMA_GBS_BASE_DIRECTORY . 'blocks/menu/index.php';
-    require_once JMA_GBS_BASE_DIRECTORY . 'blocks/logo/index.php';
+    //require_once JMA_GBS_BASE_DIRECTORY . 'blocks/logo/index.php';
+    require_once JMA_GBS_BASE_DIRECTORY . 'blocks/logo2/index.php';
 }
 add_action('after_setup_theme', 'jma_gbs_add_blocks');
 

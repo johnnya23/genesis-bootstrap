@@ -39,7 +39,26 @@
      // Here we actually register the block with WP, again using our namespacing.
      // We also specify the editor script to be used in the Gutenberg interface.
      register_block_type('jma-gbs/logo-block', array(
-
+         'attributes'      => array(
+             'mediaID' => array(
+                 'type' => 'string',
+             ),
+             'mediaURL' => array(
+                 'type' => 'string',
+             ),
+             'mediaTitle' => array(
+                 'type' => 'string',
+             ),
+             'mediaFileName' => array(
+                 'type' => 'string',
+             ),
+             'alignment' => array(
+                 'type' => 'string',
+             ),
+             'content' => array(
+                 'type' => 'string',
+             )
+         ),
         'editor_script' => 'jma-gbs-menu-logo-script',
         'render_callback' => 'jma_gbs_seo_site_title',
     ));
@@ -59,6 +78,7 @@
  */
 function jma_gbs_seo_site_title($x)
 {
+
     // Set what goes inside the wrapping tags.
     $inside = current_theme_supports('genesis-custom-logo') && has_custom_logo() ? wp_kses_post(get_bloginfo('name')) : wp_kses_post(sprintf('<a href="%s">%s</a>', trailingslashit(home_url()), get_bloginfo('name')));
 
@@ -98,7 +118,11 @@ function jma_gbs_seo_site_title($x)
             ],
         ]
     );
+    $title = 'xxx';
+    if (isset($x['mediaURL'])) {
+        $title = $x['mediaURL'] . '<button type="button" class="components-button components-button is-button is-default is-large">open</button>';
+    }
     ob_start();
-    echo $title;
+    echo  $title;
     return ob_get_clean();
 }
