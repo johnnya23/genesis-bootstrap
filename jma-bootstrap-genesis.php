@@ -7,7 +7,6 @@
 *Author URI: https://gist.github.com/theandystratton/5924570
 *License: GPL2
  */
-
 /**
  * Include all php files in the /includes directory
  *
@@ -24,70 +23,72 @@ define('JMA_GBS_BASE_DIRECTORY', plugin_dir_path(__FILE__));
   */
 define('JMA_GBS_BASE_URI', plugin_dir_url(__FILE__));
 
-add_action('genesis_setup', 'JMA_GBS_load_lib_files', 15);
 
-function JMA_GBS_load_lib_files()
+
+function JMA_GBS_load_files()
 {
-    foreach (glob(JMA_GBS_BASE_DIRECTORY . '/lib/*.php') as $file) {
-        include $file;
-    }
-}
-function jma_gbs_add_blocks()
-{
-    require_once JMA_GBS_BASE_DIRECTORY . 'blocks/menu/index.php';
-    //require_once JMA_GBS_BASE_DIRECTORY . 'blocks/logo/index.php';
-    require_once JMA_GBS_BASE_DIRECTORY . 'blocks/logo2/index.php';
-}
-add_action('after_setup_theme', 'jma_gbs_add_blocks');
+    $folders = array('lib', 'jma_lib');
 
-function jma_gbs_customizer($wp_customize)
-{
-    $wp_customize->add_section('jma_gbs_header_controls_section', array(
-        'title'      => __('Header', 'jma_gbs'),
-        'priority'   => 30,
-    ));
-
-    $wp_customize->add_setting(
-        'jma_gbs_header_page',
-        array(
-            'default' => '',
-            'transport' => 'refresh'
-        )
-    );
-    $wp_customize->add_control(
-            'jma_gbs_header_page_control',
-            array(
-                'label' => __('Page for Header', 'jma_gbs'),
-                'description' => esc_html__('Page that will provide header content.'),
-                'section' => 'jma_gbs_header_controls_section',
-                'settings'   => 'jma_gbs_header_page',
-                'type' => 'dropdown-pages'
-            )
-    );
-}
-add_action('customize_register', 'jma_gbs_customizer', 9999);
-
-/**
- *
-
- */
-function bsg_unload_framework()
-{
-    //echo get_theme_mod('jma_gbs_header_page'). 'dddd';
-    if (defined('GENESIS_LOADED_FRAMEWORK') && get_theme_mod('jma_gbs_header_page') != 0) {
-        remove_action('genesis_after_header', 'genesis_do_subnav');
-        remove_action('genesis_after_header', 'genesis_do_nav');
-
-        remove_action('genesis_header', 'genesis_do_header');
-
-        if (!is_page(get_theme_mod('jma_gbs_header_page'))) {
-            add_action('genesis_header', 'jma_gbs_do_header');
+    foreach ($folders as $key => $folder) {
+        foreach (glob(JMA_GBS_BASE_DIRECTORY . '/' . $folder . '/*.php') as $file) {
+            include $file;
         }
     }
 }
-add_action('genesis_init', 'bsg_unload_framework', 99);
+add_action('genesis_setup', 'JMA_GBS_load_files', 15);
 
-function jma_gbs_do_header()
+function jma_gbs_genesis_post_title_output($settings)
 {
-    echo apply_filters('the_content', get_the_content(null, false, get_theme_mod('jma_gbs_header_page')));
+    global $wp_query;
+    if (!is_archive()) {
+        $settings = '';
+    }
+    return $settings;
 }
+function jma_gbs_customize_register()
+{
+    //add_filter('genesis_post_title_output', 'jma_gbs_genesis_post_title_output', 88);
+}
+add_action('after_setup_theme', 'jma_gbs_customize_register', 88);
+
+
+function jma_gbs_customizer_control($wp_customize)
+{/*
+    $wp_customize->add_section('jma_gbs_header_controls_section', array(
+    'panel' => 'jma_gbs_header_controls_panel',
+        'title'      => __('Page', 'jma_gbs'),
+        'priority'   => 30,
+    ));
+    $wp_customize->add_panel('jma_gbs_header_controls_panel', array(
+        'title'      => __('JMA Panel', 'jma_gbs'),
+        'priority'   => 30,
+    ));*/
+    $items = array();
+    foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
+        $new = include $file;
+        array_push($items, $new);
+    }
+    jma_gbs_settings_process($items, $wp_customize);
+}
+add_action('customize_register', 'jma_gbs_customizer_control');
+
+function jma_gbs_header_css()
+{
+    require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
+    echo jma_gbs_process_css_array($css);
+}
+add_action('wp_head', 'jma_gbs_header_css');
+
+
+function jma_gbs_template_redirect()
+{
+    //if (defined('GENESIS_LOADED_FRAMEWORK') && get_theme_mod('jma_gbs_site_banner') == 1) {
+    remove_action('genesis_entry_header', 'genesis_do_post_title', 999);
+    //}
+}
+
+function jma_gbs_wrap_redirect()
+{
+    add_action('genesis_before_entry', 'jma_gbs_template_redirect');
+}
+add_action('template_redirect', 'jma_gbs_template_redirect', 999);
