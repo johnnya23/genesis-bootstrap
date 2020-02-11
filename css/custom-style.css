@@ -1,3 +1,4 @@
+/* mobile menu */
 @media(max-width: 767px) {
     .sf-vertical>li {
         float: none;
@@ -52,4 +53,8 @@ body.open .jma-gbs-mobile-panel {
 body.open .site-container {
     -webkit-transform: translate3d(-280px, 0, 0);
     transform: translate3d(-280px, 0, 0);
+}
+
+entry-title-link:hover {
+    text-decoration: none;
 }

@@ -60,6 +60,40 @@ function jma_gbs_settings_process($items, $wp_customize, $pre = 'jma_gbs_')
 }
 
 /**
+* structure_css_array creates nested array
+*
+*
+* @param array $items items of be processed
+* @return array $querys   [$query][$selector][$item][$attr] = $value
+*/
+function structure_css_array($items)
+{
+    $querys = array();
+    foreach ($items as $item) {
+        $query = 'none';
+        //do we have a valid item
+        if (is_array($item) && isset($item['selector']) && count($item) > 1) {
+            if (isset($item['query']) && $item['query']) {
+                $query = str_replace(array(' ', 'and'), array('', ' and '), $item['query']);
+                unset($item['query']);
+            }
+            //open with selector(s)
+            $selectors = explode(',', $item['selector']);
+            unset($item['selector']);
+            //the attr/value pairs plus selector and query elements
+            foreach ($selectors as $selector) {
+                $selectors_attr_vals = array();
+                //echo $selector;
+                $selector = trim(preg_replace('/\s+/', ' ', $selector));
+                $selectors_attr_vals[$query][$selector] = $item;
+                $querys = array_replace_recursive($querys, $selectors_attr_vals);
+            }
+        }
+    }
+    return $querys;
+}
+
+/**
 * jma_gbs_process_css_array creates css string from array
 *
 *
@@ -71,42 +105,25 @@ function jma_gbs_process_css_array($items)
     $css = '';
     if (is_array($items)) {
         $css .= '<style type="text/css" media="screen">';
-        $querys = array();
-        foreach ($items as $item) {
-            $selectors_attr_vals = '';
-            $query = 'none';
-            //do we have a valid item
-            if (is_array($item) && isset($item['selector']) && count($item) > 1) {
-                //open with selector
-                $selectors_attr_vals .= $item['selector'] . '{';
-                //the attr/value pairs plus selector and query elements
-                foreach ($item as $attr => $value) {
-                    //we dont want to process these 2 below
-                    if ($attr == 'query' || $attr == 'selector') {
-                        //if a query is present we assign the value and we disregard the selector
-                        if ($attr == 'query') {
-                            $query = str_replace(' ', '', $value);
-                        }
-                    } else {
-                        //what's left are the attribute value pairs
-                        $selectors_attr_vals .= $attr . ':' . $value . ';';
-                    }
-                }
-                //close it
-                $selectors_attr_vals .= '}';
-            }
-            //build and array of all queries $query => $text
-            $querys[$query] .= $selectors_attr_vals;
-        }
+        $querys = structure_css_array($items);
+
         //step through all the queries
-        foreach ($querys as $query => $text) {
-            $open = $close = '';
+        foreach ($querys as $query => $selectors) {
+            $text = $open = $close = '';
             //wrap it if there is a query
             if ($query != 'none') {
-                $open = '@media(' .$query . '){';
+                $open = '@media ' . $query . '{';
                 $close = '}';
             }
-
+            //step through all the selectors
+            foreach ($selectors as $selector => $item) {
+                $text .= $selector . '{';
+                foreach ($item as $attr => $value) {
+                    //what's left are the attribute value pairs
+                    $text .= $attr . ':' . $value . ';';
+                }
+                $text .='}';
+            }
             $css .= $open . $text . $close;
         }
         $css .= '</style>';

@@ -26,12 +26,26 @@ return array(
             'section' => 'genesis_layout',
             'type' => 'color'
         ),
-        'site_font' => array(
+        'site_title_color' => array(
+            'default' => '#004400',
+            'label' => __('Site Title Font', 'jma_gbs'),
+            //'description' => esc_html__('Page that will provide header contentxxx.'),
+            'section' => 'genesis_layout',
+            'type' => 'color'
+        ),
+        'site_font_color' => array(
             'default' => '#666666',
             'label' => __('Site Font', 'jma_gbs'),
             //'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_layout',
             'type' => 'color'
+        ),
+        'site_font_size' => array(
+            'default' => '14px',
+            'label' => __('Site Font', 'jma_gbs'),
+            'description' => esc_html__('include the unit (px, em ...)'),
+            'section' => 'genesis_layout',
+            'text' => 'text'
         ),
         'site_width' => array(
             'default' => 1200,
