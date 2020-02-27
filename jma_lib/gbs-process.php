@@ -119,8 +119,11 @@ function jma_gbs_process_css_array($items)
             foreach ($selectors as $selector => $item) {
                 $text .= $selector . '{';
                 foreach ($item as $attr => $value) {
-                    //what's left are the attribute value pairs
-                    $text .= $attr . ':' . $value . ';';
+                    //make sure its not blank
+                    if ($value) {
+                        //what's left are the attribute value pairs
+                        $text .= $attr . ':' . $value . ';';
+                    }
                 }
                 $text .='}';
             }

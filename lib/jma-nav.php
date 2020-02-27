@@ -4,10 +4,10 @@ if (class_exists('UberMenuStandard')) {
     return;
 }
 // add primary nav to top of the page
-add_action('genesis_before_header', 'jma_gbs_panel_button');
+add_action('genesis_header', 'jma_gbs_panel_button', 9);
 add_action('genesis_before', 'jma_gbs_open_panel');
-add_action('genesis_before', 'jma_gbs_panel_button');
-add_action('genesis_before', 'genesis_do_nav');
+//add_action('genesis_before', 'jma_gbs_panel_button');
+//add_action('genesis_before', 'genesis_do_nav');
 add_action('genesis_before', 'jma_gbs_close_panel');
 //add_action('genesis_before', 'genesis_do_subnav');
 
@@ -67,10 +67,10 @@ function JMA_GBS_nav_menu_markup_filter($html, $args)
 
     $data_target = "nav-collapse" . sanitize_html_class('-' . $args->theme_location);
 
-    $output = "<div>";
+    $output = '<div class="outer">';
     $output .= $html;
     $output .= '</div>'; // .collapse .navbar-collapse
-    return $output;
+    return apply_filters('JMA_GBS_nav_menu_markup_filter_inner', $output, $html, $args);
 }
 
 function JMA_GBS_navbar_brand_markup()

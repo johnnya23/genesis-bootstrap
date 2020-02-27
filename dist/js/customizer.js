@@ -1,0 +1,45 @@
+(function() {
+
+
+    function conditional_display(conditional, condition_toggled) {
+        wp.customize.control(conditional, function(control) {
+            var conditions, toggleControl; // here.
+            //conditions are the value(s) for controller that will trigger toggling
+            conditions = condition_toggled.split(',');
+            toggleControl = function toggleControl(value) {
+                conditions.forEach(function(condition) {
+                    var cond_display_control, controllers; // here.
+                    //this will get the condition that will result in display
+                    //and controllers of displayed items
+                    cond_display_control = condition.split('|');
+                    //separates out the controllers to be displayed
+                    controllers = cond_display_control[1].split('^');
+                    if (value == cond_display_control[0]) {
+
+                        controllers.forEach(function(controller) {
+                            console.log(controller);
+                            wp.customize.control(controller).toggle(true);
+                        });
+                    } else {
+                        controllers.forEach(function(controller) {
+                            wp.customize.control(controller).toggle(false);
+                        });
+                    }
+                });
+            };
+
+            toggleControl(control.setting.get());
+            control.setting.bind(toggleControl);
+        });
+    }
+    /**
+     * Run functions when customizer is ready.
+     */
+    wp.customize.bind('ready', function() {
+        conditional_display('jma_gbs_frame_content_control', 'yes|jma_gbs_frame_border_color_control^jma_gbs_frame_border_width_control^jma_gbs_frame_border_radius_control');
+
+        conditional_display('jma_gbs_modular_header_control', 'yes|jma_gbs_header_border_color_control^jma_gbs_header_border_width_control^jma_gbs_header_border_radius_control');
+
+        conditional_display('jma_gbs_modular_footer_control', 'yes|jma_gbs_footer_border_color_control^jma_gbs_footer_border_width_control^jma_gbs_footer_border_radius_control');
+    });
+})();

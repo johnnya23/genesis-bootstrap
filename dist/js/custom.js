@@ -11,19 +11,40 @@ jQuery(document).ready(function($) {
         $('body').toggleClass('open');
     });
 
-    function panel_adjust() {
-        admin_bar_height = $('#wpadminbar').length ? $('#wpadminbar').height() + 'px' : 0;
-        $('#mypanel').css('top', admin_bar_height);
+    var navVert = parseInt($('body').css('padding-top'), 10);
+    $navbar = $('.site-container').find('.site-header').find('.nav-primary');
+    $navbar.clone(true).prependTo(".site-container");
+    $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
+
+    function sticktothetop() {
+        var window_top = $(window).scrollTop();
+        $wpadminbar = $('#wpadminbar');
+
+        admin_height_adjust = $wpadminbar.length && $wpadminbar.css('position') == 'fixed' ? $wpadminbar.height() + 'px' : 0;
+        $sticky = $('.site-container >.nav-primary');
+        $sticky.width($('.site-container').width());
+        if (window_top > navVert) {
+            $sticky.addClass('fixed');
+            $sticky.css('top', admin_height_adjust);
+        } else {
+            $sticky.removeClass('fixed');
+            $sticky.css('top', '');
+        }
     }
 
     $window = $(window);
-    $window.load(function() {});
+    $window.load(function() {
+        sticktothetop();
+    });
 
-    $window.scroll(function() {});
+    $window.scroll(function() {
+        sticktothetop();
+    });
 
     $window.bind('baseresizeEnd', function() {});
 
     $window.resize(function() {
+        $('body').removeClass('open');
         if (this.gbsresizeTO) clearTimeout(this.gbsresizeTO);
         this.gbsresizeTO = setTimeout(function() {
             $(this).trigger('baseresizeEnd');

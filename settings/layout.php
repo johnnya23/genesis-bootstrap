@@ -9,8 +9,47 @@ return array(
             'type' => 'select',
             'choices' => array(
                 'full' => 'Full Width',
-                'boxed' => 'boxed'
+                'boxed' => 'Boxed',
+                'modular' => 'Modular (content only)'
             )
+        ),
+        'site_width' => array(
+            'default' => '1200px',
+            'label' => __('Site Width', 'jma_gbs'),
+            'description' => esc_html__('In Pixels'),
+            'section' => 'genesis_layout',
+            'type' => 'text'
+        ),
+        'frame_content' => array(
+            'default' => 'no',
+            'label' => __('Frame Content', 'jma_gbs'),
+            'description' => esc_html__('Frame the Site Content'),
+            'section' => 'genesis_layout',
+            'type' => 'radio',
+            'choices' => array(
+                'no' => 'No',
+                'yes' => 'Yes'
+            )
+        ),
+        'frame_border_color' => array(
+            'default' => '#660000',
+            'label' => __('Site Border Color', 'jma_gbs'),
+            'section' => 'genesis_layout',
+            'type' => 'color',
+        ),
+        'frame_border_width' => array(
+            'default' => '1',
+            'label' => __('Site Border Width (0 for no border)', 'jma_gbs'),
+            'description' => esc_html__('in px'),
+            'section' => 'genesis_layout',
+            'type' => 'text'
+        ),
+        'frame_border_radius' => array(
+            'default' => '1',
+            'label' => __('Header Border Radius', 'jma_gbs'),
+            'description' => esc_html__('in px'),
+            'section' => 'genesis_layout',
+            'type' => 'text'
         ),
         'site_bg' => array(
             'default' => '#ffffff',
@@ -28,14 +67,28 @@ return array(
         ),
         'site_title_color' => array(
             'default' => '#004400',
-            'label' => __('Site Title Font', 'jma_gbs'),
+            'label' => __('Site Title Color', 'jma_gbs'),
             //'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_layout',
             'type' => 'color'
         ),
         'site_font_color' => array(
             'default' => '#666666',
-            'label' => __('Site Font', 'jma_gbs'),
+            'label' => __('Site Font Color', 'jma_gbs'),
+            //'description' => esc_html__('Page that will provide header contentxxx.'),
+            'section' => 'genesis_layout',
+            'type' => 'color'
+        ),
+        'site_font_link_color' => array(
+            'default' => '#004400',
+            'label' => __('Site Link Font Color', 'jma_gbs'),
+            //'description' => esc_html__('Page that will provide header contentxxx.'),
+            'section' => 'genesis_layout',
+            'type' => 'color'
+        ),
+        'site_font_link_hover_color' => array(
+            'default' => '#009900',
+            'label' => __('Site Link Font Hover Color', 'jma_gbs'),
             //'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_layout',
             'type' => 'color'
@@ -46,13 +99,6 @@ return array(
             'description' => esc_html__('include the unit (px, em ...)'),
             'section' => 'genesis_layout',
             'text' => 'text'
-        ),
-        'site_width' => array(
-            'default' => 1200,
-            'label' => __('Site Width', 'jma_gbs'),
-            'description' => esc_html__('in pixels'),
-            'section' => 'genesis_layout',
-            'type' => 'number'
         ),
         'site_banner' => array(
             'default' => 0,
