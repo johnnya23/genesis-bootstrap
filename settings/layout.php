@@ -18,7 +18,7 @@ return array(
             'label' => __('Site Width', 'jma_gbs'),
             'description' => esc_html__('In Pixels'),
             'section' => 'genesis_layout',
-            'type' => 'text'
+            'type' => 'number'
         ),
         'frame_content' => array(
             'default' => 'no',
@@ -42,14 +42,14 @@ return array(
             'label' => __('Site Border Width (0 for no border)', 'jma_gbs'),
             'description' => esc_html__('in px'),
             'section' => 'genesis_layout',
-            'type' => 'text'
+            'type' => 'number'
         ),
         'frame_border_radius' => array(
             'default' => '1',
             'label' => __('Header Border Radius', 'jma_gbs'),
             'description' => esc_html__('in px'),
             'section' => 'genesis_layout',
-            'type' => 'text'
+            'type' => 'number'
         ),
         'site_bg' => array(
             'default' => '#ffffff',

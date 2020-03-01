@@ -29,11 +29,11 @@ foreach ($header_footer as $value) {
 
     if ($mods["modular_{$value}"] == "yes") {
         ${$value . '_width_array'}["selector"] = ${$value . '_appearence_array'}["selector"] = ".site-{$value} .jma-gbs-inner";
+        ${$value . '_appearence_array'}["border-radius"] = $mods["{$value}_border_radius"] . "px";
         if ($mods["{$value}_border_width"]) {
             ${$value . '_appearence_array'}["border-style"] = "solid";
             ${$value . '_appearence_array'}["border-width"] = $mods["{$value}_border_width"] . "px";
             ${$value . '_appearence_array'}["border-color"] = $mods["{$value}_border_color"];
-            ${$value . '_appearence_array'}["border-radius"] = $mods["{$value}_border_radius"] . "px";
         }
     } else {
         ${$value . '_appearence_array'}["selector"] = ".site-{$value}";
@@ -48,11 +48,11 @@ $content_appearence_array = array(
     'selector' => '.site-inner .row',
     'background-color' => $mods['page_bg']
 );
+$content_appearence_array["border-radius"] = $mods["frame_border_radius"] . "px";
 if ($mods["frame_border_width"]) {
     $content_appearence_array["border-style"] = "solid";
     $content_appearence_array["border-width"] = $mods["frame_border_width"] . "px";
     $content_appearence_array["border-color"] = $mods["frame_border_color"];
-    $content_appearence_array["border-radius"] = $mods["frame_border_radius"] . "px";
 }
 if ($mods['body_shape'] == 'full') {
     //$content_width_array['max-width'] = ($site_width +30) . 'px';
@@ -71,14 +71,59 @@ if ($mods['body_shape'] == 'boxed') {
     $content_width_array['selector'] = '.site-container';
     $content_width_array['max-width'] = ($site_width) . 'px';
 }
+/*
+handle menu options
+*/
+
+$menu_bg_color_selector ='.navbar, .site-container .navbar ul ul, .jma-gbs-mobile-panel';
+$menu_bg_current_color_selector = '.nav  li[class*="current"] > a, .nav  li[class*="current"] > a, .nav  li.current-menu-item > a:hover, .nav  li.current-menu-item > a:focus';
+$menu_bg_hover_color_selector = '.nav  li  a:hover, .nav  li  a:focus';
+if ($mods['use_menu_root_bg'] == 'no') {
+    $menu_bg_color_selector = '.site-container .navbar ul ul, .nav-primary.fixed, .jma-gbs-mobile-panel';
+    $menu_bg_current_color_selector = '.nav-primary ul ul li[class*="current"] > a, .nav-primary ul ul li.current-menu-item > a:hover, .nav-primary ul ul li.current-menu-item > a:focus';
+    $menu_bg_hover_color_selector = '.nav-primary ul ul li  a:hover, .nav-primary ul ul li  a:focus';
+}
+
+$menu_root_values = array(
+    'selector' => '.site-header .nav > li > a',
+    'padding' => $mods['menu_vertical_padding'] . 'px ' . $mods['menu_horizontal_padding'] . 'px',
+);
+if ($mods['use_menu_root_bg'] == 'no') {
+    $menu_root_values['color'] = $mods['header_font_color'];
+}
+
+$root_color_settings = array('.site-header .nav > li > a:hover' => 'menu_root_hover_font_color', '.site-header .nav > li[class*="current"] > a' => 'menu_root_current_font_color');
+if ($mods['use_menu_root_bg'] == 'no') {
+    foreach ($root_color_settings as $i => $root_setting) {
+        $$root_setting = array();
+        if (isset($mods[$root_setting]) && $mods[$root_setting]) {
+            $$root_setting = array(
+                'selector' => $i,
+                'color' => $mods[$root_setting],
+            );
+        }
+    }
+}
 
 /*
 begin main array
 */
 $css = array(
     array(
-        'selector' => '.navbar, .site-container .navbar ul ul, .jma-gbs-mobile-panel',
+        'selector' => $menu_bg_color_selector,
         'background-color' => $mods['menu_bg_color'],
+    ),
+    array(
+        'selector' => '.navbar .nav a',
+        'color' => $mods['menu_font_color']
+    ),
+    array(
+        'selector' => '.site-header .nav > li > a.sf-with-ul',
+        'padding-right' =>  ($mods['menu_horizontal_padding'] + 10) . 'px'
+    ),
+    array(
+        'selector' => '.site-header .navbar .nav a',
+        'font-size' => $mods['menu_font_size']
     ),
     array(
         'selector' => '.navbar .nav a',
@@ -88,12 +133,20 @@ $css = array(
         'selector' => '.nav  li[class*="current"] > a, .nav  li[class*="current"] > a, .nav  li.current-menu-item > a:hover, .nav  li.current-menu-item > a:focus',
         'query' => '(min-width:768px)',
         'color' => $mods['menu_current_font_color'],
+    ),
+    array(
+        'selector' => $menu_bg_current_color_selector,
+        'query' => '(min-width:768px)',
         'background-color' => $mods['menu_current_bg_color'],
     ),
     array(
         'selector' => '.nav  li  a:hover, .nav  li  a:focus',
         'query' => '(min-width:768px)',
         'color' => $mods['menu_hover_font_color'],
+    ),
+    array(
+        'selector' => $menu_bg_hover_color_selector,
+        'query' => '(min-width:768px)',
         'background-color' => $mods['menu_hover_bg_color'],
     ),
 
@@ -128,10 +181,11 @@ $css = array(
 /*
 add back content and {$value} and footer options
 */
-$css[] = $content_appearence_array;
-$css[] = $content_width_array;
-$css[] = $header_width_array;
-$css[] = $footer_width_array;
-$css[] = $header_appearence_array;
-$css[] = $footer_appearence_array;
+$supplemental_arrays = array($menu_root_values, $content_appearence_array, $content_width_array, $header_width_array, $footer_width_array, $header_appearence_array, $footer_appearence_array);
+foreach ($root_color_settings as $i => $root_setting) {
+    $supplemental_arrays[] = $$root_setting;
+}
+foreach ($supplemental_arrays as $supplemental_array) {
+    $css[] = $supplemental_array;
+}
 //print_r($css);

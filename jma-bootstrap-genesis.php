@@ -66,7 +66,7 @@ add_action('customize_register', 'jma_gbs_customizer_control');
 * @return array $mods the same array as get_theme_mods only filter is
 * applied and (optionally) $prefix is stripped
 */
-function jma_gbs_get_theme_mods($clean_px = array(), $pre = '')
+function jma_gbs_get_theme_mods($pre = '')
 {
     $raw_mods = get_theme_mods();
     foreach ($raw_mods as $key => $raw_mod) {
@@ -74,11 +74,6 @@ function jma_gbs_get_theme_mods($clean_px = array(), $pre = '')
         if (!($pre && !(substr($key, 0, strlen($pre)) === $pre))) {
             $value = apply_filters("theme_mod_{$key}", $raw_mod);
             $key = str_replace($pre, '', $key);
-            if (in_array($key, $clean_px)) {
-                if (strpos($value, 'px') !== false) {
-                    $value = str_replace('px', '', $value);
-                }
-            }
             $mods[$key] = $value;
         }
     }
@@ -88,7 +83,7 @@ function jma_gbs_get_theme_mods($clean_px = array(), $pre = '')
 function jma_gbs_header_css()
 {
     $clean_px = array('site_width', 'frame_border_width', 'frame_border_radius', 'header_border_width', 'header_border_radius', 'footer_border_width', 'footer_border_radius');
-    $mods = jma_gbs_get_theme_mods($clean_px, 'jma_gbs_');
+    $mods = jma_gbs_get_theme_mods('jma_gbs_');
     require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
     //$css = apply_filters('jma_gbs_header_css', $css, $mods);
     echo jma_gbs_process_css_array($css);
@@ -131,7 +126,7 @@ add_action('template_redirect', 'jma_gbs_template_redirect');
 
 function jma_gbs_body_filter($cl)
 {
-    $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer');
+    $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers');
     $mods = jma_gbs_get_theme_mods();
     foreach ($border_items as $key => $border_item) {
         if ($mods[$border_item] === 'yes') {

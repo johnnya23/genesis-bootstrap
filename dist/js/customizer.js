@@ -41,5 +41,7 @@
         conditional_display('jma_gbs_modular_header_control', 'yes|jma_gbs_header_border_color_control^jma_gbs_header_border_width_control^jma_gbs_header_border_radius_control');
 
         conditional_display('jma_gbs_modular_footer_control', 'yes|jma_gbs_footer_border_color_control^jma_gbs_footer_border_width_control^jma_gbs_footer_border_radius_control');
+
+        conditional_display('jma_gbs_use_menu_root_bg_control', 'no|jma_gbs_menu_root_current_font_color_control^jma_gbs_menu_root_hover_font_color_control');
     });
 })();

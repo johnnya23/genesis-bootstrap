@@ -84,8 +84,14 @@ function structure_css_array($items)
             foreach ($selectors as $selector) {
                 $selectors_attr_vals = array();
                 //echo $selector;
+                //get rid of any double spaces
                 $selector = trim(preg_replace('/\s+/', ' ', $selector));
+                //makes the selector the index of an array within the query
+                //and leavves attr/value pairs as index/value pairs within the
+                // $selector array
                 $selectors_attr_vals[$query][$selector] = $item;
+                //this will have the affect of combining like selectors
+                //in output for this query
                 $querys = array_replace_recursive($querys, $selectors_attr_vals);
             }
         }

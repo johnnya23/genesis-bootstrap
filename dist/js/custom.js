@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 
         admin_height_adjust = $wpadminbar.length && $wpadminbar.css('position') == 'fixed' ? $wpadminbar.height() + 'px' : 0;
         $sticky = $('.site-container >.nav-primary');
-        $sticky.width($('.site-container').width());
+        $sticky.width($('.site-header').find('.jma-gbs-inner').outerWidth());
         if (window_top > navVert) {
             $sticky.addClass('fixed');
             $sticky.css('top', admin_height_adjust);

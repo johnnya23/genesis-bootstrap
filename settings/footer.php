@@ -35,13 +35,13 @@ return array(
             'label' => __('Footer Border Width (zero for no border)', 'jma_gbs'),
             'description' => esc_html__('In Pixels'),
             'section' => 'genesis_footer',
-            'type' => 'text'
+            'type' => 'number'
         ),
         'footer_border_radius' => array(
             'default' => '1px',
             'label' => __('Footer Border Radius', 'jma_gbs'),
             'description' => esc_html__('In Pixels'),
             'section' => 'genesis_footer',
-            'type' => 'text'
+            'type' => 'number'
         ),
 );
