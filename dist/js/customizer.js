@@ -5,7 +5,7 @@
         wp.customize.control(conditional, function(control) {
             var conditions, toggleControl; // here.
             //conditions are the value(s) for controller that will trigger toggling
-            conditions = condition_toggled.split(',');
+            conditions = condition_toggled.split('^');
             toggleControl = function toggleControl(value) {
                 conditions.forEach(function(condition) {
                     var cond_display_control, controllers; // here.
@@ -13,7 +13,7 @@
                     //and controllers of displayed items
                     cond_display_control = condition.split('|');
                     //separates out the controllers to be displayed
-                    controllers = cond_display_control[1].split('^');
+                    controllers = cond_display_control[1].split(',');
                     if (value == cond_display_control[0]) {
 
                         controllers.forEach(function(controller) {
@@ -36,12 +36,12 @@
      * Run functions when customizer is ready.
      */
     wp.customize.bind('ready', function() {
-        conditional_display('jma_gbs_frame_content_control', 'yes|jma_gbs_frame_border_color_control^jma_gbs_frame_border_width_control^jma_gbs_frame_border_radius_control');
+        conditional_display('jma_gbs_frame_content_control', 'yes|jma_gbs_frame_border_color_control,jma_gbs_frame_border_width_control,jma_gbs_frame_border_radius_control');
 
-        conditional_display('jma_gbs_modular_header_control', 'yes|jma_gbs_header_border_color_control^jma_gbs_header_border_width_control^jma_gbs_header_border_radius_control');
+        conditional_display('jma_gbs_modular_header_control', 'yes|jma_gbs_header_border_color_control,jma_gbs_header_border_width_control,jma_gbs_header_border_radius_control');
 
-        conditional_display('jma_gbs_modular_footer_control', 'yes|jma_gbs_footer_border_color_control^jma_gbs_footer_border_width_control^jma_gbs_footer_border_radius_control');
+        conditional_display('jma_gbs_modular_footer_control', 'yes|jma_gbs_footer_border_color_control,jma_gbs_footer_border_width_control,jma_gbs_footer_border_radius_control');
 
-        conditional_display('jma_gbs_use_menu_root_bg_control', 'no|jma_gbs_menu_root_current_font_color_control^jma_gbs_menu_root_hover_font_color_control');
+        conditional_display('jma_gbs_use_menu_root_bg_control', 'no|jma_gbs_menu_root_current_font_color_control,jma_gbs_menu_root_hover_font_color_control');
     });
 })();

@@ -17,7 +17,7 @@ $format = <<<EOT
             <input type="search" class="search-field form-control" id="jma-gbs-search-form" name="s" %s="%s">
             <span class="input-group-btn">
                 <button type="submit" class="search-submit btn btn-default">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <i class="fas fa-search" aria-hidden="true"></i>
                     <span class="sr-only">%s</span>
                 </button>
             </span>

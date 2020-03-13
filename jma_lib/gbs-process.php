@@ -32,27 +32,29 @@ function jma_gbs_settings_process($items, $wp_customize, $pre = 'jma_gbs_')
                 $key,
                 $setting
             );
-                if ($control['type'] == 'color') {
-                    $wp_customize->add_control(
-                        new WP_Customize_Color_Control(
-                        $wp_customize,
-                        $key . '_control',
-                        $control
-                    )
-                );
-                } elseif ($control['type'] == 'image') {
-                    $wp_customize->add_control(
-                        new WP_Customize_Image_Control(
-                        $wp_customize,
-                        $key . '_control',
-                        $control
-                    )
-                );
-                } else {
-                    $wp_customize->add_control(
-                        $key . '_control',
-                        $control
-            );
+                if (isset($control['type'])) {
+                    if ($control['type'] == 'color') {
+                        $wp_customize->add_control(
+                            new WP_Customize_Color_Control(
+                                $wp_customize,
+                                $key . '_control',
+                                $control
+                            )
+                        );
+                    } elseif ($control['type'] == 'image') {
+                        $wp_customize->add_control(
+                            new WP_Customize_Image_Control(
+                                $wp_customize,
+                                $key . '_control',
+                                $control
+                            )
+                        );
+                    } else {
+                        $wp_customize->add_control(
+                            $key . '_control',
+                            $control
+                        );
+                    }
                 }
             }
         }
@@ -110,7 +112,6 @@ function jma_gbs_process_css_array($items)
 {
     $css = '';
     if (is_array($items)) {
-        $css .= '<style type="text/css" media="screen">';
         $querys = structure_css_array($items);
 
         //step through all the queries
@@ -135,7 +136,6 @@ function jma_gbs_process_css_array($items)
             }
             $css .= $open . $text . $close;
         }
-        $css .= '</style>';
     }
 
     return $css;

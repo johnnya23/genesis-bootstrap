@@ -21,7 +21,7 @@
  * .hoverIntent( handlerInOut, selector )
  *
  * // using a basic configuration object
- * .hoverIntent( config )
+ * .hoverIntent( config ) 
  *
  * @param  handlerIn   function OR configuration object
  * @param  handlerOut  function OR selector for delegation OR undefined

@@ -14,6 +14,8 @@ identical queries will be combined at output
 omit the query element to target all
 */
 
+$mods = jma_gbs_get_theme_mods('jma_gbs_');
+
 $site_width = $mods["site_width"];
 /*
 handle header and footer options
@@ -81,28 +83,63 @@ $menu_bg_hover_color_selector = '.nav  li  a:hover, .nav  li  a:focus';
 if ($mods['use_menu_root_bg'] == 'no') {
     $menu_bg_color_selector = '.site-container .navbar ul ul, .nav-primary.fixed, .jma-gbs-mobile-panel';
     $menu_bg_current_color_selector = '.nav-primary ul ul li[class*="current"] > a, .nav-primary ul ul li.current-menu-item > a:hover, .nav-primary ul ul li.current-menu-item > a:focus';
-    $menu_bg_hover_color_selector = '.nav-primary ul ul li  a:hover, .nav-primary ul ul li  a:focus';
+    $menu_bg_hover_color_selector = '.site-container .nav-primary ul ul li  a:hover, .site-container .nav-primary ul ul li  a:focus';
 }
 
 $menu_root_values = array(
     'selector' => '.site-header .nav > li > a',
     'padding' => $mods['menu_vertical_padding'] . 'px ' . $mods['menu_horizontal_padding'] . 'px',
 );
+
+
 if ($mods['use_menu_root_bg'] == 'no') {
+    $menu_root_hover_font_color = isset($mods['menu_root_hover_font_color']) && $mods['menu_root_hover_font_color']? $mods['menu_root_hover_font_color']: $mods['menu_hover_font_color'];
+
+
     $menu_root_values['color'] = $mods['header_font_color'];
 }
 
-$root_color_settings = array('.site-header .nav > li > a:hover' => 'menu_root_hover_font_color', '.site-header .nav > li[class*="current"] > a' => 'menu_root_current_font_color');
+/* add supplemental_arrays beginning with the arrays creaated above
+for conditional items */
+
+$supplemental_arrays = array($menu_root_values, $header_width_array, $content_width_array, $footer_width_array, $header_appearence_array, $content_appearence_array, $footer_appearence_array);
+
+
 if ($mods['use_menu_root_bg'] == 'no') {
-    foreach ($root_color_settings as $i => $root_setting) {
-        $$root_setting = array();
-        if (isset($mods[$root_setting]) && $mods[$root_setting]) {
-            $$root_setting = array(
-                'selector' => $i,
-                'color' => $mods[$root_setting],
-            );
-        }
-    }
+    $supplemental_arrays[] = array(
+        'selector' => $root_setting['selector'],
+        $root_setting['attr'] => $root_setting['value_mod'],
+    );
+}
+if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horizontal_padding']) {
+    $supplemental_arrays[] = array(
+        'query' => '(min-width:900px) and (max-width:1200px)',
+        'selector' => '.site-header .nav > li > a',
+        'padding-right' =>  $mods['menu_desktop_horizontal_padding'] . 'px',
+        'padding-left' =>  $mods['menu_desktop_horizontal_padding'] . 'px'
+    );
+}
+if (isset($mods['menu_desktop_font_size']) && $mods['menu_desktop_font_size']) {
+    $supplemental_arrays[] = array(
+        'query' => '(min-width:900px) and (max-width:1200px)',
+        'selector' => '.site-header .navbar .nav  li  a',
+        'font-size' =>  $mods['menu_desktop_font_size']
+    );
+}
+if (isset($mods['menu_tablet_horizontal_padding']) && $mods['menu_tablet_horizontal_padding']) {
+    $supplemental_arrays[] = array(
+        'query' => '(max-width:899px)',
+        'selector' => '.site-header .nav > li > a',
+        'padding-right' =>  $mods['menu_tablet_horizontal_padding'] . 'px',
+        'padding-left' =>  $mods['menu_tablet_horizontal_padding'] . 'px'
+    );
+}
+if (isset($mods['menu_tablet_font_size']) && $mods['menu_tablet_font_size']) {
+    $supplemental_arrays[] = array(
+        'query' => '(max-width:899px)',
+        'selector' => '.site-header .navbar .nav  li  a',
+        'font-size' =>  $mods['menu_tablet_font_size']
+    );
 }
 
 /*
@@ -118,42 +155,35 @@ $css = array(
         'color' => $mods['menu_font_color']
     ),
     array(
-        'selector' => '.site-header .nav > li > a.sf-with-ul',
-        'padding-right' =>  ($mods['menu_horizontal_padding'] + 10) . 'px'
-    ),
-    array(
         'selector' => '.site-header .navbar .nav a',
         'font-size' => $mods['menu_font_size']
     ),
     array(
-        'selector' => '.navbar .nav a',
-        'color' => $mods['menu_font_color']
-    ),
-    array(
         'selector' => '.nav  li[class*="current"] > a, .nav  li[class*="current"] > a, .nav  li.current-menu-item > a:hover, .nav  li.current-menu-item > a:focus',
-        'query' => '(min-width:768px)',
         'color' => $mods['menu_current_font_color'],
     ),
     array(
         'selector' => $menu_bg_current_color_selector,
-        'query' => '(min-width:768px)',
         'background-color' => $mods['menu_current_bg_color'],
     ),
     array(
-        'selector' => '.nav  li  a:hover, .nav  li  a:focus',
-        'query' => '(min-width:768px)',
+        'selector' => '.site-container .nav  li  a:hover, .site-container .nav  li  a:focus',
         'color' => $mods['menu_hover_font_color'],
     ),
     array(
         'selector' => $menu_bg_hover_color_selector,
-        'query' => '(min-width:768px)',
         'background-color' => $mods['menu_hover_bg_color'],
     ),
 
     array(
+        'selector' => '.site-container > .navbar > .jma-positioned',
+        'max-width' => $mods['site_width'] . 'px',
+    ),
+    array(
         'selector' => 'h1,h2,h3,h4,h5,h6',
         'color' => $mods['site_title_color']
     ),
+    /* don't apply the link font color in header */
     array(
         'selector' => '.site-header a',
         'color' => $mods['header_font_color']
@@ -181,10 +211,7 @@ $css = array(
 /*
 add back content and {$value} and footer options
 */
-$supplemental_arrays = array($menu_root_values, $content_appearence_array, $content_width_array, $header_width_array, $footer_width_array, $header_appearence_array, $footer_appearence_array);
-foreach ($root_color_settings as $i => $root_setting) {
-    $supplemental_arrays[] = $$root_setting;
-}
+
 foreach ($supplemental_arrays as $supplemental_array) {
     $css[] = $supplemental_array;
 }

@@ -16,6 +16,13 @@
  /**
   * Absolute file path to Genesis Bootstrap base directory.
   */
+
+if (! function_exists('get_plugin_data')) {
+    require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+}
+$plugin_data = get_plugin_data(__FILE__);
+define('JMA_GBS_VERSION', $plugin_data['Version']);
+
 define('JMA_GBS_BASE_DIRECTORY', trailingslashit(plugin_dir_path(__FILE__)));
 
  /**
@@ -55,6 +62,13 @@ function jma_gbs_customizer_control($wp_customize)
 }
 add_action('customize_register', 'jma_gbs_customizer_control');
 
+
+function jma_gbs_backend_custom_css()
+{
+    wp_add_inline_style('uagb-block-common-editor-css', '.block-editor__container .wp-block[data-type*="uagb/section"], .block-editor__container .wp-block[data-type*="uagb/columns"] {max-width: 1510px;}.block-editor-page #wpwrap .wp-block .wp-block-uagb-column .uagb-column__inner-wrap {padding: 0;}}');
+}
+add_action('admin_enqueue_scripts', 'jma_gbs_backend_custom_css');
+
 /**
 * jma_gbs_get_theme_mods uses wordpress get_theme_mods function
 * to get all theme mods THEN filters each result with the
@@ -80,18 +94,6 @@ function jma_gbs_get_theme_mods($pre = '')
     return $mods;
 }
 
-function jma_gbs_header_css()
-{
-    $clean_px = array('site_width', 'frame_border_width', 'frame_border_radius', 'header_border_width', 'header_border_radius', 'footer_border_width', 'footer_border_radius');
-    $mods = jma_gbs_get_theme_mods('jma_gbs_');
-    require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
-    //$css = apply_filters('jma_gbs_header_css', $css, $mods);
-    echo jma_gbs_process_css_array($css);
-}
-add_action('wp_head', 'jma_gbs_header_css');
-
-
-
 function jma_gbs_open_div()
 {
     echo '<div class="jma-gbs-inner">';
@@ -105,6 +107,7 @@ function jma_gbs_close_div()
 
 function jma_gbs_template_redirect()
 {
+    $mods = jma_gbs_get_theme_mods();
     add_action('genesis_header', 'jma_gbs_open_div', 7);
     add_action('genesis_header', 'jma_gbs_close_div', 13);
 
