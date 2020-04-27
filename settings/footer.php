@@ -16,13 +16,13 @@ return array(
             'type' => 'color'
         ),
         'modular_footer' => array(
-            'default' => 'no',
+            'default' => 0,
             'label' => __('Modular Footer', 'jma_gbs'),
             'section' => 'genesis_footer',
             'type' => 'radio',
             'choices' => array(
-                'no' => 'No',
-                'yes' => 'Yes'
+                0 => 'No',
+                1 => 'Yes'
             )
         ),
         'footer_border_color' => array(

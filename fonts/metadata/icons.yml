@@ -3421,7 +3421,7 @@ check:
       - success
       - tick
       - todo
-      - 'yes'
+      - 1
   styles:
     - solid
   unicode: f00c
@@ -3443,7 +3443,7 @@ check-circle:
       - success
       - tick
       - todo
-      - 'yes'
+      - 1
   styles:
     - solid
     - regular
@@ -3492,7 +3492,7 @@ check-square:
       - success
       - tick
       - todo
-      - 'yes'
+      - 1
   styles:
     - solid
     - regular
@@ -3911,7 +3911,7 @@ clipboard-check:
       - success
       - tick
       - todo
-      - 'yes'
+      - 1
   styles:
     - solid
   unicode: f46c
@@ -18390,7 +18390,7 @@ thumbs-up:
       - social
       - success
       - thumbs-o-up
-      - 'yes'
+      - 1
       - you got it dude
   styles:
     - solid
@@ -20237,7 +20237,7 @@ vote-yea:
       - election
       - politics
       - positive
-      - 'yes'
+      - 1
   styles:
     - solid
   unicode: f772

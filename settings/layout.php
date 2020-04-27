@@ -2,15 +2,15 @@
 
 return array(
         'body_shape' => array(
-            'default' => 'full',
+            'default' => 'gbs-full-content',
             'label' => __('Body Shape', 'jma_gbs'),
             //'description' => esc_html__('Won\'t be very prominent on a full-width site.'),
             'section' => 'genesis_layout',
             'type' => 'select',
             'choices' => array(
-                'full' => 'Full Width',
-                'boxed' => 'Boxed',
-                'modular' => 'Modular (content only)'
+                'gbs-full-content' => 'Full Width',
+                'gbs-boxed-content' => 'Boxed',
+                'gbs-modular-content' => 'Modular (content only)'
             )
         ),
         'site_width' => array(
@@ -21,14 +21,14 @@ return array(
             'type' => 'number'
         ),
         'frame_content' => array(
-            'default' => 'no',
+            'default' => 0,
             'label' => __('Frame Content', 'jma_gbs'),
             'description' => esc_html__('Frame the Site Content'),
             'section' => 'genesis_layout',
             'type' => 'radio',
             'choices' => array(
-                'no' => 'No',
-                'yes' => 'Yes'
+                0 => 'No',
+                1 => 'Yes'
             )
         ),
         'frame_border_color' => array(
@@ -65,16 +65,23 @@ return array(
             'section' => 'genesis_layout',
             'type' => 'color'
         ),
-        'site_title_color' => array(
-            'default' => '#004400',
-            'label' => __('Site Title Color', 'jma_gbs'),
-            //'description' => esc_html__('Page that will provide header contentxxx.'),
+        'site_font_size' => array(
+            'default' => '14px',
+            'label' => __('Site Font', 'jma_gbs'),
+            'description' => esc_html__('include the unit (px, em ...)'),
             'section' => 'genesis_layout',
-            'type' => 'color'
+            'text' => 'text'
         ),
         'site_font_color' => array(
             'default' => '#666666',
             'label' => __('Site Font Color', 'jma_gbs'),
+            //'description' => esc_html__('Page that will provide header contentxxx.'),
+            'section' => 'genesis_layout',
+            'type' => 'color'
+        ),
+        'site_title_color' => array(
+            'default' => '#004400',
+            'label' => __('Site Title Color', 'jma_gbs'),
             //'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_layout',
             'type' => 'color'
@@ -93,13 +100,6 @@ return array(
             'section' => 'genesis_layout',
             'type' => 'color'
         ),
-        'site_font_size' => array(
-            'default' => '14px',
-            'label' => __('Site Font', 'jma_gbs'),
-            'description' => esc_html__('include the unit (px, em ...)'),
-            'section' => 'genesis_layout',
-            'text' => 'text'
-        ),
         'site_banner' => array(
             'default' => 0,
             'label' => __('Site Banner', 'jma_gbs'),
@@ -108,8 +108,7 @@ return array(
             'type' => 'radio',
             'choices' => array(
                 0 => 'standard',
-                1 => 'title',
-                2 => 'custom text',
+                1 => 'title'
             )
         ),
         'site_logo' => array(

@@ -10,16 +10,13 @@ function JMA_GBS_enqueue_css_js()
 {
     $min = WP_DEBUG? '': '.min';
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
-    wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/css/style.css', array(), JMA_GBS_VERSION);
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
-    wp_enqueue_style('JMA_GBS_custom_css', JMA_GBS_BASE_URI . 'css/custom-style' . $min . '.css', array(), JMA_GBS_VERSION);
-    //wp_enqueue_style('JMA_GBS_fontawesome_css', JMA_GBS_BASE_URI . 'fonts/css/all' . $min . '.css', array(), JMA_GBS_VERSION);
+    wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/css/style.css', array(), JMA_GBS_VERSION);
     wp_enqueue_style('JMA_GBS_fontawesome_brands_css', JMA_GBS_BASE_URI . 'fonts/css/brands' . $min . '.css', array(), JMA_GBS_VERSION);
     wp_enqueue_style('JMA_GBS_fontawesome_solid_css', JMA_GBS_BASE_URI . 'fonts/css/solid' . $min . '.css', array(), JMA_GBS_VERSION);
 
 
 
-    //wp_enqueue_script('JMA_GBS_fontawesome_js', JMA_GBS_BASE_URI . 'fonts/js/all' . $min . '.js', array('jquery'), JMA_GBS_VERSION);
     wp_enqueue_script('JMA_GBS_fontawesome_brands_js', JMA_GBS_BASE_URI . 'fonts/js/brands' . $min . '.js', array('jquery'), JMA_GBS_VERSION);
     wp_enqueue_script('JMA_GBS_fontawesome_solid_js', JMA_GBS_BASE_URI . 'fonts/js/solid' . $min . '.js', array('jquery'), JMA_GBS_VERSION);
 
@@ -31,10 +28,11 @@ function JMA_GBS_enqueue_css_js()
     wp_enqueue_script('JMA_GBS_superfish_js', JMA_GBS_BASE_URI . 'dist/js/superfish' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
     wp_enqueue_script('JMA_GBS_supersubs_js', JMA_GBS_BASE_URI . 'dist/js/supersubs' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
     wp_enqueue_script('JMA_GBS_custom_js', JMA_GBS_BASE_URI . 'dist/js/custom' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
+    wp_enqueue_script('JMA_GBS_viewport_js', JMA_GBS_BASE_URI . 'js/vendor/viewportchecker/viewportChecker.umd.min.js', array('jquery'), JMA_GBS_VERSION, true);
 
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
     require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
-    
+
     //$css = apply_filters('jma_gbs_header_css', $css, $mods);
     $output = jma_gbs_process_css_array($css);
     wp_add_inline_style('JMA_GBS_combined_css', $output);
@@ -43,3 +41,11 @@ function JMA_GBS_customize_controls_enqueue_scripts()
 {
     wp_enqueue_script('JMA_GBS_customizer_js', JMA_GBS_BASE_URI . 'dist/js/customizer.js', array('jquery'), JMA_GBS_VERSION, true);
 }
+
+function JMA_GBS_enqueue_admin_styles()
+{
+    $output = '.customize-control input[type=number] {max-width:100px}';
+
+    wp_add_inline_style('genesis_admin_css', $output);
+}
+add_action('admin_print_styles', 'JMA_GBS_enqueue_admin_styles');

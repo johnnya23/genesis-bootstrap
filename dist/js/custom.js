@@ -1,10 +1,7 @@
 jQuery(document).ready(function($) {
 
-
-
     //add class for verical side menu (mobile)
     $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
-
 
     $('.site-container ul.sf-menu').superfish({
         animation: {
@@ -67,12 +64,6 @@ jQuery(document).ready(function($) {
     }
 
 
-
-
-
-
-
-
     function menuadjust() {
         //gives us a 20px cushion
         necessary_menu_width = 20;
@@ -89,7 +80,6 @@ jQuery(document).ready(function($) {
             });
             //use the sibling because they will not be altered
             sibling_width = 0;
-            $wrapping_col = $primary_nav.closest('.wp-block-uagb-column');
             $wrapping_col.siblings('.wp-block-uagb-column').each(function() {
                 sibling_width += $(this).outerWidth();
             });
@@ -101,21 +91,22 @@ jQuery(document).ready(function($) {
             target_cols_width = (necessary_menu_width * (1 / (1 - sibling_percent)));
             //change the wrap display from flex to block (and back)
             //expand menu wrap and give some top padding
+            /*
             if (target_cols_width > $wrapping_cols.width()) {
                 $positioned.removeClass('jma-positioned');
-                $wrapping_cols.css('display', 'block');
+                $wrapping_cols.css('flex-wrap', 'wrap');
                 $wrapping_col.css({
                     'width': '100%',
                     'padding-top': '10px'
                 });
             } else {
                 $positioned.addClass('jma-positioned');
-                $wrapping_cols.css('display', '');
+                $wrapping_cols.css('flex-wrap', '');
                 $wrapping_col.css({
                     'width': '',
                     'padding-top': ''
                 });
-            }
+            }*/
         }
     }
 

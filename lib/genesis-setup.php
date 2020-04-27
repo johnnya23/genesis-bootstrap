@@ -8,9 +8,11 @@ remove_theme_support('genesis-structural-wraps');
 
 // Remove item(s) from genesis admin screens
 add_action('genesis_admin_before_metaboxes', 'JMA_GBS_remove_genesis_theme_metaboxes', 999);
+//$config['genesis']['sections']['genesis_single']
+
 
 // Remove item(s) from genesis customizer
-add_action('customize_register', 'JMA_GBS_remove_genesis_customizer_controls', 999);
+//add_action('customize_register', 'JMA_GBS_remove_genesis_customizer_controls', 999);
 
 /**
  * Remove selected Genesis metaboxes from the Theme Settings and SEO Settings pages.
@@ -48,6 +50,6 @@ function JMA_GBS_remove_genesis_theme_metaboxes($hook)
 function JMA_GBS_remove_genesis_customizer_controls($wp_customize)
 {
     // remove Site Title/Logo: Dynamic Text or Image Logo option from Customizer
-    $wp_customize->remove_control('genesis_blog_title');
+    //$wp_customize->remove_control('genesis_blog_title');
     return $wp_customize;
 }
