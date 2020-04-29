@@ -100,17 +100,6 @@ return array(
             'section' => 'genesis_layout',
             'type' => 'color'
         ),
-        'site_banner' => array(
-            'default' => 0,
-            'label' => __('Site Banner', 'jma_gbs'),
-            'description' => esc_html__('show a site banner'),
-            'section' => 'genesis_layout',
-            'type' => 'radio',
-            'choices' => array(
-                0 => 'standard',
-                1 => 'title'
-            )
-        ),
         'site_logo' => array(
             'default' => '',
             'label' => __('Site Logo', 'jma_gbs'),

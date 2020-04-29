@@ -48,6 +48,24 @@ if (! isset($content_width)) {
     $content_width = get_theme_mod('jma_gbs_site_width');
 }
 
+/**
+* jma_gbs_customizer_control pulls values from seetings folder and
+* uses jma_gbs_settings_process to register customizer settings
+* on the customize_register hook
+*
+* @param object $wp_customize
+*/
+function jma_gbs_customizer_control($wp_customize)
+{
+    $items = array();
+    foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
+        $new = include $file;
+        array_push($items, $new);
+    }
+    //adds the prefix
+    jma_gbs_settings_process($items, $wp_customize, 'jma_gbs_');
+}
+
 function JMA_GBS_load_files()
 {
     $folders = array('lib', 'jma_lib');
@@ -57,10 +75,18 @@ function JMA_GBS_load_files()
             include $file;
         }
     }
+
     add_action('customize_register', 'jma_gbs_customizer_control');
 }
 add_action('genesis_setup', 'JMA_GBS_load_files', 15);
 
+
+/**
+ * prioritize existing sections and add new ones
+ * @param  array $config filtered val
+ * @return array $config val after filtering
+ *
+ */
 function jma_gbs_customizer_theme_settings_config($config)
 {
     $config['genesis']['sections']['genesis_updates']['priority'] = 20;
@@ -70,6 +96,7 @@ function jma_gbs_customizer_theme_settings_config($config)
     $config['genesis']['sections']['genesis_breadcrumbs']['priority'] = 60;
     $config['genesis']['sections']['genesis_comments']['priority'] = 70;
     $config['genesis']['sections']['genesis_single']['priority'] = 80;
+    $config['genesis']['sections']['genesis_single']['title'] = 'Pages/Posts';
     $config['genesis']['sections']['genesis_archives']['priority'] = 90;
     $config['genesis']['sections']['genesis_footer']['priority'] = 100;
     $config['genesis']['sections']['genesis_scripts']['priority'] = 110;
@@ -102,110 +129,11 @@ function jma_gbs_customizer_theme_settings_config($config)
 add_filter('genesis_customizer_theme_settings_config', 'jma_gbs_customizer_theme_settings_config');
 
 /**
-* jma_gbs_customizer_control pulls values from seetings folder and
-* uses jma_gbs_settings_process to register customizer settings
-* on the customize_register hook
-*
-* @param object $wp_customize
-*/
-function jma_gbs_customizer_control($wp_customize)
-{
-    $items = array();
-    foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
-        $new = include $file;
-        array_push($items, $new);
-    }
-    jma_gbs_settings_process($items, $wp_customize);
-}
-
-
+ * adds width to backend display
+ *
+ */
 function jma_gbs_backend_custom_css()
 {
     wp_add_inline_style('uagb-block-common-editor-css', '.block-editor__container .wp-block[data-type*="uagb/section"], .block-editor__container .wp-block[data-type*="uagb/columns"], .wp-block {max-width: 1510px;}.block-editor-page #wpwrap .wp-block .wp-block-uagb-column .uagb-column__inner-wrap {padding: 0;}}');
 }
 add_action('admin_enqueue_scripts', 'jma_gbs_backend_custom_css');
-
-
-function jma_gbs_open_div()
-{
-    echo '<div class="jma-gbs-inner">';
-}
-
-function jma_gbs_close_div()
-{
-    echo '</div>';
-}
-
-function jma_gbs_archive_banner_title()
-{
-    $title = '';
-    global $wp_query;
-    if (is_archive()) {
-        $title = $wp_query->queried_object->name;
-    } else {
-        $id = get_option('page_for_posts');
-        $title = get_the_title($id);
-    }
-    if ($title) {
-        echo '<div class="banner-wrap">';
-        printf('<h1 %s>%s</h1>', genesis_attr('archive-title'), esc_html(wp_strip_all_tags($title)));
-        echo '</div>';
-    }
-}
-
-
-function jma_gbs_template_redirect()
-{
-    $mods = jma_gbs_get_theme_mods();
-    add_action('genesis_header', 'jma_gbs_open_div', 7);
-    add_action('genesis_header', 'jma_gbs_close_div', 13);
-
-    add_action('genesis_before_loop', 'jma_gbs_open_div');
-    add_action('genesis_after_loop', 'jma_gbs_close_div');
-
-    add_action('genesis_before_sidebar_widget_area', 'jma_gbs_open_div');
-    add_action('genesis_after_sidebar_widget_area', 'jma_gbs_close_div');
-
-    add_action('genesis_footer', 'jma_gbs_open_div', 7);
-    add_action('genesis_footer', 'jma_gbs_close_div', 13);
-    //move page title to header banner
-    if ($mods['jma_gbs_site_banner']) {
-        if (is_single() || is_page()) {
-            remove_action('genesis_entry_header', 'genesis_do_post_title');
-
-            add_action('genesis_header', function () {
-                echo '<div class="banner-wrap">';
-            }, 12);
-
-            add_action('genesis_header', 'genesis_do_post_title', 12);
-
-            add_action('genesis_header', function () {
-                echo '</div>';
-            }, 12);
-        }
-        if (is_archive() || is_home()) {
-            remove_action('genesis_archive_title_descriptions', 'genesis_do_archive_headings_headline');
-            add_action('genesis_header', 'jma_gbs_archive_banner_title', 12);
-        }
-    }
-}
-add_action('template_redirect', 'jma_gbs_template_redirect');
-
-function jma_gbs_body_filter($cl)
-{
-    $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers', 'jma_gbs_site_banner');
-    $mods = jma_gbs_get_theme_mods();
-    foreach ($border_items as $key => $border_item) {
-        if ($mods[$border_item]) {
-            $cl[] = $border_item;
-        } else {
-            $cl[] = str_replace('jma_gbs_', 'jma_gbs_non_', $border_item);
-        }
-    }
-    $cl[] = $mods['jma_gbs_body_shape'];
-    if (jma_gbs_detect_block('', 'contentWidth', 'full_width') || jma_uagb_detect_block('', 'contentWidth', 'custom')) {
-        $cl[] = 'jma_gbs_full_block';
-    }
-    return $cl;
-}
-add_filter('body_class', 'jma_gbs_body_filter');

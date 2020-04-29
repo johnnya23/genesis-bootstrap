@@ -1,23 +1,29 @@
 <?php
-add_action( 'genesis_entry_header', 'JMA_GBS_single_featured_image', 5 );
+add_action('genesis_entry_header', 'JMA_GBS_single_featured_image', 5);
 
-function JMA_GBS_single_featured_image() {
+function JMA_GBS_single_featured_image()
+{
     global $post;
+    $mods = jma_gbs_get_theme_mods();
+    $display_vals = jma_gbs_get_display_vals($mods);
 
-    if ( ! is_singular() ) {
+    if (! is_singular()) {
         return;
     }
 
-    if ( ! has_post_thumbnail() ) {
+    if (! has_post_thumbnail()) {
         return;
     }
 
-    $featured_image_attr = apply_filters( 'jma-gbs-featured-image-attr', array(
-        'class' => 'single-featured-image'
-    ) );
+    if ($display_vals['image_display'] == 'hide') {
+        return;
+    }
 
-    $size = apply_filters( 'jma-gbs-featured-image', 'jma-gbs-featured-image' );
+    $featured_image_attr = apply_filters('jma-gbs-featured-image-attr', array(
+        'class' => 'single-featured-image align' . $display_vals['image_display']
+    ));
 
-    the_post_thumbnail( $size, $featured_image_attr );
+    $size = apply_filters('jma-gbs-featured-image', 'jma-gbs-featured-image');
 
+    the_post_thumbnail($size, $featured_image_attr);
 }

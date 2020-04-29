@@ -44,7 +44,9 @@ jQuery(document).ready(function($) {
 
     var navVert = parseInt($('body').css('padding-top'), 10);
     $navbar = $('.site-container').find('.site-header').find('.nav-primary');
+    //clone the sticky menu
     $navbar.clone(true).prependTo(".site-container");
+    //clone the mobile menu
     $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
 
     function sticktothetop() {
@@ -91,7 +93,7 @@ jQuery(document).ready(function($) {
             target_cols_width = (necessary_menu_width * (1 / (1 - sibling_percent)));
             //change the wrap display from flex to block (and back)
             //expand menu wrap and give some top padding
-            /*
+
             if (target_cols_width > $wrapping_cols.width()) {
                 $positioned.removeClass('jma-positioned');
                 $wrapping_cols.css('flex-wrap', 'wrap');
@@ -106,15 +108,9 @@ jQuery(document).ready(function($) {
                     'width': '',
                     'padding-top': ''
                 });
-            }*/
+            }
         }
     }
-
-
-
-
-
-
 
     $window = $(window);
     $window.load(function() {

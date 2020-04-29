@@ -5772,6 +5772,23 @@ body .site-header .navbar {
 .entry-title-link:hover {
   text-decoration: none; }
 
+/* featured image (in content area) */
+.site-inner .entry-header img {
+  margin-bottom: 15px; }
+
+.site-inner .entry-header img.alignleft,
+.site-inner .entry-header img.alignright {
+  width: 300px;
+  max-width: 40%; }
+
+.site-inner .entry-header img.alignright {
+  float: right;
+  margin-left: 15px; }
+
+.site-inner .entry-header img.alignleft {
+  float: left;
+  margin-right: 15px; }
+
 /* comments */
 .comment-respond,
 .entry-comments,

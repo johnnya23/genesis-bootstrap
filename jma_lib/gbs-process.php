@@ -35,7 +35,7 @@ function jma_gbs_get_theme_mods($pre = '')
 * @return $control  control members of $wp_customize
 * @return $setting  setting members of $wp_customize
 */
-function jma_gbs_settings_process($items, $wp_customize, $pre = 'jma_gbs_')
+function jma_gbs_settings_process($items, $wp_customize, $pre = '')
 {
     foreach ($items as $item) {
         foreach ($item as $key => $values) {
@@ -179,9 +179,7 @@ function jma_gbs_detect_block($name, $key = '', $value = '')
 
     if (function_exists('has_blocks') && has_blocks($post->post_content)) {
         $blocks = parse_blocks($post->post_content);
-        /*echo '<pre>';
-        print_r($blocks);
-        echo '</pre>';*/
+
         if (is_array($blocks)) {
             foreach ($blocks as $block) {
                 if (!$name || $name == $block['blockName']) {

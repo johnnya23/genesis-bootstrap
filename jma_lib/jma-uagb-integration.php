@@ -411,7 +411,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
 function jma_subblock_handler($block, $first, $last, $full, $wrapped)
 {
     $return = '';
-    $reforatted_blocks = array('uagb/columns', 'uagb/column', 'uagb/section');
+    $reforatted_blocks = array('uagb/columns', 'uagb/column', 'uagb/section'/*, 'jma-ghb/featued-block'*/);
     $button_blocks = array('uagb/call-to-action', 'uagb/buttons', 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel');
 
     if (is_array($block) && is_string($block['blockName']) && in_array($block['blockName'], $reforatted_blocks)) {
@@ -495,19 +495,37 @@ function jma_uagb_css()
                     }).insertBefore($this);
                 }
             });';
-    $block_css = get_transient('jma_block_uagb_css'. $post->ID);
-    if (false === $block_css) {
-        // It wasn't there, so regenerate the data and save the transient
-        $blocks = parse_blocks($post->post_content);
-
-        if (is_array($blocks)) {
-            $block_css = jma_block_handler($blocks, false, false);
+    $locations = array('header', 'footer');
+    $targets = array($post);
+    //getting the special css for header and footer $blocks
+    //as well as main content
+    if (function_exists('jma_ghb_get_header_footer')) {
+        foreach ($locations as $location) {
+            $id = jma_ghb_get_header_footer($location);
+            if ($id) {
+                $targets[] = get_post($id);
+            }
         }
-        //no timeout - just delete on page update and theme options update
-        set_transient('jma_block_uagb_css'. $post->ID, $block_css);
     }
 
-    $print .= $block_css;
+    foreach ($targets as $target) {
+        $block_css = '';
+        $block_css = get_transient('jma_block_uagb_css'. $target->ID);
+        if (false === $block_css) {
+            // It wasn't there, so regenerate the data and save the transient
+            if (function_exists('has_blocks') && has_blocks($target->post_content)) {
+                $blocks = parse_blocks($target->post_content);
+            }
+
+            if (isset($blocks) && is_array($blocks)) {
+                $block_css = jma_block_handler($blocks, false, false);
+            }
+            //no timeout - just delete on page update and theme options update
+            set_transient('jma_block_uagb_css'. $target->ID, $block_css);
+        }
+        $print .= $block_css;
+    }
+
 
     if (jma_uagb_detect_block('', 'contentWidth', 'full_width') || jma_uagb_detect_block('', 'contentWidth', 'custom')) {
         //if the page has full width element we use jquery to
@@ -546,25 +564,6 @@ function jma_uagb_css()
                 padding-left: 20px;
                 padding-right: 20px;
             }';
-        /* if wide block page and no title we get rid of page top and bottom whitespace
-            else we need to "center the title"
-        if ('hide' === get_post_meta($post->ID, '_tb_title', true) || themeblvd_get_option('title_page_top') == 1) {
-            $print .= 'body #main > .wrap {
-                padding:0;
-            }
-            body #content .inner {
-                margin-top: 0;
-            }';
-        } else {
-            $print .= '.stretched .entry-title {
-                max-width:' . (themeblvd_get_option('site_width') + 40) .'px;
-                margin-left:auto;
-                margin-right:auto;
-                padding-left:20px;
-                padding-right:20px;
-
-            }';
-        }*/
     }
 
     //themeblvd styles to buttons
