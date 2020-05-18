@@ -124,7 +124,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                     if (isset($block['attrs']['themeWidth']) && $block['attrs']['themeWidth'] && !$wrapped) {
                         $selector_inner = $selector . ' > .uagb-section__inner-wrap';
                         $pairs_inner = array(
-                            'innerWidth' => ($mods['site_width'] + 40) . 'px',
+                            'innerWidth' => $mods['site_width'] . 'px',
                             'leftMargin' => 'auto',
                             'rightMargin' => 'auto'
                         ) ;
@@ -385,7 +385,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                         $size = 'desktop';
                     }
                     $map = strtolower(str_replace(array('Mobile', 'cta'), array('', ''), $attr));
-                    if (is_array($att_map[$map])) {
+                    if (isset($att_map[$map]) && is_array($att_map[$map])) {
                         foreach ($att_map[$map] as $attr) {
                             $$size .= $attr . ':' . $value . ';';
                         }
@@ -414,7 +414,7 @@ function jma_subblock_handler($block, $first, $last, $full, $wrapped)
     $reforatted_blocks = array('uagb/columns', 'uagb/column', 'uagb/section'/*, 'jma-ghb/featued-block'*/);
     $button_blocks = array('uagb/call-to-action', 'uagb/buttons', 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel');
 
-    if (is_array($block) && is_string($block['blockName']) && in_array($block['blockName'], $reforatted_blocks)) {
+    if (is_array($block) && isset($block['blockName']) && is_string($block['blockName']) && in_array($block['blockName'], $reforatted_blocks)) {
         if (is_array($block['innerBlocks'])) {
             $return .= jma_spacing_handler($block, $first, $last, $full, $wrapped);
             if ($block['blockName'] == 'uagb/section') {
@@ -430,7 +430,7 @@ function jma_subblock_handler($block, $first, $last, $full, $wrapped)
                 jma_block_handler($inner, $full, $wrapped);
             }
         }
-        if (is_array($block) && is_string($block['blockName']) && in_array($block['blockName'], $button_blocks)) {
+        if (is_array($block) && isset($block['blockName']) && is_string($block['blockName']) && in_array($block['blockName'], $button_blocks)) {
             $return .= jma_spacing_handler($block, $first, $last, $full, $wrapped);
         }
     }

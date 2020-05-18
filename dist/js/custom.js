@@ -1,4 +1,20 @@
 jQuery(document).ready(function($) {
+    $site_inner = $('.site-inner');
+
+    $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: $(this.hash).offset().top - 180
+        }, 500);
+
+    });
+
+    if ($('.jma-local-menu').length) {
+        $jma_local_menu = $('.jma-local-menu');
+        jma_local_menu_offset = $jma_local_menu.offset().top;
+    }
+
+    $window = $(window);
 
     //add class for verical side menu (mobile)
     $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
@@ -19,7 +35,7 @@ jQuery(document).ready(function($) {
                 parentWidth = parentLi.width();
             }
             var subMenuWidth = $ul.width();
-            var subMenuRight = parentLi.offset().left + parentWidth + subMenuWidth;
+            var subMenuRight = parentLi.window_top().left + parentWidth + subMenuWidth;
             if (subMenuRight > windowWidth) {
                 $ul.closest('li').addClass('reverse');
                 $ul.css({
@@ -50,8 +66,10 @@ jQuery(document).ready(function($) {
     $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
 
     function sticktothetop() {
-        var window_top = $(window).scrollTop();
+        window_top = $window.scrollTop();
         $wpadminbar = $('#wpadminbar');
+        admin_bar_height = $wpadminbar.length ? $wpadminbar.height() : 0;
+        //if (($('.site-header').height() + 100) > $('body').height()) {
 
         admin_height_adjust = $wpadminbar.length && $wpadminbar.css('position') == 'fixed' ? $wpadminbar.height() + 'px' : 0;
         $sticky = $('.site-container >.nav-primary');
@@ -63,6 +81,32 @@ jQuery(document).ready(function($) {
             $sticky.removeClass('fixed');
             $sticky.css('top', '');
         }
+        //}
+        //header_adjustment = $body.hasClass('constrict-header') ? $top.height() + main_showing_by : main_showing_by;
+        //console.log(window_top + '>' + ($('.site-header').height() - $sticky.height() - admin_bar_height));
+        padding_top = parseInt($('.site-inner').css('padding-top'), 10);
+        if (window_top > $('.site-header').outerHeight() + padding_top - $sticky.height() - admin_bar_height) {
+            if ($('.jma-local-menu').length) {
+                $jma_local_menu.addClass('fix-local');
+                $jma_local_menu.css('margin-top', (admin_bar_height + $sticky.height()) + 'px');
+            }
+            if ($('body.sticky').length) {
+                $sticky.addClass('push-forward');
+                $sticky.css('z-index', 35);
+            }
+        } else {
+            if ($('.jma-local-menu').length) {
+                $jma_local_menu.removeClass('fix-local');
+                $jma_local_menu.css('margin-top', '');
+            }
+            if ($('body.sticky').length) {
+                $.when($sticky.removeClass('push-forward')).then(function() {
+                    $sticky.css('z-index', '').delay(800);
+                });
+
+            }
+        }
+
     }
 
 
@@ -111,8 +155,6 @@ jQuery(document).ready(function($) {
             }
         }
     }
-
-    $window = $(window);
     $window.load(function() {
         sticktothetop();
         menuadjust();
@@ -122,17 +164,9 @@ jQuery(document).ready(function($) {
         sticktothetop();
     });
 
-    $window.bind('ghbresizeEnd', function() {
-
-    });
-
     $window.resize(function() {
         menuadjust();
         $('body').removeClass('open');
-        if (this.gbsresizeTO) clearTimeout(this.gbsresizeTO);
-        this.gbsresizeTO = setTimeout(function() {
-            $(this).trigger('ghbresizeEnd');
-        }, 500);
     });
 
 });

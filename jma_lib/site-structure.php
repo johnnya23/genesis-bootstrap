@@ -63,16 +63,30 @@ function jma_gbs_archive_banner_title()
 
 
 function jma_gbs_template_redirect()
-{
+{//add_action('jma_gbs_local_menu');
+    global $post;
+
+    if (get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
+        $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
+    }
     add_filter('body_class', 'jma_gbs_body_filter');
     add_action('genesis_header', 'jma_gbs_open_div', 7);
     add_action('genesis_header', 'jma_gbs_close_div', 13);
+
+    add_action('genesis_before_content_sidebar_wrap', 'jma_gbs_open_div');
+    if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
+        add_action('genesis_before_content_sidebar_wrap', 'jma_gbs_local_menu');
+    }
+    add_action('genesis_after_content_sidebar_wrap', 'jma_gbs_close_div');
 
     add_action('genesis_before_loop', 'jma_gbs_open_div');
     add_action('genesis_after_loop', 'jma_gbs_close_div');
 
     add_action('genesis_before_sidebar_widget_area', 'jma_gbs_open_div');
     add_action('genesis_after_sidebar_widget_area', 'jma_gbs_close_div');
+
+    add_action('genesis_before_sidebar_alt_widget_area', 'jma_gbs_open_div');
+    add_action('genesis_after_sidebar_alt_widget_area', 'jma_gbs_close_div');
 
     add_action('genesis_footer', 'jma_gbs_open_div', 7);
     add_action('genesis_footer', 'jma_gbs_close_div', 13);
@@ -90,7 +104,7 @@ function jma_gbs_template_redirect()
 
     //move page title to header banner
     if ($mods['jma_gbs_site_banner']) {
-        if (is_singular() && !$jma_gbs_change_post_title_display) {
+        if (is_singular() && $display_vals['title_display'] == 'show') {
             add_action('genesis_header', function () {
                 echo '<div class="banner-wrap">';
             }, 12);
@@ -111,6 +125,11 @@ add_action('template_redirect', 'jma_gbs_template_redirect');
 
 function jma_gbs_body_filter($cl)
 {
+    global $post;
+
+    if (get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
+        $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
+    }
     $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers', 'jma_gbs_site_banner');
     $mods = jma_gbs_get_theme_mods();
     foreach ($border_items as $key => $border_item) {
@@ -123,6 +142,14 @@ function jma_gbs_body_filter($cl)
     $cl[] = $mods['jma_gbs_body_shape'];
     if (jma_gbs_detect_block('', 'contentWidth', 'full_width') || jma_uagb_detect_block('', 'contentWidth', 'custom')) {
         $cl[] = 'jma_gbs_full_block';
+    }
+
+    if (isset($page_options['sticky-header']) && $page_options['sticky-header']) {
+        $cl[] = 'sticky';
+    }
+
+    if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
+        $cl[] = 'scroll_menu';
     }
     return $cl;
 }

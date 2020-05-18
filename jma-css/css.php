@@ -45,7 +45,7 @@ foreach ($header_footer as $value) {
 /*
 handle content options
 */
-$content_width_array = array('selector' => '.site-inner .row', 'max-width' => ($site_width +30) . 'px');
+$content_width_array = array('selector' => '.site-inner > .jma-gbs-inner', 'max-width' => ($site_width) . 'px');
 $content_appearence_array = array(
     'selector' => '.site-inner .row',
     'background-color' => $mods['page_bg']
@@ -66,11 +66,11 @@ if ($mods['body_shape'] == 'gbs-full-content') {
     }
 }
 if ($mods['body_shape'] == 'gbs-modular-content') {
-    $content_appearence_array['selector'] = '.site-inner .jma-gbs-inner';
-    unset($content_appearence_array['max-width']);
+    $content_appearence_array['selector'] = '.site-inner .content-sidebar-wrap .jma-gbs-inner';
+    //unset($content_appearence_array['max-width']);
 }
 if ($mods['body_shape'] == 'gbs-boxed-content') {
-    $content_appearence_array['selector'] = '.site-container';
+    $content_appearence_array['selector'] = '.site-inner';
     $content_width_array['selector'] = '.site-container';
     $content_width_array['max-width'] = ($site_width) . 'px';
 }
