@@ -44,6 +44,26 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
 
         echo '<p></p>';
 
+        echo '<label for="title_display">';
+        _e('Toggle Title Display', 'jma_ghb_textdomain');
+        echo '</label><br/><br/> ';
+        echo '<select name="title_display">';
+        echo '<option value="0"'.selected($page_options['title_display'], '0').'>Default</option>';
+        echo '<option value="show"'.selected($page_options['title_display'], 'show').'>Show Title</option>';
+        echo '<option value="hide"'.selected($page_options['title_display'], 'hide').'>Hide Title</option>';
+        echo '</select><br/><br/>';
+
+        echo '<label for="image_display">';
+        _e('Change Featured Image Display within body', 'jma_ghb_textdomain');
+        echo '</label><br/><br/> ';
+        echo '<select name="image_display">';
+        echo '<option value="0"'.selected($page_options['image_display'], '0').'>Default</option>';
+        echo '<option value="hide"'.selected($page_options['image_display'], 'hide').'>Hide</option>';
+        echo '<option value="full"'.selected($page_options['image_display'], 'full').'>Full Width</option>';
+        echo '<option value="right"'.selected($page_options['image_display'], 'right').'>Align Right</option>';
+        echo '<option value="left"'.selected($page_options['image_display'], 'left').'>Align Left</option>';
+        echo '</select><br/><br/>';
+
         $menus = get_terms('nav_menu');
 
         echo '<label for="scroll_menu">';
@@ -54,14 +74,6 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
         foreach ($menus as $menu) {
             echo '<option value="'.$menu->slug.'"'.selected($page_options['scroll_menu'], $menu->slug).'>'.$menu->name.'</option>';
         }
-        echo '</select><br/><br/>';
-
-        echo '<label for="sticky-header">';
-        _e('Stick header stay in same place as main content rolls over it', 'jma_textdomain');
-        echo '</label><br/><br/> ';
-        echo '<select name="sticky-header">';
-        echo '<option value="0"'.selected($page_options['sticky-header'], 0).'>normal</option>';
-        echo '<option value="1"'.selected($page_options['sticky-header'], 1).'>sticky</option>';
         echo '</select><br/><br/>';
     }
 /*

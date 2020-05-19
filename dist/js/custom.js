@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
     $site_inner = $('.site-inner');
-
+    /* animation for local menu */
     $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
         event.preventDefault();
         $('html, body').animate({
@@ -9,20 +9,16 @@ jQuery(document).ready(function($) {
 
     });
 
-    if ($('.jma-local-menu').length) {
-        $jma_local_menu = $('.jma-local-menu');
-        jma_local_menu_offset = $jma_local_menu.offset().top;
-    }
 
     $window = $(window);
 
     //add class for verical side menu (mobile)
-    $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
+    //$('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
 
     $('.site-container ul.sf-menu').superfish({
-        animation: {
+        /*animation: {
             height: 'show'
-        }, // slide-down effect without fade-in
+        }, */ // slide-down effect without fade-in
 
         //reverse direstion of flyout when space is limited
         onBeforeShow: function() {
@@ -35,7 +31,7 @@ jQuery(document).ready(function($) {
                 parentWidth = parentLi.width();
             }
             var subMenuWidth = $ul.width();
-            var subMenuRight = parentLi.window_top().left + parentWidth + subMenuWidth;
+            var subMenuRight = parentLi.offset().left + parentWidth + subMenuWidth;
             if (subMenuRight > windowWidth) {
                 $ul.closest('li').addClass('reverse');
                 $ul.css({
@@ -51,7 +47,7 @@ jQuery(document).ready(function($) {
             }
 
         },
-        delay: 800 // 0.8 second delay on mouseout
+        delay: 600 // 0.6 second delay on mouseout
     });
 
     $('.jma-panel-button a').click(function() {
@@ -61,47 +57,55 @@ jQuery(document).ready(function($) {
     var navVert = parseInt($('body').css('padding-top'), 10);
     $navbar = $('.site-container').find('.site-header').find('.nav-primary');
     //clone the sticky menu
-    $navbar.clone(true).prependTo(".site-container");
+    $sticky_menu = $navbar.clone(true).prependTo(".site-container");
     //clone the mobile menu
     $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
 
-    function sticktothetop() {
+    function stickmainmenutotop() {
         window_top = $window.scrollTop();
         $wpadminbar = $('#wpadminbar');
-        admin_bar_height = $wpadminbar.length ? $wpadminbar.height() : 0;
-        //if (($('.site-header').height() + 100) > $('body').height()) {
 
-        admin_height_adjust = $wpadminbar.length && $wpadminbar.css('position') == 'fixed' ? $wpadminbar.height() + 'px' : 0;
-        $sticky = $('.site-container >.nav-primary');
-        $sticky.width($('.site-header').find('.jma-gbs-inner').outerWidth());
-        if (window_top > navVert) {
-            $sticky.addClass('fixed');
-            $sticky.css('top', admin_height_adjust);
-        } else {
-            $sticky.removeClass('fixed');
-            $sticky.css('top', '');
+
+        admin_height_adjust = $wpadminbar.length && $wpadminbar.css('position') == 'absolute' ? $wpadminbar.height() : 0;
+        admin_height = $wpadminbar.length && $wpadminbar.css('position') == 'fixed' ? $wpadminbar.height() : 0;
+
+        if (($('.site-header').height() - 100) < $('body').height()) {
+            $sticky_menu.width($('.site-header').find('.jma-gbs-inner').outerWidth());
+            if (window_top > navVert) {
+                $sticky_menu.addClass('fixed');
+                $sticky_menu.css('top', admin_height + 'px');
+            } else {
+                $sticky_menu.removeClass('fixed');
+                $sticky_menu.css('top', '');
+            }
         }
-        //}
-        //header_adjustment = $body.hasClass('constrict-header') ? $top.height() + main_showing_by : main_showing_by;
-        //console.log(window_top + '>' + ($('.site-header').height() - $sticky.height() - admin_bar_height));
+
+
         padding_top = parseInt($('.site-inner').css('padding-top'), 10);
-        if (window_top > $('.site-header').outerHeight() + padding_top - $sticky.height() - admin_bar_height) {
+        sticky_menu_height = $sticky_menu.css('display') == 'block' ? $sticky_menu.height() : 0;
+        //console.log(admin_height);
+        if (window_top > $('.site-header').outerHeight() + admin_height_adjust + padding_top - sticky_menu_height) {
             if ($('.jma-local-menu').length) {
+                $jma_local_menu = $('.jma-local-menu');
                 $jma_local_menu.addClass('fix-local');
-                $jma_local_menu.css('margin-top', (admin_bar_height + $sticky.height()) + 'px');
+                console.log(admin_height + '+' + sticky_menu_height);
+                $jma_local_menu.css({
+                    'top': (admin_height + sticky_menu_height) + 'px'
+                });
             }
             if ($('body.sticky').length) {
-                $sticky.addClass('push-forward');
-                $sticky.css('z-index', 35);
+                $sticky_menu.addClass('push-forward');
+                $sticky_menu.css('z-index', 35);
             }
         } else {
             if ($('.jma-local-menu').length) {
+                $jma_local_menu = $('.jma-local-menu');
                 $jma_local_menu.removeClass('fix-local');
-                $jma_local_menu.css('margin-top', '');
+                $jma_local_menu.css('top', '');
             }
             if ($('body.sticky').length) {
-                $.when($sticky.removeClass('push-forward')).then(function() {
-                    $sticky.css('z-index', '').delay(800);
+                $.when($sticky_menu.removeClass('push-forward')).then(function() {
+                    $sticky_menu.css('z-index', '').delay(400);
                 });
 
             }
@@ -156,12 +160,12 @@ jQuery(document).ready(function($) {
         }
     }
     $window.load(function() {
-        sticktothetop();
+        stickmainmenutotop();
         menuadjust();
     });
 
     $window.scroll(function() {
-        sticktothetop();
+        stickmainmenutotop();
     });
 
     $window.resize(function() {

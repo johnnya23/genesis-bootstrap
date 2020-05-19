@@ -18,13 +18,13 @@ function jma_gbs_get_display_vals($mods)
     $context = is_page()? '_pages': '_posts';
     //the items we are checking/modifying
     $items = array('title_display', 'image_display');
-    if (get_post_meta(get_the_ID(), '_jma_ghb_header_footer_key', true)) {
+    if (get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true)) {
         //keys in meta match $items
-        $meta =  get_post_meta(get_the_ID(), '_jma_ghb_header_footer_key', true);
+        $meta =  get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true);
     }
     foreach ($items as $item) {
         //modify keys to match those in $mod
-        $mod_key = 'jma_ghb_' . $item . $context;
+        $mod_key = 'jma_gbs_' . $item . $context;
         if (isset($meta[$item]) && $meta[$item]) {
             $return[$item] = $meta[$item];
         } elseif (isset($mods[$mod_key])) {

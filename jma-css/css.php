@@ -75,7 +75,7 @@ if ($mods['body_shape'] == 'gbs-boxed-content') {
     $content_width_array['max-width'] = ($site_width) . 'px';
 }
 if ($mods['frame_content']) {
-    $content_width_array['max-width'] = $site_width . 'px';
+    $content_width_array['max-width'] = ($site_width + 40) . 'px';
 }
 /*
 handle menu options

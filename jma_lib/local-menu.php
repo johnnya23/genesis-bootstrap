@@ -8,5 +8,5 @@ function jma_gbs_local_menu()
     if (is_array($page_options) && isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
         $menuslug = $page_options['scroll_menu'];
     }
-    echo wp_nav_menu(array( 'menu' => $menuslug, 'menu_class' => 'jma-local-menu clearfix', 'container' => null ));
+    echo wp_nav_menu(array( 'menu' => $menuslug, 'menu_class' => 'jma-local-menu', 'container' => null ));
 }
