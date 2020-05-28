@@ -65,45 +65,10 @@ return array(
             'section' => 'genesis_layout',
             'type' => 'color'
         ),
-        'site_font_size' => array(
-            'default' => '14px',
-            'label' => __('Site Font', 'jma_gbs'),
-            'description' => esc_html__('include the unit (px, em ...)'),
-            'section' => 'genesis_layout',
-            'text' => 'text'
-        ),
-        'site_font_color' => array(
-            'default' => '#666666',
-            'label' => __('Site Font Color', 'jma_gbs'),
-            //'description' => esc_html__('Page that will provide header contentxxx.'),
-            'section' => 'genesis_layout',
-            'type' => 'color'
-        ),
-        'site_title_color' => array(
-            'default' => '#004400',
-            'label' => __('Site Title Color', 'jma_gbs'),
-            //'description' => esc_html__('Page that will provide header contentxxx.'),
-            'section' => 'genesis_layout',
-            'type' => 'color'
-        ),
-        'site_font_link_color' => array(
-            'default' => '#004400',
-            'label' => __('Site Link Font Color', 'jma_gbs'),
-            //'description' => esc_html__('Page that will provide header contentxxx.'),
-            'section' => 'genesis_layout',
-            'type' => 'color'
-        ),
-        'site_font_link_hover_color' => array(
-            'default' => '#009900',
-            'label' => __('Site Link Font Hover Color', 'jma_gbs'),
-            //'description' => esc_html__('Page that will provide header contentxxx.'),
-            'section' => 'genesis_layout',
-            'type' => 'color'
-        ),
-        'site_logo' => array(
+        'sticky_logo' => array(
             'default' => '',
-            'label' => __('Site Logo', 'jma_gbs'),
-            //'description' => esc_html__('Page that will provide header contentxxx.'),
+            'label' => __('Stiky Menu Logo', 'jma_gbs'),
+            'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_layout',
             'type' => 'image'
         ),

@@ -36,12 +36,16 @@
      * Run functions when customizer is ready.
      */
     wp.customize.bind('ready', function() {
-        conditional_display('jma_gbs_frame_content_control', 'yes|jma_gbs_frame_border_color_control,jma_gbs_frame_border_width_control,jma_gbs_frame_border_radius_control');
+        conditional_display('jma_gbs_frame_content_control', '1|jma_gbs_frame_border_color_control,jma_gbs_frame_border_width_control,jma_gbs_frame_border_radius_control');
 
-        conditional_display('jma_gbs_modular_header_control', 'yes|jma_gbs_header_border_color_control,jma_gbs_header_border_width_control,jma_gbs_header_border_radius_control');
+        conditional_display('jma_gbs_modular_header_control', '1|jma_gbs_header_border_color_control,jma_gbs_header_border_width_control,jma_gbs_header_border_radius_control');
 
-        conditional_display('jma_gbs_modular_footer_control', 'yes|jma_gbs_footer_border_color_control,jma_gbs_footer_border_width_control,jma_gbs_footer_border_radius_control');
+        conditional_display('jma_gbs_modular_footer_control', '1|jma_gbs_footer_border_color_control,jma_gbs_footer_border_width_control,jma_gbs_footer_border_radius_control');
 
-        conditional_display('jma_gbs_use_menu_root_bg_control', 'no|jma_gbs_menu_root_current_font_color_control,jma_gbs_menu_root_hover_font_color_control');
+        conditional_display('jma_gbs_use_menu_root_bg_control', '0|jma_gbs_menu_root_current_font_color_control,jma_gbs_menu_root_hover_font_color_control');
+
+        conditional_display('jma_gbs_site_font_family_control', 'custom|jma_gbs_site_custom_font_family_control');
+
+        conditional_display('jma_gbs_site_title_font_family_control', 'custom|jma_gbs_site_custom_title_font_family_control');
     });
 })();

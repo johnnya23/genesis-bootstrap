@@ -91,8 +91,8 @@ function jma_gbs_template_redirect()
     add_action('genesis_footer', 'jma_gbs_open_div', 7);
     add_action('genesis_footer', 'jma_gbs_close_div', 13);
 
+    $mods = jma_gbs_get_theme_mods();
     if (is_singular()) {
-        $mods = jma_gbs_get_theme_mods();
         // $display_vals['title_display'] and image_display with values
         $display_vals = jma_gbs_get_display_vals($mods);
         if ($display_vals['title_display'] == 'hide') {
@@ -145,7 +145,9 @@ function jma_gbs_body_filter($cl)
     }
 
     if (isset($page_options['sticky-header']) && $page_options['sticky-header']) {
-        $cl[] = 'sticky';
+        $cl[] = 'sticky-header';
+    } else {
+        $cl[] = 'non-sticky-header';
     }
 
     if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
@@ -153,3 +155,15 @@ function jma_gbs_body_filter($cl)
     }
     return $cl;
 }
+
+function jma_gbs_genesis_markup_site_header_open($open)
+{
+    $mods = jma_gbs_get_theme_mods();
+    $data = '';
+    if (isset($mods['jma_gbs_sticky_logo']) && $mods['jma_gbs_sticky_logo']) {
+        $data = 'data-sticky-header="' . $mods['jma_gbs_sticky_logo'] . '"';
+    }
+    $open = str_replace('class', ' id="site-header" '. $data .' class', $open);
+    return $open;
+}
+add_filter('genesis_markup_site-header_open', 'jma_gbs_genesis_markup_site_header_open');

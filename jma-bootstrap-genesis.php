@@ -48,6 +48,22 @@ if (! isset($content_width)) {
     $content_width = get_theme_mod('jma_gbs_site_width');
 }
 
+$families = array(
+    'georgia' => 'Georgia, serif',
+    'palatino' => '"Palatino Linotype", "Book Antiqua", Palatino, serif',
+    'times' => '"Times New Roman", Times, serif',
+    'arial' => 'Arial, Helvetica, sans-serif',
+    'comic' => '"Comic Sans MS", cursive, sans-serif',
+    'impact' => 'Impact, Charcoal, sans-serif',
+    'lucinda' => '"Lucida Sans Unicode", "Lucida Grande", sans-serif',
+    'tahoma' => 'Tahoma, Geneva, sans-serif',
+    'trebuchet' => '"Trebuchet MS", Helvetica, sans-serif',
+    'verdana' => 'Verdana, Geneva, sans-serif',
+    'courier' => '"Courier New", Courier, monospace',
+    'console' => '"Lucida Console", Monaco, monospace',
+    'custom' => 'Custom Font Family'
+);
+
 /**
 * jma_gbs_customizer_control pulls values from seetings folder and
 * uses jma_gbs_settings_process to register customizer settings
@@ -109,11 +125,19 @@ function jma_gbs_customizer_theme_settings_config($config)
         'controls'       => null
     );
 
+    $config['genesis']['sections']['jma_uagb_fonts']= array(
+        'title'          => __('--Font Settings', 'genesis'),
+        'description'    => __('all values are px', 'genesis'),
+        'panel'          => 'genesis',
+        'priority'       => 52,
+        'controls'       => null
+    );
+
     $config['genesis']['sections']['jma_uagb_buttons']= array(
         'title'          => __('--Button Settings', 'genesis'),
         'description'    => __('all values are px', 'genesis'),
         'panel'          => 'genesis',
-        'priority'       => 52,
+        'priority'       => 54,
         'controls'       => null
     );
 
@@ -121,7 +145,7 @@ function jma_gbs_customizer_theme_settings_config($config)
         'title'          => __('--Ultimate Addons for Gutenberg', 'genesis'),
         'description'    => __('Settings for UAGB Components', 'genesis'),
         'panel'          => 'genesis',
-        'priority'       => 54,
+        'priority'       => 57,
         'controls'       => null
     );
     return $config;

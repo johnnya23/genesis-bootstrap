@@ -6,7 +6,8 @@ return array(
             'label' => __('Header Background', 'jma_gbs'),
             //'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_header',
-            'type' => 'color'
+            'type' => 'color',
+            'show_opacity' => true
         ),
         'header_font_color' => array(
             'default' => '',
