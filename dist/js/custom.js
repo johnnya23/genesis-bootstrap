@@ -105,7 +105,7 @@ jQuery(document).ready(function($) {
         boxed_adjust = $('.gbs-boxed-content').length ? -20 : 0;
 
         //time to display local menu and sticky menu
-        if (window_top > pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - admin_height) {
+        if (window_top > pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - admin_height + parseInt($('.site-inner').css('margin-top'), 10)) {
             //local
             if ($('.jma-local-menu').length) {
                 $jma_local_menu = $('.jma-local-menu');
