@@ -4,7 +4,7 @@ if (class_exists('UberMenuStandard')) {
     return;
 }
 // add primary nav to top of the page
-add_action('genesis_header', 'jma_gbs_panel_button', 9);
+add_action('genesis_before_header', 'jma_gbs_panel_button', 9);
 add_action('genesis_before', 'jma_gbs_open_panel');
 //add_action('genesis_before', 'jma_gbs_panel_button');
 //add_action('genesis_before', 'genesis_do_nav');

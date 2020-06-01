@@ -69,7 +69,7 @@ jQuery(document).ready(function($) {
             $this.clone(true).appendTo('#jma-gbs-mobile-panel');
     });
 
-
+    //add logo to sticky menu
     if ($('#site-header').data('sticky-header').length) {
         $sticky_menu.addClass('has-image');
         $sticky_menu.find('.jma-positioned').prepend($('<a>', {

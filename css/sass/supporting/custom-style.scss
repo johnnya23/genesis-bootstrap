@@ -5,7 +5,7 @@
 }
 
 .jma-panel-button {
-    z-index: 10;
+    z-index: 100;
 }
 @media(min-width:600px) {
     .jma-panel-button {
@@ -278,7 +278,7 @@ body .site-container .navbar.sticky-menu.has-image .jma-positioned > ul {
     max-width: 100%;
 }
 
-.sticky-header .site-container > .navbar {
+.sticky-header .sticky-menu {
     position: fixed;
 }
 @media(min-width:768px) {
@@ -348,6 +348,10 @@ body .site-container .navbar.sticky-menu.has-image .jma-positioned > ul {
     .site-container .add-to-panel {
         display: none;
     }
+
+    .site-container {
+        position: relative;
+    }
 }
 
 body .navbar a {
@@ -410,8 +414,6 @@ body .site-header .navbar {
 .site-inner > .jma-gbs-inner {
     margin: auto;
     width: 100%;
-    overflow-x: hidden;
-    /*overflow: hidden;*/
 }
 
 .site-inner,
