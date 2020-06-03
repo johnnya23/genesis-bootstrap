@@ -80,12 +80,12 @@ handle menu options
 */
 
 $menu_bg_color_selector ='.navbar, .site-container .navbar ul ul, .jma-gbs-mobile-panel';
-$menu_bg_current_color_selector = '.navbar  li[class*="current"] > a, .navbar  li[class*="current"] > a, .navbar  li.current-menu-item > a:hover, .navbar  li.current-menu-item > a:focus';
-$menu_bg_hover_color_selector = '.navbar  li  a:hover, .navbar  li  a:focus';
+$menu_current_bg_color_selector = '.site-container .navbar  li[class*="current"] > a, .site-container .navbar  li.current-menu-item > a:hover, .site-container .navbar  li.current-menu-item > a:focus';
+$menu_hover_bg_color_selector = '.site-container .navbar  li  a:hover, .navbar  li  a:focus';
 if (!$mods['use_menu_root_bg']) {
     $menu_bg_color_selector = '.site-container .navbar ul ul, .jma-gbs-mobile-panel';
-    $menu_bg_current_color_selector = '.nav-primary ul ul li[class*="current"] > a, .nav-primary ul ul li.current-menu-item > a:hover, .nav-primary ul ul li.current-menu-item > a:focus';
-    $menu_bg_hover_color_selector = '.site-container .nav-primary ul ul li  a:hover, .site-container .nav-primary ul ul li  a:focus';
+    $menu_current_bg_color_selector = '.site-container .nav-primary ul ul li[class*="current"] > a, .site-container .nav-primary ul ul li.current-menu-item > a:hover, .site-container .nav-primary ul ul li.current-menu-item > a:focus';
+    $menu_hover_bg_color_selector = '.site-container .nav-primary ul ul li  a:hover, .site-container .nav-primary ul ul li  a:focus';
 }
 
 $menu_root_values = array(
@@ -100,7 +100,6 @@ if (!$mods['use_menu_root_bg']) {
     $menu_root_hover_font_color = isset($mods['menu_root_hover_font_color']) && $mods['menu_root_hover_font_color']? $mods['menu_root_hover_font_color']: $mods['menu_hover_font_color'];
 
     $menu_root_current_font_color = isset($mods['menu_root_current_font_color']) && $mods['menu_root_current_font_color']? $mods['menu_root_current_font_color']: $mods['menu_current_font_color'];
-
 
     $menu_root_values['color'] = $mods['header_font_color'];
     $kids = array(
@@ -132,12 +131,12 @@ if ($mods['body_shape'] == 'gbs-full-content' && !$mods['frame_content']) {
 }
 if (!$mods['use_menu_root_bg']) {
     $supplemental_arrays[] = array(
-        'selector' => '.site-container .navbar > li > a:hover',
-        'color' => $menu_root_hover_font_color,
+        'selector' => '.site-container .navbar > .jma-ul-wrap > ul > li[class*="current"] > a, .site-container .navbar > .jma-ul-wrap > ul > li[class*="current"] > a, .site-container .navbar > .jma-ul-wrap > ul > li.current-menu-item > a:hover, .site-container .navbar > .jma-ul-wrap > ul > li.current-menu-item > a:focus',
+        'color' => $menu_root_current_font_color,
     );
     $supplemental_arrays[] = array(
-        'selector' => '.site-container .navbar > div > ul > li[class*="current"] > a, .site-container .navbar > div > ul > li[class*="current"] > a, .site-container .navbar > div > ul > li.current-menu-item > a:hover, .site-container .navbar > div > ul > li.current-menu-item > a:focus',
-        'color' => $menu_root_current_font_color,
+        'selector' => '.site-container .navbar .jma-ul-wrap > ul > li > a:hover',
+        'color' => $menu_root_hover_font_color,
     );
 }
 if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horizontal_padding']) {
@@ -183,27 +182,27 @@ $css = array(
         'background-color' => $mods['menu_bg_color'],
     ),
     array(
-        'selector' => '.navbar .navbar a',
+        'selector' => 'body .navbar .jma-ul-wrap a',
         'color' => $mods['menu_font_color']
     ),
     array(
-        'selector' => '.site-header .navbar .navbar a',
+        'selector' => '.site-header .navbar a',
         'font-size' => $mods['menu_font_size']
     ),
     array(
-        'selector' => '.navbar  li[class*="current"] > a, .navbar  li[class*="current"] > a, .navbar  li.current-menu-item > a:hover, .navbar  li.current-menu-item > a:focus',
+        'selector' => '.navbar  li[class*="current"] > a, .navbar  li.current-menu-item > a:hover, .navbar  li.current-menu-item > a:focus',
         'color' => $mods['menu_current_font_color'],
     ),
     array(
-        'selector' => $menu_bg_current_color_selector,
+        'selector' => $menu_current_bg_color_selector,
         'background-color' => $mods['menu_current_bg_color'],
     ),
     array(
-        'selector' => '.site-container .navbar  li  a:hover, .site-container .navbar  li  a:focus',
+        'selector' => '.navbar  li  a:hover, .navbar  li  a:focus',
         'color' => $mods['menu_hover_font_color'],
     ),
     array(
-        'selector' => $menu_bg_hover_color_selector,
+        'selector' => $menu_hover_bg_color_selector,
         'background-color' => $mods['menu_hover_bg_color'],
     ),
     array(

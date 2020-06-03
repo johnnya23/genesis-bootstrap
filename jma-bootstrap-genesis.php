@@ -1,7 +1,7 @@
 <?php
 /**
-*Plugin Name: Bootstrap with Genesis
-*Description: child theme to plugin
+*Plugin Name: JMA Bootstrap with Genesis
+*Description: Bootstap and customizations applied to Genesis Theme
 *Version: 1.0
 *Author: John Antonacci
 *Author URI: https://gist.github.com/theandystratton/5924570
@@ -117,7 +117,7 @@ function jma_gbs_customizer_theme_settings_config($config)
     $config['genesis']['sections']['genesis_footer']['priority'] = 100;
     $config['genesis']['sections']['genesis_scripts']['priority'] = 110;
 
-    $config['genesis']['sections']['jma_uagb_menu']= array(
+    $config['genesis']['sections']['jma_gbs_uagb_menu']= array(
         'title'          => __('--Menu Settings', 'genesis'),
         //'description'    => __('all values are px', 'genesis'),
         'panel'          => 'genesis',
@@ -125,7 +125,7 @@ function jma_gbs_customizer_theme_settings_config($config)
         'controls'       => null
     );
 
-    $config['genesis']['sections']['jma_uagb_fonts']= array(
+    $config['genesis']['sections']['jma_gbs_fonts']= array(
         'title'          => __('--Font Settings', 'genesis'),
         'description'    => __('all values are px', 'genesis'),
         'panel'          => 'genesis',
@@ -133,7 +133,7 @@ function jma_gbs_customizer_theme_settings_config($config)
         'controls'       => null
     );
 
-    $config['genesis']['sections']['jma_uagb_buttons']= array(
+    $config['genesis']['sections']['jma_gbs_buttons']= array(
         'title'          => __('--Button Settings', 'genesis'),
         'description'    => __('all values are px', 'genesis'),
         'panel'          => 'genesis',
@@ -141,7 +141,7 @@ function jma_gbs_customizer_theme_settings_config($config)
         'controls'       => null
     );
 
-    $config['genesis']['sections']['jma_uagb_comps']= array(
+    $config['genesis']['sections']['jma_gbs_uagb_comps']= array(
         'title'          => __('--Ultimate Addons for Gutenberg', 'genesis'),
         'description'    => __('Settings for UAGB Components', 'genesis'),
         'panel'          => 'genesis',

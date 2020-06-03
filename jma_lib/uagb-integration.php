@@ -5,11 +5,11 @@ if (! defined('ABSPATH')) {
 }
 
 /**
- * function jma_uagb_detect_block Detect full width blocks
+ * function jma_gbs_uagb_detect_block Detect full width blocks
  * we don't have to drill down below the first level in detectin full width
  * @return boolean $return
  */
-function jma_uagb_detect_block($name, $key = '', $value = '')
+function jma_gbs_uagb_detect_block($name, $key = '', $value = '')
 {
     global $post;
     $return = false;
@@ -36,11 +36,11 @@ function jma_uagb_detect_block($name, $key = '', $value = '')
     return $return;
 }
 
-function jma_uagb_template_redirect()
+function jma_gbs_uagb_template_redirect()
 {
-    add_action('wp_enqueue_scripts', 'jma_uagb_css', 99);
+    add_action('wp_enqueue_scripts', 'jma_gbs_uagb_css', 99);
 }
-add_action('template_redirect', 'jma_uagb_template_redirect');
+add_action('template_redirect', 'jma_gbs_uagb_template_redirect');
 
 
 
@@ -465,7 +465,7 @@ function jma_block_handler($blocks, $full = false, $wrapped = false)
     return $return;
 }
 
-function jma_uagb_css()
+function jma_gbs_uagb_css()
 {
     //if (function_exists('themeblvd_get_option')) {
     global $post;
@@ -527,7 +527,7 @@ function jma_uagb_css()
     }
 
 
-    if (jma_uagb_detect_block('', 'contentWidth', 'full_width') || jma_uagb_detect_block('', 'contentWidth', 'custom')) {
+    if (jma_gbs_uagb_detect_block('', 'contentWidth', 'full_width') || jma_gbs_uagb_detect_block('', 'contentWidth', 'custom')) {
         //if the page has full width element we use jquery to
         //add class when section comes into view
         $reveal = '$(".uagb-section__inner-wrap, .uagb-columns__inner-wrap").viewportChecker({
@@ -602,7 +602,7 @@ function jma_uagb_css()
     }
 
     if ($print) {
-        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_uagb_css_output', $print));
+        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print));
     }
     if ($reveal || $scroll) {
         $data = 'jQuery(document).ready(function($) {' . $reveal . $scroll . '});';
@@ -611,7 +611,7 @@ function jma_uagb_css()
     //}
 }
 
-function jma_uagb_dynamic_styles_filter($dynamic_styles)
+function jma_gbs_uagb_dynamic_styles_filter($dynamic_styles)
 {
     $mods = jma_get_theme_values();
     $dynamic_styles['uagb_10'] = array('a[class^="uagb"]',
@@ -626,13 +626,13 @@ function jma_uagb_dynamic_styles_filter($dynamic_styles)
 );
     return $dynamic_styles;
 }
-//add_filter('dynamic_styles_filter', 'jma_uagb_dynamic_styles_filter');
-function jma_uagb_delete_trans($post_ID)
+//add_filter('dynamic_styles_filter', 'jma_gbs_uagb_dynamic_styles_filter');
+function jma_gbs_uagb_delete_trans($post_ID)
 {
     delete_transient('jma_block_uagb_css'. $post_ID);
 }
 
-function jma_uagb_delete_all_trans()
+function jma_gbs_uagb_delete_all_trans()
 {
     global $wpdb;
 
@@ -643,14 +643,14 @@ function jma_uagb_delete_all_trans()
     }
 }
 
-function jma_uagb_update_styles()
+function jma_gbs_uagb_update_styles()
 {
     //customize_save_after  https://developer.wordpress.org/reference/hooks/customize_save_after/
-    add_action('customize_save_after', 'jma_uagb_delete_all_trans');
+    add_action('customize_save_after', 'jma_gbs_uagb_delete_all_trans');
 }
-//add_action('admin_init', 'jma_uagb_update_styles', 11);
+//add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
 
-add_action('post_updated', 'jma_uagb_delete_trans');
+add_action('post_updated', 'jma_gbs_uagb_delete_trans');
 
 $gutter_options = array(
     array(
