@@ -15,7 +15,7 @@ function JMA_GBS_enqueue_css_js()
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
     wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/css/style.css', array(), JMA_GBS_VERSION);
 
-    wp_enqueue_style('JMA_GBS_fontawesome_css', JMA_GBS_BASE_URI . 'fonts/css/all.min.css', array(), JMA_GBS_VERSION);
+    wp_enqueue_style('JMA_GBS_fontawesome_css', JMA_GBS_ROOT_URI . 'fonts/css/all.min.css', array(), JMA_GBS_VERSION);
 
     // wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
     // NOTE: this combined script is loading in the footer
