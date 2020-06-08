@@ -54,7 +54,7 @@ function JMA_GBS_layout_options_modify_classes_to_add($classes_to_add)
         $classes_to_add['sidebar-secondary'] = 'col-sm-3 col-sm-pull-9';
     }
 
-    return $classes_to_add;
+    return apply_filters('jma_gbs_classes_to_add', $classes_to_add, $layout);
 };
 
 function JMA_GBS_modify_classes_based_on_template($classes_to_add, $context, $attr)
