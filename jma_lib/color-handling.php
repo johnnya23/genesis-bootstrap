@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 function jma_gbs_get_trans($color_in, $trans_amount=0.6)
 {
     $raw = str_replace('#', '', $color_in);

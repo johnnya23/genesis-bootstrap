@@ -1,5 +1,8 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 /**
 * jma_gbs_get_theme_mods uses wordpress get_theme_mods function

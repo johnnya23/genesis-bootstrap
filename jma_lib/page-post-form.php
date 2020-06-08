@@ -3,9 +3,9 @@
  * Adds a box to the right column on the Post and Page edit screens.
  */
 
-if (!defined('ABSPATH')) {
-    die('No direct access.');
-}
+ if (! defined('ABSPATH')) {
+     exit;
+ } // Exit if accessed directly
 function jma_gbs_image_input_box()
 {
     $screens = array('post', 'page');

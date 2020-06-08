@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 /**
  * Modify Previous Page / Next Page to use Bootstrap styling
  *
@@ -9,20 +14,22 @@
  * @since 0.7.0
  */
 
-add_filter( 'genesis_prev_link_text', 'JMA_GBS_genesis_prev_link_text_numeric' );
-add_filter( 'genesis_next_link_text', 'JMA_GBS_genesis_next_link_text_numeric' );
+add_filter('genesis_prev_link_text', 'JMA_GBS_genesis_prev_link_text_numeric');
+add_filter('genesis_next_link_text', 'JMA_GBS_genesis_next_link_text_numeric');
 
-function JMA_GBS_genesis_prev_link_text_numeric( $text ) {
-    if ( 'numeric' === genesis_get_option( 'posts_nav' ) ) {
+function JMA_GBS_genesis_prev_link_text_numeric($text)
+{
+    if ('numeric' === genesis_get_option('posts_nav')) {
         return '<span aria-hidden="true">&laquo;</span>'
-            . '<span class="sr-only">' . __( 'Previous Page', 'genesis' ) . '</span>';
+            . '<span class="sr-only">' . __('Previous Page', 'genesis') . '</span>';
     }
     return $text;
 }
 
-function JMA_GBS_genesis_next_link_text_numeric( $text ) {
-    if ( 'numeric' === genesis_get_option( 'posts_nav' ) ) {
-        return '<span class="sr-only">' . __( 'Next Page', 'genesis' ) . '</span>'
+function JMA_GBS_genesis_next_link_text_numeric($text)
+{
+    if ('numeric' === genesis_get_option('posts_nav')) {
+        return '<span class="sr-only">' . __('Next Page', 'genesis') . '</span>'
             . '<span aria-hidden="true">&raquo;</span>';
     }
     return $text;

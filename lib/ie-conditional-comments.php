@@ -1,12 +1,17 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 // remove default doctype
 // replace doctype/opening html tag with conditional comments doctype/opening html tag
-remove_action(  'genesis_doctype', 'genesis_do_doctype' );
-add_action(     'genesis_doctype', 'JMA_GBS_conditional_comments' );
+remove_action('genesis_doctype', 'genesis_do_doctype');
+add_action('genesis_doctype', 'JMA_GBS_conditional_comments');
 
-function JMA_GBS_conditional_comments() {
-   ?>
+function JMA_GBS_conditional_comments()
+{
+    ?>
 <!doctype html>
 <!--[if lt IE 7 ]> <html class="ie ie6 no-js" dir="ltr" lang="en-US"> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie ie7 no-js" dir="ltr" lang="en-US"> <![endif]-->

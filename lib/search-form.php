@@ -1,15 +1,19 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 // search-form same behavior as genesis with additional classes
 // for bootstrap styling
 
-add_filter( 'genesis_search_form', 'JMA_GBS_search_form', 10, 4);
+add_filter('genesis_search_form', 'JMA_GBS_search_form', 10, 4);
 
-function JMA_GBS_search_form( $form, $search_text, $button_text, $label ) {
+function JMA_GBS_search_form($form, $search_text, $button_text, $label)
+{
+    $value_or_placeholder = (get_search_query() == '') ? 'placeholder' : 'value';
 
-    $value_or_placeholder = ( get_search_query() == '' ) ? 'placeholder' : 'value';
-
-$format = <<<EOT
+    $format = <<<EOT
 <form method="get" class="search-form form-inline" action="%s" role="search">
     <div class="form-group">
         <label class="sr-only sr-only-focusable" for="jma-gbs-search-form">%s</label>
@@ -26,5 +30,5 @@ $format = <<<EOT
 </form>
 EOT;
 
-    return sprintf( $format, home_url( '/' ), esc_html( $label ), $value_or_placeholder, esc_attr( $search_text ), esc_attr( $button_text ) );
+    return sprintf($format, home_url('/'), esc_html($label), $value_or_placeholder, esc_attr($search_text), esc_attr($button_text));
 }

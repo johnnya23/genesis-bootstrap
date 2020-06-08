@@ -1,4 +1,10 @@
 <?php
+
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 /* Modify the Bootstrap Classes being applied
  * based on the Genesis template chosen
  */

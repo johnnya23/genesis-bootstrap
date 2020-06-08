@@ -1,11 +1,16 @@
 <?php
 
-// hide title and description on all pages other than front page
-add_action( 'template_redirect', 'JMA_GBS_title_area_hide_on_pages_other_than_front' );
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
-function JMA_GBS_title_area_hide_on_pages_other_than_front() {
-    if ( !is_front_page() ) {
-        remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
-        remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+// hide title and description on all pages other than front page
+add_action('template_redirect', 'JMA_GBS_title_area_hide_on_pages_other_than_front');
+
+function JMA_GBS_title_area_hide_on_pages_other_than_front()
+{
+    if (!is_front_page()) {
+        remove_action('genesis_site_title', 'genesis_seo_site_title');
+        remove_action('genesis_site_description', 'genesis_seo_site_description');
     }
 }

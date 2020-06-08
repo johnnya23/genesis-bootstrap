@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 // Add HTML5 markup structure
 add_theme_support('html5');
 

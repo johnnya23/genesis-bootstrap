@@ -1,8 +1,13 @@
 <?php
 
-add_filter( 'comment_form_defaults', 'JMA_GBS_comment_form_modifications' );
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
-function JMA_GBS_comment_form_modifications( $fields ) {
+add_filter('comment_form_defaults', 'JMA_GBS_comment_form_modifications');
+
+function JMA_GBS_comment_form_modifications($fields)
+{
     //Remove Form Allowed Tags Box
     $fields['comment_notes_after'] = '';
 

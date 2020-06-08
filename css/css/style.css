@@ -5766,6 +5766,19 @@ body .navbar a {
 .navbar .sf-menu li a {
   border-top: none; }
 
+.site-header .jma-ul-wrap > ul > li > a {
+  border-top: solid 3px transparent;
+  border-bottom: solid 3px transparent; }
+
+.header-nav .no-click > a,
+.jma-ul-wrap *[href='#'] {
+  cursor: text; }
+
+.jma-ul-wrap .jma-gbs-open-search a {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  cursor: pointer; }
+
 body .site-header .jma-gbs-inner .navbar {
   max-width: 100%;
   border-bottom: none; }
@@ -5952,3 +5965,47 @@ li.comment {
 .site-header .sf-menu a,
 .site-header a:hover {
   text-decoration: none; }
+
+/* full page search */
+.jma-gbs-overlay {
+  height: 0;
+  width: 0;
+  position: fixed;
+  z-index: -5;
+  top: 50%;
+  left: 50%;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.jma-gbs-overlay * {
+  opacity: 0; }
+
+.jma-gbs-overlay.open {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100000; }
+
+.jma-gbs-overlay.open * {
+  opacity: 1; }
+
+.jma-gbs-overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin: auto; }
+
+.jma-gbs-overlay .jma-gbs-close-search {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white; }
+
+.jma-gbs-overlay .jma-gbs-close-search:hover {
+  color: #ccc; }

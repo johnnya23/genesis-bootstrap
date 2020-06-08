@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 if (class_exists('UberMenuStandard')) {
     return;
 }
@@ -60,6 +64,7 @@ function JMA_GBS_nav_menu_markup_filter($html, $args)
 {
     // only add additional Bootstrap markup to
     // primary and secondary nav locations
+
     if (
         'primary'   !== $args->theme_location &&
         'secondary' !== $args->theme_location

@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 // add bootstrap classes
 add_filter('genesis_attr_nav-primary', 'JMA_GBS_add_markup_class', 10, 2);
 add_filter('genesis_attr_nav-secondary', 'JMA_GBS_add_markup_class', 10, 2);

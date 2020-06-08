@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 /**
  * function jma_gbs_uagb_detect_block Detect full width blocks
  * we don't have to drill down below the first level in detectin full width
@@ -9,7 +14,7 @@ function jma_gbs_uagb_detect_block($name, $key = '', $value = '')
     global $post;
     $return = false;
 
-    if (function_exists('has_blocks') && has_blocks($post->post_content)) {
+    if (is_object($post) && function_exists('has_blocks') && has_blocks($post->post_content)) {
         $blocks = parse_blocks($post->post_content);
 
         if (is_array($blocks)) {

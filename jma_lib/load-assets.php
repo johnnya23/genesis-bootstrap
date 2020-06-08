@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 // replace style.css - Theme Information (no css)
 // with css/style' . $min . '.css -  Compressed CSS for Theme
 remove_action('genesis_meta', 'genesis_load_stylesheet');

@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 return array(
         'menu_bg_color' => array(
             'default' => '#660000',
@@ -109,6 +113,13 @@ return array(
                 0 => 'No'
             )
         ),
+        'menu_root_font_color' => array(
+            'default' => '',
+            'label' => __('Menu Root Font Color', 'jma_gbs'),
+            'description' => esc_html__('Clear to inherit from main menu font option'),
+            'section' => 'jma_gbs_uagb_menu',
+            'type' => 'color',
+        ),
         'menu_root_hover_font_color' => array(
             'default' => '',
             'label' => __('Menu Root Hover Font Color', 'jma_gbs'),
@@ -123,4 +134,27 @@ return array(
             'section' => 'jma_gbs_uagb_menu',
             'type' => 'color',
         ),
+        'menu_highlight' => array(
+            'default' => '',
+            'label' => __('Add a highlight bar above or below the current and hover menu items', 'jma_gbs'),
+            'description' => '',
+            'section' => 'jma_gbs_uagb_menu',
+            'type' => 'radio',
+            'choices' => array(
+                0 => 'None',
+                'top' => 'Top',
+                'bottom' => 'Bottom'
+            )
+        ),
+        'add_search'  => array(
+            'default' => '',
+            'label' => __('add search icon to right of main menu', 'jma_gbs'),
+            'description' => '',
+            'section' => 'jma_gbs_uagb_menu',
+            'type' => 'radio',
+            'choices' => array(
+                0 => 'No',
+                1 => 'Yes'
+            )
+        )
 );

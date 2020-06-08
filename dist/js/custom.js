@@ -1,4 +1,26 @@
 jQuery(document).ready(function($) {
+    //search form
+    function jma_gbs_open_search() {
+        document.getElementById("jma_gbs_search_overlay").classList.add('open');
+    }
+
+    function jma_gbs_close_search() {
+        document.getElementById("jma_gbs_search_overlay").classList.remove('open');
+    }
+    $('.jma-gbs-open-search, .jma-gbs-open-search a').each(function() {
+        $(this).click(function(e) {
+            e.preventDefault();
+            jma_gbs_open_search();
+        });
+    });
+    $('.jma-gbs-close-search, .jma-gbs-close-search a').each(function() {
+        $(this).click(function(e) {
+            e.preventDefault();
+            jma_gbs_close_search();
+        });
+    });
+
+
     $site_inner = $('.site-inner');
     /* animation for local menu */
     $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
@@ -70,7 +92,7 @@ jQuery(document).ready(function($) {
     });
 
     //add logo to sticky menu
-    if ($('#site-header').data('sticky-header').length) {
+    if ($('#site-header').data('sticky-header')) {
         $sticky_menu.addClass('has-image');
         $sticky_menu.find('.jma-positioned').prepend($('<a>', {
             href: window.location.protocol + '//' + window.location.host

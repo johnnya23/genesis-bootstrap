@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 /**
  * Modify Previous Page / Next Page to use Bootstrap styling
  *
@@ -8,8 +13,8 @@
  *
  * @since 0.7.0
  */
-remove_action( 'genesis_after_endwhile', 'genesis_posts_nav' );
-add_action( 'genesis_after_endwhile', 'JMA_GBS_genesis_posts_nav' );
+remove_action('genesis_after_endwhile', 'genesis_posts_nav');
+add_action('genesis_after_endwhile', 'JMA_GBS_genesis_posts_nav');
 
 /**
  * Replacement for genesis_posts_nav() that replaces the call to
@@ -18,9 +23,10 @@ add_action( 'genesis_after_endwhile', 'JMA_GBS_genesis_posts_nav' );
  *
  * @since 0.7.0
  */
-function JMA_GBS_genesis_posts_nav() {
-    if ( 'numeric' === genesis_get_option( 'posts_nav' ) ) {
-		genesis_numeric_posts_nav();
+function JMA_GBS_genesis_posts_nav()
+{
+    if ('numeric' === genesis_get_option('posts_nav')) {
+        genesis_numeric_posts_nav();
     } else {
         JMA_GBS_genesis_prev_next_posts_nav();
     }
@@ -34,25 +40,26 @@ function JMA_GBS_genesis_posts_nav() {
  *
  * @since 0.7.0
  */
-function JMA_GBS_genesis_prev_next_posts_nav() {
-	$prev_link = get_previous_posts_link( apply_filters( 'genesis_prev_link_text', '<span aria-hidden="true">&larr;</span> ' . __( 'Previous Page', 'genesis' ) ) );
-	$next_link = get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . ' <span aria-hidden="true">&rarr;</span>' ) );
+function JMA_GBS_genesis_prev_next_posts_nav()
+{
+    $prev_link = get_previous_posts_link(apply_filters('genesis_prev_link_text', '<span aria-hidden="true">&larr;</span> ' . __('Previous Page', 'genesis')));
+    $next_link = get_next_posts_link(apply_filters('genesis_next_link_text', __('Next Page', 'genesis') . ' <span aria-hidden="true">&rarr;</span>'));
 
-	$prev = $prev_link ? '<li class="previous">' . $prev_link . '</li>' : '';
-	$next = $next_link ? '<li class="next">' . $next_link . '</li>' : '';
+    $prev = $prev_link ? '<li class="previous">' . $prev_link . '</li>' : '';
+    $next = $next_link ? '<li class="next">' . $next_link . '</li>' : '';
 
-	$nav = genesis_markup( array(
-		'html5'   => '<nav %s><ul class="pager">',
-		'xhtml'   => '<div class="navigation">',
-		'context' => 'archive-pagination',
-		'echo'    => false,
-	) );
+    $nav = genesis_markup(array(
+        'html5'   => '<nav %s><ul class="pager">',
+        'xhtml'   => '<div class="navigation">',
+        'context' => 'archive-pagination',
+        'echo'    => false,
+    ));
 
-	$nav .= $prev;
-	$nav .= $next;
-	$nav .= '</ul></nav>';
+    $nav .= $prev;
+    $nav .= $next;
+    $nav .= '</ul></nav>';
 
-	if ( $prev || $next )
-		echo $nav;
-
+    if ($prev || $next) {
+        echo $nav;
+    }
 }

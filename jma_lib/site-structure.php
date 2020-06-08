@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 /**
  * compares theme mod vs page modifications a returns the value if
  * theme mod is over written -- zero is used in the page/post
@@ -66,7 +70,7 @@ function jma_gbs_template_redirect()
 {//add_action('jma_gbs_local_menu');
     global $post;
 
-    if (get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
+    if (is_object($post) && get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
         $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
     }
     add_filter('body_class', 'jma_gbs_body_filter');
@@ -92,6 +96,9 @@ function jma_gbs_template_redirect()
     add_action('genesis_footer', 'jma_gbs_close_div', 13);
 
     $mods = jma_gbs_get_theme_mods();
+    if ($mods['jma_gbs_add_search']) {
+        add_filter('JMA_GBS_nav_menu_markup_filter_inner', 'jma_gbs_nav_menu_markup_filter_inner', 10, 3);
+    }
     if (is_singular()) {
         // $display_vals['title_display'] and image_display with values
         $display_vals = jma_gbs_get_display_vals($mods);
@@ -127,7 +134,7 @@ function jma_gbs_body_filter($cl)
 {
     global $post;
 
-    if (get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
+    if (is_object($post) && get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
         $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
     }
     $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers', 'jma_gbs_site_banner');
@@ -167,3 +174,38 @@ function jma_gbs_genesis_markup_site_header_open($open)
     return $open;
 }
 add_filter('genesis_markup_site-header_open', 'jma_gbs_genesis_markup_site_header_open');
+
+
+
+function jma_gbs_local_menu()
+{
+    global $post;
+    if (is_object($post) && get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true)) {
+        $page_options =  get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true);
+    }
+    if (is_array($page_options) && isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
+        $menuslug = $page_options['scroll_menu'];
+    }
+    echo wp_nav_menu(array( 'menu' => $menuslug, 'menu_class' => 'jma-local-menu', 'container' => null ));
+}
+
+
+function jma_gbs_footer_search_form()
+{
+    echo '<div id="jma_gbs_search_overlay" class="jma-gbs-overlay">';
+    echo '<span class="jma-gbs-close-search" title="Close Overlay">×</span>';
+    echo '<div class="jma-gbs-overlay-content">';
+    get_search_form();
+    echo '</div>';
+    echo '</div>';
+}
+add_action('genesis_after', 'jma_gbs_footer_search_form');
+
+function jma_gbs_nav_menu_markup_filter_inner($out, $html, $args)
+{
+    if ('primary'   == $args->theme_location) {
+        $search_html = '<li class="jma-gbs-open-search menu-item"><a title="search the site" href="#"><span><i class="fas fa-search"></i></span></a></li>';
+        $out = str_replace('</ul></div>', $search_html . '</ul></div>', $out);
+    }
+    return $out;
+}

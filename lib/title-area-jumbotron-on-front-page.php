@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 //add_action( 'template_redirect', 'JMA_GBS_title_area_jumbotron_unit_on_front_page' );
 
 function JMA_GBS_title_area_jumbotron_unit_on_front_page()

@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 return array(
         'body_shape' => array(
             'default' => 'gbs-full-content',

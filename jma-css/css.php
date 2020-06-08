@@ -51,7 +51,7 @@ $content_appearence_array = array(
     'background-color' => $mods['page_bg']
 );
 $content_appearence_array["border-radius"] = $mods["frame_border_radius"] . "px";
-if ($mods["frame_border_width"]) {
+if ($mods['frame_border_width'] && $mods['frame_content']) {
     $content_appearence_array["border-style"] = "solid";
     $content_appearence_array["border-width"] = $mods["frame_border_width"] . "px";
     $content_appearence_array["border-color"] = $mods["frame_border_color"];
@@ -89,7 +89,7 @@ if (!$mods['use_menu_root_bg']) {
 }
 
 $menu_root_values = array(
-    'selector' => '.site-container .navbar > li > a',
+    'selector' => '.site-container .navbar .nav > li > a',
     'padding' => $mods['menu_vertical_padding'] . 'px ' . $mods['menu_horizontal_padding'] . 'px',
 );
 
@@ -101,7 +101,7 @@ if (!$mods['use_menu_root_bg']) {
 
     $menu_root_current_font_color = isset($mods['menu_root_current_font_color']) && $mods['menu_root_current_font_color']? $mods['menu_root_current_font_color']: $mods['menu_current_font_color'];
 
-    $menu_root_values['color'] = $mods['header_font_color'];
+    $menu_root_values['color'] = isset($mods['menu_root_font_color']) && $mods['menu_root_font_color']? $mods['menu_root_font_color']:$mods['menu_font_color'];
     $kids = array(
         'selector' => '.navbar ul ul a',
         'color' => $mods['menu_font_color'],
@@ -129,14 +129,22 @@ if ($mods['body_shape'] == 'gbs-full-content' && !$mods['frame_content']) {
         'max-width' => $mods['site_width'] . 'px',
     );
 }
+$menu_border_attribute = $menu_current_border_value = $menu_hover_border_value = null;
 if (!$mods['use_menu_root_bg']) {
+    if ($mods['menu_highlight']) {
+        $menu_border_attribute = 'border-' . $mods['menu_highlight'] . '-color';
+        $menu_current_border_value = $menu_root_current_font_color;
+        $menu_hover_border_value = $menu_root_hover_font_color;
+    }
     $supplemental_arrays[] = array(
         'selector' => '.site-container .navbar > .jma-ul-wrap > ul > li[class*="current"] > a, .site-container .navbar > .jma-ul-wrap > ul > li[class*="current"] > a, .site-container .navbar > .jma-ul-wrap > ul > li.current-menu-item > a:hover, .site-container .navbar > .jma-ul-wrap > ul > li.current-menu-item > a:focus',
         'color' => $menu_root_current_font_color,
+        $menu_border_attribute => $menu_current_border_value
     );
     $supplemental_arrays[] = array(
         'selector' => '.site-container .navbar .jma-ul-wrap > ul > li > a:hover',
         'color' => $menu_root_hover_font_color,
+        $menu_border_attribute => $menu_hover_border_value
     );
 }
 if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horizontal_padding']) {

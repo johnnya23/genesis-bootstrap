@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 /* Remove Genesis Page Templates
  *
  * @author Bill Erickson
@@ -7,9 +12,10 @@
  * @param array $page_templates
  * @return array
  */
-function JMA_GBS_be_remove_genesis_page_templates( $page_templates ) {
-	unset( $page_templates['page_archive.php'] );
-	unset( $page_templates['page_blog.php'] );
-	return $page_templates;
+function JMA_GBS_be_remove_genesis_page_templates($page_templates)
+{
+    unset($page_templates['page_archive.php']);
+    unset($page_templates['page_blog.php']);
+    return $page_templates;
 }
-add_filter( 'theme_page_templates', 'JMA_GBS_be_remove_genesis_page_templates' );
+add_filter('theme_page_templates', 'JMA_GBS_be_remove_genesis_page_templates');

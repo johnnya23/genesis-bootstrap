@@ -1,9 +1,17 @@
 <?php
+
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+
 add_action('genesis_entry_header', 'JMA_GBS_single_featured_image', 5);
 
 function JMA_GBS_single_featured_image()
 {
     global $post;
+    if (!is_object($post)) {
+        return;
+    }
     $mods = jma_gbs_get_theme_mods();
     $display_vals = jma_gbs_get_display_vals($mods);
 
