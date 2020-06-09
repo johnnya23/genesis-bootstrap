@@ -10,6 +10,9 @@ remove_action('genesis_meta', 'genesis_load_stylesheet');
 
 function JMA_GBS_enqueue_css_js()
 {
+    // THIS IS FOR FSB SITE //mnt/BLOCKSTORAGE/home/155879.cloudwaysapps.com/gnqhmzwgkr/public_html/wp-content/plugins/jma-bootstrap-genesis/bootstrap-genesis/
+
+
     $min = WP_DEBUG? '': '.min';
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
@@ -19,6 +22,8 @@ function JMA_GBS_enqueue_css_js()
 
     // wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
     // NOTE: this combined script is loading in the footer
+    wp_enqueue_script('JMA_GBS_ekko_js', JMA_GBS_BASE_URI . 'dist/js/ekko-lightbox.min.js', array('jquery'), JMA_GBS_VERSION, true);
+
     wp_enqueue_script('JMA_GBS_combined_js', JMA_GBS_BASE_URI . 'js/javascript' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
 
     wp_enqueue_script('JMA_GBS_hover_js', JMA_GBS_BASE_URI . 'dist/js/hoverIntent' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);

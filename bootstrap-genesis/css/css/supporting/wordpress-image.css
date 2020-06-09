@@ -1,6 +1,6 @@
 /*
 Error: Undefined variable: "$galleryCaptionColor".
-        on line 43 of /home/john/Local Sites/newtheme/app/public/wp-content/plugins/jma-bootstrap-genesis/css/sass/supporting/wordpress-image.scss
+        on line 43 of /home/john/Local Sites/newtheme/app/public/wp-content/plugins/jma-bootstrap-genesis/bootstrap-genesis/css/sass/supporting/wordpress-image.scss
 
 38:     margin: 5px 0;
 39: }
@@ -15,7 +15,7 @@ Error: Undefined variable: "$galleryCaptionColor".
 48: 
 
 Backtrace:
-/home/john/Local Sites/newtheme/app/public/wp-content/plugins/jma-bootstrap-genesis/css/sass/supporting/wordpress-image.scss:43
+/home/john/Local Sites/newtheme/app/public/wp-content/plugins/jma-bootstrap-genesis/bootstrap-genesis/css/sass/supporting/wordpress-image.scss:43
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/script/tree/variable.rb:49:in `_perform'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/script/tree/node.rb:50:in `perform'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:402:in `visit_prop'
@@ -48,9 +48,10 @@ Backtrace:
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:161:in `visit'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:10:in `visit'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:36:in `css_tree'
-/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:20:in `render'
-/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:290:in `render'
-/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:400:in `run'
+/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:391:in `run'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:63:in `process_result'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:52:in `parse'
 /usr/share/koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:19:in `parse!'
@@ -61,4 +62,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$galleryCaptionColor\".\A         on line 43 of /home/john/Local Sites/newtheme/app/public/wp-content/plugins/jma-bootstrap-genesis/css/sass/supporting/wordpress-image.scss\A \A 38:     margin: 5px 0;\A 39: }\A 40: \A 41: .wp-caption .wp-caption-text,\A 42: .entry-caption, .gallery-caption {\A 43:     color: $galleryCaptionColor;\A 44:     font-size: 18px;\A 45:     font-style: italic;\A 46:     font-weight: 300;\A 47: }\A 48: "; }
+  content: "Error: Undefined variable: \"$galleryCaptionColor\".\A         on line 43 of /home/john/Local Sites/newtheme/app/public/wp-content/plugins/jma-bootstrap-genesis/bootstrap-genesis/css/sass/supporting/wordpress-image.scss\A \A 38:     margin: 5px 0;\A 39: }\A 40: \A 41: .wp-caption .wp-caption-text,\A 42: .entry-caption, .gallery-caption {\A 43:     color: $galleryCaptionColor;\A 44:     font-size: 18px;\A 45:     font-style: italic;\A 46:     font-weight: 300;\A 47: }\A 48: "; }

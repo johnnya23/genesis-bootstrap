@@ -89,7 +89,7 @@ if (!$mods['use_menu_root_bg']) {
 }
 
 $menu_root_values = array(
-    'selector' => '.site-header .navbar .nav > li > a',
+    'selector' => '.site-container .navbar .nav > li > a',
     'padding' => $mods['menu_vertical_padding'] . 'px ' . $mods['menu_horizontal_padding'] . 'px',
 );
 

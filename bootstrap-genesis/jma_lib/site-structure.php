@@ -209,3 +209,10 @@ function jma_gbs_nav_menu_markup_filter_inner($out, $html, $args)
     }
     return $out;
 }
+
+function jma_gbs_favicon_url($x)
+{
+    $mods = jma_gbs_get_theme_mods('jma_gbs_');
+    return isset($mods['favicon'])? $mods['favicon']: $x;
+}
+add_filter('genesis_favicon_url', 'jma_gbs_favicon_url');

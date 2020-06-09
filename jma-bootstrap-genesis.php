@@ -40,5 +40,6 @@ add_action('admin_notices', 'JMA_GBS_admin_notice');
 define('JMA_GBS_VERSION', $plugin_data['Version']);
 
 define('JMA_GBS_ROOT_URI', trailingslashit(plugin_dir_url(__FILE__)));
+define('JMA_GBS_ROOT_DIRECTORY', trailingslashit(plugin_dir_path(__FILE__)));
 
 require('bootstrap-genesis/bootstrap-genesis.php');
