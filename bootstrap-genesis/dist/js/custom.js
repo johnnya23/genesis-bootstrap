@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
     //popups
-    $('.wp-block-image').find('a').click(function(e) {
+    $('.wp-block-image, .widget-wrap').find('a').click(function(e) {
         if ($(this).children('img[class*=wp-image]').length) {
             e.preventDefault();
             $(this).ekkoLightbox();
@@ -82,6 +82,7 @@ jQuery(document).ready(function($) {
 
     var navVert = parseInt($('body').css('padding-top'), 10);
     $navbar = $('.site-container').find('.site-header').find('.nav-primary');
+
     //clone the sticky menu
     $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass('sticky-menu');
 
