@@ -5921,7 +5921,7 @@ body .navbar a {
 @media (min-width: 768px) {
   .jma-ul-wrap .jma-gbs-open-search a {
     padding-left: 2px !important;
-    padding-right: 7px !important;
+    padding-right: 8px !important;
     cursor: pointer; } }
 body .site-header .jma-gbs-inner .navbar {
   max-width: 100%;
