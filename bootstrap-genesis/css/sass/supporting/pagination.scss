@@ -6,18 +6,9 @@
  * In Bootstrap a span inside the li would be preferred
  * but this solution via CSS is simplier than modifying the markup
  *---------------------------------------------------------- */
-
-.jma-gbs-pagination-numeric ul {
-    @extend .pagination;
-}
 .pagination-omission {
     position: relative;
     float: left; // Collapse white-space
-    padding: $padding-base-vertical $padding-base-horizontal;
-    line-height: $line-height-base;
     text-decoration: none;
-    color: $pagination-color;
-    background-color: $pagination-bg;
-    border: 1px solid $pagination-border;
     margin-left: -1px;
 }

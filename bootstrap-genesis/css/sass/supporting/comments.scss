@@ -1,6 +1,5 @@
 /* Comment Styles
 ------------------------------------------------------------ */
-
 #comment {
     width: 100%;
 }
@@ -8,14 +7,13 @@
 .comment-respond,
 .entry-comments,
 .entry-pings {
-    background-color: $commentBgColor;
     margin-bottom: 40px;
 }
 
 .comment-list,
 .comment-list .children {
     margin: 20px 0 0;
-    padding:0;
+    padding: 0;
 }
 
 .comment-respond a,
@@ -34,7 +32,7 @@
 .comment-respond input[type="email"],
 .comment-respond input[type="text"],
 .comment-respond input[type="url"] {
-    width: 50%
+    width: 50%;
 }
 
 .comment-respond label {
@@ -42,16 +40,15 @@
     margin-right: 12px;
 }
 
-.comment-list>li,
-.comment-list .children>li,
-.ping-list>li {
+.comment-list .children > li,
+.comment-list > li,
+.ping-list > li {
     list-style-type: none;
     margin-top: 24px;
-    padding:10px;
+    padding: 10px;
 }
 
 li.comment {
-    background-color: $singleCommentBgColor;
     border: 2px solid #fff;
     border-right: none;
 }
@@ -64,12 +61,9 @@ li.comment {
     display: none;
 }
 
-li.bypostauthor {
-    background-color: $singleCommentPostAuthorBgColor;
-}
+li.bypostauthor {}
 
 .form-allowed-tags {
-    background-color: $singleCommentBgColor;
     font-size: 14px;
     padding: 24px;
 }

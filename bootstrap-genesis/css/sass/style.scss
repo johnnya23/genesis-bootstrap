@@ -1,21 +1,12 @@
 /*
 * Sass (http://sass-lang.com/) file to generate theme.css
 */
-/* Bootstrap Core Override Variables
------------------------------------------------------------- */
-@import "supporting/variables-bootstrap-core-override";
 /* Bootstrap Base 3.3.2
 ------------------------------------------------------------ */
 @import "supporting/bootstrap";
-/* Bootstrap Genesis Theme Variables
------------------------------------------------------------- */
-@import "supporting/variables-bootstrap-genesis";
 /* Archive/Blog Styling
 ------------------------------------------------------------ */
 @import "supporting/archive";
-/* Nav Styling
------------------------------------------------------------- */
-@import "supporting/nav";
 /* Widget Styling
 ------------------------------------------------------------ */
 @import "supporting/widget";
@@ -29,9 +20,6 @@
  * see http://wptest.io/demo/non-breaking-text/
 ------------------------------------------------------------ */
 @import "supporting/long-nonbreaking-path-name-support";
-/* Table Styling
------------------------------------------------------------- */
-@import "supporting/tables";
 /* Pagination modifications to accomodate WordPress
 ------------------------------------------------------------ */
 @import "supporting/pagination";
