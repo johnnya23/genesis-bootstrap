@@ -435,7 +435,6 @@ function jma_block_handler($blocks, $full = false, $wrapped = false)
 
 function jma_gbs_uagb_css()
 {
-    //if (function_exists('themeblvd_get_option')) {
     global $post;
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
 
@@ -464,7 +463,7 @@ function jma_gbs_uagb_css()
                 }
             });';
     $locations = array('header', 'footer');
-    
+
     if (is_object($post)) {
         $targets = array($post);
     } else {
@@ -581,7 +580,6 @@ function jma_gbs_uagb_css()
         $data = 'jQuery(document).ready(function($) {' . $reveal . $scroll . '});';
         wp_add_inline_script('JMA_GBS_viewport_js', $data);
     }
-    //}
 }
 
 function jma_gbs_uagb_dynamic_styles_filter($dynamic_styles)
@@ -599,7 +597,8 @@ function jma_gbs_uagb_dynamic_styles_filter($dynamic_styles)
 );
     return $dynamic_styles;
 }
-//add_filter('dynamic_styles_filter', 'jma_gbs_uagb_dynamic_styles_filter');
+add_filter('dynamic_styles_filter', 'jma_gbs_uagb_dynamic_styles_filter');
+
 function jma_gbs_uagb_delete_trans($post_ID)
 {
     delete_transient('jma_block_uagb_css'. $post_ID);
@@ -621,7 +620,7 @@ function jma_gbs_uagb_update_styles()
     //customize_save_after  https://developer.wordpress.org/reference/hooks/customize_save_after/
     add_action('customize_save_after', 'jma_gbs_uagb_delete_all_trans');
 }
-//add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
+add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
 
 add_action('post_updated', 'jma_gbs_uagb_delete_trans');
 
