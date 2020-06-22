@@ -266,13 +266,13 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
             break;
         }
 
-
+//.uagb-block-c44ffafe-724a-4a73-a427-976ad12f06ab .uagb-post-pagination-wrap a
         case 'uagb/post-grid':
         case 'uagb/post-masonry':
         case 'uagb/post-carousel': {
             $id_item = str_replace('uagb/post-', '', $block['blockName']);
 
-            $selector_outer = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta';
+            $selector_outer = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta, ' . $uagb_sel_id . ' .uagb-post-pagination-wrap .page-numbers';
             $pairs_outer = array(
                 'ctaBgColor' => $mods['button_back'],
                 'borderColor' => $mods['button_font'],
@@ -280,19 +280,19 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                 'borderRadius' => $mods['button_border_radius'] . 'px',
                 'borderStyle' => 'solid'
             );
-            $selector = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a';
+            $selector = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a, ' . $uagb_sel_id . '  .uagb-post-pagination-wrap a';
             $pairs = array(
                 'ctaFontSize' => $mods['button_font_size'] . 'px',
                 'btnVPadding' => $mods['button_vert_padding'] . 'px',
                 'btnHPadding' => $mods['button_hor_padding'] . 'px',
                 'ctaColor' => $mods['button_font']
             );
-            $selector_outer_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta:hover';
+            $selector_outer_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta:hover,' . $uagb_sel_id . ' .uagb-post-pagination-wrap .page-numbers:hover';
             $pairs_outer_hover = array(
                 'ctaBgHColor' => $mods['button_back_hover'],
                 'borderHColor' => $mods['button_font_hover']
             );
-            $selector_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a:hover';
+            $selector_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a:hover,' . $uagb_sel_id . '  .uagb-post-pagination-wrap a:hover';
             $pairs_hover = array(
                 'ctaHColor' => $mods['button_font_hover']
             );

@@ -114,11 +114,11 @@ for conditional items */
 $supplemental_arrays = array($menu_root_values, $kids, $header_width_array, $content_width_array, $footer_width_array, $header_appearence_array, $content_appearence_array, $footer_appearence_array);
 
 if (isset($mods['title_size_adjust']) && $mods['title_size_adjust'] && $mods['title_size_adjust'] != 100) {
-    $titles = array('h1'=> 36,'h2'=> 30,'h3'=> 24,'h4'=> 18,'h5'=> 14,'h6'=> 12);
+    $titles = array('h1'=> 2.5,'h2'=> 2,'h3'=> 1.75,'h4'=> 1.5,'h5'=> 1.25,'h6'=> 1);
     foreach ($titles as $sel => $size) {
         $supplemental_arrays[] = array(
             'selector' => $sel,
-            'font-size' => ($size * ($mods['title_size_adjust']/100)) . 'px'
+            'font-size' => ($size * ($mods['title_size_adjust']/100)) . 'rem'
         );
     }
 }

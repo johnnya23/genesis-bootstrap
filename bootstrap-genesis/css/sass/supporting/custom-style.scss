@@ -409,6 +409,7 @@ body .navbar a {
 body .site-header .navbar {
     max-width: 100%;
     border-bottom: none;
+    display: block;
 }
 
 .site-footer p:last-child,
@@ -622,6 +623,15 @@ li.comment {
 .comment-list .children li.comment {
     border-left-style: solid;
     border-left-width: 1px;
+}
+/* uagb pagination */
+.page-numbers.current,
+.page-numbers.dots {
+    background-color: transparent!important;
+}
+
+.page-numbers.dots {
+    border-color: transparent!important;
 }
 /* footer display */
 .site-footer {

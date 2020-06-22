@@ -2,6 +2,14 @@
 ------------------------------------------------------------ */
 // default widget styles
 
+.sidebar .widget {
+    margin-bottom: 20px;
+}
+
+.sidebar .widget:last-child {
+    margin-bottom: 0;
+}
+
 .widget {
     ul {
         padding-left: 0;
