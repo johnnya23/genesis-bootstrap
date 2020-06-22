@@ -59,6 +59,8 @@
 
 .jma-panel-button > a {
     margin: 0;
+    float: right;
+    padding: 10px;
 }
 
 .hamb {
@@ -111,6 +113,7 @@
     .navbar-toggle .icon-bar {
         border: solid 1px;
         position: absolute;
+        width: 100%;
     }
 
     .navbar-toggle .icon-bar.top {
@@ -461,6 +464,10 @@ body .site-header .navbar {
 .site-inner,
 .site-inner > .jma-gbs-inner {
     position: relative;
+}
+
+.site-inner > .jma-gbs-inner {
+    overflow-x: hidden;
 }
 
 .scroll_menu .site-inner .content-sidebar-wrap > * {

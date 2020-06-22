@@ -130,7 +130,7 @@ jQuery(document).ready(function($) {
         }
 
 
-        sticky_menu_height = $sticky_menu.css('display') == 'block' ? $sticky_menu.height() : 0;
+        sticky_menu_height = $sticky_menu.css('display') == 'block' ? $sticky_menu.outerHeight() : 0;
         pos = $('.site-inner').position();
         boxed_adjust = $('.gbs-boxed-content').length ? -20 : 0;
 

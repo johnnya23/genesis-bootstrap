@@ -34,7 +34,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
         'vpadding' => array('padding-top', 'padding-bottom'),
         'btnhrpadding' => array('padding-left', 'padding-right'),
         'btnvertpadding' => array('padding-top', 'padding-bottom'),
-        'borderColor' => array('border-color'),
+        'bordercolor' => array('border-color'),
         'borderhcolor' => array('border-color'),
         'borderhovercolor' => array('border-color'),
         'borderradius' => array('border-radius'),
@@ -54,30 +54,20 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
 
     );
 
-    $button_defaults = array(
-        'target' => '_self',
-        'vPadding' => 10,
-        'hPadding' => 14,
-        'borderWidth' => 1,
-        'borderRadius' => 2,
-        'borderStyle' => 'solid',
-        'borderColor' => '#333',
-        'borderHColor' => '#333',
-        'color' => '#333',
-        'hColor' => '#333',
-        'sizeType' => 'px',
-    );
-
 
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
 
     $layout = genesis_site_layout();
 
     $selectors = $pairs = array();
+    $uagb_sel_id = $selector = '';
+    if (isset($block['attrs']['block_id'])) {
+        $uagb_sel_id = ' body .uagb-block-' . $block['attrs']['block_id'];
+    }
 
     switch ($block['blockName']) {
         case 'uagb/section': {
-            $selector = 'body .uagb-block-' . $block['attrs']['block_id'] . '.uagb-section__wrap';
+            $selector = $uagb_sel_id . '.uagb-section__wrap';
 
             if (!$wrapped) {
                 $pairs = array(
@@ -110,13 +100,14 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
 
             break;
         }
+
         case 'uagb/columns': {
-            $selector = 'body .uagb-block-' . $block['attrs']['block_id'] . '.uagb-columns__wrap';
+            $selector = $uagb_sel_id . '.uagb-columns__wrap';
             $pairs = array(
                 'topPadding' => ($mods['element_vert']/2) . 'px',
                 'bottomPadding' => ($mods['element_vert']/2) . 'px'
             );
-            $selector_not_full = 'body .uagb-columns-' . $block['attrs']['block_id'] . '.uagb-columns__wrap';
+            $selector_not_full = $uagb_sel_id . '.uagb-columns__wrap';
             $pairs_not_full = array(
                 'leftPadding' => '0',
                 'rightPadding' => '0'
@@ -148,7 +139,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
             break;
         }
         case 'uagb/column': {
-            $selector = 'body .uagb-block-' . $block['attrs']['block_id'] . '.uagb-column__wrap';
+            $selector = $uagb_sel_id . '.uagb-column__wrap';
             $pairs = array(
                     'topMarginMobile' => '0',
                     'bottomMarginMobile' => '20px',
@@ -194,7 +185,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                 $selectors[$selector_full_inner] = $pairs_full_inner;
             }
 
-            $selector_full_width_class = 'body .uagb-column-' . $block['attrs']['block_id'] . '.uagb-column__wrap';
+            $selector_full_width_class = $uagb_sel_id . '.uagb-column__wrap';
             $pairs_full_width_class = array();
 
             if (!$wrapped) {
@@ -209,49 +200,42 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
 
 
 
-        case 'uagb/buttons': {
-            $count = $block['attrs']['btn_count']? $block['attrs']['btn_count']:2;
-            for ($i=0; $i < $count; $i++) {
-                $selector_outer = 'body .uagb-buttons-' . $block['attrs']['block_id'] . ' .uagb-buttons-repeater-' . $i;
+        case 'uagb/buttons-child': {
+                $selector_outer = $uagb_sel_id . ' .uagb-buttons-repeater';
                 $pairs_outer = array(
                     'background' => $mods['button_back'],
                     'borderColor' => $mods['button_font'],
                     'borderWidth' => $mods['button_border_width'] . 'px',
                     'borderRadius' => $mods['button_border_radius'] . 'px',
-                    'borderStyle' => 'solid',
-                    'button' => $i
+                    'borderStyle' => 'solid'
                 );
-                $selector = 'body .uagb-buttons-' . $block['attrs']['block_id'] . ' .uagb-buttons-repeater-' . $i . ' a.uagb-button__link';
+                $selector = $uagb_sel_id . ' .uagb-buttons-repeater  a.uagb-button__link';
                 $pairs = array(
                     'size' => $mods['button_font_size'] . 'px',
                     'vPadding' => $mods['button_vert_padding'] . 'px',
                     'hPadding' => $mods['button_hor_padding'] . 'px',
-                    'color' => $mods['button_font'],
-                    'button' => $i
+                    'color' => $mods['button_font']
                 );
-                $selector_outer_hover = 'body .uagb-buttons-' . $block['attrs']['block_id'] . ' .uagb-buttons-repeater-' . $i . ':hover';
+                $selector_outer_hover = $uagb_sel_id . ' .uagb-buttons-repeater:hover';
                 $pairs_outer_hover = array(
                     'hColor' => $mods['button_font_hover'],
                     'borderHColor' => $mods['button_font_hover'],
                     'hBackground' => $mods['button_back_hover'],
-                    'borderWidth' => $mods['button_border_width'] . 'px',
-                    'button' => $i
+                    'borderWidth' => $mods['button_border_width'] . 'px'
                 );
-                $selector_hover = 'body .uagb-buttons-' . $block['attrs']['block_id'] . ' .uagb-buttons-repeater-' . $i . ' a.uagb-button__link:hover';
+                $selector_hover = $uagb_sel_id . ' .uagb-buttons-repeater  a.uagb-button__link:hover';
                 $pairs_hover = array(
-                    'hColor' => $mods['button_font_hover'],
-                    'button' => $i
+                    'hColor' => $mods['button_font_hover']
                 );
                 $selectors[$selector_outer] = $pairs_outer;
                 $selectors[$selector] = $pairs;
                 $selectors[$selector_outer_hover] = $pairs_outer_hover;
                 $selectors[$selector_hover] = $pairs_hover;
-            }
             break;
         }
 
         case 'uagb/call-to-action': {
-            $selector = 'body .uagb-cta-block-' . $block['attrs']['block_id'] . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button';
+            $selector = $uagb_sel_id . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button';
             $pairs = array(
                 'ctaBgColor' => $mods['button_back'],
                 'ctaBorderColor' => $mods['button_font'],
@@ -264,14 +248,14 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                 'ctaBtnLinkColor' => $mods['button_font']
             );
 
-            $selector_hover = 'body .uagb-cta-block-' . $block['attrs']['block_id'] . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button:hover';
+            $selector_hover = $uagb_sel_id . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button:hover';
             $pairs_hover = array(
                 'ctaBgHoverColor' => $mods['button_back_hover'],
                 'ctaBorderhoverColor' => $mods['button_font_hover'],
                 'ctaLinkHoverColor' => $mods['button_font_hover']
             );
 
-            $selector_outer = '.uagb-cta-block-' . $block['attrs']['block_id'];
+            $selector_outer = $uagb_sel_id;
             $pairs_outer = array(
                 'rightPadding' => '10px',
                 'leftPadding' => '10px'
@@ -288,7 +272,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
         case 'uagb/post-carousel': {
             $id_item = str_replace('uagb/post-', '', $block['blockName']);
 
-            $selector_outer = 'body .uagb-post__' . $id_item . '-' . $block['attrs']['block_id'] . ' .uagb-post__text .uagb-post__cta';
+            $selector_outer = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta';
             $pairs_outer = array(
                 'ctaBgColor' => $mods['button_back'],
                 'borderColor' => $mods['button_font'],
@@ -296,19 +280,19 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                 'borderRadius' => $mods['button_border_radius'] . 'px',
                 'borderStyle' => 'solid'
             );
-            $selector = 'body .uagb-post__' . $id_item . '-' . $block['attrs']['block_id'] . ' .uagb-post__text .uagb-post__cta a';
+            $selector = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a';
             $pairs = array(
                 'ctaFontSize' => $mods['button_font_size'] . 'px',
                 'btnVPadding' => $mods['button_vert_padding'] . 'px',
                 'btnHPadding' => $mods['button_hor_padding'] . 'px',
                 'ctaColor' => $mods['button_font']
             );
-            $selector_outer_hover = 'body .uagb-post__' . $id_item . '-' . $block['attrs']['block_id'] . ' .uagb-post__text .uagb-post__cta:hover';
+            $selector_outer_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta:hover';
             $pairs_outer_hover = array(
                 'ctaBgHColor' => $mods['button_back_hover'],
                 'borderHColor' => $mods['button_font_hover']
             );
-            $selector_hover = 'body .uagb-post__' . $id_item . '-' . $block['attrs']['block_id'] . ' .uagb-post__text .uagb-post__cta a:hover';
+            $selector_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a:hover';
             $pairs_hover = array(
                 'ctaHColor' => $mods['button_font_hover']
             );
@@ -322,29 +306,14 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
 
     }
     $mobiles = $tablets = $desktops = '';
+
     foreach ($selectors as $selector => $pairs) {
-        if (strpos($selector, 'buttons') !== false) {
-            //since all button attrs (even blank and default) are present we need to
-            //weed them out of the final array
-            $attrs = array();
-            $uagb_attrs = $block['attrs']['buttons'][$pairs['button']];
-            if (is_array($uagb_attrs)) {
-                foreach ($uagb_attrs as $i => $uagb_attr) {
-                    //only the ones with values that are not == the defaults pass this condition
-                    if ($uagb_attr && ($uagb_attr != $button_defaults[$i])) {
-                        $attrs[$i] = $uagb_attr;
-                    }
-                }
-            }
-        } else {
-            $attrs = $block['attrs'];
-        }
         $mobile = $tablet = $desktop = '';
         if (is_array($pairs)) {
             foreach ($pairs as $attr => $value) {
-                //a=$attrs are the non-default values for the element that the plugin is going to styles
+                //a=$block['attrs'] are the non-default values for the element that the plugin is going to styles
                 //there fore we wnat to ignore them
-                if (!array_key_exists($attr, $attrs)) {
+                if (!array_key_exists($attr, $block['attrs'])) {
                     if (strpos($attr, 'Mobile') !== false) {
                         $size = 'mobile';
                     } elseif (strpos($attr, 'Tablet') !== false) {
@@ -373,32 +342,24 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
             $mobiles .= $selector . '{' . $mobile . '}';
         }
     }
-    return $desktops . '@media(max-width:992px){' . $tablets . '}' . '@media(max-width:768px){' . $mobiles . '}';
+    $return = $desktops;
+    if ($tablets != '') {
+        $return .= '@media(max-width:993px){' . $tablets . '}';
+    }
+    if ($mobiles) {
+        $return .= '@media(max-width:768px){' . $mobiles . '}';
+    }
+    return $return;
 }
 
-function jma_subblock_handler($block, $first, $last, $full, $wrapped)
+function jma_subblock_handler($block, $first, $last, $full, $wrapped, $return = '')
 {
-    $return = '';
-    $reforatted_blocks = array('uagb/columns', 'uagb/column', 'uagb/section'/*, 'jma-ghb/featued-block'*/);
-    $button_blocks = array('uagb/call-to-action', 'uagb/buttons', 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel');
-
-    if (is_array($block) && isset($block['blockName']) && is_string($block['blockName']) && in_array($block['blockName'], $reforatted_blocks)) {
-        if (is_array($block['innerBlocks'])) {
-            $return .= jma_spacing_handler($block, $first, $last, $full, $wrapped);
-            if ($block['blockName'] == 'uagb/section') {
-                $wrapped = true;
-            }
-            if (is_array($block['innerBlocks'])) {
-                $return .= jma_block_handler($block['innerBlocks'], $full, $wrapped);
-            }
-        }
-    } else {
-        foreach ($block as $inner) {
-            if (is_array($inner)) {
-                jma_block_handler($inner, $full, $wrapped);
-            }
-        }
-        if (is_array($block) && isset($block['blockName']) && is_string($block['blockName']) && in_array($block['blockName'], $button_blocks)) {
+    if (isset($block['innerBlocks']) && is_array($block['innerBlocks']) && count($block['innerBlocks'])) {
+        $return .= jma_block_handler($block['innerBlocks'], false, true);
+    }
+    $reforatted_blocks = array('uagb/call-to-action', 'uagb/buttons-child', 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel','uagb/columns', 'uagb/column', 'uagb/section', 'jma-ghb/featued-block');
+    if (is_array($block) && isset($block['blockName']) && is_string($block['blockName'])) {
+        if (in_array($block['blockName'], $reforatted_blocks)) {
             $return .= jma_spacing_handler($block, $first, $last, $full, $wrapped);
         }
     }
@@ -419,10 +380,10 @@ function jma_block_handler($blocks, $full = false, $wrapped = false)
         if ($i === ($numItems-1)) {
             $last = true;
         }
-        if (isset($block['attrs']['contentWidth']) && $block['attrs']['contentWidth'] == 'full_width') {
-            $full = true;
-        }
-        if (is_array($block)) {
+        if (is_array($block) && isset($block['blockName'])) {
+            if (isset($block['attrs']['contentWidth']) && $block['attrs']['contentWidth'] == 'full_width') {
+                $full = true;
+            }
             $return .= jma_subblock_handler($block, $first, $last, $full, $wrapped);
         }
         //reset for top level elements
@@ -437,10 +398,6 @@ function jma_gbs_uagb_css()
 {
     global $post;
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
-
-    /*echo '<pre>';
-    print_r($mods);
-    echo '</pre>';*/
 
     $scroll = $reveal = $data = $print = '';
 
@@ -490,7 +447,10 @@ function jma_gbs_uagb_css()
             }
 
             if (isset($blocks) && is_array($blocks)) {
-                $block_css = jma_block_handler($blocks, false, false);
+                /*echo '<pre>'.$target->post_title;
+                print_r($blocks);
+                echo '</pre>';*/
+                $block_css .= jma_block_handler($blocks, false, false);
             }
             //no timeout - just delete on page update and theme options update
             set_transient('jma_block_uagb_css'. $target->ID, $block_css);
@@ -574,12 +534,13 @@ function jma_gbs_uagb_css()
     }
 
     if ($print) {
-        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print));
+        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print.'yyyyy'));
     }
     if ($reveal || $scroll) {
         $data = 'jQuery(document).ready(function($) {' . $reveal . $scroll . '});';
         wp_add_inline_script('JMA_GBS_viewport_js', $data);
     }
+    //}
 }
 
 function jma_gbs_uagb_dynamic_styles_filter($dynamic_styles)
@@ -597,8 +558,7 @@ function jma_gbs_uagb_dynamic_styles_filter($dynamic_styles)
 );
     return $dynamic_styles;
 }
-add_filter('dynamic_styles_filter', 'jma_gbs_uagb_dynamic_styles_filter');
-
+//add_filter('dynamic_styles_filter', 'jma_gbs_uagb_dynamic_styles_filter');
 function jma_gbs_uagb_delete_trans($post_ID)
 {
     delete_transient('jma_block_uagb_css'. $post_ID);
@@ -620,7 +580,7 @@ function jma_gbs_uagb_update_styles()
     //customize_save_after  https://developer.wordpress.org/reference/hooks/customize_save_after/
     add_action('customize_save_after', 'jma_gbs_uagb_delete_all_trans');
 }
-add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
+//add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
 
 add_action('post_updated', 'jma_gbs_uagb_delete_trans');
 

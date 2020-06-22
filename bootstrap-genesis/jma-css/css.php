@@ -186,6 +186,15 @@ $title_family = $mods['site_title_font_family'] != 'custom'? $families[$mods['si
 
 $css = array(
     array(
+        'selector' => '.jma-panel-button > a',
+        'background-color' => $mods['menu_font_color'],
+    ),
+    array(
+        'selector' => '.jma-panel-button > a',
+        'color' => $mods['menu_bg_color'] . '!important',
+    ),
+
+    array(
         'selector' => $menu_bg_color_selector,
         'background-color' => $mods['menu_bg_color'],
     ),
