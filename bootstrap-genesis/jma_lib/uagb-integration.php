@@ -280,26 +280,43 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                 'borderRadius' => $mods['button_border_radius'] . 'px',
                 'borderStyle' => 'solid'
             );
-            $selector = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a, ' . $uagb_sel_id . '  .uagb-post-pagination-wrap a';
+            $selector = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a';
             $pairs = array(
                 'ctaFontSize' => $mods['button_font_size'] . 'px',
                 'btnVPadding' => $mods['button_vert_padding'] . 'px',
                 'btnHPadding' => $mods['button_hor_padding'] . 'px',
                 'ctaColor' => $mods['button_font']
             );
-            $selector_outer_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta:hover,' . $uagb_sel_id . ' .uagb-post-pagination-wrap .page-numbers:hover';
+            $selector_outer_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta:hover';
             $pairs_outer_hover = array(
                 'ctaBgHColor' => $mods['button_back_hover'],
                 'borderHColor' => $mods['button_font_hover']
             );
-            $selector_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a:hover,' . $uagb_sel_id . '  .uagb-post-pagination-wrap a:hover';
+            $selector_hover = $uagb_sel_id . ' .uagb-post__text .uagb-post__cta a:hover';
             $pairs_hover = array(
                 'ctaHColor' => $mods['button_font_hover']
+            );
+            $pagination_selector = $uagb_sel_id . '  .uagb-post-pagination-wrap a';
+            $pagination_pairs = array(
+                'ctaColor' => $mods['button_font']
+            );
+            $pagination_hover = $uagb_sel_id . '  .uagb-post-pagination-wrap a:hover';
+            $pagination_pairs_hover = array(
+                'ctaHColor' => $mods['button_font_hover']
+            );
+            $pagination_outer_hover = $uagb_sel_id . ' .uagb-post-pagination-wrap .page-numbers:hover';
+            $pagination_pairs_outer_hover = array(
+                'ctaBgHColor' => $mods['button_back_hover'],
+                'borderHColor' => $mods['button_font_hover']
             );
             $selectors[$selector_outer] = $pairs_outer;
             $selectors[$selector] = $pairs;
             $selectors[$selector_outer_hover] = $pairs_outer_hover;
             $selectors[$selector_hover] = $pairs_hover;
+
+            $selectors[$pagination_selector] = $pagination_pairs;
+            $selectors[$pagination_hover] = $pagination_pairs_hover;
+            $selectors[$pagination_outer_hover] = $pagination_pairs_outer_hover;
             break;
         }
 

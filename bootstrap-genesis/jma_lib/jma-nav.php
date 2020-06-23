@@ -72,23 +72,8 @@ function JMA_GBS_nav_menu_markup_filter($html, $args)
         return $html;
     }
 
-    $data_target = "nav-collapse" . sanitize_html_class('-' . $args->theme_location);
-
     $output = '<div class="outer">';
     $output .= $html;
-    $output .= '</div>'; // .collapse .navbar-collapse
+    $output .= '</div>';
     return apply_filters('JMA_GBS_nav_menu_markup_filter_inner', $output, $html, $args);
-}
-
-function JMA_GBS_navbar_brand_markup()
-{
-    $output = '<a class="navbar-brand" id="logo" title="' .
-        esc_attr(get_bloginfo('description')) .
-        '" href="' .
-            esc_url(home_url('/')) .
-    '">';
-    $output .= get_bloginfo('name');
-    $output .= '</a>';
-
-    return $output;
 }

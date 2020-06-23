@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
     $window = $(window);
 
     //add class for verical side menu (mobile)
-    //$('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
+    $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
 
     $('.site-container ul.sf-menu').superfish({
 

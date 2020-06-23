@@ -199,7 +199,7 @@ $css = array(
         'background-color' => $mods['menu_bg_color'],
     ),
     array(
-        'selector' => 'body .navbar .jma-ul-wrap a',
+        'selector' => 'body .navbar .jma-ul-wrap a, body .jma-gbs-mobile-panel .navbar .jma-ul-wrap li.menu-item a',
         'color' => $mods['menu_font_color']
     ),
     array(
