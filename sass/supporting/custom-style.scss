@@ -434,8 +434,8 @@ body .site-header .navbar {
 }
 @media(max-width:767px) {
     .content-sidebar-wrap.row {
-        margin-left: 0;
-        margin-right: 0;
+        /*margin-left: 0;
+        margin-right: 0;*/
     }
 }
 /* padding position for gbs-boxed-content display mode */
@@ -474,10 +474,6 @@ body .site-header .navbar {
 .site-inner,
 .site-inner > .jma-gbs-inner {
     position: relative;
-}
-
-.site-inner > .jma-gbs-inner {
-    overflow-x: hidden;
 }
 
 .scroll_menu .site-inner .content-sidebar-wrap > * {
@@ -595,7 +591,7 @@ body .site-header .navbar {
 }
 
 .search-submit.btn-default {
-    padding: 9px 12px;
+    padding: 9px 11px;
 }
 
 figure.alignleft,

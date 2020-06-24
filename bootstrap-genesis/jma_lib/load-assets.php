@@ -16,7 +16,7 @@ function JMA_GBS_enqueue_css_js()
     $min = WP_DEBUG? '': '.min';
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
-    wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/css/style.css', array(), JMA_GBS_VERSION);
+    wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/style.css', array(), JMA_GBS_VERSION);
 
     wp_enqueue_style('JMA_GBS_fontawesome_css', JMA_GBS_ROOT_URI . 'fonts/css/all.min.css', array(), JMA_GBS_VERSION);
 

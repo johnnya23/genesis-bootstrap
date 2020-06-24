@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACA,GAAI,CACA,MAAM,CAAE,IAAI,CACZ,SAAS,CAAE,IAAI,CAInB,qCAIM,CACF,SAAS,CAAE,IAAI,CAInB,qBAEO,CACH,SAAS,CAAE,IAAI",
-"sources": ["../../sass/supporting/wordpress-responsive.scss"],
-"names": [],
-"file": "wordpress-responsive.css"
-}

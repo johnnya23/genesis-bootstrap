@@ -1,0 +1,23 @@
+{
+  "name": "jma-bootstrap-genesis",
+  "version": "1.0.0",
+  "description": "bootstrap-genesis ================= WordPress Genesis Child Theme setup to use Bootstrap 3, Sass, and Grunt.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch sass -o bootstrap-genesis/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnnya23/genesis-bootstrap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnnya23/genesis-bootstrap/issues"
+  },
+  "homepage": "https://github.com/johnnya23/genesis-bootstrap#readme",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
+}

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAEA,mBACQ,CACJ,aAAa,CAAE,UAAU,CACzB,SAAS,CAAE,UAAU",
-"sources": ["../../sass/supporting/long-nonbreaking-path-name-support.scss"],
-"names": [],
-"file": "long-nonbreaking-path-name-support.css"
-}
