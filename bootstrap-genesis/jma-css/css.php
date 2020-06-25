@@ -125,7 +125,11 @@ if (isset($mods['title_size_adjust']) && $mods['title_size_adjust'] && $mods['ti
 
 if ($mods['body_shape'] == 'gbs-full-content' && !$mods['frame_content']) {
     $supplemental_arrays[] = array(
-        'selector' => '.jma_gbs_full_block .entry-header, .jma_gbs_full_block .entry-content>*',
+        'selector' => '.jma_gbs_full_block .entry-header',
+        'max-width' => ($mods['site_width'] + 30) . 'px',
+    );
+    $supplemental_arrays[] = array(
+        'selector' => '.jma_gbs_full_block .entry-content>*',
         'max-width' => $mods['site_width'] . 'px',
     );
 }
