@@ -22,36 +22,36 @@ function JMA_GBS_layout_options_modify_classes_to_add($classes_to_add)
 
     // full-width-content       // supported
     if ('full-width-content' === $layout) {
-        $classes_to_add['content'] = 'col-sm-12';
+        $classes_to_add['content'] = 'col-md-12';
     }
 
     // sidebar-content          // supported
     if ('sidebar-content' === $layout) {
-        $classes_to_add['content'] = 'col-sm-9 col-sm-push-3';
-        $classes_to_add['sidebar-primary'] = 'col-sm-3 col-sm-pull-9';
+        $classes_to_add['content'] = 'col-md-9 col-md-push-3';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 col-md-pull-9';
     }
 
     // content-sidebar-sidebar  // supported
     if ('content-sidebar-sidebar' === $layout) {
-        $classes_to_add['content'] = 'col-sm-6';
-        $classes_to_add['sidebar-primary'] = 'col-sm-3';
-        $classes_to_add['sidebar-secondary'] = 'col-sm-3';
+        $classes_to_add['content'] = 'col-md-6';
+        $classes_to_add['sidebar-primary'] = 'col-md-3';
+        $classes_to_add['sidebar-secondary'] = 'col-md-3';
     }
 
 
     // sidebar-sidebar-content  // supported
     if ('sidebar-sidebar-content' === $layout) {
-        $classes_to_add['content'] = 'col-sm-6 col-sm-push-6';
-        $classes_to_add['sidebar-primary'] = 'col-sm-3 col-sm-pull-3';
-        $classes_to_add['sidebar-secondary'] = 'col-sm-3 col-sm-pull-9';
+        $classes_to_add['content'] = 'col-md-6 col-md-push-6';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 col-md-pull-3';
+        $classes_to_add['sidebar-secondary'] = 'col-md-3 col-md-pull-9';
     }
 
 
     // sidebar-content-sidebar  // supported
     if ('sidebar-content-sidebar' === $layout) {
-        $classes_to_add['content'] = 'col-sm-6 col-sm-push-3';
-        $classes_to_add['sidebar-primary'] = 'col-sm-3 col-sm-push-3';
-        $classes_to_add['sidebar-secondary'] = 'col-sm-3 col-sm-pull-9';
+        $classes_to_add['content'] = 'col-md-6 col-md-push-3';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 col-md-push-3';
+        $classes_to_add['sidebar-secondary'] = 'col-md-3 col-md-pull-9';
     }
 
     return apply_filters('jma_gbs_classes_to_add', $classes_to_add, $layout);

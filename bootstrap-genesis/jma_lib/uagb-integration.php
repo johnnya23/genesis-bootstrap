@@ -12,7 +12,7 @@ add_action('template_redirect', 'jma_gbs_uagb_template_redirect');
 
 
 
-function jma_spacing_handler($block, $first, $last, $full, $wrapped)
+function jma_spacing_handler($block, $first, $last, $full, $wrapped, $gapset)
 {
     $att_map = array(
         'topmargin' => array('margin-top'),
@@ -149,15 +149,17 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
                     'rightPaddingMobile' => '20px',
                     'topPadding' => '20px',
                     'bottomPadding' => '20px',
-                    'leftMargin' => ($mods['uagb_gutter']/2) . 'px',
-                    'rightMargin' => ($mods['uagb_gutter']/2) . 'px',
                 );
-            if ($first) {
-                $pairs['leftMargin'] = '0';
-            }
-            if ($last) {
-                $pairs['rightMargin'] = '0';
-            }
+                if (!$gapset) {
+                    $pairs['leftMargin'] = ($mods['uagb_gutter']/2) . 'px';
+                    $pairs['rightMargin'] = ($mods['uagb_gutter']/2) . 'px';
+                    if ($first) {
+                        $pairs['leftMargin'] = '0';
+                    }
+                    if ($last) {
+                        $pairs['rightMargin'] = '0';
+                    }
+                }
             if (isset($block['attrs']['className']) && strpos($block['attrs']['className'], 'full-size-content') !== false) {
                 $pairs['toppadding'] = '0';
                 $pairs['bottompadding'] = '0';
@@ -361,30 +363,34 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped)
     }
     $return = $desktops;
     if ($tablets != '') {
-        $return .= '@media(max-width:993px){' . $tablets . '}';
+        $return .= '@media(max-width:991px){' . $tablets . '}';
     }
     if ($mobiles) {
-        $return .= '@media(max-width:768px){' . $mobiles . '}';
+        $return .= '@media(max-width:767px){' . $mobiles . '}';
     }
     return $return;
 }
 
-function jma_subblock_handler($block, $first, $last, $full, $wrapped, $return = '')
+function jma_subblock_handler($block, $first, $last, $full, $wrapped, $gapset)
 {
+    $return = '';
     if (isset($block['innerBlocks']) && is_array($block['innerBlocks']) && count($block['innerBlocks'])) {
-        $return .= jma_block_handler($block['innerBlocks'], false, true);
+        if ($block['blockName'] == 'uagb/columns') {
+            $gapset = isset($block['attrs']['columnGap'])? true:false;
+        }
+        $return .= jma_block_handler($block['innerBlocks'], false, true, $gapset);
     }
     $reforatted_blocks = array('uagb/call-to-action', 'uagb/buttons-child', 'uagb/post-grid', 'uagb/post-masonry', 'uagb/post-carousel','uagb/columns', 'uagb/column', 'uagb/section', 'jma-ghb/featued-block');
     if (is_array($block) && isset($block['blockName']) && is_string($block['blockName'])) {
         if (in_array($block['blockName'], $reforatted_blocks)) {
-            $return .= jma_spacing_handler($block, $first, $last, $full, $wrapped);
+            $return .= jma_spacing_handler($block, $first, $last, $full, $wrapped, $gapset);
         }
     }
 
     return $return;
 }
 
-function jma_block_handler($blocks, $full = false, $wrapped = false)
+function jma_block_handler($blocks, $full = false, $wrapped = false, $gapset = false)
 {
     $return = '';
     $numItems = count($blocks);
@@ -401,12 +407,14 @@ function jma_block_handler($blocks, $full = false, $wrapped = false)
             if (isset($block['attrs']['contentWidth']) && $block['attrs']['contentWidth'] == 'full_width') {
                 $full = true;
             }
-            $return .= jma_subblock_handler($block, $first, $last, $full, $wrapped);
+            if ($block['blockName'] == 'uagb/columns') {
+                $gapset = isset($block['attrs']['columnGap'])? true:false;
+            }
+
+            $return .= jma_subblock_handler($block, $first, $last, $full, $wrapped, $gapset);
         }
         //reset for top level elements
-        if (isset($block['attrs']['contentWidth']) && $block['attrs']['contentWidth'] == 'full_width') {
-            $full = false;
-        }
+        $full = false;
     }
     return $return;
 }
@@ -455,7 +463,6 @@ function jma_gbs_uagb_css()
     }
 
     foreach ($targets as $target) {
-        $block_css = '';
         $block_css = get_transient('jma_block_uagb_css'. $target->ID);
         if (false === $block_css) {
             // It wasn't there, so regenerate the data and save the transient
@@ -467,7 +474,7 @@ function jma_gbs_uagb_css()
                 /*echo '<pre>'.$target->post_title;
                 print_r($blocks);
                 echo '</pre>';*/
-                $block_css .= jma_block_handler($blocks, false, false);
+                $block_css = jma_block_handler($blocks, false, false);
             }
             //no timeout - just delete on page update and theme options update
             set_transient('jma_block_uagb_css'. $target->ID, $block_css);
@@ -597,16 +604,6 @@ function jma_gbs_uagb_update_styles()
     //customize_save_after  https://developer.wordpress.org/reference/hooks/customize_save_after/
     add_action('customize_save_after', 'jma_gbs_uagb_delete_all_trans');
 }
-//add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
+add_action('admin_init', 'jma_gbs_uagb_update_styles', 11);
 
 add_action('post_updated', 'jma_gbs_uagb_delete_trans');
-
-$gutter_options = array(
-    array(
-    'name' 		=> 'Default Column Gutters (advanced columns)',
-    'desc' 		=> 'Width between advanced columns columns elements in px (don\'t add unit abbreviation)',
-    'id' 		=> 'uagb_gutter',
-    'std'		=> '20',
-    'type' 		=> 'text'
-    )
-);

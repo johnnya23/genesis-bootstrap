@@ -80,7 +80,7 @@ jQuery(document).ready(function($) {
         $('body').toggleClass('open');
     });
 
-    var navVert = parseInt($('body').css('padding-top'), 10);
+    var navVert = parseInt($('body').css('padding-top'), 10) + parseInt($('#site-header').css('padding-top'), 10);
     $navbar = $('.site-container').find('.site-header').find('.nav-primary');
 
     //clone the sticky menu
@@ -100,7 +100,7 @@ jQuery(document).ready(function($) {
     });
 
     //add logo to sticky menu
-    if ($('#site-header').data('sticky-header')) {
+    if ($sticky_menu && $('#site-header').data('sticky-header')) {
         $sticky_menu.addClass('has-image');
         $sticky_menu.find('.jma-positioned').prepend($('<a>', {
             href: window.location.protocol + '//' + window.location.host

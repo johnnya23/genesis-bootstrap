@@ -29,7 +29,7 @@ foreach ($header_footer as $value) {
         "color" => $mods["{$value}_font_color"]
 );
 
-    if ($mods["modular_{$value}"] == "yes") {
+    if ($mods["modular_{$value}"]) {
         ${$value . '_width_array'}["selector"] = ${$value . '_appearence_array'}["selector"] = ".site-{$value} .jma-gbs-inner";
         ${$value . '_appearence_array'}["border-radius"] = $mods["{$value}_border_radius"] . "px";
         if ($mods["{$value}_border_width"]) {
@@ -68,7 +68,7 @@ if ($mods['body_shape'] == 'gbs-full-content') {
 }
 if ($mods['body_shape'] == 'gbs-modular-content') {
     $content_appearence_array['selector'] = '.site-inner .content-sidebar-wrap .jma-gbs-inner';
-    //unset($content_appearence_array['max-width']);
+    $content_width_array['max-width'] = ($site_width +30) . 'px';
 }
 if ($mods['body_shape'] == 'gbs-boxed-content') {
     $content_appearence_array['selector'] = '.site-inner';
@@ -271,7 +271,7 @@ $css = array(
         'color' => $mods['site_font_link_hover_color']
     ),
     array(
-        'selector' => 'button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default',
+        'selector' => 'button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default, .jma-gbs-pagination-numeric li a',
         'color' => $mods['button_font'],
         'border-color' => $mods['button_font'],
         'padding' => $mods['button_hor_padding'] . 'px ' . $mods['button_vert_padding'] . 'px',
@@ -281,7 +281,7 @@ $css = array(
         'background-color' => $mods['button_back'],
     ),
     array(
-        'selector' => 'button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, a.gbs-btn:hover, .btn-default:hover',
+        'selector' => 'button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, a.gbs-btn:hover, .btn-default:hover, .jma-gbs-pagination-numeric li a:hover',
         'color' => $mods['button_font_hover'],
         'border-color' => $mods['button_font_hover'],
         'background-color' => $mods['button_back_hover'],
@@ -293,6 +293,10 @@ $css = array(
     array(
         'selector' => '.site-footer a',
         'color' => $mods['footer_font_color']
+    ),
+    array(
+        'selector' => 'html',
+        'background-color' => $mods['footer_bg_color']
     ),
 );
 
