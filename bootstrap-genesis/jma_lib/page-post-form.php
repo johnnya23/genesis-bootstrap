@@ -8,7 +8,11 @@
  } // Exit if accessed directly
 function jma_gbs_image_input_box()
 {
-    $screens = array('post', 'page');
+    $screens = array();
+    $cpts = jma_ghb_get_cpt();
+    foreach ($cpts as $slug => $obj) {
+        $screens[] = $slug;
+    }
     $screens = apply_filters('jma_gbs_image_input_screens_filter', $screens);
     foreach ($screens as $screen) {
         add_meta_box(

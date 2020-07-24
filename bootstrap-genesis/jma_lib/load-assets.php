@@ -8,11 +8,15 @@ if (! defined('ABSPATH')) {
 // with css/style' . $min . '.css -  Compressed CSS for Theme
 remove_action('genesis_meta', 'genesis_load_stylesheet');
 
+function jma_gbs_customize_save_after()
+{
+    delete_transient('jma_gbs_general_css');
+}
+add_action('customize_save_after', 'jma_gbs_customize_save_after');
+add_action('customize_controls_print_scripts', 'jma_gbs_customize_save_after');
+
 function JMA_GBS_enqueue_css_js()
 {
-    // THIS IS FOR FSB SITE //mnt/BLOCKSTORAGE/home/155879.cloudwaysapps.com/gnqhmzwgkr/public_html/wp-content/plugins/jma-bootstrap-genesis/bootstrap-genesis/
-
-
     $min = WP_DEBUG? '': '.min';
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
@@ -34,14 +38,33 @@ function JMA_GBS_enqueue_css_js()
     wp_enqueue_script('JMA_GBS_viewport_js', JMA_GBS_BASE_URI . 'js/vendor/viewportchecker/viewportChecker.umd.min.js', array('jquery'), JMA_GBS_VERSION, true);
     wp_enqueue_script('JMA_GBS_bootstrap_js', JMA_GBS_BASE_URI . 'js/vendor/bootstrap/bootstrap.bundle.min.js', array('jquery'), JMA_GBS_VERSION, false);
 
-    $mods = jma_gbs_get_theme_mods('jma_gbs_');
-    require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
+    $output = get_transient('jma_gbs_general_css');
+    if (false == $output) {
+        // It wasn't there, so regenerate the data and save the transient
+        $mods = jma_gbs_get_theme_mods('jma_gbs_');
+        require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
 
-    //$css = apply_filters('jma_gbs_header_css', $css, $mods);
-    $output = jma_gbs_process_css_array($css);
+        $css = apply_filters('jma_gbs_header_css', $css, $mods);
+        $output = jma_gbs_process_css_array($css);
+        set_transient('jma_gbs_general_css', $output);
+    }
     wp_add_inline_style('JMA_GBS_combined_css', $output);
 }
 add_action('wp_enqueue_scripts', 'JMA_GBS_enqueue_css_js');
+
+function JMA_GBS_customizer_live_preview()
+{
+    $mods = jma_gbs_get_theme_mods('jma_gbs_');
+    require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
+
+    $css = apply_filters('jma_gbs_header_css', $css, $mods);
+    $output = jma_gbs_process_css_array($css, true);
+
+    wp_register_style('jma_gbs_customizer_css', false, array('JMA_GBS_combined_css'));
+    wp_enqueue_style('jma_gbs_customizer_css');
+    wp_add_inline_style('jma_gbs_customizer_css', $output);
+}
+add_action('customize_preview_init', 'JMA_GBS_customizer_live_preview');
 
 function JMA_GBS_customize_controls_enqueue_scripts()
 {

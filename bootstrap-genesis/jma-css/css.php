@@ -307,4 +307,5 @@ add back content and {$value} and footer options
 foreach ($supplemental_arrays as $supplemental_array) {
     $css[] = $supplemental_array;
 }
+$css = apply_filters('jma_gbs_css_array', $css, $mods);
 //print_r($css);

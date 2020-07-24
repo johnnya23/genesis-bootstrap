@@ -553,12 +553,12 @@ function jma_gbs_uagb_css()
             text-decoration: underline
         }';
 
-    if (function_exists('jmaminifyCss')) {
-        $print = jmaminifyCss($print);
+    if (function_exists('jma_gbs_minifyCss')) {
+        $print = jma_gbs_minifyCss($print);
     }
 
     if ($print) {
-        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print.'yyyyy'));
+        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print));
     }
     if ($reveal || $scroll) {
         $data = 'jQuery(document).ready(function($) {' . $reveal . $scroll . '});';

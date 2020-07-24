@@ -699,6 +699,10 @@ li.comment {
     display: inline-block;
 }
 
+.form-inline {
+    display: block;
+}
+
 .jma-gbs-overlay .jma-gbs-close-search {
     position: absolute;
     top: 20px;
@@ -731,4 +735,13 @@ body .jma-gbs-pagination-numeric li a {
 
 .jma-gbs-pagination-numeric li a:hover {
     text-decoration: none;
+}
+/* bootstarp modification */
+.card {
+    background-color: transparent;
+    border: none;
+}
+
+.card-body {
+    background-color: #ffffff;
 }
