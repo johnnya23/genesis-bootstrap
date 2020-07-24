@@ -4,7 +4,7 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-add_action('genesis_entry_header', 'JMA_GBS_single_featured_image', 5);
+add_action('genesis_entry_header', 'JMA_GBS_single_featured_image', 15);
 
 function JMA_GBS_single_featured_image()
 {

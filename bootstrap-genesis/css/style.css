@@ -10119,13 +10119,13 @@ img.alignright {
 }
 
 /* featured image (in content area) */
-.site-inner .entry-header img {
+.site-inner .single-featured-image {
   margin-bottom: 15px;
 }
 
-.site-inner .entry-header img.alignleft,
-.site-inner .entry-header img.alignright {
-  width: 300px;
+.site-inner .single-featured-image.alignleft,
+.site-inner .single-featured-image.alignright {
+  width: 400px;
   max-width: 40%;
 }
 
