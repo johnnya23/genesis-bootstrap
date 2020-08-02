@@ -5,15 +5,15 @@ if (! defined('ABSPATH')) {
 } // Exit if accessed directly
 
 return array(
-        'menu_bg_color' => array(
-            'default' => '#660000',
-            'label' => __('Menu Background Color', 'jma_gbs'),
-            'section' => 'jma_gbs_uagb_menu',
-            'type' => 'color',
-        ),
         'menu_font_color' => array(
             'default' => '#ffffff',
             'label' => __('Menu Font Color', 'jma_gbs'),
+            'section' => 'jma_gbs_uagb_menu',
+            'type' => 'color',
+        ),
+        'menu_bg_color' => array(
+            'default' => '#660000',
+            'label' => __('Menu Background Color', 'jma_gbs'),
             'section' => 'jma_gbs_uagb_menu',
             'type' => 'color',
         ),

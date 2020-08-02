@@ -26,7 +26,6 @@ function JMA_GBS_enqueue_css_js()
 
     // wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
     // NOTE: this combined script is loading in the footer
-    wp_enqueue_script('JMA_GBS_ekko_js', JMA_GBS_BASE_URI . 'dist/js/ekko-lightbox.min.js', array('jquery'), JMA_GBS_VERSION, true);
 
     wp_enqueue_script('JMA_GBS_combined_js', JMA_GBS_BASE_URI . 'js/javascript' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
 

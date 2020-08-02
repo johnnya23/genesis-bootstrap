@@ -237,7 +237,7 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped, $gapset)
         }
 
         case 'uagb/call-to-action': {
-            $selector = $uagb_sel_id . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button';
+            $selector = $uagb_sel_id . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button ';
             $pairs = array(
                 'ctaBgColor' => $mods['button_back'],
                 'ctaBorderColor' => $mods['button_font'],
@@ -257,12 +257,18 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped, $gapset)
                 'ctaLinkHoverColor' => $mods['button_font_hover']
             );
 
+            $selector_inner = $uagb_sel_id . ' .uagb-cta__button-wrapper a.uagb-cta-typeof-button *';
+            $pairs_inner = array(
+                'ctaFontSize' => $mods['button_font_size'] . 'px'
+            );
+
             $selector_outer = $uagb_sel_id;
             $pairs_outer = array(
                 'rightPadding' => '10px',
                 'leftPadding' => '10px'
             );
             $selectors[$selector] = $pairs;
+            $selectors[$selector_inner] = $pairs_inner;
             $selectors[$selector_hover] = $pairs_hover;
             $selectors[$selector_outer] = $pairs_outer;
             break;
@@ -496,7 +502,7 @@ function jma_gbs_uagb_css()
                 padding-left:0!important;
                 padding-right:0!important;
         	}
-             .entry-content > .wp-block-uagb-section > .uagb-section__inner-wrap>*, .entry-content > .wp-block-uagb-columns > .uagb-columns__inner-wrap>* {
+             .entry-content > .wp-block-uagb-section > .uagb-section__inner-wrap, .entry-content > .wp-block-uagb-columns > .uagb-columns__inner-wrap {
             	opacity: 0;
             	-webkit-backface-visibility: hidden;
             	-webkit-transform: scale(0.8, 0.8) translate3d(0, 0, 0);
@@ -507,7 +513,7 @@ function jma_gbs_uagb_css()
             	transition-delay: .15s;
             }
             /* adding the fade in effect */
-             .entry-content > .wp-block-uagb-section > .uagb-section__inner-wrap.jma-visible>*,   .entry-content > .wp-block-uagb-columns > .uagb-columns__inner-wrap.jma-visible>* {
+             .entry-content > .wp-block-uagb-section > .uagb-section__inner-wrap.jma-visible,   .entry-content > .wp-block-uagb-columns > .uagb-columns__inner-wrap.jma-visible {
             	opacity: 1;
             	-webkit-transform: scale(1, 1) translate3d(0,0,0);
             	transform: scale(1, 1) translate3d(0,0,0);
@@ -558,7 +564,7 @@ function jma_gbs_uagb_css()
     }
 
     if ($print) {
-        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print));
+        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print, $blocks, $mods));
     }
     if ($reveal || $scroll) {
         $data = 'jQuery(document).ready(function($) {' . $reveal . $scroll . '});';

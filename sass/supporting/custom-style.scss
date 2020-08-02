@@ -745,3 +745,15 @@ body .jma-gbs-pagination-numeric li a {
 .card-body {
     background-color: #ffffff;
 }
+/* integration with lightbox plugin */
+body #slb_viewer_wrap .slb_theme_slb_baseline .slb_container {
+    padding: 0;
+}
+
+body #slb_viewer_wrap .slb_theme_slb_default .slb_container {
+    border-radius: 0;
+}
+
+body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
+    display: none;
+}

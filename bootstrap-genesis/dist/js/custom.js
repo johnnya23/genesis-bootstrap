@@ -1,11 +1,4 @@
 jQuery(document).ready(function($) {
-    //popups
-    $('.wp-block-image, .widget-wrap').find('a').click(function(e) {
-        if ($(this).children('img[class*=wp-image]').length) {
-            e.preventDefault();
-            $(this).ekkoLightbox();
-        }
-    });
     //search form
     function jma_gbs_open_search() {
         document.getElementById("jma_gbs_search_overlay").classList.add('open');

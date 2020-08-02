@@ -274,7 +274,7 @@ $css = array(
         'selector' => 'button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default, .jma-gbs-pagination-numeric li a',
         'color' => $mods['button_font'],
         'border-color' => $mods['button_font'],
-        'padding' => $mods['button_hor_padding'] . 'px ' . $mods['button_vert_padding'] . 'px',
+        'padding' => $mods['button_vert_padding'] . 'px ' . $mods['button_hor_padding'] . 'px',
         'font-size' => $mods['button_font_size'] . 'px',
         'border-radius' => $mods['button_border_radius'] . 'px',
         'border-width' => $mods['button_border_width'] . 'px',
