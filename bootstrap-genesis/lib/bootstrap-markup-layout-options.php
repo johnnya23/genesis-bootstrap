@@ -42,8 +42,8 @@ function JMA_GBS_layout_options_modify_classes_to_add($classes_to_add)
     // sidebar-sidebar-content  // supported
     if ('sidebar-sidebar-content' === $layout) {
         $classes_to_add['content'] = 'col-md-6 order-md-12';
-        $classes_to_add['sidebar-primary'] = 'col-md-3 order-1';
-        $classes_to_add['sidebar-secondary'] = 'col-md-3 order-6';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 order-6';
+        $classes_to_add['sidebar-secondary'] = 'col-md-3 order-1';
     }
 
 
