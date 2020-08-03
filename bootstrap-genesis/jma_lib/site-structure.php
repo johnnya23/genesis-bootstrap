@@ -38,6 +38,22 @@ function jma_gbs_get_display_vals($mods)
     return $return;
 }
 
+
+function jma_gbs_site_layout($pre)
+{
+    if (is_singular()) {
+        $mods = jma_gbs_get_theme_mods('jma_gbs_');
+        $post_type = get_post_type();
+
+        if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
+            $pre = $mods[$post_type . '_col_layout'];
+        }
+    }
+    return $pre;
+}
+add_filter('genesis_site_layout', 'jma_gbs_site_layout', 40);
+
+
 function jma_gbs_open_div()
 {
     echo '<div class="jma-gbs-inner">';
@@ -68,6 +84,7 @@ function jma_gbs_archive_banner_title()
 
 function jma_gbs_template_redirect()
 {//add_action('jma_gbs_local_menu');
+
     global $post;
 
     if (is_object($post) && get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {

@@ -4,7 +4,21 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-return array(
+$jma_ghb_cpt = jma_ghb_get_cpt();
+$post_type_array = array();
+$default = array(0 => 'default');
+foreach ($jma_ghb_cpt as $slug => $obj) {
+    $post_type_array[$slug . '_col_layout'] = array(
+        'default' => 0,
+        'label' => __('Site Layout for ' . $obj->label, 'jma_gbs'),
+        'description' => esc_html__('Default Site Layout for your ' . $obj->label . '.'),
+        'section' => 'genesis_layout',
+        'type' => 'select',
+        'choices' => array_merge($default, genesis_get_layouts_for_customizer())
+    );
+}
+
+$layout_choices = array(
         'body_shape' => array(
             'default' => 'gbs-full-content',
             'label' => __('Body Shape', 'jma_gbs'),
@@ -84,3 +98,4 @@ return array(
             'type' => 'image'
         ),
 );
+return array_merge($post_type_array, $layout_choices);

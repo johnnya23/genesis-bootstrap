@@ -27,8 +27,8 @@ function JMA_GBS_layout_options_modify_classes_to_add($classes_to_add)
 
     // sidebar-content          // supported
     if ('sidebar-content' === $layout) {
-        $classes_to_add['content'] = 'col-md-9 col-md-push-3';
-        $classes_to_add['sidebar-primary'] = 'col-md-3 col-md-pull-9';
+        $classes_to_add['content'] = 'col-md-9 order-md-12';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 order-md-1';
     }
 
     // content-sidebar-sidebar  // supported
@@ -41,17 +41,17 @@ function JMA_GBS_layout_options_modify_classes_to_add($classes_to_add)
 
     // sidebar-sidebar-content  // supported
     if ('sidebar-sidebar-content' === $layout) {
-        $classes_to_add['content'] = 'col-md-6 col-md-push-6';
-        $classes_to_add['sidebar-primary'] = 'col-md-3 col-md-pull-3';
-        $classes_to_add['sidebar-secondary'] = 'col-md-3 col-md-pull-9';
+        $classes_to_add['content'] = 'col-md-6 order-md-12';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 order-1';
+        $classes_to_add['sidebar-secondary'] = 'col-md-3 order-6';
     }
 
 
     // sidebar-content-sidebar  // supported
     if ('sidebar-content-sidebar' === $layout) {
-        $classes_to_add['content'] = 'col-md-6 col-md-push-3';
-        $classes_to_add['sidebar-primary'] = 'col-md-3 col-md-push-3';
-        $classes_to_add['sidebar-secondary'] = 'col-md-3 col-md-pull-9';
+        $classes_to_add['content'] = 'col-md-6 order-md-6';
+        $classes_to_add['sidebar-primary'] = 'col-md-3 order-md-1';
+        $classes_to_add['sidebar-secondary'] = 'col-md-3 order-md-12';
     }
 
     return apply_filters('jma_gbs_classes_to_add', $classes_to_add, $layout);
