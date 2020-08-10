@@ -375,6 +375,12 @@ body .site-container .sticky-menu.has-image .nav > li > a {
     }
 }
 
+.navbar > ul,
+.site-header > .jma-gbs-inner > .navbar > .outer {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 body .navbar a {
     font-size: 16px;
 }

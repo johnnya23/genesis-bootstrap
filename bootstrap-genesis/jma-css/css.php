@@ -141,12 +141,12 @@ if (!$mods['use_menu_root_bg']) {
         $menu_hover_border_value = $menu_root_hover_font_color;
     }
     $supplemental_arrays[] = array(
-        'selector' => '.site-container .navbar > .jma-ul-wrap > ul > li[class*="current"] > a, .site-container .navbar > .jma-ul-wrap > ul > li[class*="current"] > a, .site-container .navbar > .jma-ul-wrap > ul > li.current-menu-item > a:hover, .site-container .navbar > .jma-ul-wrap > ul > li.current-menu-item > a:focus',
+        'selector' => '.site-container .navbar > ul > li[class*="current"] > a, .site-container .navbar > ul > li[class*="current"] > a, .site-container .navbar > ul > li.current-menu-item > a:hover, .site-container .navbar > ul > li.current-menu-item > a:focus',
         'color' => $menu_root_current_font_color,
         $menu_border_attribute => $menu_current_border_value
     );
     $supplemental_arrays[] = array(
-        'selector' => '.site-container .navbar .jma-ul-wrap > ul > li > a:hover',
+        'selector' => '.site-container .navbar ul > li > a:hover',
         'color' => $menu_root_hover_font_color,
         $menu_border_attribute => $menu_hover_border_value
     );
@@ -203,7 +203,7 @@ $css = array(
         'background-color' => $mods['menu_bg_color'],
     ),
     array(
-        'selector' => 'body .navbar .jma-ul-wrap a, body .jma-gbs-mobile-panel .navbar .jma-ul-wrap li.menu-item a',
+        'selector' => 'body .navbar .nav a, body .jma-gbs-mobile-panel .navbar .nav li.menu-item a',
         'color' => $mods['menu_font_color']
     ),
     array(
@@ -236,7 +236,7 @@ $css = array(
     ),
 
     array(
-        'selector' => '.site-container > .navbar > .jma-positioned',
+        'selector' => '.site-container > .navbar > ul, .site-header > .jma-gbs-inner > .navbar > .outer',
         'max-width' => $mods['site_width'] . 'px',
     ),
 

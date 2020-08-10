@@ -43,7 +43,7 @@ function jma_gbs_close_panel()
 add_filter('wp_nav_menu_args', 'JMA_GBS_nav_menu_args_filter');
 
 // add bootstrap markup around the nav
-add_filter('wp_nav_menu', 'JMA_GBS_nav_menu_markup_filter', 10, 2);
+add_filter('wp_nav_menu', 'JMA_GBS_nav_menu_markup_filter', 10, 3);
 
 function JMA_GBS_nav_menu_args_filter($args)
 {
@@ -52,7 +52,7 @@ function JMA_GBS_nav_menu_args_filter($args)
         'secondary' === $args['theme_location']
     ) {
         $args['depth'] = 0;
-        $args['menu_class'] = 'nav sf-menu sf-arrows';
+        //$args['menu_class'] = 'nav sf-menu sf-arrows';
         $args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
         $args['walker'] = new wp_bootstrap_navwalker();
     }
