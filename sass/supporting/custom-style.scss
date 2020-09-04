@@ -779,10 +779,28 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
     right: 0;
 }
 
+.jma-fixed-scroll {
+    z-index: 9999;
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+    padding: 2px 6px;
+    background-color: rgba(0,0,0, 0.1);
+    font-size: 20px;
+    color: #333;
+    display: none;
+    border: none;
+    outline: none!important;
+}
+
 .page-edge-widget .simple-social-icons ul li {
     float: none;
 }
 @media(max-width:767px) {
+    .jma-fixed-scroll {
+        display: inline-block;
+    }
+
     .page-edge-widget #simple-social-icons-2 ul li a {
         padding: 3px;
     }

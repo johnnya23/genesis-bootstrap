@@ -97,6 +97,11 @@ function jma_gbs_add_page_edge_content()
     ));
 }
 
+function jma_gbs_add_scroll_to_top()
+{
+    echo '<button class="jma-fixed-scroll jma-scroll-to-top"><i class="fas fa-chevron-up"></i></button>';
+}
+
 
 function jma_gbs_template_redirect()
 {//add_action('jma_gbs_local_menu');
@@ -161,6 +166,7 @@ function jma_gbs_template_redirect()
         }
     }
     add_action('genesis_after', 'jma_gbs_add_page_edge_content');
+    add_action('genesis_after', 'jma_gbs_add_scroll_to_top');
 }
 add_action('template_redirect', 'jma_gbs_template_redirect');
 

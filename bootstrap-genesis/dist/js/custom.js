@@ -1,5 +1,9 @@
 jQuery(document).ready(function($) {
-
+    $('.jma-scroll-to-top, .jma-scroll-to-top a').click(function() {
+        $("html").animate({
+            scrollTop: 0
+        });
+    });
     //search form
     function jma_gbs_open_search() {
         document.getElementById("jma_gbs_search_overlay").classList.add('open');
