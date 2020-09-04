@@ -1,4 +1,5 @@
 jQuery(document).ready(function($) {
+
     //search form
     function jma_gbs_open_search() {
         document.getElementById("jma_gbs_search_overlay").classList.add('open');
@@ -79,6 +80,7 @@ jQuery(document).ready(function($) {
     //clone the sticky menu
     $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass('sticky-menu');
 
+    //add items from header to mobile (side) menu
     $('.add-to-panel').each(function() {
         $('<div/>', {
             style: 'clear:both'
@@ -95,7 +97,7 @@ jQuery(document).ready(function($) {
     //add logo to sticky menu
     if ($sticky_menu && $('#site-header').data('sticky-header')) {
         $sticky_menu.addClass('has-image');
-        $sticky_menu.find('.jma-positioned').prepend($('<a>', {
+        $sticky_menu.find('.outer').prepend($('<a>', {
             href: window.location.protocol + '//' + window.location.host
         }).prepend($("<img>", {
             src: $('#site-header').data('sticky-header'),
@@ -174,7 +176,10 @@ jQuery(document).ready(function($) {
         if ($wrapping_col.length) {
             //find the space our menu needs before wrapping
             $primary_nav.find('.sf-menu >li').each(function() {
-                necessary_menu_width += $(this).outerWidth();
+                $this = $(this);
+                //don't include hidden elements in calculation
+                if ($this.css('display') != 'none')
+                    necessary_menu_width += $this.outerWidth();
             });
             //use the sibling because they will not be altered
             sibling_width = 0;

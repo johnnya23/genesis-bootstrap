@@ -53,6 +53,12 @@ function jma_gbs_site_layout($pre)
 }
 add_filter('genesis_site_layout', 'jma_gbs_site_layout', 40);
 
+genesis_register_sidebar(array(
+    'id'		=> 'page-edge-widget',
+    'name'		=> 'Page Edge Widget',
+    'description'	=> 'Mostly this is for follow icons'
+));
+
 
 function jma_gbs_open_div()
 {
@@ -79,6 +85,16 @@ function jma_gbs_archive_banner_title()
         printf('<h1 %s>%s</h1>', genesis_attr('archive-title'), esc_html(wp_strip_all_tags($title)));
         echo '</div>';
     }
+}
+
+//* Add the page widget in the content - HTML5
+
+function jma_gbs_add_page_edge_content()
+{
+    genesis_widget_area('page-edge-widget', array(
+        'before' => '<div class="page-edge-widget"><div class="wrap">',
+        'after' => '</div></div>',
+    ));
 }
 
 
@@ -144,6 +160,7 @@ function jma_gbs_template_redirect()
             add_action('genesis_header', 'jma_gbs_archive_banner_title', 12);
         }
     }
+    add_action('genesis_after', 'jma_gbs_add_page_edge_content');
 }
 add_action('template_redirect', 'jma_gbs_template_redirect');
 

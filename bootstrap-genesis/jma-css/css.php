@@ -30,7 +30,7 @@ foreach ($header_footer as $value) {
 );
 
     if ($mods["modular_{$value}"]) {
-        ${$value . '_width_array'}["selector"] = ${$value . '_appearence_array'}["selector"] = ".site-{$value} .jma-gbs-inner";
+        ${$value . '_width_array'}["selector"] = ${$value . '_appearence_array'}["selector"] = ".site-{$value} .jma-gbs-inner, .sticky-menu.fixed .outer";
         ${$value . '_appearence_array'}["border-radius"] = $mods["{$value}_border_radius"] . "px";
         if ($mods["{$value}_border_width"]) {
             ${$value . '_appearence_array'}["border-style"] = "solid";
@@ -39,7 +39,7 @@ foreach ($header_footer as $value) {
         }
     } else {
         ${$value . '_appearence_array'}["selector"] = ".site-{$value}";
-        ${$value . '_width_array'}["selector"] = ".site-{$value} .jma-gbs-inner > *, .site-{$value} .jma-gbs-inner .navbar div";
+        ${$value . '_width_array'}["selector"] = ".site-{$value} .jma-gbs-inner > *, .site-{$value} .jma-gbs-inner .navbar div, .sticky-menu.fixed .outer";
     }
 }
 /*
@@ -141,7 +141,7 @@ if (!$mods['use_menu_root_bg']) {
         $menu_hover_border_value = $menu_root_hover_font_color;
     }
     $supplemental_arrays[] = array(
-        'selector' => '.site-container .navbar > ul > li[class*="current"] > a, .site-container .navbar > ul > li[class*="current"] > a, .site-container .navbar > ul > li.current-menu-item > a:hover, .site-container .navbar > ul > li.current-menu-item > a:focus',
+        'selector' => '.site-container .navbar ul > li[class*="current"] > a, .site-container .navbar .outer > ul > li[class*="current"] > a, .site-container .navbar .outer > ul > li.current-menu-item > a:hover, .site-container .navbar .outer > ul > li.current-menu-item > a:focus',
         'color' => $menu_root_current_font_color,
         $menu_border_attribute => $menu_current_border_value
     );
