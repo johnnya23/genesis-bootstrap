@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
-    $('.jma-scroll-to-top, .jma-scroll-to-top a').click(function() {
+    $('.jma-scroll-to-top, .jma-scroll-to-top a').click(function(event) {
+        event.preventDefault();
         $("html").animate({
             scrollTop: 0
         });
@@ -30,8 +31,11 @@ jQuery(document).ready(function($) {
     /* animation for local menu */
     $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
         event.preventDefault();
+        scrollTopVal = $(this.hash).offset().top - 180;
+        if ($(this).closest('li').hasClass('jma-scroll-to-top'))
+            scrollTopVal = 0;
         $('html, body').animate({
-            scrollTop: $(this.hash).offset().top - 180
+            scrollTop: scrollTopVal
         }, 500);
 
     });

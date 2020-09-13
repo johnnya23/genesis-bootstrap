@@ -247,7 +247,7 @@ i.fas {
     border-left: none;
 }
 
-.site-container .navbar .sf-menu ul a:hover {
+.site-container .navbar .sf-menu a:hover {
     text-decoration: none;
 }
 /* let menu dropdowns show */
@@ -777,6 +777,7 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
     top: 600px;
     top: calc(60vh);
     right: 0;
+    z-index: 9999;
 }
 
 .jma-fixed-scroll {
@@ -799,6 +800,7 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
 @media(max-width:767px) {
     .jma-fixed-scroll {
         display: inline-block;
+        z-index: 99999;
     }
 
     .page-edge-widget #simple-social-icons-2 ul li a {
