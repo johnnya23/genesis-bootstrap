@@ -25,6 +25,15 @@ function jma_gbs_get_theme_mods($pre = '')
             $value = apply_filters("theme_mod_{$key}", $raw_mod);
             $key = str_replace($pre, '', $key);
             $mods[$key] = $value;
+            $settings_array = jma_gbs_get_settngs();
+            $defaults = $settings_array['defaults'];
+            //grab all the defaults and cycle through
+            foreach ($defaults as $default_key => $default) {
+                $key_adjust = str_replace($pre, '', $default_key);
+                if (!isset($mods[$key_adjust])) {
+                    $mods[$key_adjust] = $defaults[$default_key];
+                }
+            }
         }
     }
     return $mods;

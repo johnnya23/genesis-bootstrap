@@ -14,7 +14,9 @@ identical queries will be combined at output
 omit the query element to target all
 */
 
+$mods = array();
 $mods = jma_gbs_get_theme_mods('jma_gbs_');
+
 global $families;
 $site_width = $mods["site_width"];
 /*

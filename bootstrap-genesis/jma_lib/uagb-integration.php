@@ -564,7 +564,7 @@ function jma_gbs_uagb_css()
     }
 
     if ($print) {
-        wp_add_inline_style('JMA_GBS_combined_css', apply_filters('jma_gbs_uagb_css_output', $print, $blocks, $mods));
+        wp_add_inline_style('JMA_GBS_combined_css', $print);
     }
     if ($reveal || $scroll) {
         $data = 'jQuery(document).ready(function($) {' . $reveal . $scroll . '});';

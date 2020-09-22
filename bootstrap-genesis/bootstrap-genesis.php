@@ -1,6 +1,5 @@
 <?php
 
-
 define('JMA_GBS_BASE_DIRECTORY', trailingslashit(plugin_dir_path(__FILE__)));
 
  /**
@@ -27,8 +26,33 @@ $families = array(
     'verdana' => 'Verdana, Geneva, sans-serif',
     'courier' => '"Courier New", Courier, monospace',
     'console' => '"Lucida Console", Monaco, monospace',
-    'custom' => 'Custom Font Family'
+    'custom' => 'Custom Font Family',
 );
+
+function jma_gbs_get_settngs()
+{
+    $return = array();
+    $defaults = array();
+    $pages = array();
+    foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
+        $new = include $file;
+        array_push($pages, $new);
+    }
+    foreach ($pages as $settings) {
+        foreach ($settings as $key => $setting) {
+            if (isset($setting['default'])) {
+                $defaults['jma_gbs_' . $key] = $setting['default'];
+            } else {
+                $defaults['jma_gbs_' . $key] = '';
+            }
+        }
+    }
+
+    /*echo '<pre>www';
+    print_r($defaults);
+    echo '</pre>';*/
+    return array('settings' => $pages, 'defaults' => $defaults);
+}
 
 /**
 * jma_gbs_customizer_control pulls values from seetings folder and
@@ -39,11 +63,8 @@ $families = array(
 */
 function jma_gbs_customizer_control($wp_customize)
 {
-    $items = array();
-    foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
-        $new = include $file;
-        array_push($items, $new);
-    }
+    $pages_array = jma_gbs_get_settngs();
+    $items = $pages_array['settings'];
     //adds the prefix
     jma_gbs_settings_process($items, $wp_customize, 'jma_gbs_');
 }
