@@ -35,5 +35,7 @@
     "url": "https://github.com/johnnya23/genesis-bootstrap/issues"
   },
   "homepage": "https://github.com/johnnya23/genesis-bootstrap#readme",
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.5.2"
+  }
 }

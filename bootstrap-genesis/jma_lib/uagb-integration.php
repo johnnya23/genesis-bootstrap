@@ -1,9 +1,9 @@
 <?php
-//return null;
+
 if (! defined('ABSPATH')) {
     exit;
 }
-
+//return;
 function jma_gbs_uagb_template_redirect()
 {
     add_action('wp_enqueue_scripts', 'jma_gbs_uagb_css', 99);
@@ -71,8 +71,8 @@ function jma_spacing_handler($block, $first, $last, $full, $wrapped, $gapset)
 
             if (!$wrapped) {
                 $pairs = array(
-                    'topPadding' => $mods['section_vert'] . 'px',
-                    'bottomPadding' => $mods['section_vert'] . 'px'
+                    'topPadding' => ($mods['section_vert']/2) . 'px',
+                    'bottomPadding' => ($mods['section_vert']/2) . 'px'
                 );
                 if ($full) {
                     $pairs['leftPadding'] = '20px';

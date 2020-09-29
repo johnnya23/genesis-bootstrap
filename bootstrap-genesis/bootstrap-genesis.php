@@ -148,3 +148,18 @@ function jma_gbs_backend_custom_css()
     wp_add_inline_style('uagb-block-common-editor-css', '.block-editor__container .wp-block[data-type*="uagb/section"], .block-editor__container .wp-block[data-type*="uagb/columns"], .wp-block {max-width: 1510px;}.block-editor-page #wpwrap .wp-block .wp-block-uagb-column .uagb-column__inner-wrap {padding: 0;}.wp-block[data-type*="jma-ghb/logo-block"] a, .wp-block[data-type*="jma-ghb/menu-block"] a {pointer-events: none;}');
 }
 add_action('admin_enqueue_scripts', 'jma_gbs_backend_custom_css');
+
+/* add a reusabel blocks button */
+function jma_gbs_reuseable_url()
+{
+    add_menu_page('jma_gbs_reuseable_url', 'Reuseable Blocks', 'read', 'reuseable_url', '', 'dashicons-smiley', 7);
+}
+add_action('admin_menu', 'jma_gbs_reuseable_url');
+
+
+function jma_gbs_reuseable_url_function()
+{
+    global $menu;
+    $menu[7][2] = site_url('wp-admin/edit.php?post_type=wp_block');
+}
+add_action('admin_menu', 'jma_gbs_reuseable_url_function');

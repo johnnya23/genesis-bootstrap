@@ -400,7 +400,7 @@ body .navbar a {
 }
 
 .navbar *[href='#'] {
-    pointer-events: none;
+    cursor: text;
 }
 @media(min-width:768px) {
     .jma-ul-wrap .jma-gbs-open-search a {
