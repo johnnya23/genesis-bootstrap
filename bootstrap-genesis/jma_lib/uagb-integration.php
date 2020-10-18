@@ -3,6 +3,7 @@
 if (! defined('ABSPATH')) {
     exit;
 }
+
 //return;
 function jma_gbs_uagb_template_redirect()
 {
