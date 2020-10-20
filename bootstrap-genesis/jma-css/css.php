@@ -273,7 +273,7 @@ $css = array(
         'color' => $mods['site_font_link_hover_color']
     ),
     array(
-        'selector' => 'button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default, .jma-gbs-pagination-numeric li a',
+        'selector' => 'button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default, .jma-gbs-pagination-numeric li a, .wp-block-button__link, .wp-block-button__link:visited',
         'color' => $mods['button_font'],
         'border-color' => $mods['button_font'],
         'padding' => $mods['button_vert_padding'] . 'px ' . $mods['button_hor_padding'] . 'px',
@@ -283,7 +283,22 @@ $css = array(
         'background-color' => $mods['button_back'],
     ),
     array(
-        'selector' => 'button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, a.gbs-btn:hover, .btn-default:hover, .jma-gbs-pagination-numeric li a:hover',
+        'selector' => 'button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, a.gbs-btn:hover, .btn-default:hover, .jma-gbs-pagination-numeric li a:hover, .wp-block-button__link:hover',
+        'color' => $mods['button_font_hover'],
+        'border-color' => $mods['button_font_hover'],
+        'background-color' => $mods['button_back_hover'],
+    ),
+    array(
+        'selector' => 'body .uagb-post-grid .uagb-post-pagination-wrap .page-numbers',
+        'color' => $mods['button_font'],
+        'border-color' => $mods['button_font'],
+        'font-size' => $mods['button_font_size'] . 'px',
+        'border-radius' => $mods['button_border_radius'] . 'px',
+        'border-width' => $mods['button_border_width'] . 'px',
+        'background-color' => $mods['button_back'],
+    ),
+    array(
+        'selector' => 'body .uagb-post-grid .uagb-post-pagination-wrap .page-numbers:hover',
         'color' => $mods['button_font_hover'],
         'border-color' => $mods['button_font_hover'],
         'background-color' => $mods['button_back_hover'],

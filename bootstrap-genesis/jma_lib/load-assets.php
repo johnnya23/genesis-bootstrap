@@ -42,6 +42,7 @@ function JMA_GBS_enqueue_css_js()
     if (false == $output) {
         // It wasn't there, so regenerate the data and save the transient
         $mods = jma_gbs_get_theme_mods('jma_gbs_');
+        $css = array();
         require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
 
         $css = apply_filters('jma_gbs_header_css', $css, $mods);

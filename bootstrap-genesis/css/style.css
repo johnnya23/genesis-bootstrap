@@ -8997,6 +8997,10 @@ body.jma_gbs_full_block .uagb-section__wrap {
   padding: 9px 11px;
 }
 
+button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default, .jma-gbs-pagination-numeric li a, .wp-block-button__link, body .uagb-post-grid .uagb-post-pagination-wrap .page-numbers {
+  border-style: solid;
+}
+
 figure.alignleft,
 figure.alignright,
 img.alignleft,

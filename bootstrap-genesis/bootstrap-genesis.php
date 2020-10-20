@@ -34,6 +34,8 @@ function jma_gbs_get_settngs()
     $return = array();
     $defaults = array();
     $pages = array();
+    
+
     foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
         $new = include $file;
         array_push($pages, $new);
