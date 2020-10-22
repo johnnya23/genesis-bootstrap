@@ -10,7 +10,7 @@ foreach ($menu_objects as  $menu_object) {
     $jmamenus[$menu_object->slug] = $menu_object->name;
 }
 return array(
-        'mobile_menu' => array(
+        'custom_mobile_menu' => array(
             'default' => 0,
             'label' => __('Menu to use for mobile', 'jma_gbs'),
             'description' => esc_html__('If none selected a menu will be generaetd with jquery(if possible)'),

@@ -34,12 +34,14 @@ function jma_gbs_get_nav_menu($args = [])
     $nav = wp_nav_menu($args);
 
     // Do nothing if there is nothing to show.
+
     if (! $nav) {
         return null;
     }
-
-    $nav_markup_open  = genesis_get_structural_wrap('menu-' . $sanitized_location, 'open');
-    $nav_markup_close = genesis_get_structural_wrap('menu-' . $sanitized_location, 'close');
+    
+    $sanitized_location = 'primary';
+    $nav_markup_open  = genesis_get_structural_wrap('menu-' . $sanitized_location, 'open') . '<div class="outer">';
+    $nav_markup_close = '</div>' . genesis_get_structural_wrap('menu-' . $sanitized_location, 'close');
 
     $nav_output = genesis_markup(
         [
@@ -47,8 +49,8 @@ function jma_gbs_get_nav_menu($args = [])
             'close'   => '</nav>',
             'context' => 'nav-' . $sanitized_location,
             'content' => $nav_markup_open . $nav . $nav_markup_close,
-            'echo'    => false,
-            'params'  => $params,
+            'echo'    => true,
+            //'params'  => $params,
         ]
     );
 

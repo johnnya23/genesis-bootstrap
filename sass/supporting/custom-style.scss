@@ -330,7 +330,7 @@ body .site-container .sticky-menu.has-image .nav > li > a {
 }
 
 .jma-gbs-mobile-panel .navbar .sf-menu li,
-.site-container .navbar .sf-menu li {
+.site-container .navbar .sf-menu li, .jma-gbs-mobile-panel .navbar li a:focus {
     background: none;
 }
 /* extra default padding for root menu items with arrows */

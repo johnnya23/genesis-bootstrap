@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
 
 
     $site_inner = $('.site-inner');
-    /* animation for local menu */
+    /* animation for local menu   */
     $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
         event.preventDefault();
         scrollTopVal = $(this.hash).offset().top - 180;
@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
     //add class for verical side menu (mobile)
     $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
 
-    $('.site-container ul.sf-menu').superfish({
+    $('.site-container ul.sf-menu, .jma-gbs-mobile-panel ul.sf-menu').superfish({
 
         //reverse direstion of flyout when space is limited
         onBeforeShow: function() {
@@ -112,7 +112,8 @@ jQuery(document).ready(function($) {
         })));
     }
     //clone the mobile menu
-    $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
+    if ($('body').hasClass('default_moble_menu'))
+        $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
 
     //handle the sticky menu position and the local menu
     function stickmainmenutotop() {
