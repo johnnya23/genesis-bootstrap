@@ -10,14 +10,6 @@ foreach ($menu_objects as  $menu_object) {
     $jmamenus[$menu_object->slug] = $menu_object->name;
 }
 return array(
-        'custom_mobile_menu' => array(
-            'default' => 0,
-            'label' => __('Menu to use for mobile', 'jma_gbs'),
-            'description' => esc_html__('If none selected a menu will be generaetd with jquery(if possible)'),
-            'section' => 'jma_gbs_uagb_menu',
-            'type' => 'select',
-            'choices' => $jmamenus
-        ),
         'menu_font_color' => array(
             'default' => '#ffffff',
             'label' => __('Menu Font Color', 'jma_gbs'),
@@ -169,5 +161,13 @@ return array(
                 0 => 'No',
                 1 => 'Yes'
             )
+        ),
+        'custom_mobile_menu' => array(
+            'default' => 0,
+            'label' => __('Menu to use for mobile', 'jma_gbs'),
+            'description' => esc_html__('If none selected a menu will be generaetd with jquery(if possible)'),
+            'section' => 'jma_gbs_uagb_menu',
+            'type' => 'select',
+            'choices' => $jmamenus
         )
 );

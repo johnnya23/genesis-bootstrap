@@ -84,36 +84,41 @@ handle menu options
 $menu_bg_color_selector ='.navbar, .site-container .navbar ul ul, .jma-gbs-mobile-panel';
 $menu_current_bg_color_selector = '.site-container .navbar  li[class*="current"] > a, .site-container .navbar  li.current-menu-item > a:hover, .site-container .navbar  li.current-menu-item > a:focus';
 $menu_hover_bg_color_selector = '.site-container .navbar  li  a:hover, .navbar  li  a:focus';
+
+$menu_root_values = array(
+    'selector' => '.site-container .navbar ul.sf-menu > li > a',
+    'padding' => $mods['menu_vertical_padding'] . 'px ' . $mods['menu_horizontal_padding'] . 'px',
+);
+
+$menu_root_non_bg_dividers = array();
+$fixed_root_bg = jma_gbs_get_trans($mods['menu_bg_color'], 0.9);
+$menu_root_values_color = isset($mods['menu_root_font_color']) && $mods['menu_root_font_color'] && !$mods['use_menu_root_bg']? $mods['menu_root_font_color']:$mods['menu_font_color'];
+
+//no root background
 if (!$mods['use_menu_root_bg']) {
     $menu_bg_color_selector = '.site-container .navbar ul ul, .jma-gbs-mobile-panel';
     $menu_current_bg_color_selector = '.site-container .nav-primary ul ul li[class*="current"] > a, .site-container .nav-primary ul ul li.current-menu-item > a:hover, .site-container .nav-primary ul ul li.current-menu-item > a:focus';
     $menu_hover_bg_color_selector = '.site-container .nav-primary ul ul li  a:hover, .site-container .nav-primary ul ul li  a:focus';
-}
 
-$menu_root_values = array(
-    'selector' => '.site-container .navbar .nav > li > a',
-    'padding' => $mods['menu_vertical_padding'] . 'px ' . $mods['menu_horizontal_padding'] . 'px',
-);
-
-$kids = array();
-$fixed_root_bg = jma_gbs_get_trans($mods['menu_bg_color'], 0.9);
-if (!$mods['use_menu_root_bg']) {
     $fixed_root_bg = jma_gbs_get_trans($mods['header_bg_color'], 0.9);
+    $menu_root_values['color'] = $menu_root_values_color;
     $menu_root_hover_font_color = isset($mods['menu_root_hover_font_color']) && $mods['menu_root_hover_font_color']? $mods['menu_root_hover_font_color']: $mods['menu_hover_font_color'];
 
     $menu_root_current_font_color = isset($mods['menu_root_current_font_color']) && $mods['menu_root_current_font_color']? $mods['menu_root_current_font_color']: $mods['menu_current_font_color'];
 
-    $menu_root_values['color'] = isset($mods['menu_root_font_color']) && $mods['menu_root_font_color']? $mods['menu_root_font_color']:$mods['menu_font_color'];
-    $kids = array(
-        'selector' => '.navbar ul ul a',
-        'color' => $mods['menu_font_color'],
-    );
-}
 
+    $menu_root_non_bg_dividers = array(
+        'selector' => '.jma_gbs_non_use_menu_root_bg .site-container .sf-menu > li > a:before',
+        'border-color' => $menu_root_values_color
+    );
+} else {
+    //with root background
+    $menu_root_values['border-left-color'] = $menu_root_values_color;
+}
 /* add supplemental_arrays beginning with the arrays creaated above
 for conditional items */
 
-$supplemental_arrays = array($menu_root_values, $kids, $header_width_array, $content_width_array, $footer_width_array, $header_appearence_array, $content_appearence_array, $footer_appearence_array);
+$supplemental_arrays = array($menu_root_values, $menu_root_non_bg_dividers, $header_width_array, $content_width_array, $footer_width_array, $header_appearence_array, $content_appearence_array, $footer_appearence_array);
 
 if (isset($mods['title_size_adjust']) && $mods['title_size_adjust'] && $mods['title_size_adjust'] != 100) {
     $titles = array('h1'=> 2.5,'h2'=> 2,'h3'=> 1.75,'h4'=> 1.5,'h5'=> 1.25,'h6'=> 1);
@@ -213,16 +218,16 @@ $css = array(
         'font-size' => $mods['menu_font_size']
     ),
     array(
-        'selector' => '.navbar  li[class*="current"] > a, .navbar  li.current-menu-item > a:hover, .navbar  li.current-menu-item > a:focus',
+        'selector' => '.site-container .navbar ul.nav li[class*="menu-item"] a:hover',
+        'color' => $mods['menu_hover_font_color'],
+    ),
+    array(//.site-container .navbar ul.sf-menu > li > a
+        'selector' => '.site-container .navbar ul.nav  li[class*="current"] > a, .site-container .navbar ul.nav  li.current-menu-item > a:hover, .site-container .navbar ul.nav  li.current-menu-item > a:focus',
         'color' => $mods['menu_current_font_color'],
     ),
     array(
         'selector' => $menu_current_bg_color_selector,
         'background-color' => $mods['menu_current_bg_color'],
-    ),
-    array(
-        'selector' => '.navbar  li  a:hover, .navbar  li  a:focus',
-        'color' => $mods['menu_hover_font_color'],
     ),
     array(
         'selector' => $menu_hover_bg_color_selector,

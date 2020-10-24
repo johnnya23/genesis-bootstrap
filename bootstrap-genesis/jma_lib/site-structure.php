@@ -181,7 +181,7 @@ function jma_gbs_body_filter($cl)
     if (is_object($post) && get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
         $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
     }
-    $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers', 'jma_gbs_site_banner');
+    $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers', 'jma_gbs_use_menu_root_bg', 'jma_gbs_site_banner');
     $mods = jma_gbs_get_theme_mods();
     foreach ($border_items as $key => $border_item) {
         if ($mods[$border_item]) {

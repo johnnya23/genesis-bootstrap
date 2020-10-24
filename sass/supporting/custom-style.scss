@@ -193,6 +193,10 @@ body.open .navbar-toggle {
 #jma-gbs-mobile-panel .sf-menu ul ul {
     right: 0 !important;
 }
+body div.jma-gbs-mobile-panel .navbar li.current-menu-item a, body div.jma-gbs-mobile-panel .navbar li.current-menu-ancestor > a {
+    font-weight: bold;
+    font-size: 115%
+}
 /* end mobile menu */
 i.fab,
 i.fas {
@@ -203,6 +207,9 @@ i.fas {
     .sf-menu ul ul {
         top: 10px;
     }
+}
+.sf-with-ul ul {
+    z-index: 20
 }
 /* arrows for menus */
 .sf-arrows .sf-with-ul:after,
@@ -241,7 +248,20 @@ i.fas {
 .jma_gbs_non_use_menu_root_dividers .sf-menu a {
     border-color: transparent;
 }
+.jma_gbs_use_menu_root_dividers.jma_gbs_non_use_menu_root_bg .site-container .sf-menu > li > a:before {
+    content: "";
+    position: absolute;
+    left:0;
+    top:50%;
+    height: 14px;
+    transform:translateY(-50%);
+    border-left-style: solid;
+    border-left-width: 1px;
+}
 
+.jma_gbs_use_menu_root_dividers.jma_gbs_non_use_menu_root_bg .site-container .sf-menu > li:first-child > a:before {
+    border-left-width: 0;
+}
 .site-container .navbar .sf-menu li:first-child a,
 .site-container .navbar .sf-menu ul a {
     border-left: none;
@@ -258,6 +278,10 @@ i.fas {
 .site-header {
     z-index: 20;
     position: relative;
+}
+
+.jma-gbs-open-search.menu-item a:hover {
+    cursor: pointer;
 }
 /* initially hide the sticky menu */
 .sticky-menu {
@@ -673,6 +697,7 @@ li.comment {
 .site-header .sf-menu a,
 .site-header a:hover {
     text-decoration: none;
+    border-color:transparent
 }
 /* full page search */
 .jma-gbs-overlay {

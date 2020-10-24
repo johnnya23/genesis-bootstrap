@@ -34,7 +34,7 @@ function jma_gbs_get_settngs()
     $return = array();
     $defaults = array();
     $pages = array();
-    
+
 
     foreach (glob(JMA_GBS_BASE_DIRECTORY . 'settings/*.php') as $file) {
         $new = include $file;
@@ -77,7 +77,9 @@ function JMA_GBS_load_files()
 
     foreach ($folders as $key => $folder) {
         foreach (glob(JMA_GBS_BASE_DIRECTORY . $folder . '/*.php') as $file) {
-            include $file;
+            if (!strpos($file, 'uagb-integration')) {
+                include $file;
+            }
         }
     }
 
