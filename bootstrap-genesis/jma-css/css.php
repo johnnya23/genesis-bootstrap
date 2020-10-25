@@ -120,12 +120,20 @@ for conditional items */
 
 $supplemental_arrays = array($menu_root_values, $menu_root_non_bg_dividers, $header_width_array, $content_width_array, $footer_width_array, $header_appearence_array, $content_appearence_array, $footer_appearence_array);
 
-if (isset($mods['title_size_adjust']) && $mods['title_size_adjust'] && $mods['title_size_adjust'] != 100) {
+if (isset($mods['title_size_adjust']) && $mods['title_size_adjust']) {
     $titles = array('h1'=> 2.5,'h2'=> 2,'h3'=> 1.75,'h4'=> 1.5,'h5'=> 1.25,'h6'=> 1);
     foreach ($titles as $sel => $size) {
-        $supplemental_arrays[] = array(
+        if ($mods['title_size_adjust'] != 100) {
+            $supplemental_arrays[] = array(
             'selector' => $sel,
             'font-size' => ($size * ($mods['title_size_adjust']/100)) . 'rem'
+        );
+        }
+        //smaller titles on mobile
+        $supplemental_arrays[] = array(
+            'query' => '(max-width:991px)',
+            'selector' => $sel,
+            'font-size' => ($size * ($mods['title_size_adjust']/133.33)) . 'rem'
         );
     }
 }
@@ -313,13 +321,21 @@ $css = array(
         'border-color' => $mods['footer_bg_color']
     ),
     array(
-        'selector' => '.site-footer a',
+        'selector' => '.site-footer a, .jma-local-menu a',
         'color' => $mods['footer_font_color']
     ),
     array(
-        'selector' => 'html',
+        'selector' => 'html, .jma-local-menu a',
         'background-color' => $mods['footer_bg_color']
     ),
+    array(
+        'selector' => '.jma-local-menu a:hover',
+        'color' => $mods['footer_bg_color']
+    ),
+    array(
+        'selector' => '.jma-local-menu a:hover',
+        'background-color' => $mods['footer_font_color']
+    )
 );
 
 /*
