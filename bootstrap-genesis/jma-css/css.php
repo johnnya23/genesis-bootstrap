@@ -156,14 +156,14 @@ if (!$mods['use_menu_root_bg']) {
         $menu_hover_border_value = $menu_root_hover_font_color;
     }
     $supplemental_arrays[] = array(
+        'selector' => '.site-container .navbar ul.sf-menu > li[class*="menu-item"] > a:hover',
+        'color' => $menu_root_hover_font_color,
+        $menu_border_attribute => $menu_hover_border_value
+    );
+    $supplemental_arrays[] = array(
         'selector' => '.site-container .navbar ul > li[class*="current"] > a, .site-container .navbar .outer > ul > li[class*="current"] > a, .site-container .navbar .outer > ul > li.current-menu-item > a:hover, .site-container .navbar .outer > ul > li.current-menu-item > a:focus',
         'color' => $menu_root_current_font_color,
         $menu_border_attribute => $menu_current_border_value
-    );
-    $supplemental_arrays[] = array(
-        'selector' => '.site-container .navbar ul > li > a:hover',
-        'color' => $menu_root_hover_font_color,
-        $menu_border_attribute => $menu_hover_border_value
     );
 }
 if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horizontal_padding']) {

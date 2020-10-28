@@ -11,6 +11,14 @@ remove_action('genesis_meta', 'genesis_load_stylesheet');
 function jma_gbs_customize_save_after()
 {
     delete_transient('jma_gbs_general_css');
+
+    global $wpdb;
+
+    $plugin_options = $wpdb->get_results("SELECT option_name FROM $wpdb->options WHERE option_name LIKE '_transient_jma_gbs_get_theme_mods%' OR option_name LIKE '_transient_timeout_jma_gbs_get_theme_mods%'");
+
+    foreach ($plugin_options as $option) {
+        delete_option($option->option_name);
+    }
 }
 add_action('customize_save_after', 'jma_gbs_customize_save_after');
 add_action('customize_controls_print_scripts', 'jma_gbs_customize_save_after');

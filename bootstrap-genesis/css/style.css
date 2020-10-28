@@ -8521,7 +8521,7 @@ li.comment {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     -webkit-transition: transform 0.2s ease-out;
-    transition: transform 0.2s ease-out;
+    transition: all 0.2s ease-out;
     width: 280px;
     z-index: 201;
     right: -280px;
@@ -8532,7 +8532,7 @@ li.comment {
   }
   .jma-panel-button {
     display: inline-block;
-    position: absolute;
+    position: fixed;
     width: unset;
     right: 0;
     top: 0;
@@ -8748,7 +8748,7 @@ body .site-container .sticky-menu.has-image .nav > li > a {
   border: none;
 }
 
-.admin-bar .jma-gbs-mobile-panel {
+.admin-bar .jma-gbs-mobile-panel, .admin-bar .jma-panel-button {
   top: 46px;
 }
 
