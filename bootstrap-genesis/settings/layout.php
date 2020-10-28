@@ -32,7 +32,7 @@ $layout_choices = array(
             )
         ),
         'site_width' => array(
-            'default' => '1200px',
+            'default' => 1200,
             'label' => __('Site Width', 'jma_gbs'),
             'description' => esc_html__('In Pixels'),
             'section' => 'genesis_layout',
