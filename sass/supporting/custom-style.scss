@@ -167,10 +167,16 @@
 
     .jma-panel-button {
         display: inline-block;
-        position: fixed;
+        position: absolute;
         width: unset;
         right: 0;
         top: 0;
+    }
+    body.open .jma-panel-button {
+        position: fixed;
+    }
+    body.open.admin-bar .jma-panel-button {
+        top:46px;
     }
 
     .navbar-toggle {
@@ -366,7 +372,7 @@ body .site-container .sticky-menu.has-image .nav > li > a {
     border: none;
 }
 
-.admin-bar .jma-gbs-mobile-panel, .admin-bar .jma-panel-button {
+.admin-bar .jma-gbs-mobile-panel {
     top: 46px;
 }
 

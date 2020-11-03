@@ -1,3 +1,23 @@
 
-/* cd "/opt/lampp/htdocs/newtheme/wp-content/plugins/jma-bootstrap-genesis"
+/* cd /opt/lampp/htdocs/newtheme/wp-content/plugins/jma-bootstrap-genesis
  sudo npm run start */
+
+
+
+/*
+https://stackoverflow.com/questions/42308879/how-to-solve-npm-error-npm-err-code-elifecycle
+Step 1:
+$ npm cache clean --force
+
+Step 2: Delete node_modules by
+$ rm -rf node_modules package-lock.json
+
+folder or delete it manually by going into the directory and right-click > delete / move to trash. Also, delete package-lock.json file too.
+
+Step 3:
+npm install
+
+To start again,
+$ npm start
+
+*/
