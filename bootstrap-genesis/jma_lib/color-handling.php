@@ -29,7 +29,7 @@ function jma_gbs_get_tint($color_in, $tint_amount=0.5)
     // Convert string to 3 decimal values (0-255)
     $rgb = array_map('hexdec', str_split($raw, 2));
     $return['str_split'] = $rgb;
-    // Modify color
+    // Modify colors
     $lighten[0] = round(($rgb[0] + 255)*$tint_amount);
     $lighten[1] = round(($rgb[1] + 255)*$tint_amount);
     $lighten[2] = round(($rgb[2] + 255)*$tint_amount);
