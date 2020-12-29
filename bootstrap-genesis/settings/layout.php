@@ -4,7 +4,10 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-$jma_ghb_cpt = jma_ghb_get_cpt();
+$jma_ghb_cpt = array();
+if (function_exists('jma_ghb_get_cpt')) {
+    $jma_ghb_cpt = jma_ghb_get_cpt();
+}
 $post_type_array = array();
 $default = array(0 => 'default');
 foreach ($jma_ghb_cpt as $slug => $obj) {

@@ -88,7 +88,7 @@ function structure_css_array($items)
 * @param array $items items of be processed
 * @return string $css   css for wp_head
 */
-function jma_gbs_process_css_array($items, $customizer = false)
+function jma_gbs_process_css_array($items)
 {
     $css = '';
     if (is_array($items)) {
@@ -104,13 +104,6 @@ function jma_gbs_process_css_array($items, $customizer = false)
             }
             //step through all the selectors
             foreach ($selectors as $selector => $item) {
-                if ($customizer) {
-                    if (strpos($selector, 'body') === 0) {
-                        $selector = str_replace('body', 'body.customize-partial-edit-shortcuts-shown', $selector);
-                    } else {
-                        $selector = 'body.customize-partial-edit-shortcuts-shown ' . $selector;
-                    }
-                }
                 $text .= $selector . '{';
                 foreach ($item as $attr => $value) {
                     //make sure its not blank

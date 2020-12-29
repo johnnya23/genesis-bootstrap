@@ -77,9 +77,7 @@ function JMA_GBS_load_files()
 
     foreach ($folders as $key => $folder) {
         foreach (glob(JMA_GBS_BASE_DIRECTORY . $folder . '/*.php') as $file) {
-            if (!strpos($file, 'uagb-integration')) {
-                include $file;
-            }
+            include $file;
         }
     }
 
@@ -108,7 +106,7 @@ function jma_gbs_customizer_theme_settings_config($config)
     $config['genesis']['sections']['genesis_footer']['priority'] = 100;
     $config['genesis']['sections']['genesis_scripts']['priority'] = 110;
 
-    $config['genesis']['sections']['jma_gbs_uagb_menu']= array(
+    $config['genesis']['sections']['jma_gbs_menu']= array(
         'title'          => __('--Menu Settings', 'genesis'),
         //'description'    => __('all values are px', 'genesis'),
         'panel'          => 'genesis',
@@ -131,14 +129,6 @@ function jma_gbs_customizer_theme_settings_config($config)
         'priority'       => 54,
         'controls'       => null
     );
-
-    $config['genesis']['sections']['jma_gbs_uagb_comps']= array(
-        'title'          => __('--Ultimate Addons for Gutenberg', 'genesis'),
-        'description'    => __('Settings for UAGB Components', 'genesis'),
-        'panel'          => 'genesis',
-        'priority'       => 57,
-        'controls'       => null
-    );
     return $config;
 }
 add_filter('genesis_customizer_theme_settings_config', 'jma_gbs_customizer_theme_settings_config');
@@ -149,7 +139,7 @@ add_filter('genesis_customizer_theme_settings_config', 'jma_gbs_customizer_theme
  */
 function jma_gbs_backend_custom_css()
 {
-    wp_add_inline_style('uagb-block-common-editor-css', '.block-editor__container .wp-block[data-type*="uagb/section"], .block-editor__container .wp-block[data-type*="uagb/columns"], .wp-block {max-width: 1510px;}.block-editor-page #wpwrap .wp-block .wp-block-uagb-column .uagb-column__inner-wrap {padding: 0;}.wp-block[data-type*="jma-ghb/logo-block"] a, .wp-block[data-type*="jma-ghb/menu-block"] a {pointer-events: none;}');
+    wp_add_inline_style('JMA_ghb_superfish_css', '.wp-block {max-width: 1510px;}.wp-block[data-type*="jma-ghb/logo-block"] a, .wp-block[data-type*="jma-ghb/menu-block"] a {pointer-events: none;}');
 }
 add_action('admin_enqueue_scripts', 'jma_gbs_backend_custom_css');
 

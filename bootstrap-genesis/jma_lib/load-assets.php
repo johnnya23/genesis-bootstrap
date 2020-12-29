@@ -63,17 +63,9 @@ add_action('wp_enqueue_scripts', 'JMA_GBS_enqueue_css_js');
 
 function JMA_GBS_customizer_live_preview()
 {
-    $mods = jma_gbs_get_theme_mods('jma_gbs_');
-    require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
-
-    $css = apply_filters('jma_gbs_header_css', $css, $mods);
-    $output = jma_gbs_process_css_array($css, true);
-
-    wp_register_style('jma_gbs_customizer_css', false, array('JMA_GBS_combined_css'));
-    wp_enqueue_style('jma_gbs_customizer_css');
-    wp_add_inline_style('jma_gbs_customizer_css', $output);
+    jma_gbs_customize_save_after();
 }
-add_action('customize_preview_init', 'JMA_GBS_customizer_live_preview');
+add_action('customize_preview_init', 'JMA_GBS_customizer_live_preview', -1);
 
 function JMA_GBS_customize_controls_enqueue_scripts()
 {

@@ -8,20 +8,22 @@
  } // Exit if accessed directly
 function jma_gbs_image_input_box()
 {
-    $screens = array();
-    $cpts = jma_ghb_get_cpt();
+    $cpts = $screens = array();
+    if (function_exists('jma_ghb_get_cpt')) {
+        $cpts = jma_ghb_get_cpt();
+    }
     foreach ($cpts as $slug => $obj) {
         $screens[] = $slug;
     }
     $screens = apply_filters('jma_gbs_image_input_screens_filter', $screens);
     foreach ($screens as $screen) {
         add_meta_box(
-                'jma_gbs_image_input_section',
-                __('Page Options', 'jma_textdomain'),
-                'jma_gbs_page_options',
-                $screen,
-                'side'
-            );
+            'jma_gbs_image_input_section',
+            __('Page Options', 'jma_textdomain'),
+            'jma_gbs_page_options',
+            $screen,
+            'side'
+        );
     }
 }
 add_action('add_meta_boxes', 'jma_gbs_image_input_box');

@@ -191,7 +191,7 @@ function jma_gbs_body_filter($cl)
         }
     }
     $cl[] = $mods['jma_gbs_body_shape'];
-    if (jma_gbs_uagb_detect_block('', 'contentWidth', 'full_width') || jma_gbs_uagb_detect_block('', 'contentWidth', 'custom')) {
+    if (jma_gbs_detect_block('getwid/section')) {
         $cl[] = 'jma_gbs_full_block';
     }
 

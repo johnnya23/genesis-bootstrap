@@ -5,11 +5,11 @@ if (! defined('ABSPATH')) {
 } // Exit if accessed directly
 
 /**
- * function jma_gbs_uagb_detect_block Detect full width blocks
+ * function jma_gbs_detect_block Detect full width blocks
  * we don't have to drill down below the first level in detectin full width
  * @return boolean $return
  */
-function jma_gbs_uagb_detect_block($name, $key = '', $value = '')
+function jma_gbs_detect_block($name, $key = '', $value = '')
 {
     global $post;
     $return = false;
@@ -24,10 +24,10 @@ function jma_gbs_uagb_detect_block($name, $key = '', $value = '')
                     if ($key || $value) {
                         if (isset($block['attrs'][$key]) && $block['attrs'][$key] == $value) {
                             $return = true;
-                        } elseif ($name && $name == $block['blockName']) {
-                            // else matching the block name is good enough
-                            $return = true;
                         }
+                    } elseif ($name && $name == $block['blockName']) {
+                        // else matching the block name is good enough
+                        $return = true;
                     }
                 }
             }

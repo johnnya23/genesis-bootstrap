@@ -93,8 +93,8 @@ jQuery(document).ready(function($) {
             style: 'clear:both'
         }).appendTo('#jma-gbs-mobile-panel');
         $this = $(this);
-        if ($this.find('.uagb-columns__inner-wrap').length)
-            $this.find('.uagb-columns__inner-wrap').find('.uagb-column__inner-wrap').each(function() {
+        if ($this.find('.wp-block-columns').length)
+            $this.find('.wp-block-columns').find('.wp-block-column').each(function() {
                 $(this).clone(true).appendTo('#jma-gbs-mobile-panel');
             });
         else
@@ -176,52 +176,42 @@ function stickmainmenutotop() {
 
 }
 
+//gives us a 20px cushion
+necessary_menu_width = 20;
+//$primary_nav is the <nav> element
+$primary_nav = jQuery('.site-header').find('.nav-primary');
+$positioned = $primary_nav.children();
+
+$wrapping_col = $primary_nav.closest('.wp-block-column');
+$wrapping_cols = $wrapping_col.closest('.wp-block-columns');
+//check to see if menu is in a column
+if ($wrapping_col.length) {
+    //find the space our menu needs before wrapping
+    $primary_nav.find('.sf-menu >li').each(function() {
+        $this = jQuery(this);
+        //don't include hidden elements in calculation
+        if ($this.css('display') != 'none')
+            necessary_menu_width += $this.outerWidth();
+    });
+    $wrapping_col.css('min-width', necessary_menu_width);
+    wrapping_col_percent = parseFloat($wrapping_col.css('flex-basis'), 10);
+
+}
 //make the menu slide under logo (presumably) when screen is too narrow
 function menuadjust() {
-    //gives us a 20px cushion
-    necessary_menu_width = 20;
-    //$primary_nav is the <nav> element
-    $primary_nav = jQuery('.site-header').find('.nav-primary');
-    $positioned = $primary_nav.children();
+    if (necessary_menu_width > 20) {
 
-    $wrapping_col = $primary_nav.closest('.wp-block-uagb-column');
-    //check to see if menu is in a column
-    if ($wrapping_col.length) {
-        //find the space our menu needs before wrapping
-        $primary_nav.find('.sf-menu >li').each(function() {
-            $this = jQuery(this);
-            //don't include hidden elements in calculation
-            if ($this.css('display') != 'none')
-                necessary_menu_width += $this.outerWidth();
-        });
-        //use the sibling because they will not be altered
-        sibling_width = 0;
-        $wrapping_col.siblings('.wp-block-uagb-column').each(function() {
-            sibling_width += jQuery(this).outerWidth();
-        });
-        //$wrapping_cols spans the content section
-        $wrapping_cols = $wrapping_col.parent();
-        //in the math below we will "invert" the sibling persent to get a
-        //stable value to the parent column percent
-        sibling_percent = sibling_width / $wrapping_cols.width();
-        target_cols_width = (necessary_menu_width * (1 / (1 - sibling_percent)));
-        //change the wrap display from flex to block (and back)
-        //expand menu wrap and give some top padding
-
-        if (target_cols_width > $wrapping_cols.width()) {
+        if (necessary_menu_width > (($wrapping_cols.width() * wrapping_col_percent) / 100)) {
             $positioned.removeClass('jma-positioned');
-            $wrapping_cols.css('flex-wrap', 'wrap');
-            $wrapping_col.css({
-                'width': '100%',
-                'padding-top': '10px'
-            });
+            $wrapping_cols.css('display', 'block');
+            $wrapping_cols.children().css('float', 'left');
+            $wrapping_col.css('padding-top', '10px');
         } else {
+            $wrapping_cols.css('display', '');
+            $wrapping_cols.children().css('float', '');
+
             $positioned.addClass('jma-positioned');
-            $wrapping_cols.css('flex-wrap', '');
-            $wrapping_col.css({
-                'width': '',
-                'padding-top': ''
-            });
+            $wrapping_col.css('padding-top', '');
         }
     }
 }

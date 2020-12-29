@@ -60,7 +60,7 @@ if ($mods['frame_border_width'] && $mods['frame_content']) {
 }
 if ($mods['body_shape'] == 'gbs-full-content') {
     if (!$mods['frame_content']) {
-        $content_width_array['max-width'] = ($site_width +40) . 'px';
+        $content_width_array['max-width'] = ($site_width +30) . 'px';
         $content_appearence_array['selector'] = '.site-inner';
     } else {
         $content_appearence_array['selector'] = '.site-inner > .jma-gbs-inner';
@@ -100,7 +100,7 @@ if (!$mods['use_menu_root_bg']) {
     $menu_current_bg_color_selector = '.site-container .nav-primary ul ul li[class*="current"] > a, .site-container .nav-primary ul ul li.current-menu-item > a:hover, .site-container .nav-primary ul ul li.current-menu-item > a:focus';
     $menu_hover_bg_color_selector = '.site-container .nav-primary ul ul li  a:hover, .site-container .nav-primary ul ul li  a:focus';
 
-    $fixed_root_bg = jma_gbs_get_trans($mods['header_bg_color'],0.9);
+    $fixed_root_bg = jma_gbs_get_trans($mods['header_bg_color'], 0.9);
     $menu_root_values['color'] = $menu_root_values_color;
     $menu_root_hover_font_color = isset($mods['menu_root_hover_font_color']) && $mods['menu_root_hover_font_color']? $mods['menu_root_hover_font_color']: $mods['menu_hover_font_color'];
 
