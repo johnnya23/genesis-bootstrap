@@ -154,19 +154,19 @@ function jma_gbs_template_redirect()
     //move page title to header banner
     if ($mods['jma_gbs_site_banner']) {
         if (is_singular() && $display_vals['title_display'] == 'show') {
-            add_action('genesis_header', function () {
+            add_action('genesis_before_content_sidebar_wrap', function () {
                 echo '<div class="banner-wrap">';
-            }, 12);
+            }, 4);
             remove_action('genesis_entry_header', 'genesis_do_post_title');
-            add_action('genesis_header', 'genesis_do_post_title', 12);
+            add_action('genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 4);
 
-            add_action('genesis_header', function () {
+            add_action('genesis_before_content_sidebar_wrap', function () {
                 echo '</div>';
-            }, 12);
+            }, 4);
         }
         if (is_archive() || is_home()) {
             remove_action('genesis_archive_title_descriptions', 'genesis_do_archive_headings_headline');
-            add_action('genesis_header', 'jma_gbs_archive_banner_title', 12);
+            add_action('genesis_before_content_sidebar_wrap', 'jma_gbs_archive_banner_title', 4);
         }
     }
     add_action('genesis_after', 'jma_gbs_add_page_edge_content');

@@ -463,8 +463,8 @@ body .site-header .navbar {
 }
 
 .banner-wrap .entry-title {
-    margin-top: 0;
-    margin-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -521,7 +521,7 @@ body .site-header .navbar {
 .site-header .jma-gbs-inner > * {
     max-width: 1200px;
 }
-.site-header .jma-gbs-inner .banner-wrap, .site-header .jma-gbs-inner > .wp-block-getwid-section, .site-footer .jma-gbs-inner > .wp-block-getwid-section {
+.site-inner .jma-gbs-inner .banner-wrap, .site-header .jma-gbs-inner > .wp-block-getwid-section, .site-footer .jma-gbs-inner > .wp-block-getwid-section {
     max-width: 100%;
 }
 

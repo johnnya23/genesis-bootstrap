@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:sass": "node-sass --output-style=expanded --source-map=true sass/style.scss bootstrap-genesis/css/style.css",
+    "build:sass": "node-sass --output-style=compressed --source-map=true sass/style.scss bootstrap-genesis/css/style.css",
     "prefix": "npm run build:sass && postcss bootstrap-genesis/css/style.css --use=autoprefixer --output=bootstrap-genesis/css/style.css",
     "start": "onchange \"sass/**/*.scss\" -- npm run prefix"
   },
