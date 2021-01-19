@@ -54,12 +54,14 @@ jQuery(document).ready(function($) {
             windowWidth = $(window).width();
             var parentWidth = 0;
             $ul = $(this);
-            var parentLi = $ul.parent();
+            var $parentLi = $ul.parent();
             if (!this.is('.sf-js-enabled>li>ul')) {
-                parentWidth = parentLi.width();
+                parentWidth = $parentLi.width();
             }
             var subMenuWidth = $ul.width();
-            var subMenuRight = parentLi.offset().left + parentWidth + subMenuWidth;
+            subMenuRight = 0;
+            if ($parentLi.length)
+                var subMenuRight = $parentLi.offset().left + parentWidth + subMenuWidth;
             if (subMenuRight > windowWidth) {
                 $ul.closest('li').addClass('reverse');
                 $ul.css({

@@ -137,11 +137,11 @@ add_filter('genesis_customizer_theme_settings_config', 'jma_gbs_customizer_theme
  * adds width to backend display
  *
  */
-function jma_gbs_backend_custom_css()
-{
-    wp_add_inline_style('JMA_ghb_superfish_css', '.wp-block {max-width: 1510px;}.wp-block[data-type*="jma-ghb/logo-block"] a, .wp-block[data-type*="jma-ghb/menu-block"] a {pointer-events: none;}');
-}
-add_action('admin_enqueue_scripts', 'jma_gbs_backend_custom_css');
+ function jma_gbs_backend_custom_css()
+ {
+     wp_add_inline_style('JMA_ghb_superfish_css', '.wp-block {max-width: 1510px;}[data-type*="jma-ghb/logo-block"] a, [data-type*="jma-ghb/menu-block"] a {pointer-events: none;} [data-type*="jma-ghb/logo-block"], [data-type="jma-ghb/menu-block"] {min-height: 75px}');
+ }
+ add_action('admin_enqueue_scripts', 'jma_gbs_backend_custom_css');
 
 /* add a reusabel blocks button */
 function jma_gbs_reuseable_url()
