@@ -26,7 +26,7 @@ $families = array(
     'verdana' => 'Verdana, Geneva, sans-serif',
     'courier' => '"Courier New", Courier, monospace',
     'console' => '"Lucida Console", Monaco, monospace',
-    'custom' => 'Custom Font Family',
+    //'custom' => 'Custom Font Family',
 );
 
 function jma_gbs_get_settngs()

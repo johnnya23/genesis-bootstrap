@@ -198,6 +198,7 @@ begin main array
 
 $main_family = $mods['site_font_family'] != 'custom'? $families[$mods['site_font_family']]: str_replace('\'', '"', $mods['site_custom_font_family']);
 $title_family = $mods['site_title_font_family'] != 'custom'? $families[$mods['site_title_font_family']]: str_replace('\'', '"', $mods['site_custom_title_font_family']);
+$bg_darker_hex_footer = jma_gbs_first_is_lighter($mods['footer_bg_color'], $mods['footer_font_color'])? $mods['footer_font_color']: $mods['footer_bg_color'];
 
 $css = array(
     array(
@@ -214,7 +215,7 @@ $css = array(
         'background-color' => $mods['menu_bg_color'],
     ),
     array(
-        'selector' => 'body .navbar .nav a, body .jma-gbs-mobile-panel .navbar .nav li.menu-item a',
+        'selector' => 'body .navbar .nav a, body .jma-gbs-mobile-panel .navbar .nav li.menu-item a, body .jma-gbs-mobile-panel .add-to-panel *, body .jma-gbs-mobile-panel .add-to-panel * a',
         'color' => $mods['menu_font_color']
     ),
     array(
@@ -314,7 +315,7 @@ $css = array(
     ),
     array(
         'selector' => '.comment-list .children li.comment',
-        'border-color' => $mods['footer_bg_color']
+        'border-color' => $bg_darker_hex_footer
     ),
     array(
         'selector' => '.site-footer a, .jma-local-menu a',
@@ -329,13 +330,21 @@ $css = array(
         'color' => $mods['footer_bg_color']
     ),
     array(
-        'selector' => '.jma-local-menu a:hover',
-        'background-color' => $mods['footer_font_color']
+        'selector' => '.site-inner a.overlay',
+        'background-color' => $mods['page_bg']
+    ),
+    array(
+        'selector' => '.site-inner a.overlay:hover',
+        'background-color' => $bg_darker_hex_footer
+    ),
+    array(
+        'selector' => '.site-inner a.overlay:hover:after',
+        'color' => $bg_darker_hex_footer
     )
 );
 
 /*
-add back content and {$value} and footer options
+add back content and {$value} and footer options    $bg_darker_hex_footer
 */
 
 foreach ($supplemental_arrays as $supplemental_array) {
