@@ -30,9 +30,6 @@ function JMA_GBS_enqueue_css_js()
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
     wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/style.css', array(), JMA_GBS_VERSION);
 
-    wp_register_style('JMA_GBS_fontawesome_css', JMA_GBS_ROOT_URI . 'fonts/css/all.min.css', array(), JMA_GBS_VERSION);
-    wp_enqueue_style('JMA_GBS_fontawesome_css');
-
     // wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
     // NOTE: this combined script is loading in the footer
 
@@ -43,7 +40,6 @@ function JMA_GBS_enqueue_css_js()
     wp_enqueue_script('JMA_GBS_supersubs_js', JMA_GBS_BASE_URI . 'dist/js/supersubs' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
 
     wp_enqueue_script('JMA_GBS_custom_js', JMA_GBS_BASE_URI . 'dist/js/custom' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
-    wp_enqueue_script('JMA_GBS_viewport_js', JMA_GBS_BASE_URI . 'js/vendor/viewportchecker/viewportChecker.umd.min.js', array('jquery'), JMA_GBS_VERSION, true);
     wp_enqueue_script('JMA_GBS_bootstrap_js', JMA_GBS_BASE_URI . 'js/vendor/bootstrap/bootstrap.bundle.min.js', array('jquery'), JMA_GBS_VERSION, false);
 
     $output = get_transient('jma_gbs_general_css');
