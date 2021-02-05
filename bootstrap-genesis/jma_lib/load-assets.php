@@ -52,7 +52,7 @@ function JMA_GBS_enqueue_css_js()
         $mods = jma_gbs_get_theme_mods('jma_gbs_');
         $css = array();
         require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
-        
+
         $output = jma_gbs_process_css_array($css);
         set_transient('jma_gbs_general_css', $output);
     }

@@ -1,3 +1,4 @@
+$window = jQuery(window);
 jQuery(document).ready(function($) {
     $('.jma-scroll-to-top, .jma-scroll-to-top a').on('click', function(event) {
         event.preventDefault();
@@ -10,7 +11,8 @@ jQuery(document).ready(function($) {
     $('.site-inner').find('a').each(function() {
         $this = $(this);
         href = $this.attr('href');
-        var extension = href.substr((href.lastIndexOf('.') + 1));
+        if (typeof href != 'undefined')
+            var extension = href.substr((href.lastIndexOf('.') + 1));
         lightbox = (extension == 'jpg' || extension == 'png') ? ' lightbox' : '';
         png = (extension == 'png') ? ' png' : '';
         external = (typeof $this.attr('target') != 'undefined' && $this.attr('target').length) && $this.attr('target') != '_self' ? ' external' : '';
@@ -53,9 +55,6 @@ jQuery(document).ready(function($) {
         }, 500);
 
     });
-
-
-    $window = $(window);
 
     //add class for verical side menu (mobile)
     $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
