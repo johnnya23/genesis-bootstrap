@@ -711,10 +711,18 @@ li.comment {
     text-decoration: underline;
 }
 
+a.wp-block-button__link {
+    text-decoration: none!important;
+}
+
 .site-footer a:hover,
 .site-header .sf-menu a,
 .site-header a:hover {
     text-decoration: none;
+    border-color:transparent
+}
+
+.site-header .sf-menu a {
     border-color:transparent
 }
 /* full page search */

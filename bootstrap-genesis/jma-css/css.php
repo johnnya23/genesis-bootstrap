@@ -165,7 +165,7 @@ if (!$mods['use_menu_root_bg']) {
 if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horizontal_padding']) {
     $supplemental_arrays[] = array(
         'query' => '(min-width:900px) and (max-width:1200px)',
-        'selector' => '.site-header .navbar > li > a',
+        'selector' => '.site-header .navbar  ul.nav > li > a',
         'padding-right' =>  $mods['menu_desktop_horizontal_padding'] . 'px',
         'padding-left' =>  $mods['menu_desktop_horizontal_padding'] . 'px'
     );
@@ -173,14 +173,14 @@ if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horiz
 if (isset($mods['menu_desktop_font_size']) && $mods['menu_desktop_font_size']) {
     $supplemental_arrays[] = array(
         'query' => '(min-width:900px) and (max-width:1200px)',
-        'selector' => '.site-header .navbar .navbar  li  a',
+        'selector' => '.site-header .navbar  li  a',
         'font-size' =>  $mods['menu_desktop_font_size']
     );
 }
 if (isset($mods['menu_tablet_horizontal_padding']) && $mods['menu_tablet_horizontal_padding']) {
     $supplemental_arrays[] = array(
         'query' => '(max-width:899px)',
-        'selector' => '.site-header .navbar > li > a',
+        'selector' => '.site-header .navbar  ul.nav > li > a',
         'padding-right' =>  $mods['menu_tablet_horizontal_padding'] . 'px',
         'padding-left' =>  $mods['menu_tablet_horizontal_padding'] . 'px'
     );
@@ -188,7 +188,7 @@ if (isset($mods['menu_tablet_horizontal_padding']) && $mods['menu_tablet_horizon
 if (isset($mods['menu_tablet_font_size']) && $mods['menu_tablet_font_size']) {
     $supplemental_arrays[] = array(
         'query' => '(max-width:899px)',
-        'selector' => '.site-header .navbar .navbar  li  a',
+        'selector' => '.site-header .navbar  li  a',
         'font-size' =>  $mods['menu_tablet_font_size']
     );
 }
