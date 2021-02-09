@@ -42,11 +42,15 @@ function jma_gbs_get_display_vals($mods)
 function jma_gbs_site_layout($pre)
 {
     if (is_singular()) {
-        $mods = jma_gbs_get_theme_mods('jma_gbs_');
-        $post_type = get_post_type();
+        global $post;
+        $meta = get_post_meta($post->ID);
+        if(!$meta['_genesis_layout'][0]){
+            $mods = jma_gbs_get_theme_mods('jma_gbs_');
+            $post_type = get_post_type();
 
-        if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
-            $pre = $mods[$post_type . '_col_layout'];
+            if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
+                $pre = $mods[$post_type . '_col_layout'];
+            }
         }
     }
     return $pre;
