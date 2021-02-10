@@ -408,6 +408,11 @@ body .site-container .sticky-menu.has-image .nav > li > a {
 #jma-gbs-mobile-panel .add-to-panel * {
     justify-content: flex-start;
 }
+#jma-gbs-mobile-panel .wp-block-column {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 0
+}
 body .jma-gbs-mobile-panel .add-to-panel * a {
     text-decoration: underline;
 }
@@ -829,7 +834,7 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
     top: 600px;
     top: calc(60vh);
     right: 0;
-    z-index: 9999;
+    z-index: 200;
 }
 
 .jma-fixed-scroll {

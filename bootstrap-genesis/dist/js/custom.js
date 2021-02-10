@@ -105,7 +105,7 @@ jQuery(document).ready(function($) {
     //add items from header to mobile (side) menu
     $('.add-to-panel').each(function() {
         $('<div/>', {
-            style: 'clear:both'
+            style: 'clear:both;padding-bottom: 15px'
         }).appendTo('#jma-gbs-mobile-panel');
         $this = $(this);
         if ($this.find('.wp-block-columns').length)
@@ -220,13 +220,20 @@ function menuadjust() {
             $positioned.removeClass('jma-positioned');
             $wrapping_cols.css('display', 'block');
             $wrapping_cols.children().css('float', 'left');
-            $wrapping_col.css('padding-top', '10px');
+            $positioned.children().css('float', 'left');
+            $wrapping_col.css({
+                'width': 'inherit',
+                'margin-left': '0'
+            });
         } else {
             $wrapping_cols.css('display', '');
             $wrapping_cols.children().css('float', '');
-
+            $positioned.children().css('float', '');
             $positioned.addClass('jma-positioned');
-            $wrapping_col.css('padding-top', '');
+            $wrapping_col.css({
+                'width': '',
+                'margin-left': ''
+            });
         }
     }
 }
