@@ -873,20 +873,20 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
 /* overlays*/
 
 
-.site-inner a img {
+a.jma-overlay img, .jma-overlay a img, .site-inner a img {
     display: block;
     position: relative;
 }
 
-.site-inner a.overlay{
+a.jma-overlay.overlay, .jma-overlay a.overlay, .site-inner a.overlay{
     transition: background-color 300ms linear;
 }
-.site-inner a.overlay:hover {
+a.jma-overlay.overlay:hover, .jma-overlay a.overlay:hover, .site-inner a.overlay:hover {
     display: block;
     position: relative;
 }
 
-.site-inner a.overlay:hover:after {
+a.jma-overlay.overlay:hover:after, .jma-overlay a.overlay:hover:after, .site-inner a.overlay:hover:after {
     font-family: "Font Awesome 5 Free";
     content: "\f0c1";
     font-style: normal;
@@ -899,16 +899,16 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
     right: 10px;
 }
 
-.site-inner a.overlay.external:hover:after {
+a.jma-overlay.overlay.external:hover:after, .jma-overlay a.overlay.external:hover:after, .site-inner a.overlay.external:hover:after {
     content: "\f35d";
 }
-.site-inner a.overlay.lightbox img {
+a.jma-overlay.overlay.lightbox img, .jma-overlay a.overlay.lightbox img, .site-inner a.overlay.lightbox img {
     cursor: pointer;
 }
-.site-inner a.overlay.lightbox:hover:after {
+a.jma-overlay.overlay.lightbox:hover:after, .jma-overlay a.overlay.lightbox:hover:after, .site-inner a.overlay.lightbox:hover:after {
     content: "\f03e";
 }
 
-.site-container a:hover img {
+a.jma-overlay:hover img, .jma-overlay a:hover img, .site-container a:hover img {
     opacity: 0.75;
 }
