@@ -664,6 +664,20 @@ img.alignleft,
 img.alignright {
     max-width: 60%;
 }
+.archive-image-wrap img {
+    max-width: 100%;
+    margin: 0;
+}
+.archive-image-wrap {
+    margin-top: 5px;
+        margin-bottom: 5px;
+}
+.archive-image-wrap.alignleft {
+    margin-right: 20px;
+}
+.archive-image-wrap.alignright {
+    margin-left: 20px;
+}
 /* featured image (in content area) */
 .site-inner .single-featured-image {
     margin-bottom: 15px;

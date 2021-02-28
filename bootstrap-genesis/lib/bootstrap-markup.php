@@ -17,6 +17,8 @@ add_filter('genesis_attr_archive-pagination', 'JMA_GBS_add_markup_class', 10, 2)
 add_filter('genesis_attr_entry-content', 'JMA_GBS_add_markup_class', 10, 2);
 add_filter('genesis_attr_entry-pagination', 'JMA_GBS_add_markup_class', 10, 2);
 add_filter('genesis_attr_site-footer', 'JMA_GBS_add_markup_class', 10, 2);
+add_filter('genesis_markup_entry-image-link_open', 'JMA_GBS_wrap_archive_image_open', 10, 2);
+add_filter('genesis_markup_entry-image-link_close', 'JMA_GBS_wrap_archive_image_close', 10, 2);
 
 function JMA_GBS_add_markup_class($attr, $context)
 {
@@ -59,4 +61,13 @@ function JMA_GBS_add_markup_class($attr, $context)
     $attr['class'] .= ' ' . implode(' ', $classes_array);
 
     return $attr;
+}
+
+function JMA_GBS_wrap_archive_image_open($open, $args){
+    $side = (strpos($args['content'], 'right') !== false)? 'right': 'left' ;
+    return '<div class="archive-image-wrap align' . $side . '">' . $open;
+}
+
+function JMA_GBS_wrap_archive_image_close($close, $args){
+    return $close . '</div>';
 }
