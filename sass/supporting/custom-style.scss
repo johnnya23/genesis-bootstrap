@@ -806,16 +806,22 @@ a.wp-block-button__link {
     padding-left: 0;
 }
 
-.jma-gbs-pagination-numeric li {
+body .site-container .jma-gbs-pagination-numeric li {
     display: inline-block;
     float: left;
     margin-right: 3px;
 }
 
-body .jma-gbs-pagination-numeric li a {
+body .site-container .jma-gbs-pagination-numeric li a {
     display: block;
-    padding: 2px 7px;
-    border: solid 1px red;
+    padding: 10px;
+}
+
+body .jma-gbs-pagination-numeric li.active a {
+    background-color: #ccc;
+    border-color: #777;
+    color: #777;
+    pointer-events: none;
 }
 
 .jma-gbs-pagination-numeric li a:hover {
