@@ -111,8 +111,9 @@ function jma_gbs_template_redirect()
 {//add_action('jma_gbs_local_menu');
 
     global $post;
-    if (is_object($post) && get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
-        $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
+        $post_id = is_home()? get_option( 'page_for_posts' ): $post->ID;
+    if ((is_object($post) || is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
+        $page_options = get_post_meta($post_id, '_jma_gbs_page_options_key', true);
     }
     add_filter('body_class', 'jma_gbs_body_filter');
     add_action('genesis_header', 'jma_gbs_open_div', 7);
@@ -181,9 +182,10 @@ add_action('template_redirect', 'jma_gbs_template_redirect');
 function jma_gbs_body_filter($cl)
 {
     global $post;
+    $post_id = is_home()? get_option( 'page_for_posts' ): $post->ID;
 
-    if (is_object($post) && get_post_meta($post->ID, '_jma_gbs_page_options_key', true)) {
-        $page_options = get_post_meta($post->ID, '_jma_gbs_page_options_key', true);
+    if ((is_object($post) ||  is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
+        $page_options = get_post_meta($post_id, '_jma_gbs_page_options_key', true);
     }
     $border_items = array('jma_gbs_modular_header', 'jma_gbs_frame_content', 'jma_gbs_modular_footer', 'jma_gbs_use_menu_root_dividers', 'jma_gbs_use_menu_root_bg', 'jma_gbs_site_banner');
     $mods = jma_gbs_get_theme_mods();
@@ -197,12 +199,6 @@ function jma_gbs_body_filter($cl)
     $cl[] = $mods['jma_gbs_body_shape'];
     if (jma_gbs_detect_block('getwid/section')) {
         $cl[] = 'jma_gbs_full_block';
-    }
-
-    if (isset($page_options['sticky-header']) && $page_options['sticky-header']) {
-        $cl[] = 'sticky-header';
-    } else {
-        $cl[] = 'non-sticky-header';
     }
 
     if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
@@ -231,8 +227,10 @@ add_filter('genesis_markup_site-header_open', 'jma_gbs_genesis_markup_site_heade
 function jma_gbs_local_menu()
 {
     global $post;
-    if (is_object($post) && get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true)) {
-        $page_options =  get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true);
+    $post_id = is_home()? get_option( 'page_for_posts' ): $post->ID;
+
+    if ((is_object($post) ||  is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
+        $page_options =  get_post_meta($post_id, '_jma_gbs_page_options_key', true);
     }
     if (is_array($page_options) && isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
         $menuslug = $page_options['scroll_menu'];

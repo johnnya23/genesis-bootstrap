@@ -129,9 +129,10 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
         $values = $_POST;
         //$values['widget_area'] = $_POST[ '_jma_ghb_widget_area'];
         $clean_data = array();
-        foreach ($values as $i => $value) {
-            if (is_string($value)) {
-                $clean_data[$i] = wp_kses_post($value);
+        $fields = array('scroll_menu', 'title_display', 'image_display');
+        foreach ($fields as $field) {
+            if (is_string($values[$field])) {
+                $clean_data[$field] = wp_kses_post($values[$field]);
             }
         }
 
