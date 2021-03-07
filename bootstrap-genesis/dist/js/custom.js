@@ -205,7 +205,7 @@ function menuadjust() {
     //check to see if menu is in a column
     if ($wrapping_col.length) {
         //find the space our menu needs before wrapping
-        $primary_nav.find('.sf-menu >li').each(function() {
+        $primary_nav.find('.sf-menu >li, .mega-menu>li').each(function() {
             $this = jQuery(this);
             //don't include hidden elements in calculation
             if ($this.css('display') != 'none')
@@ -240,7 +240,11 @@ function menuadjust() {
 //duplicate menu for sticky header
 
 if (jQuery('body').hasClass('sticky-header')) {
-    $original_navbar = jQuery('body.sticky-header').find('.site-header').find('.nav-primary').find('.outer').children();
+    if (!jQuery('.mega-menu-wrap').length) {
+        $original_navbar = jQuery('body.sticky-header').find('.site-header').find('.nav-primary').find('.outer').children();
+    } else {
+        $original_navbar = jQuery('body.sticky-header').find('.site-header').find('.nav-primary').find('#mega-menu-wrap-primary');
+    }
     menu_pos = $original_navbar.offset();
     menu_pos_top = menu_pos.top - window.pageYOffset;
 
