@@ -475,7 +475,7 @@ body .site-header .navbar {
 }
 
 /* double menu ovedrlay for sticky header */
-body.sticky-header .site-container>ul.nav>li>a, body.sticky-header .site-container>ul.mega-menu>li>a {
+body.sticky-header .site-container>ul.nav>li>a, body.sticky-header .site-container>.mega-menu-wrap ul.mega-menu>li>a {
     opacity: 0;
 }
 

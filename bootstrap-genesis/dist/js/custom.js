@@ -252,6 +252,7 @@ if (jQuery('body').hasClass('sticky-header')) {
     $double_menu = $original_navbar.clone(true).prependTo(".site-container").addClass('double-menu').css({
         'top': menu_pos_top + 'px',
         'left': menu_pos.left + 'px',
+        'width': $original_navbar.width() + 'px',
         'position': 'fixed'
     });
     var menu_height_adjust = jQuery('.jma-local-menu').length ? $double_menu.height() : 0;
@@ -263,6 +264,7 @@ function menu_resize_pos() {
     $double_menu.css({
         'top': menu_top_pos + 'px',
         'left': menu_pos.left + 'px',
+        'width': $original_navbar.width() + 'px',
     });
     site_pos = $site_inner.offset();
     if (menu_pos.top + menu_height_adjust > site_pos.top) {
