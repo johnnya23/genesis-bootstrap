@@ -2,7 +2,7 @@
 /**
 *Plugin Name: JMA Bootstrap with Genesis
 *Description: Bootstap and customizations applied to Genesis Theme
-*Version: 2
+*Version: 2.1
 *Author: John Antonacci
 *Author URI: https://gist.github.com/theandystratton/5924570
 *License: GPL2
