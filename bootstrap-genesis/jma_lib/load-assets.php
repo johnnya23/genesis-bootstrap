@@ -4,10 +4,6 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-// replace style.css - Theme Information (no css)
-// with css/style' . $min . '.css -  Compressed CSS for Theme
-remove_action('genesis_meta', 'genesis_load_stylesheet');
-
 function jma_gbs_customize_save_after()
 {
     delete_transient('jma_gbs_general_css');
@@ -21,7 +17,7 @@ function jma_gbs_customize_save_after()
     }
 }
 add_action('customize_save_after', 'jma_gbs_customize_save_after');
-add_action('customize_controls_print_scripts', 'jma_gbs_customize_save_after');
+//add_action('customize_controls_print_scripts', 'jma_gbs_customize_save_after', 10);
 
 function JMA_GBS_enqueue_css_js()
 {

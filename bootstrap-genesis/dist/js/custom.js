@@ -1,4 +1,7 @@
 $window = jQuery(window);
+
+$site_inner = jQuery('.site-inner');
+
 jQuery(document).ready(function($) {
     $('.jma-scroll-to-top, .jma-scroll-to-top a').on('click', function(event) {
         event.preventDefault();
@@ -8,7 +11,7 @@ jQuery(document).ready(function($) {
     });
 
     //overlays
-    $('.site-inner').find('a').each(function() {
+    $site_inner.find('a').each(function() {
         $this = $(this);
         href = $this.attr('href');
         if (typeof href != 'undefined')
@@ -42,8 +45,6 @@ jQuery(document).ready(function($) {
         });
     });
 
-
-    $site_inner = $('.site-inner');
     /* animation for local menu   */
     $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
         event.preventDefault();
@@ -56,12 +57,9 @@ jQuery(document).ready(function($) {
 
     });
 
-    //add class for verical side menu (mobile)
-    $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
-
+    //reverse direstion of flyout when space is limited
     $('.site-container ul.sf-menu, .jma-gbs-mobile-panel ul.sf-menu').superfish({
 
-        //reverse direstion of flyout when space is limited
         onBeforeShow: function() {
             var windowWidth;
             windowWidth = $(window).width();
@@ -97,10 +95,8 @@ jQuery(document).ready(function($) {
         $('body').toggleClass('open');
     });
 
-    $navbar = $('.site-container').find('.site-header').find('.nav-primary');
-
-    //clone the sticky menu
-    $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass('sticky-menu');
+    //add class for verical side menu (mobile)
+    $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
 
     //add items from header to mobile (side) menu
     $('.add-to-panel').each(function() {
@@ -115,6 +111,11 @@ jQuery(document).ready(function($) {
         else
             $this.clone(true).appendTo('#jma-gbs-mobile-panel');
     });
+
+    $navbar = $('.site-container').find('.site-header').find('.nav-primary');
+
+    //clone the sticky menu
+    $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass('sticky-menu');
 
     //add logo to sticky menu
     if ($sticky_menu && $('#site-header').data('sticky-header')) {
@@ -154,11 +155,11 @@ function stickmainmenutotop() {
 
 
     sticky_menu_height = $sticky_menu.css('display') == 'block' ? $sticky_menu.outerHeight() : 0;
-    pos = $('.site-inner').position();
+    pos = $site_inner.position();
     boxed_adjust = $('.gbs-boxed-content').length ? -20 : 0;
 
     //time to display local menu and sticky menu
-    if (window_top > pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - admin_height + parseInt($('.site-inner').css('margin-top'), 10)) {
+    if (window_top > pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - admin_height + parseInt($site_inner.css('margin-top'), 10)) {
         //local
         if ($('.jma-local-menu').length) {
             $jma_local_menu = $('.jma-local-menu');
@@ -185,70 +186,122 @@ function stickmainmenutotop() {
         if ($('body.sticky-header').length) {
             $sticky_menu.removeClass('push-forward');
             $sticky_menu.css('top', '');
-
         }
     }
 
 }
 
-//gives us a 20px cushion
-necessary_menu_width = 20;
 //$primary_nav is the <nav> element
 $primary_nav = jQuery('.site-header').find('.nav-primary');
 $positioned = $primary_nav.children();
 
 $wrapping_col = $primary_nav.closest('.wp-block-column');
 $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
-//check to see if menu is in a column
-if ($wrapping_col.length) {
-    //find the space our menu needs before wrapping
-    $primary_nav.find('.sf-menu >li').each(function() {
-        $this = jQuery(this);
-        //don't include hidden elements in calculation
-        if ($this.css('display') != 'none')
-            necessary_menu_width += $this.outerWidth();
-    });
-    $wrapping_col.css('min-width', necessary_menu_width);
-    wrapping_col_percent = parseFloat($wrapping_col.css('flex-basis'), 10);
 
-}
 //make the menu slide under logo (presumably) when screen is too narrow
 function menuadjust() {
+    //gives us a 20px cushion
+    necessary_menu_width = 20;
+    //check to see if menu is in a column
+    if ($wrapping_col.length) {
+        //find the space our menu needs before wrapping
+        $primary_nav.find('.sf-menu >li').each(function() {
+            $this = jQuery(this);
+            //don't include hidden elements in calculation
+            if ($this.css('display') != 'none')
+                necessary_menu_width += $this.outerWidth();
+        });
+        $wrapping_col.css('min-width', necessary_menu_width);
+        wrapping_col_percent = parseFloat($wrapping_col.css('flex-basis'), 10);
+
+    }
     if (necessary_menu_width > 20) {
 
         if (necessary_menu_width > (($wrapping_cols.width() * wrapping_col_percent) / 100)) {
             $positioned.removeClass('jma-positioned');
             $wrapping_cols.css('display', 'block');
-            $wrapping_cols.children().css('float', 'left');
-            $positioned.children().css('float', 'left');
             $wrapping_col.css({
                 'width': 'inherit',
+                'margin-top': '3px',
                 'margin-left': '0'
             });
         } else {
-            $wrapping_cols.css('display', '');
-            $wrapping_cols.children().css('float', '');
-            $positioned.children().css('float', '');
             $positioned.addClass('jma-positioned');
+            $wrapping_cols.css('display', '');
             $wrapping_col.css({
                 'width': '',
+                'margin-top': '',
                 'margin-left': ''
             });
         }
     }
 }
 
+//duplicate menu for sticky header
+
+if (jQuery('body').hasClass('sticky-header')) {
+    $original_navbar = jQuery('body.sticky-header').find('.site-header').find('.nav-primary').find('.outer').children();
+    menu_pos = $original_navbar.offset();
+    menu_pos_top = menu_pos.top - window.pageYOffset;
+
+    //clone the main menu ul and position the double
+    $double_menu = $original_navbar.clone(true).prependTo(".site-container").addClass('double-menu').css({
+        'top': menu_pos_top + 'px',
+        'left': menu_pos.left + 'px',
+        'position': 'fixed'
+    });
+    var menu_height_adjust = jQuery('.jma-local-menu').length ? $double_menu.height() : 0;
+}
+
+function menu_resize_pos() {
+    menu_pos = $original_navbar.offset();
+    menu_top_pos = menu_pos.top - window.pageYOffset;
+    $double_menu.css({
+        'top': menu_top_pos + 'px',
+        'left': menu_pos.left + 'px',
+    });
+    site_pos = $site_inner.offset();
+    if (menu_pos.top + menu_height_adjust > site_pos.top) {
+        $double_menu.addClass('hide-double');
+    } else {
+        $double_menu.removeClass('hide-double');
+    }
+}
+
+function menu_scroll_pos() {
+    menu_pos = $original_navbar.offset();
+    menu_top_pos = menu_pos.top - window.pageYOffset;
+    $double_menu.css({
+        'top': menu_top_pos + 'px'
+    });
+    site_pos = $site_inner.offset();
+    if (menu_pos.top + menu_height_adjust > site_pos.top) {
+        $double_menu.addClass('hide-double');
+    } else {
+        $double_menu.removeClass('hide-double');
+    }
+}
+
 $window.on('load', function() {
     stickmainmenutotop();
     menuadjust();
+    if (jQuery('.jma-gbs-mobile-panel').css('display') == 'none' && jQuery('body').hasClass('sticky-header')) {
+        menu_resize_pos();
+    }
 });
 
 $window.on('scroll', function() {
     stickmainmenutotop();
+    if (jQuery('.jma-gbs-mobile-panel').css('display') == 'none' && jQuery('body').hasClass('sticky-header')) {
+        menu_scroll_pos();
+    }
 });
 
 $window.on('resize', function() {
     stickmainmenutotop();
     menuadjust();
     jQuery('body').removeClass('open');
+    if (jQuery('.jma-gbs-mobile-panel').css('display') == 'none' && jQuery('body').hasClass('sticky-header')) {
+        menu_resize_pos();
+    }
 });

@@ -201,7 +201,8 @@ body.open .navbar-toggle {
 }
 body div.jma-gbs-mobile-panel .navbar li.current-menu-item a, body div.jma-gbs-mobile-panel .navbar li.current-menu-ancestor > a {
     font-weight: bold;
-    font-size: 115%
+    font-size: 115%;
+    white-space: normal;
 }
 /* end mobile menu */
 i.fab,
@@ -268,12 +269,12 @@ i.fas {
 .jma_gbs_use_menu_root_dividers.jma_gbs_non_use_menu_root_bg .site-container .sf-menu > li:first-child > a:before {
     border-left-width: 0;
 }
-.site-container .navbar .sf-menu li:first-child a,
-.site-container .navbar .sf-menu ul a {
+.site-container ul.nav li:first-child a,
+.site-container ul.nav ul a {
     border-left: none;
 }
 
-.site-container .navbar .sf-menu a:hover {
+.site-container ul.nav.sf-menu a:hover {
     text-decoration: none;
 }
 /* let menu dropdowns show */
@@ -360,7 +361,7 @@ body .site-container .sticky-menu.has-image .nav > li > a {
 }
 
 .jma-gbs-mobile-panel .navbar .sf-menu li,
-.site-container .navbar .sf-menu li, .jma-gbs-mobile-panel .navbar li a:focus {
+.site-container ul.nav.sf-menu li, .jma-gbs-mobile-panel ul.nav li a:focus {
     background: none;
 }
 /* extra default padding for root menu items with arrows */
@@ -429,26 +430,26 @@ body .jma-gbs-mobile-panel .add-to-panel * a {
     }
 }
 
-.navbar > ul,
+ul.nav,
 .site-header > .jma-gbs-inner > .navbar > .outer {
     margin-left: auto;
     margin-right: auto;
 }
 
-body .navbar a {
+body ul.nav a {
     font-size: 16px;
 }
 
-.navbar .sf-menu li a {
+ul.nav li a {
     border-top: none;
 }
 
-.site-container .outer > ul > li > a {
+.site-container  ul.nav > li > a {
     border-top: solid 3px transparent;
     border-bottom: solid 3px transparent;
 }
 
-.navbar *[href='#'] {
+ul.nav *[href='#'] {
     cursor: text;
 }
 @media(min-width:768px) {
@@ -473,6 +474,24 @@ body .site-header .navbar {
     }
 }
 
+/* double menu ovedrlay for sticky header */
+body.sticky-header .site-container>ul.nav>li>a {
+    opacity: 0;
+}
+
+@media(max-width: 767px) {
+    .double-menu {
+        display: none
+    }
+}
+
+.double-menu {
+    z-index: 9999
+}
+
+.double-menu.hide-double {
+    z-index: 30
+}
 .site-footer p:last-child,
 .site-header p:last-child {
     margin-bottom: 0;
