@@ -83,7 +83,49 @@
 .site-container > * .gbs-btn {
     text-decoration: none;
 }
+
+
+
+
+
 @media(max-width: 767px) {
+    .site-header .nav-primary {
+        display: none;
+    }
+
+    .jma-gbs-mobile-panel {
+        display: block;
+    }
+
+    .jma-panel-button {
+        display: inline-block;
+        position: absolute;
+        width: unset;
+        right: 0;
+        top: 0;
+    }
+}
+
+
+
+
+/* we need to make this all available 1px early to accomodate mega menu */
+@media(max-width: 768px) {
+    body.mega-menu-primary .site-header .nav-primary {
+        display: none;
+    }
+
+    body.mega-menu-primary .jma-gbs-mobile-panel {
+        display: block;
+    }
+
+    body.mega-menu-primary .jma-panel-button {
+        display: inline-block;
+        position: absolute;
+        width: unset;
+        right: 0;
+        top: 0;
+    }
     .site-header .nav-primary {
         display: none;
     }
@@ -429,6 +471,18 @@ body .jma-gbs-mobile-panel .add-to-panel * a {
         flex-basis: 100%!important;
     }
 }
+@media(max-width:768px) {
+    body.mega-menu-primary .site-container .add-to-panel {
+        display: none;
+    }
+
+    body.mega-menu-primary .site-container {
+        position: relative;
+    }
+    body.mega-menu-primary .wp-block-column, body .wp-block-column:not(:only-child) {
+        flex-basis: 100%!important;
+    }
+}
 
 ul.nav,
 .site-header > .jma-gbs-inner > .navbar > .outer {
@@ -475,7 +529,7 @@ body .site-header .navbar {
 }
 
 /* double menu ovedrlay for sticky header */
-body.sticky-header .site-container>ul.nav>li>a, body.sticky-header .site-container>.mega-menu-wrap ul.mega-menu>li>a {
+body.sticky-header .site-container>ul.nav>li>a, body.sticky-header .site-container>#mega-menu-wrap-primary ul#mega-menu-primary>li>a.mega-menu-link {
     opacity: 0;
 }
 
@@ -877,17 +931,17 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
 }
 
 .jma-fixed-scroll {
-    z-index: 9999;
+    z-index: 99999;
     position: fixed;
-    bottom: 2px;
-    right: 2px;
+    bottom: 10px;
+    right: 10px;
     padding: 2px 6px;
-    background-color: rgba(0,0,0, 0.1);
+    background-color: rgba(255,255,255,0.8);
     font-size: 20px;
     color: #333;
     display: none;
     border: none;
-    outline: none!important;
+    outline: none !important;
 }
 
 .page-edge-widget .simple-social-icons ul li {
@@ -896,7 +950,6 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
 @media(max-width:767px) {
     .jma-fixed-scroll {
         display: inline-block;
-        z-index: 99999;
     }
 
     .page-edge-widget #simple-social-icons-2 ul li a {
