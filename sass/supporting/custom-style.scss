@@ -126,13 +126,6 @@
         right: 0;
         top: 0;
     }
-    .site-header .nav-primary {
-        display: none;
-    }
-
-    .jma-gbs-mobile-panel {
-        display: block;
-    }
 
     .sf-vertical > li {
         float: none;
@@ -205,14 +198,6 @@
     body.open .jma-gbs-mobile-panel {
         -webkit-transform: translate3d(-280px, 0, 0);
         transform: translate3d(-280px, 0, 0);
-    }
-
-    .jma-panel-button {
-        display: inline-block;
-        position: absolute;
-        width: unset;
-        right: 0;
-        top: 0;
     }
     body.open .jma-panel-button {
         position: fixed;
