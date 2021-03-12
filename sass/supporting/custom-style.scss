@@ -334,14 +334,12 @@ i.fas {
     transform: translateX(-50%);
 }
 
-.sticky-menu.fixed .outer {
-    margin-left: auto;
-    margin-right: auto;
+.sticky-menu img {
+    max-height: 50px;
+    padding: 2px;
 }
 
 .sticky-menu.has-image img {
-    max-height: 50px;
-    padding: 2px;
     float: left;
 }
 
@@ -349,14 +347,25 @@ body .site-container .navbar.sticky-menu.has-image .jma-positioned > ul {
     float: right;
 }
 
-body .site-container .sticky-menu .nav > li > a {
-    padding-top: 10px;
-    padding-bottom: 10px;
+body .site-container .sticky-menu.from-wrap * {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+body .site-container .sticky-menu.from-wrap .sf-menu a {
+    padding: .75em 1em!important;
 }
 
-body .site-container .sticky-menu.has-image .nav > li > a {
-    padding-top: 11px;
-    padding-bottom: 11px;
+body .site-container .sticky-menu .nav > li > a {
+    padding: 11px 14px!important;
+    font-size: 17px!important;
+}
+
+.sticky-menu.fixed {
+    display: flex;
+    position: fixed;
+}
+.sticky-menu.fixed.wp-block-getwid-section {
+    display:block;
 }
 /* disable sticky menu at 992 */
 @media(max-width:992px) {
@@ -521,7 +530,7 @@ body .site-header .navbar {
 }
 
 /* double menu ovedrlay for sticky header */
-body.sticky-header .site-header .nav-primary ul.nav>li>a, body.sticky-header .site-header #mega-menu-wrap-primary ul#mega-menu-primary>li>a.mega-menu-link {
+body.sticky-header .site-header .navbar ul.nav>li>a, body.sticky-header .site-header #mega-menu-wrap-primary ul#mega-menu-primary>li>a.mega-menu-link {
     opacity: 0;
 }
 
