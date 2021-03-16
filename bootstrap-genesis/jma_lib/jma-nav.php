@@ -26,8 +26,7 @@ function jma_gbs_panel_button()
         </div><!-- jma-panel-button -->';
 }
 
-function jma_gbs_open_panel()
-{
+function jma_gbs_open_panel(){
     echo '<div id="jma-gbs-mobile-panel" class="jma-gbs-mobile-panel">';
 }
 

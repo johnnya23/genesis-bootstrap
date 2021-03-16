@@ -52,8 +52,7 @@ function JMA_GBS_enqueue_css_js()
 }
 add_action('wp_enqueue_scripts', 'JMA_GBS_enqueue_css_js');
 
-function JMA_GBS_customizer_live_preview()
-{
+function JMA_GBS_customizer_live_preview(){
     jma_gbs_customize_save_after();
 }
 add_action('customize_preview_init', 'JMA_GBS_customizer_live_preview', -1);
