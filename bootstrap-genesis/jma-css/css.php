@@ -263,7 +263,7 @@ $css = array(
     ),
     /* don't apply the link font color in header */
     array(
-        'selector' => '.site-container a',
+        'selector' => '.site-header a',
         'color' => $mods['header_font_color']
     ),
 

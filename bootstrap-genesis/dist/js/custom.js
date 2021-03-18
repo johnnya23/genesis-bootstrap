@@ -10,6 +10,7 @@ jQuery(document).ready(function($) {
         });
     });
 
+
     //overlays
     $site_inner.find('a').each(function() {
         $this = $(this);
@@ -23,6 +24,7 @@ jQuery(document).ready(function($) {
             $this.addClass('overlay' + external + lightbox);
         }
     });
+
 
     //search form
     function jma_gbs_open_search() {
@@ -45,6 +47,7 @@ jQuery(document).ready(function($) {
         });
     });
 
+
     /* animation for local menu   */
     $site_inner.on('click', '.jma-local-menu  li  a', function(event) {
         event.preventDefault();
@@ -56,6 +59,7 @@ jQuery(document).ready(function($) {
         }, 500);
 
     });
+
 
     //reverse direstion of flyout when space is limited
     $('.site-container ul.sf-menu, .jma-gbs-mobile-panel ul.sf-menu').superfish({
@@ -95,8 +99,10 @@ jQuery(document).ready(function($) {
         $('body').toggleClass('open');
     });
 
+
     //add class for verical side menu (mobile)
     $('body .jma-gbs-mobile-panel ul.sf-menu').addClass('sf-vertical');
+
 
     //add items from header to mobile (side) menu
     $('.add-to-panel').each(function() {
@@ -104,12 +110,19 @@ jQuery(document).ready(function($) {
             style: 'clear:both;padding-bottom: 15px'
         }).appendTo('#jma-gbs-mobile-panel');
         $this = $(this);
-        if ($this.find('.wp-block-columns').length)
+        if ($this.find('.wp-block-columns').length) {
             $this.find('.wp-block-columns').find('.wp-block-column').each(function() {
-                $(this).clone(true).appendTo('#jma-gbs-mobile-panel');
+                $html = $(this).clone(true);
             });
-        else
-            $this.clone(true).appendTo('#jma-gbs-mobile-panel');
+        } else if ($this.find('.wp-block-getwid-section__content').length) {
+            $html = $this.find('.wp-block-getwid-section__content');
+        } else {
+            $html = $this;
+        }
+        $('<div/>', {
+            style: 'clear:both;padding-left: 15px;padding-right: 15px',
+            html: $html
+        }).appendTo('#jma-gbs-mobile-panel');
     });
 
     $navbar = $('.site-container').find('.site-header').find('.nav-primary');
@@ -120,8 +133,10 @@ jQuery(document).ready(function($) {
         $navbar = $('.sticky-menu-wrap');
     }
 
+
     //clone the sticky menu
     $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass($sticky_class);
+
 
     //add logo to sticky menu
     if ($sticky_menu && $('#site-header').data('sticky-header') && !$('.sticky-menu-wrap').length) {
@@ -132,13 +147,13 @@ jQuery(document).ready(function($) {
             src: $('#site-header').data('sticky-header'),
         })));
     }
+
+
     //clone the mobile menu
     if ($('body').hasClass('default_moble_menu'))
         $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
-
-
-
 });
+
 
 //handle the sticky menu position and the local menu
 function stickmainmenutotop() {
@@ -160,7 +175,6 @@ function stickmainmenutotop() {
             $sticky_menu.css('top', '');
         }
     }
-
 
     sticky_menu_height = $sticky_menu.css('display') == 'block' ? $sticky_menu.outerHeight() : 0;
     pos = $site_inner.position();
@@ -199,12 +213,14 @@ function stickmainmenutotop() {
 
 }
 
+
 //$primary_nav is the <nav> element
 $primary_nav = jQuery('.site-header').find('.nav-primary');
 $positioned = $primary_nav.children();
 
 $wrapping_col = $primary_nav.closest('.wp-block-column');
 $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
+
 
 //make the menu slide under logo (presumably) when screen is too narrow
 function menuadjust() {
@@ -247,7 +263,6 @@ function menuadjust() {
 
 
 //duplicate menu for sticky header
-
 if (jQuery('body').hasClass('sticky-header')) {
     if (!jQuery('.mega-menu-wrap').length) {
         $original_navbars = jQuery('body.sticky-header').find('.site-header').find('.nav');
@@ -275,6 +290,8 @@ if (jQuery('body').hasClass('sticky-header')) {
     menu_resize_pos();
 }
 
+
+//the diplicate menu for sticky headers
 function menu_resize_pos() {
     $original_navbars.each(function(i, x) {
         $this = jQuery(this);
