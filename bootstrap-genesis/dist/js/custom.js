@@ -110,14 +110,10 @@ jQuery(document).ready(function($) {
             style: 'clear:both;padding-bottom: 15px'
         }).appendTo('#jma-gbs-mobile-panel');
         $this = $(this);
-        if ($this.find('.wp-block-columns').length) {
-            $this.find('.wp-block-columns').find('.wp-block-column').each(function() {
-                $html = $(this).clone(true);
-            });
-        } else if ($this.find('.wp-block-getwid-section__content').length) {
-            $html = $this.find('.wp-block-getwid-section__content');
+        if ($this.find('.wp-block-getwid-section__content').length) {
+            $html = $this.find('.wp-block-getwid-section__content').clone(true);
         } else {
-            $html = $this;
+            $html = $this.clone(true);
         }
         $('<div/>', {
             style: 'clear:both;padding-left: 15px;padding-right: 15px',
