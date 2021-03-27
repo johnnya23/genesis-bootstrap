@@ -23,8 +23,10 @@ function JMA_GBS_enqueue_css_js()
 {
     $min = WP_DEBUG? '': '.min';
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
-    wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
-    wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/style.css', array(), JMA_GBS_VERSION);
+    wp_register_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
+    wp_register_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/style.css', array(), JMA_GBS_VERSION);
+    wp_enqueue_style('JMA_GBS_superfish_css');
+    wp_enqueue_style('JMA_GBS_combined_css');
 
     // wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer );
     // NOTE: this combined script is loading in the footer
@@ -51,6 +53,13 @@ function JMA_GBS_enqueue_css_js()
     wp_add_inline_style('JMA_GBS_combined_css', $output);
 }
 add_action('wp_enqueue_scripts', 'JMA_GBS_enqueue_css_js');
+
+function JMA_GBS_admin_enqueue_css_js()
+{
+    wp_enqueue_style('JMA_GBS_superfish_css');
+    wp_enqueue_style('JMA_GBS_combined_css');
+}
+add_action('admin_enqueue_scripts', 'JMA_GBS_admin_enqueue_css_js');
 
 function JMA_GBS_customizer_live_preview(){
     jma_gbs_customize_save_after();
