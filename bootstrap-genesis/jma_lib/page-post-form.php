@@ -19,7 +19,7 @@ function jma_gbs_image_input_box()
     foreach ($screens as $screen) {
         add_meta_box(
             'jma_gbs_image_input_section',
-            __('Page Options', 'jma_textdomain'),
+            __('Theme Modifications - Page Display Options', 'jma_textdomain'),
             'jma_gbs_page_options',
             $screen,
             'side'

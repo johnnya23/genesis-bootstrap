@@ -84,7 +84,7 @@
     text-decoration: none;
 }
 @media(max-width: 767px) {
-    .site-header .nav-primary {
+    .site-header .navbar-static-top {
         display: none;
     }
 
@@ -102,7 +102,7 @@
 }
 /* we need to make this all available 1px early to accomodate mega menu */
 @media(max-width: 768px) {
-    body.mega-menu-primary .site-header .nav-primary {
+    body.mega-menu-primary .site-header .navbar-static-top {
         display: none;
     }
 
@@ -325,7 +325,7 @@ i.fas {
     cursor: pointer;
 }
 /* initially hide the sticky menu */
-.sticky-menu {
+.jma-sticky-menu {
     display: none;
     top: 0;
     width: 100%;
@@ -334,68 +334,68 @@ i.fas {
     transform: translateX(-50%);
 }
 
-.sticky-menu img {
+.jma-sticky-menu img {
     max-height: 50px;
     padding: 2px;
 }
 
-.sticky-menu.has-image img {
+.jma-sticky-menu.has-image img {
     float: left;
 }
 
-body .site-container .navbar.sticky-menu.has-image .jma-positioned > ul {
+body .site-container .navbar.jma-sticky-menu.has-image .jma-positioned > ul {
     float: right;
 }
 
-body .site-container .sticky-menu.from-wrap * {
+body .site-container .jma-sticky-menu.from-wrap * {
     padding-top: 0!important;
     padding-bottom: 0!important;
 }
 
-body .site-container .sticky-menu.from-wrap .sf-menu a {
+body .site-container .jma-sticky-menu.from-wrap .sf-menu ul a {
     padding: 0.75em 1em !important;
 }
 
-body .site-container .sticky-menu .nav > li > a {
+body .site-container .jma-sticky-menu .nav > li > a {
     padding: 11px 14px !important;
 }
 
-.sticky-menu.fixed {
+.jma-sticky-menu.fixed {
     display: flex;
     position: fixed;
 }
 
-.sticky-menu.fixed.wp-block-getwid-section {
+.jma-sticky-menu.fixed.wp-block-getwid-section {
     display: block;
 }
 /* disable sticky menu at 992 */
 @media(max-width:992px) {
-    .sticky-menu.fixed {
+    .jma-sticky-menu.fixed {
         display: none!important;
     }
 }
 /* position sticky */
-.sticky-menu {
+.jma-sticky-menu {
     max-width: 100%;
 }
 
-.sticky-header .sticky-menu {
+.sticky-header .jma-sticky-menu {
     position: fixed;
 }
 @media(min-width:768px) {
-    .sticky-header .nav-primary {
+    .sticky-header .navbar-static-top {
         display: block;
     }
 }
 
-.non-sticky-header .nav-primary.fixed {
+.non-sticky-header .navbar-static-top.fixed {
     display: block;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.nav-primary.fixed .outer {
+.navbar-static-top.fixed .outer {
     margin-left: auto;
     margin-right: auto;
 }
@@ -534,7 +534,7 @@ body .site-header .navbar {
     border-bottom: none;
 }
 @media(min-width:768px) {
-    body .site-header .navbar {
+    body .site-container .navbar {
         display: block;
     }
 }

@@ -121,12 +121,12 @@ jQuery(document).ready(function($) {
         }).appendTo('#jma-gbs-mobile-panel');
     });
 
-    $navbar = $('.site-container').find('.site-header').find('.nav-primary');
-    $sticky_class = 'sticky-menu';
+    $navbar = $('.site-container').find('.site-header').find('.navbar-static-top');
+    $sticky_class = 'jma-sticky-menu';
 
-    if ($('.sticky-menu-wrap').length) {
+    if ($('.jma-sticky-menu-wrap').length) {
         $sticky_class += ' from-wrap';
-        $navbar = $('.sticky-menu-wrap');
+        $navbar = $('.jma-sticky-menu-wrap');
     }
 
 
@@ -135,7 +135,7 @@ jQuery(document).ready(function($) {
 
 
     //add logo to sticky menu
-    if ($sticky_menu && $('#site-header').data('sticky-header') && !$('.sticky-menu-wrap').length) {
+    if ($sticky_menu && $('#site-header').data('sticky-header') && !$('.jma-sticky-menu-wrap').length) {
         $sticky_menu.addClass('has-image');
         $sticky_menu.find('.outer').prepend($('<a>', {
             href: window.location.protocol + '//' + window.location.host
@@ -156,7 +156,7 @@ function stickmainmenutotop() {
     var $ = jQuery.noConflict();
     window_top = $window.scrollTop();
     $wpadminbar = $('#wpadminbar');
-    $sticky_menu = $('.sticky-menu');
+    $sticky_menu = $('.jma-sticky-menu');
 
     $sticky_menu.width($('.site-header').find('.jma-gbs-inner').outerWidth());
     admin_height = $wpadminbar.length && $wpadminbar.css('position') == 'fixed' ? $wpadminbar.height() : 0;
@@ -211,8 +211,8 @@ function stickmainmenutotop() {
 
 
 //$primary_nav is the <nav> element
-$primary_nav = jQuery('.site-header').find('.nav-primary');
-$positioned = $primary_nav.children();
+$primary_nav = jQuery('.site-header').find('.navbar-static-top');
+$positioned = $primary_nav.find('.jma-positioned');
 
 $wrapping_col = $primary_nav.closest('.wp-block-column');
 $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
@@ -222,8 +222,8 @@ $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
 function menuadjust() {
     //gives us a 20px cushion
     necessary_menu_width = 20;
-    //check to see if menu is in a column
-    if ($wrapping_col.length) {
+    //check to see if menu is in a column AND won't deal with 2+ nav setup
+    if ($wrapping_col.length && $wrapping_col.length < 2) {
         //find the space our menu needs before wrapping
         $primary_nav.find('.sf-menu >li, .mega-menu>li').each(function() {
             $this = jQuery(this);
@@ -263,7 +263,7 @@ if (jQuery('body').hasClass('sticky-header')) {
     if (!jQuery('.mega-menu-wrap').length) {
         $original_navbars = jQuery('body.sticky-header').find('.site-header').find('.nav');
     } else {
-        $original_navbars = jQuery('body.sticky-header').find('.site-header').find('.nav-primary').find('#mega-menu-wrap-primary');
+        $original_navbars = jQuery('body.sticky-header').find('.site-header').find('.navbar-static-top').find('#mega-menu-wrap-primary');
     }
 
     //clone the main menu ul(s)

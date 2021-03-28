@@ -5,6 +5,7 @@ if (! defined('ABSPATH')) {
 } // Exit if accessed directly
 
 // add bootstrap classes
+add_filter('genesis_attr_navbar-static-top', 'JMA_GBS_add_markup_class', 10, 2);
 add_filter('genesis_attr_nav-primary', 'JMA_GBS_add_markup_class', 10, 2);
 add_filter('genesis_attr_nav-secondary', 'JMA_GBS_add_markup_class', 10, 2);
 add_filter('genesis_attr_site-header', 'JMA_GBS_add_markup_class', 10, 2);
@@ -27,7 +28,8 @@ function JMA_GBS_add_markup_class($attr, $context)
         'jma-gbs-classes-to-add',
         // default bootstrap markup values
         array(
-            'nav-primary'               => 'clearfix navbar navbar-default navbar-static-top',
+            'nav-static-top'         => 'clearfix navbar navbar-default navbar-static-top',
+            'nav-primary'            => 'clearfix navbar navbar-default navbar-static-top',
             'nav-secondary'             => 'clearfix navbar navbar-inverse navbar-static-top',
             'site-header'               => 'container',
             'site-inner'                => 'container',
@@ -63,11 +65,13 @@ function JMA_GBS_add_markup_class($attr, $context)
     return $attr;
 }
 
-function JMA_GBS_wrap_archive_image_open($open, $args){
+function JMA_GBS_wrap_archive_image_open($open, $args)
+{
     $side = (strpos($args['content'], 'right') !== false)? 'right': 'left' ;
     return '<div class="archive-image-wrap align' . $side . '">' . $open;
 }
 
-function JMA_GBS_wrap_archive_image_close($close, $args){
+function JMA_GBS_wrap_archive_image_close($close, $args)
+{
     return $close . '</div>';
 }
