@@ -312,10 +312,6 @@ i.fas {
     text-decoration: none;
 }
 /* let menu dropdowns show */
-.site-header .uagb-column__wrap {
-    overflow: visible;
-}
-/* let menu dropdowns show */
 .site-header {
     z-index: 20;
     position: relative;
@@ -431,15 +427,6 @@ body .site-container .jma-sticky-menu .nav > li > a {
     padding-bottom: 7px;
     font-size: 14px;
     text-decoration: none!important;
-}
-
-.jma-gbs-mobile-panel .uagb-column__inner-wrap {
-    padding: 10px 15px 0;
-    text-align: left;
-}
-
-.jma-gbs-mobile-panel .uagb-column__inner-wrap * {
-    text-align: left;
 }
 
 .jma-gbs-mobile-panel .sf-menu ul li {
