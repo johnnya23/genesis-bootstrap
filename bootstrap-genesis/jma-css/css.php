@@ -97,8 +97,8 @@ $menu_root_values_color = isset($mods['menu_root_font_color']) && $mods['menu_ro
 //no root background
 if (!$mods['use_menu_root_bg']) {
     $menu_bg_color_selector = '.site-container ul.nav ul, .jma-gbs-mobile-panel';
-    $menu_current_bg_color_selector = '.site-container .navbar-static-top ul ul li[class*="current"] > a, .site-container .navbar-static-top ul ul li.current-menu-item > a:hover, .site-container .navbar-static-top ul ul li.current-menu-item > a:focus';
-    $menu_hover_bg_color_selector = '.site-container .navbar-static-top ul ul li  a:hover, .site-container .navbar-static-top ul ul li  a:focus';
+    $menu_current_bg_color_selector = '.site-container ul.nav ul li[class*="current"] > a, .site-container ul.nav ul li.current-menu-item > a:hover, .site-container ul.nav ul li.current-menu-item > a:focus';
+    $menu_hover_bg_color_selector = '.site-container ul.nav ul li  a:hover, .site-container ul.nav ul li  a:focus';
 
     $fixed_root_bg = jma_gbs_get_trans($mods['header_bg_color'], 0.9);
     $menu_root_values['color'] = $menu_root_values_color;

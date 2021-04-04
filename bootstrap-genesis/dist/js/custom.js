@@ -214,6 +214,7 @@ function stickmainmenutotop() {
 $primary_nav = jQuery('.site-header').find('.navbar-static-top');
 $positioned = $primary_nav.find('.jma-positioned');
 
+$primary_nav.parents('.wp-block-getwid-section').css('z-index', 110);
 $wrapping_col = $primary_nav.closest('.wp-block-column');
 $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
 
@@ -231,7 +232,10 @@ function menuadjust() {
             if ($this.css('display') != 'none')
                 necessary_menu_width += $this.outerWidth();
         });
-        $wrapping_col.css('min-width', necessary_menu_width);
+        $wrapping_col.css({
+            'min-width': necessary_menu_width,
+            'z-index': 101
+        });
         wrapping_col_percent = parseFloat($wrapping_col.css('flex-basis'), 10);
 
     }

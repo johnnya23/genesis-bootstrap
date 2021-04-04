@@ -948,10 +948,11 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
 /* fixed position for social icons and scroll to top */
 .page-edge-widget {
     position: fixed;
-    top: 600px;
+    top: 400px;
     top: calc(60vh);
     right: 0;
     z-index: 200;
+    width: 40px;
 }
 
 .jma-fixed-scroll {
