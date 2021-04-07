@@ -44,7 +44,7 @@ function jma_gbs_site_layout($pre)
     if (is_singular()) {
         global $post;
         $meta = get_post_meta($post->ID);
-        if(isset($meta['_genesis_layout'][0]) && !$meta['_genesis_layout'][0]){
+        if (isset($meta['_genesis_layout'][0]) && !$meta['_genesis_layout'][0]) {
             $mods = jma_gbs_get_theme_mods('jma_gbs_');
             $post_type = get_post_type();
 
@@ -111,7 +111,7 @@ function jma_gbs_template_redirect()
 {//add_action('jma_gbs_local_menu');
 
     global $post;
-        $post_id = is_home()? get_option( 'page_for_posts' ): $post->ID;
+    $post_id = is_home()? get_option('page_for_posts'): $post->ID;
     if ((is_object($post) || is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
         $page_options = get_post_meta($post_id, '_jma_gbs_page_options_key', true);
     }
@@ -182,7 +182,7 @@ add_action('template_redirect', 'jma_gbs_template_redirect');
 function jma_gbs_body_filter($cl)
 {
     global $post;
-    $post_id = is_home()? get_option( 'page_for_posts' ): $post->ID;
+    $post_id = is_home()? get_option('page_for_posts'): $post->ID;
 
     if ((is_object($post) ||  is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
         $page_options = get_post_meta($post_id, '_jma_gbs_page_options_key', true);
@@ -197,7 +197,7 @@ function jma_gbs_body_filter($cl)
         }
     }
     $cl[] = $mods['jma_gbs_body_shape'];
-    if (jma_gbs_detect_block('getwid/section')) {
+    if (jma_gbs_detect_block(array('name' => 'getwid/section')) || jma_gbs_detect_block(array('name' =>  'kadence/rowlayout'))) {
         $cl[] = 'jma_gbs_full_block';
     }
 
@@ -227,7 +227,7 @@ add_filter('genesis_markup_site-header_open', 'jma_gbs_genesis_markup_site_heade
 function jma_gbs_local_menu()
 {
     global $post;
-    $post_id = is_home()? get_option( 'page_for_posts' ): $post->ID;
+    $post_id = is_home()? get_option('page_for_posts'): $post->ID;
 
     if ((is_object($post) ||  is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
         $page_options =  get_post_meta($post_id, '_jma_gbs_page_options_key', true);

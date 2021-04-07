@@ -214,7 +214,7 @@ function stickmainmenutotop() {
 $primary_nav = jQuery('.site-header').find('.navbar-static-top');
 $positioned = $primary_nav.find('.jma-positioned');
 
-$primary_nav.parents('.wp-block-getwid-section').css('z-index', 110);
+$primary_nav.parents('.wp-block-getwid-section, .wp-block-kadence-rowlayout').css('z-index', 110);
 $wrapping_col = $primary_nav.closest('.wp-block-column');
 $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
 
