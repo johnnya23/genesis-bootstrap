@@ -22,8 +22,7 @@ function jma_gbs_detect_block($args)
         'name' => '',
         'post' => $post,
         'key' => '',
-        'value' => '',
-        'drill' => 0
+        'value' => ''
     );
     $args = wp_parse_args($args, $defaults);
 
@@ -45,15 +44,7 @@ function jma_gbs_detect_block($args)
             if (isset($block['blockName']) && 'core/block' == $block['blockName'] && isset($block['attrs']['ref']) && $block['attrs']['ref']) {
                 $subargs = $args;
                 $subargs['post'] = $block['attrs']['ref'];
-                if (jma_ghb_detect_block($subargs)) {
-                    return true;
-                }
-            }
-            //recursively run inner blocks (if drill)
-            if ($args['drill'] && isset($block['innerBlocks']) && count($block['innerBlocks'])) {
-                $innerargs = $args;
-                $innerargs['blocks'] = $block['innerBlocks'];
-                if (jma_ghb_detect_block($innerargs)) {
+                if (jma_gbs_detect_block($subargs)) {
                     return true;
                 }
             }
