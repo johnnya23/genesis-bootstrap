@@ -18,7 +18,6 @@ function jma_gbs_detect_block($args)
     global $post;
 
     $defaults = array(
-        'blocks' => array(),
         'name' => '',
         'post' => $post,
         'key' => '',
@@ -26,10 +25,7 @@ function jma_gbs_detect_block($args)
     );
     $args = wp_parse_args($args, $defaults);
 
-    $blocks = $args['blocks'];
-
-    if (!count($blocks)) {
-        if (isset($args['post']) && function_exists('has_blocks')) {
+        if (function_exists('has_blocks')) {
             if (is_int($args['post'])) {
                 $args['post'] = get_post($args['post']);
             }
@@ -37,7 +33,7 @@ function jma_gbs_detect_block($args)
                 $blocks = parse_blocks($args['post']->post_content);
             }
         }
-    }
+
     if (count($blocks)) {
         foreach ($blocks as $block) {
             //recursively run reusable blocks
