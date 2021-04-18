@@ -777,24 +777,20 @@ img.alignright {
     margin-left: 20px;
 }
 /* featured image (in content area) */
-.site-inner .single-featured-image {
-    margin-bottom: 15px;
-}
-
 .site-inner .single-featured-image.alignleft,
 .site-inner .single-featured-image.alignright {
     width: 400px;
     max-width: 40%;
 }
 
-.site-inner .entry-header img.alignright {
-    float: right;
-    margin-left: 15px;
+.site-inner .entry-header img.alignleft,
+.site-inner .single-featured-image.alignleft {
+    margin-right: 15px;
 }
 
-.site-inner .entry-header img.alignleft {
-    float: left;
-    margin-right: 15px;
+.site-inner .entry-header img.alignright,
+.site-inner .single-featured-image.alignright {
+    margin-left: 15px;
 }
 /* comments */
 .comment-respond,
