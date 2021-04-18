@@ -14,14 +14,20 @@ if (! defined('ABSPATH')) {
  * @var array $meta the value from the page/post form
  * @return array $return key and modified value pairs
  */
-function jma_gbs_get_display_vals($mods)
+function jma_gbs_get_display_vals()
 {
+    $mods = jma_gbs_get_theme_mods();
     $meta = array();
-    $return = array('title_display' => 'show', 'image_display' => 'full');
+    $return = array(
+        'title_display' => 'show',
+        'image_display' => 'full',
+        'featured_size' => 'medium',
+        'lightbox_display' => 'off'
+    );
 
     $context = is_page()? '_pages': '_posts';
     //the items we are checking/modifying
-    $items = array('title_display', 'image_display');
+    $items = array('title_display', 'image_display', 'featured_size', 'lightbox_display');
     if (get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true)) {
         //keys in meta match $items
         $meta =  get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true);
@@ -109,7 +115,6 @@ function jma_gbs_add_scroll_to_top()
 
 function jma_gbs_template_redirect()
 {//add_action('jma_gbs_local_menu');
-
     global $post;
     $post_id = is_home()? get_option('page_for_posts'): $post->ID;
     if ((is_object($post) || is_home()) && get_post_meta($post_id, '_jma_gbs_page_options_key', true)) {
@@ -148,12 +153,14 @@ function jma_gbs_template_redirect()
 
     if (is_singular()) {
         // $display_vals['title_display'] and image_display with values
-        $display_vals = jma_gbs_get_display_vals($mods);
+        $display_vals = jma_gbs_get_display_vals();
         if ($display_vals['title_display'] == 'hide') {
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_open', 5);
             remove_action('genesis_entry_header', 'genesis_do_post_title');
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_close', 15);
         }
         //remove_action('genesis_entry_header', 'genesis_post_info', 12);
-        //remove_action('genesis_entry_footer', 'genesis_post_meta');
+        //remove_action('genesis_entry_footer', 'genesis_post_meta');   add_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
     }
 
     //move page title to header banner
@@ -162,7 +169,9 @@ function jma_gbs_template_redirect()
             add_action('genesis_before_content_sidebar_wrap', function () {
                 echo '<div class="banner-wrap">';
             }, 4);
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_open', 5);
             remove_action('genesis_entry_header', 'genesis_do_post_title');
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_close', 15);
             add_action('genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 4);
 
             add_action('genesis_before_content_sidebar_wrap', function () {

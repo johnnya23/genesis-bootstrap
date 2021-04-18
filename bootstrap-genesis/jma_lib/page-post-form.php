@@ -70,6 +70,26 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
         echo '<option value="left"'.selected($page_options['image_display'], 'left').'>Align Left</option>';
         echo '</select><br/><br/>';
 
+        echo '<label for="lightbox_display">';
+        _e('Change Featured Image Display Lightbox within body', 'jma_ghb_textdomain');
+        echo '</label><br/><br/> ';
+        echo '<select name="lightbox_display">';
+        echo '<option value="0"'.selected($page_options['lightbox_display'], '0').'>Default</option>';
+        echo '<option value="off"'.selected($page_options['lightbox_display'], 'off').'>Off</option>';
+        echo '<option value="on"'.selected($page_options['lightbox_display'], 'on').'>On</option>';
+        echo '</select><br/><br/>';
+
+        echo '<label for="featured_size">';
+        _e('Change Featured Image Size within body', 'jma_ghb_textdomain');
+        echo '</label><br/><br/> ';
+        echo '<select name="featured_size">';
+        echo '<option value="0"'.selected($page_options['featured_size'], '0').'>Default</option>';
+        echo '<option value="full"'.selected($page_options['featured_size'], 'full').'>Full</option>';
+        echo '<option value="large"'.selected($page_options['featured_size'], 'large').'>Large</option>';
+        echo '<option value="medium"'.selected($page_options['featured_size'], 'medium').'>Mediom</option>';
+        echo '<option value="jma-gbs-grid"'.selected($page_options['featured_size'], 'jma-gbs-grid').'>Grid(640x360)</option>';
+        echo '</select><br/><br/>';
+
         $menus = get_terms('nav_menu');
 
         echo '<label for="scroll_menu">';
@@ -129,10 +149,12 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
         $values = $_POST;
         //$values['widget_area'] = $_POST[ '_jma_ghb_widget_area'];
         $clean_data = array();
-        $fields = array('scroll_menu', 'title_display', 'image_display');
+        $fields = array('scroll_menu', 'title_display', 'image_display', 'lightbox_display', 'featured_size');
         foreach ($fields as $field) {
             if (is_string($values[$field])) {
                 $clean_data[$field] = wp_kses_post($values[$field]);
+            } else {
+                $clean_data[$field] = 0;
             }
         }
 

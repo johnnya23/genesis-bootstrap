@@ -23,16 +23,17 @@ function jma_gbs_detect_block($args)
         'key' => '',
         'value' => ''
     );
+    $blocks = array();
     $args = wp_parse_args($args, $defaults);
 
-        if (function_exists('has_blocks')) {
-            if (is_int($args['post'])) {
-                $args['post'] = get_post($args['post']);
-            }
-            if (has_blocks($args['post']->post_content)) {
-                $blocks = parse_blocks($args['post']->post_content);
-            }
+    if (function_exists('has_blocks')) {
+        if (is_int($args['post'])) {
+            $args['post'] = get_post($args['post']);
         }
+        if (has_blocks($args['post']->post_content)) {
+            $blocks = parse_blocks($args['post']->post_content);
+        }
+    }
 
     if (count($blocks)) {
         foreach ($blocks as $block) {

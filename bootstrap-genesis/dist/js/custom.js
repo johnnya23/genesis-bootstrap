@@ -112,12 +112,15 @@ jQuery(document).ready(function($) {
         $this = $(this);
         if ($this.find('.wp-block-getwid-section__content').length) {
             $html = $this.find('.wp-block-getwid-section__content').clone(true);
+        } else if ($this.find('.kt-row-layout-inner').length) {
+            $html = $this.find('.kt-row-column-wrap').clone(true);
         } else {
             $html = $this.clone(true);
         }
         $('<div/>', {
             style: 'clear:both;padding-left: 15px;padding-right: 15px',
-            html: $html
+            "class": 'add-to-panel',
+            html: $html,
         }).appendTo('#jma-gbs-mobile-panel');
     });
 
@@ -212,7 +215,6 @@ function stickmainmenutotop() {
 
 //$primary_nav is the <nav> element
 $primary_nav = jQuery('.site-header').find('.navbar-static-top');
-$positioned = $primary_nav.find('.jma-positioned');
 
 $primary_nav.parents('.wp-block-getwid-section, .wp-block-kadence-rowlayout').css('z-index', 110);
 $wrapping_col = $primary_nav.closest('.wp-block-column');
@@ -221,8 +223,8 @@ $wrapping_cols = $wrapping_col.closest('.wp-block-columns');
 
 //make the menu slide under logo (presumably) when screen is too narrow
 function menuadjust() {
-    //gives us a 20px cushion
-    necessary_menu_width = 20;
+    //gives us a 10px cushion
+    necessary_menu_width = 10;
     //check to see if menu is in a column AND won't deal with 2+ nav setup
     if ($wrapping_col.length && $wrapping_col.length < 2) {
         //find the space our menu needs before wrapping
@@ -239,10 +241,10 @@ function menuadjust() {
         wrapping_col_percent = parseFloat($wrapping_col.css('flex-basis'), 10);
 
     }
-    if (necessary_menu_width > 20) {
+    if (necessary_menu_width > 10) {
 
         if (necessary_menu_width > (($wrapping_cols.width() * wrapping_col_percent) / 100)) {
-            $positioned.removeClass('jma-positioned');
+            jQuery('body').addClass('slide-under');
             $wrapping_cols.css('display', 'block');
             $wrapping_col.css({
                 'width': 'inherit',
@@ -250,7 +252,7 @@ function menuadjust() {
                 'margin-left': '0'
             });
         } else {
-            $positioned.addClass('jma-positioned');
+            jQuery('body').removeClass('slide-under');
             $wrapping_cols.css('display', '');
             $wrapping_col.css({
                 'width': '',
@@ -315,11 +317,11 @@ function menu_resize_pos() {
 }
 
 $window.on('load', function() {
+    stickmainmenutotop();
+    menuadjust();
     if (jQuery('.jma-gbs-mobile-panel').css('display') == 'none' && jQuery('body').hasClass('sticky-header')) {
         menu_resize_pos();
     }
-    stickmainmenutotop();
-    menuadjust();
 });
 
 $window.on('scroll', function() {
