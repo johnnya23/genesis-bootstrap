@@ -86,7 +86,7 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
         echo '<option value="0"'.selected($page_options['featured_size'], '0').'>Default</option>';
         echo '<option value="full"'.selected($page_options['featured_size'], 'full').'>Full</option>';
         echo '<option value="large"'.selected($page_options['featured_size'], 'large').'>Large</option>';
-        echo '<option value="medium"'.selected($page_options['featured_size'], 'medium').'>Mediom</option>';
+        echo '<option value="medium"'.selected($page_options['featured_size'], 'medium').'>Medium</option>';
         echo '<option value="jma-gbs-grid"'.selected($page_options['featured_size'], 'jma-gbs-grid').'>Grid(640x360)</option>';
         echo '</select><br/><br/>';
 

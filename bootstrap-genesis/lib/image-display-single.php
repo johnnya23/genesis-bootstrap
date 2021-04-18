@@ -29,7 +29,7 @@ function JMA_GBS_single_featured_image()
     $featured_image_attr = apply_filters('jma-gbs-featured-image-attr', array());
 
     $size = $display_vals['featured_size'];
-    $size = apply_filters('jma-gbs-featured-image', 'jma-gbs-featured-image');
+    $size = apply_filters('jma-gbs-featured-image', $size);
 
     echo '<figure class="single-featured-image align' . $display_vals['image_display'] . '">';
     if ($display_vals['lightbox_display'] == 'on') {

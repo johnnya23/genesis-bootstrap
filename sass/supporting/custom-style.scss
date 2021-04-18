@@ -792,6 +792,10 @@ img.alignright {
 .site-inner .single-featured-image.alignright {
     margin-left: 15px;
 }
+
+.single-featured-image img {
+    width: 100%;
+}
 /* comments */
 .comment-respond,
 .entry-comments,
