@@ -134,7 +134,7 @@ jQuery(document).ready(function($) {
 
 
     //clone the sticky menu
-    $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass($sticky_class);
+    $sticky_menu = $navbar.clone(true).prependTo(".site-container").addClass($sticky_class).find('.sf-menu').find('ul').css('display', 'none');;
 
 
     //add logo to sticky menu
@@ -150,7 +150,9 @@ jQuery(document).ready(function($) {
 
     //clone the mobile menu
     if ($('body').hasClass('default_moble_menu'))
-        $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical');
+        $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical').find('ul').css('display', 'none');
+
+    //$sticky_menu.find('.sf-menu').find('ul').css('display', 'none');
 });
 
 
