@@ -98,6 +98,7 @@
         width: unset;
         right: 0;
         top: 0;
+        z-index: 1000;
     }
 }
 /* we need to make this all available 1px early to accomodate mega menu */
@@ -311,89 +312,25 @@ i.fas {
 .site-container ul.nav.sf-menu a:hover {
     text-decoration: none;
 }
-/* let menu dropdowns show */
-.site-header {
-    z-index: 20;
-    position: relative;
-}
 
 .jma-gbs-open-search.menu-item a:hover {
     cursor: pointer;
 }
-/* initially hide the sticky menu */
+
 .jma-sticky-menu {
-    display: none;
-    top: 0;
     width: 100%;
-    z-index: 11;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
-.jma-sticky-menu img {
-    max-height: 50px;
-    padding: 2px;
-}
-
-.jma-sticky-menu.has-image img {
-    float: left;
-}
-
-body .site-container .navbar.jma-sticky-menu.has-image .jma-positioned {
-    float: right;
-}
-
-body .site-container .jma-sticky-menu.from-wrap * {
-    padding-top: 0!important;
-    padding-bottom: 0!important;
-}
-
-body .site-container .jma-sticky-menu.from-wrap .sf-menu ul a {
-    padding: 0.75em 1em !important;
-}
-
-body .site-container .jma-sticky-menu .nav > li > a {
+.jma-sticky-menu.jma-fixed .nav > li > a {
     padding: 11px 14px !important;
 }
 
-.jma-sticky-menu.fixed {
-    display: flex;
-    position: fixed;
-}
-
-.jma-sticky-menu.fixed.wp-block-getwid-section {
-    display: block;
-}
-/* disable sticky menu at 992 */
-@media(max-width:992px) {
-    .jma-sticky-menu.fixed {
-        display: none!important;
-    }
+.jma-fixed {
+    position: fixed!important;
 }
 /* position sticky */
-.jma-sticky-menu {
+.jma-placeholder {
     max-width: 100%;
-}
-
-.sticky-header .jma-sticky-menu {
-    position: fixed;
-}
-@media(min-width:768px) {
-    .sticky-header .navbar-static-top {
-        display: block;
-    }
-}
-
-.non-sticky-header .jma-sticky-menu.fixed {
-    display: block;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.jma-sticky-menu.fixed .outer {
-    margin-left: auto;
-    margin-right: auto;
 }
 /* remove gap below menu */
 .site-container .sf-menu {
@@ -469,21 +406,13 @@ body .jma-gbs-mobile-panel .add-to-panel * a {
     body.mega-menu-primary .site-container .add-to-panel {
         display: none;
     }
-
-    body.mega-menu-primary .site-container {
+    /*body.mega-menu-primary .site-container {
         position: relative;
-    }
-
+    }*/
     body .wp-block-column:not(:only-child),
     body.mega-menu-primary .wp-block-column {
         flex-basis: 100%!important;
     }
-}
-
-.site-header > .jma-gbs-inner > .navbar > .outer,
-ul.nav {
-    margin-left: auto;
-    margin-right: auto;
 }
 
 body ul.nav a {
@@ -522,36 +451,6 @@ body .site-header .navbar {
     body .site-header .navbar {
         display: block;
     }
-}
-/* double menu ovedrlay for sticky header */
-body.sticky-header .site-header #mega-menu-wrap-primary ul#mega-menu-primary > li > a.mega-menu-link,
-body.sticky-header .site-header .navbar ul.nav > li > a {
-    opacity: 0;
-}
-@media(max-width: 767px) {
-    .double-menu {
-        display: none;
-    }
-}
-
-.double-menu {
-    z-index: 9999;
-    min-width: 2000px;
-    pointer-events: none;
-    opacity: 0;
-}
-
-.double-menu a {
-    pointer-events: all;
-}
-
-.double-menu.hide-double {
-    z-index: 30;
-}
-
-#mega-menu-wrap-primary.double-menu {
-    position: fixed;
-    opacity: 0;
 }
 
 .site-footer p:last-child,
@@ -618,9 +517,7 @@ body.sticky-header .site-header .navbar ul.nav > li > a {
 }
 
 .site-footer .jma-gbs-inner > .wp-block-getwid-section,
-.site-footer .jma-gbs-inner > .wp-block-kadence-rowlayout,
-.site-header .jma-gbs-inner > .wp-block-getwid-section,
-.site-header .jma-gbs-inner > .wp-block-kadence-rowlayout,
+.site-header .jma-gbs-inner > .wp-block-getwid-section:not(.jma-sticky-menu.jma-fixed),
 .site-inner .jma-gbs-inner .banner-wrap {
     max-width: 100%;
 }
