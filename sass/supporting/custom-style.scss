@@ -3,7 +3,7 @@
     padding-left: 0;
     padding-right: 0;
 }
-@media(min-width:768px) {
+@media screen and (min-width:768px) {
     .content-sidebar-wrap .jma-gbs-inner {
         padding-left: 5px;
         padding-right: 5px;
@@ -26,27 +26,27 @@
 .jma-panel-button {
     z-index: 100;
 }
-@media(min-width:600px) {
+@media screen and (min-width:600px) {
     .jma-panel-button {
         z-index: 600;
     }
 }
-@media(min-width:767px) {
+@media screen and (min-width:767px) {
     .jma-panel-button {
         z-index: 768;
     }
 }
-@media(min-width:991px) {
+@media screen and (min-width:991px) {
     .jma-panel-button {
         z-index: 991;
     }
 }
-@media(min-width:1200px) {
+@media screen and (min-width:1200px) {
     .jma-panel-button {
         z-index: 1200;
     }
 }
-@media(min-width:767px) {
+@media screen and (min-width:767px) {
     .jma-panel-button {
         z-index: 768;
     }
@@ -83,7 +83,7 @@
 .site-container > * .gbs-btn {
     text-decoration: none;
 }
-@media(max-width: 767px) {
+@media screen and (max-width: 767px) {
     .site-header .navbar-static-top {
         display: none;
     }
@@ -102,7 +102,7 @@
     }
 }
 /* we need to make this all available 1px early to accomodate mega menu */
-@media(max-width: 768px) {
+@media screen and (max-width: 768px) {
     body.mega-menu-primary .site-header .navbar-static-top {
         display: none;
     }
@@ -232,7 +232,7 @@ i.fab,
 i.fas {
     font-style: normal;
 }
-@media(min-width:768px) {
+@media screen and (min-width:768px) {
     /* offset 3rd level flyout */
     .sf-menu ul ul {
         top: 10px;
@@ -317,12 +317,21 @@ i.fas {
     cursor: pointer;
 }
 
-.jma-sticky-menu {
-    width: 100%;
+.jma-sticky-menu .nav > li > a {
+    transition: all 0.3s;
 }
 
 .jma-sticky-menu.jma-fixed .nav > li > a {
-    padding: 11px 14px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.jma-sticky-menu .site-title img {
+    transition: all 0.3s;
+}
+
+.jma-sticky-menu.jma-fixed .site-title img {
+    height: 50px !important;
 }
 
 .jma-fixed {
@@ -388,7 +397,7 @@ i.fas {
 body .jma-gbs-mobile-panel .add-to-panel * a {
     text-decoration: underline;
 }
-@media(max-width:767px) {
+@media screen and (max-width:767px) {
     .site-container .add-to-panel {
         display: none;
     }
@@ -402,7 +411,7 @@ body .jma-gbs-mobile-panel .add-to-panel * a {
         flex-basis: 100%!important;
     }
 }
-@media(max-width:768px) {
+@media screen and (max-width:768px) {
     body.mega-menu-primary .site-container .add-to-panel {
         display: none;
     }
@@ -431,7 +440,7 @@ ul.nav li a {
 ul.nav *[href='#'] {
     cursor: text;
 }
-@media(min-width:768px) {
+@media screen and (min-width:768px) {
     .jma-ul-wrap .jma-gbs-open-search a {
         padding-left: 2px!important;
         padding-right: 8px!important;
@@ -447,7 +456,7 @@ body .site-header .navbar {
     max-width: 100%;
     border-bottom: none;
 }
-@media(min-width:768px) {
+@media screen and (min-width:768px) {
     body .site-header .navbar {
         display: block;
     }
@@ -488,7 +497,7 @@ body .site-header .navbar {
 .site-inner > .jma-gbs-inner {
     margin: auto;
 }
-@media(max-width:767px) {
+@media screen and (max-width:767px) {
     .site-inner > .jma-gbs-inner {
         overflow-x: hidden;
     }
@@ -611,7 +620,7 @@ body .site-header .navbar {
 .jma-local-menu li a {
     text-decoration: none;
 }
-@media(min-width:992px) {
+@media screen and (min-width:992px) {
     .jma-local-menu li {
         font-size: 16px;
     }
@@ -870,7 +879,7 @@ body #slb_viewer_wrap .slb_theme_slb_baseline .slb_details {
 .page-edge-widget .simple-social-icons ul li {
     float: none;
 }
-@media(max-width:767px) {
+@media screen and (max-width:767px) {
     .jma-fixed-scroll {
         display: inline-block;
     }

@@ -145,6 +145,8 @@ $site_body = jQuery('body');
 site_body_pos = $site_body.offset();
 
 $sticky_menu = jQuery('.jma-sticky-menu');
+
+sticky_menu_im_height = $sticky_menu.find('.site-title').find('img').height();
 sticky_menu_pos = $sticky_menu.offset();
 
 $visual_content = jQuery('.inner-visual');
@@ -161,21 +163,19 @@ function stickmainmenutotop() {
 
         //sticky menu
         if ($('.jma-sticky-menu').length && window_top > sticky_menu_pos.top - site_body_pos.top) {
-            $sticky_menu.addClass('jma-fixed');
-            $sticky_menu.css({
+            $sticky_menu.addClass('jma-fixed').css({
                 'top': site_body_pos.top + 'px',
-                'max-width': $('.jma-ghb-featured-wrap').width() + 'px'
+                'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
             });
             if (!$('#jma-placeholder').length) {
                 $sticky_menu.after($('<div/>', {
-                    style: 'height: ' + sticky_menu_height + 'px',
-                    id: 'jma-placeholder',
+                    style: 'height: ' + sticky_menu_height + 'px;width:0',
+                    id: 'jma-placeholder'
                 }));
             }
         } else {
             $('#jma-placeholder').remove();
-            $sticky_menu.removeClass('jma-fixed');
-            $sticky_menu.css({
+            $sticky_menu.removeClass('jma-fixed').css({
                 'top': '',
                 'max-width': ''
             });
@@ -184,12 +184,11 @@ function stickmainmenutotop() {
         //sticky visual
         sticky_menu_adjust = $('.jma-ghb-featured-wrap .jma-sticky-menu').length ? 0 : sticky_menu_height;
         if ($('.inner-visual.anchored').length) {
-            console.log(window_top + '>' + site_body_pos.top)
             if (window_top > visual_content_pos.top - (site_body_pos.top + sticky_menu_adjust)) {
                 $visual_content.addClass('jma-fixed');
                 $visual_content.css({
                     'top': site_body_pos.top + sticky_menu_adjust + 'px',
-                    'max-width': $('.jma-ghb-featured-wrap').width() + 'px'
+                    'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
                 });
             } else {
                 $visual_content.removeClass('jma-fixed');

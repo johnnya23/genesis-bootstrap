@@ -30,7 +30,7 @@ function jma_gbs_detect_block($args)
         if (is_int($args['post'])) {
             $args['post'] = get_post($args['post']);
         }
-        if (has_blocks($args['post']->post_content)) {
+        if (is_object($args['post']) && has_blocks($args['post']->post_content)) {
             $blocks = parse_blocks($args['post']->post_content);
         }
     }
