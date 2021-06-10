@@ -85,20 +85,6 @@ $layout_choices = array(
             //'description' => esc_html__('Page that will provide header contentxxx.'),
             'section' => 'genesis_layout',
             'type' => 'color'
-        ),
-        'sticky_logo' => array(
-            'default' => '',
-            'label' => __('Stiky Menu Logo', 'jma_gbs'),
-            'description' => esc_html__('logo for left side of sticky menu'),
-            'section' => 'genesis_layout',
-            'type' => 'image'
-        ),
-        'favicon' => array(
-            'default' => '',
-            'label' => __('Favicon', 'jma_gbs'),
-            'description' => esc_html__('favicon'),
-            'section' => 'genesis_layout',
-            'type' => 'image'
-        ),
+        )
 );
 return array_merge($post_type_array, $layout_choices);

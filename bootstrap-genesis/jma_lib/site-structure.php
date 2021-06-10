@@ -219,18 +219,6 @@ function jma_gbs_body_filter($cl)
     return $cl;
 }
 
-function jma_gbs_genesis_markup_site_header_open($open)
-{
-    $mods = jma_gbs_get_theme_mods();
-    $data = '';
-    if (isset($mods['jma_gbs_sticky_logo']) && $mods['jma_gbs_sticky_logo']) {
-        $data = 'data-sticky-header="' . $mods['jma_gbs_sticky_logo'] . '"';
-    }
-    $open = str_replace('class', ' id="site-header" '. $data .' class', $open);
-    return $open;
-}
-add_filter('genesis_markup_site-header_open', 'jma_gbs_genesis_markup_site_header_open');
-
 
 
 function jma_gbs_local_menu()
@@ -279,10 +267,3 @@ function jma_gbs_nav_menu_markup_filter_inner($out, $html, $args)
     }
     return $out;
 }
-
-function jma_gbs_favicon_url($x)
-{
-    $mods = jma_gbs_get_theme_mods('jma_gbs_');
-    return isset($mods['favicon'])? $mods['favicon']: $x;
-}
-add_filter('genesis_favicon_url', 'jma_gbs_favicon_url');

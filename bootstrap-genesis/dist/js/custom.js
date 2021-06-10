@@ -145,18 +145,22 @@ $site_body = jQuery('body');
 site_body_pos = $site_body.offset();
 
 $sticky_menu = jQuery('.jma-sticky-menu');
-
-sticky_menu_im_height = $sticky_menu.find('.site-title').find('img').height();
 sticky_menu_pos = $sticky_menu.offset();
 
 $visual_content = jQuery('.inner-visual');
 visual_content_pos = $visual_content.offset();
 
 function stickmainmenutotop() {
+    site_body_pos = $site_body.offset();
     var $ = jQuery.noConflict();
     window_top = $window.scrollTop();
 
-    sticky_menu_height = $('.jma-sticky-menu').length && $sticky_menu.css('display') == 'block' ? $sticky_menu.outerHeight() : 0;
+    sticky_menu_height = jQuery('.jma-sticky-menu').length && $sticky_menu.css('display') == 'block' ? $sticky_menu.outerHeight() : 0;
+    if (!$('#jma-placeholder').length)
+        $sticky_menu.wrap(jQuery('<div/>', {
+            style: 'height: ' + sticky_menu_height + 'px;',
+            id: 'jma-placeholder'
+        }));
 
     boxed_adjust = $('.gbs-boxed-content').length ? -20 : 0;
     if ($('.jma-gbs-mobile-panel').css('display') == 'none') {
@@ -165,19 +169,14 @@ function stickmainmenutotop() {
         if ($('.jma-sticky-menu').length && window_top > sticky_menu_pos.top - site_body_pos.top) {
             $sticky_menu.addClass('jma-fixed').css({
                 'top': site_body_pos.top + 'px',
-                'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
+                'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
+                'width': $('.site-header .jma-gbs-inner').width() + 'px'
             });
-            if (!$('#jma-placeholder').length) {
-                $sticky_menu.after($('<div/>', {
-                    style: 'height: ' + sticky_menu_height + 'px;width:0',
-                    id: 'jma-placeholder'
-                }));
-            }
         } else {
-            $('#jma-placeholder').remove();
             $sticky_menu.removeClass('jma-fixed').css({
                 'top': '',
-                'max-width': ''
+                'max-width': '',
+                'width': ''
             });
         }
 
@@ -200,7 +199,8 @@ function stickmainmenutotop() {
         }
     }
     site_pos = $site_inner.position();
-    //time to display local menu and sticky menu
+
+    //time to display local menu
     if (window_top > site_pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - site_body_pos.top) {
         //local
         if ($('.jma-local-menu').length) {
