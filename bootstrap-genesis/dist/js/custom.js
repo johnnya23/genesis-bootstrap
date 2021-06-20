@@ -155,14 +155,17 @@ function stickmainmenutotop() {
     var $ = jQuery.noConflict();
     window_top = $window.scrollTop();
 
-    sticky_menu_height = jQuery('.jma-sticky-menu').length && $sticky_menu.css('display') == 'block' ? $sticky_menu.outerHeight() : 0;
+    sticky_menu_height = jQuery('.jma-sticky-menu').length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
     if (!$('#jma-placeholder').length)
         $sticky_menu.wrap(jQuery('<div/>', {
-            style: 'height: ' + sticky_menu_height + 'px;',
+            style: 'height: ' + sticky_menu_height + 'px;max-width:' + $('.site-header .jma-gbs-inner').width() + 'px;',
             id: 'jma-placeholder'
         }));
+    $('#jma-placeholder').css({
+        'height': sticky_menu_height + 'px',
+        'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
+    });
 
-    boxed_adjust = $('.gbs-boxed-content').length ? -20 : 0;
     if ($('.jma-gbs-mobile-panel').css('display') == 'none') {
 
         //sticky menu
@@ -224,59 +227,8 @@ function stickmainmenutotop() {
     }
 }
 
-//$primary_nav is the <nav> element
-$primary_nav = jQuery('.site-header').find('.navbar-static-top');
-
-$primary_nav.parents('.wp-block-getwid-section').css('z-index', 110);
-$wrapping_col = $primary_nav.closest('.wp-block-column');
-$wrapping_cols = $wrapping_col.closest('.wp-block-columns');
-
-
-//make the menu slide under logo (presumably) when screen is too narrow
-function menuadjust() {
-    //gives us a 10px cushion
-    necessary_menu_width = 10;
-    //check to see if menu is in a column AND won't deal with 2+ nav setup
-    if ($wrapping_col.length && $wrapping_col.length < 2) {
-        //find the space our menu needs before wrapping
-        $primary_nav.find('.sf-menu >li, .mega-menu>li').each(function() {
-            $this = jQuery(this);
-            //don't include hidden elements in calculation
-            if ($this.css('display') != 'none')
-                necessary_menu_width += $this.outerWidth();
-        });
-        $wrapping_col.css({
-            'min-width': necessary_menu_width,
-            'z-index': 101
-        });
-        wrapping_col_percent = parseFloat($wrapping_col.css('flex-basis'), 10);
-
-    }
-    if (necessary_menu_width > 10) {
-
-        if (necessary_menu_width > (($wrapping_cols.width() * wrapping_col_percent) / 100)) {
-            jQuery('body').addClass('slide-under');
-            $wrapping_cols.css('display', 'block');
-            $wrapping_col.css({
-                'width': 'inherit',
-                'margin-top': '3px',
-                'margin-left': '0'
-            });
-        } else {
-            jQuery('body').removeClass('slide-under');
-            $wrapping_cols.css('display', '');
-            $wrapping_col.css({
-                'width': '',
-                'margin-top': '',
-                'margin-left': ''
-            });
-        }
-    }
-}
-
 $window.on('load', function() {
     stickmainmenutotop();
-    menuadjust();
 });
 
 $window.on('scroll', function() {
@@ -285,6 +237,5 @@ $window.on('scroll', function() {
 
 $window.on('resize', function() {
     stickmainmenutotop();
-    menuadjust();
     jQuery('body').removeClass('open');
 });
