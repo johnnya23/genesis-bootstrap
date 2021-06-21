@@ -155,7 +155,7 @@ function stickmainmenutotop() {
     var $ = jQuery.noConflict();
     window_top = $window.scrollTop();
 
-    sticky_menu_height = jQuery('.jma-sticky-menu').length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
+    sticky_menu_height = $sticky_menu.length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
     if (!$('#jma-placeholder').length)
         $sticky_menu.wrap(jQuery('<div/>', {
             style: 'height: ' + sticky_menu_height + 'px;max-width:' + $('.site-header .jma-gbs-inner').width() + 'px;',

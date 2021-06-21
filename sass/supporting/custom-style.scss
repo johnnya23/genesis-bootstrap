@@ -317,6 +317,10 @@ i.fas {
     cursor: pointer;
 }
 
+.jma-sticky-menu {
+    z-index: 110;
+}
+
 .jma-sticky-menu .nav > li > a {
     transition: all 0.3s;
 }
