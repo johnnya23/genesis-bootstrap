@@ -147,24 +147,29 @@ site_body_pos = $site_body.offset();
 $sticky_menu = jQuery('.jma-sticky-menu');
 sticky_menu_pos = $sticky_menu.offset();
 
+
 $visual_content = jQuery('.inner-visual');
 visual_content_pos = $visual_content.offset();
 
+
 function stickmainmenutotop() {
-    site_body_pos = $site_body.offset();
     var $ = jQuery.noConflict();
     window_top = $window.scrollTop();
 
     sticky_menu_height = $sticky_menu.length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
-    if (!$('#jma-placeholder').length)
-        $sticky_menu.wrap(jQuery('<div/>', {
-            style: 'height: ' + sticky_menu_height + 'px;max-width:' + $('.site-header .jma-gbs-inner').width() + 'px;',
-            id: 'jma-placeholder'
-        }));
-    $('#jma-placeholder').css({
-        'height': sticky_menu_height + 'px',
-        'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
-    });
+    //if the menu is wrapped in the featured wrap then we need to to wrap the
+    //menu to preserve structure of flex spacing (otherwise we can just used
+    //next margin-top)
+    wrapped_menu = $('.jma-ghb-featured-wrap .jma-sticky-menu').length;
+    if (wrapped_menu) {
+        if (!$('#jma-placeholder').length) {
+            $sticky_menu.wrap(jQuery('<div/>', {
+                style: "height:" + sticky_menu_height + "px;max-width:" + $('.site-header .jma-gbs-inner').width() + "px;",
+                id: 'jma-placeholder'
+            }));
+        }
+    }
+
 
     if ($('.jma-gbs-mobile-panel').css('display') == 'none') {
 
@@ -175,21 +180,44 @@ function stickmainmenutotop() {
                 'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
                 'width': $('.site-header .jma-gbs-inner').width() + 'px'
             });
+            //menu wrapped in featured
+            if (wrapped_menu) {
+                $('#jma-placeholder').css({
+                    'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
+                    'height': sticky_menu_height + 'px',
+                });
+            } else {
+                //menu outside featured
+                $sticky_menu.next().attr('style', 'margin-top: ' + sticky_menu_height + 'px !important');
+                $sticky_menu.next().style.setProperty('margin-top', sticky_menu_height + 'px', 'important');
+            }
         } else {
             $sticky_menu.removeClass('jma-fixed').css({
                 'top': '',
                 'max-width': '',
                 'width': ''
             });
+            //menu wrapped in featured
+            if (wrapped_menu) {
+                $('#jma-placeholder').css({
+                    'height': ''
+                });
+            } else {
+                //menu outside featured
+                $sticky_menu.next().css({
+                    'margin-top': ''
+                });
+            }
         }
 
         //sticky visual
-        sticky_menu_adjust = $('.jma-ghb-featured-wrap .jma-sticky-menu').length ? 0 : sticky_menu_height;
+        sticky_menu_adjust = wrapped_menu ? 0 : sticky_menu_height;
         if ($('.inner-visual.anchored').length) {
+
             if (window_top > visual_content_pos.top - (site_body_pos.top + sticky_menu_adjust)) {
                 $visual_content.addClass('jma-fixed');
                 $visual_content.css({
-                    'top': site_body_pos.top + sticky_menu_adjust + 'px',
+                    'top': (site_body_pos.top + sticky_menu_adjust) + 'px',
                     'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
                 });
             } else {
@@ -200,10 +228,14 @@ function stickmainmenutotop() {
                 });
             }
         }
+
     }
     site_pos = $site_inner.position();
 
     //time to display local menu
+    if ($('.jma-gbs-mobile-panel').css('display') != 'none') {
+        sticky_menu_height = 0;
+    }
     if (window_top > site_pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - site_body_pos.top) {
         //local
         if ($('.jma-local-menu').length) {
