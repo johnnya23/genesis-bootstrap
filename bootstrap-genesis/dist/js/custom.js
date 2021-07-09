@@ -143,10 +143,33 @@ jQuery(document).ready(function($) {
 
 $site_body = jQuery('body');
 site_body_pos = $site_body.offset();
+wrapped_menu = 0;
 
-$sticky_menu = jQuery('.jma-sticky-menu');
-sticky_menu_pos = $sticky_menu.offset();
+if (jQuery('.jma-sticky-menu').length) {
+    $sticky_menu = jQuery('.jma-sticky-menu');
+    sticky_menu_pos = $sticky_menu.offset();
+    sticky_menu_height = $sticky_menu.length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
+    wrapped_menu = jQuery('.jma-ghb-featured-wrap .jma-sticky-menu').length;
 
+    //if the menu is wrapped in the featured wrap then we need to to wrap the
+    //menu to preserve structure of flex spacing (otherwise we can just used
+    //next margin-top)
+    if (wrapped_menu) {
+        if (!jQuery('#jma-placeholder').length) {
+            $sticky_menu.wrap(jQuery('<div/>', {
+                style: "height:" + sticky_menu_height + "px;max-width:" + jQuery('.site-header .jma-gbs-inner').width() + "px;",
+                id: 'jma-placeholder'
+            }));
+        }
+    } else {
+        if (!jQuery('#jma-placeholder-after').length) {
+            $sticky_menu.after(jQuery('<div/>', {
+                "class": "clearfix",
+                id: 'jma-placeholder-after'
+            }));
+        }
+    }
+}
 
 $visual_content = jQuery('.inner-visual');
 visual_content_pos = $visual_content.offset();
@@ -154,59 +177,45 @@ visual_content_pos = $visual_content.offset();
 
 function stickmainmenutotop() {
     var $ = jQuery.noConflict();
-    window_top = $window.scrollTop();
+    window_scroll_top = $window.scrollTop();
 
     sticky_menu_height = $sticky_menu.length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
-    //if the menu is wrapped in the featured wrap then we need to to wrap the
-    //menu to preserve structure of flex spacing (otherwise we can just used
-    //next margin-top)
-    wrapped_menu = $('.jma-ghb-featured-wrap .jma-sticky-menu').length;
-    if (wrapped_menu) {
-        if (!$('#jma-placeholder').length) {
-            $sticky_menu.wrap(jQuery('<div/>', {
-                style: "height:" + sticky_menu_height + "px;max-width:" + $('.site-header .jma-gbs-inner').width() + "px;",
-                id: 'jma-placeholder'
-            }));
-        }
-    }
-
 
     if ($('.jma-gbs-mobile-panel').css('display') == 'none') {
 
         //sticky menu
-        if ($('.jma-sticky-menu').length && window_top > sticky_menu_pos.top - site_body_pos.top) {
-            $sticky_menu.addClass('jma-fixed').css({
-                'top': site_body_pos.top + 'px',
-                'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
-                'width': $('.site-header .jma-gbs-inner').width() + 'px'
-            });
-            //menu wrapped in featured
-            if (wrapped_menu) {
-                $('#jma-placeholder').css({
+        if (jQuery('.jma-sticky-menu').length) {
+            if ($('.jma-sticky-menu').length && window_scroll_top > sticky_menu_pos.top - site_body_pos.top) {
+                $sticky_menu.addClass('jma-fixed').css({
+                    'top': site_body_pos.top + 'px',
                     'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
-                    'height': sticky_menu_height + 'px',
+                    'width': $('.site-header .jma-gbs-inner').width() + 'px'
                 });
+                //menu wrapped in featured
+                if (wrapped_menu) {
+                    $('#jma-placeholder').css({
+                        'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
+                        'height': sticky_menu_height + 'px',
+                    });
+                } else {
+                    //menu outside featured
+                    $('#jma-placeholder-after').css('margin-top', sticky_menu_height + 'px');
+                }
             } else {
-                //menu outside featured
-                $sticky_menu.next().attr('style', 'margin-top: ' + sticky_menu_height + 'px !important');
-                $sticky_menu.next().style.setProperty('margin-top', sticky_menu_height + 'px', 'important');
-            }
-        } else {
-            $sticky_menu.removeClass('jma-fixed').css({
-                'top': '',
-                'max-width': '',
-                'width': ''
-            });
-            //menu wrapped in featured
-            if (wrapped_menu) {
-                $('#jma-placeholder').css({
-                    'height': ''
+                $sticky_menu.removeClass('jma-fixed').css({
+                    'top': '',
+                    'max-width': '',
+                    'width': ''
                 });
-            } else {
-                //menu outside featured
-                $sticky_menu.next().css({
-                    'margin-top': ''
-                });
+                //menu wrapped in featured
+                if (wrapped_menu) {
+                    $('#jma-placeholder').css({
+                        'height': ''
+                    });
+                } else {
+                    //menu outside featured
+                    $('#jma-placeholder-after').css('margin-top', '');
+                }
             }
         }
 
@@ -214,7 +223,7 @@ function stickmainmenutotop() {
         sticky_menu_adjust = wrapped_menu ? 0 : sticky_menu_height;
         if ($('.inner-visual.anchored').length) {
 
-            if (window_top > visual_content_pos.top - (site_body_pos.top + sticky_menu_adjust)) {
+            if (window_scroll_top > visual_content_pos.top - (site_body_pos.top + sticky_menu_adjust)) {
                 $visual_content.addClass('jma-fixed');
                 $visual_content.css({
                     'top': (site_body_pos.top + sticky_menu_adjust) + 'px',
@@ -233,26 +242,19 @@ function stickmainmenutotop() {
     site_pos = $site_inner.position();
 
     //time to display local menu
-    if ($('.jma-gbs-mobile-panel').css('display') != 'none') {
-        sticky_menu_height = 0;
-    }
-    if (window_top > site_pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - site_body_pos.top) {
-        //local
-        if ($('.jma-local-menu').length) {
-            $jma_local_menu = $('.jma-local-menu');
+    if ($('.jma-local-menu').length) {
+        $jma_local_menu = $('.jma-local-menu');
+        if ($('.jma-gbs-mobile-panel').css('display') != 'none') {
+            sticky_menu_height = 0;
+        }
+        if (window_scroll_top > site_pos.top - parseInt($('body').css('padding-top'), 10) - sticky_menu_height - site_body_pos.top) {
+            //local
             $jma_local_menu.addClass('fix-local');
-
             $jma_local_menu.css({
                 'top': (site_body_pos.top + sticky_menu_height) + 'px'
             });
-        }
-        //sticky menu when stick header is used
-
-        if (($('.jma-gbs-mobile-panel').css('display') == 'none') && $('.sticky-header').length) {}
-    } else {
-        //undue local
-        if ($('.jma-local-menu').length) {
-            $jma_local_menu = $('.jma-local-menu');
+        } else {
+            //undue local
             $jma_local_menu.removeClass('fix-local');
             $jma_local_menu.css('top', '');
         }
