@@ -26,8 +26,11 @@ if (get_option('template') != 'genesis') {
 if (! function_exists('get_plugin_data')) {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
+$plugin_data = array('Version' => 1.0);
 
-$plugin_data = get_plugin_data(__FILE__);
+if (function_exists('get_plugin_data')) {
+    $plugin_data = get_plugin_data(__FILE__);
+}
 
 define('JMA_GBS_VERSION', $plugin_data['Version']);
 

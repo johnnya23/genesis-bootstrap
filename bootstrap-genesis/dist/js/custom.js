@@ -125,12 +125,6 @@ jQuery(document).ready(function($) {
     });
 
     $navbar = $('.site-container').find('.site-header').find('.navbar-static-top');
-    $sticky_class = 'jma-sticky-menu';
-
-    if ($('.jma-sticky-menu-wrap').length) {
-        $sticky_class += ' from-wrap';
-        $navbar = $('.jma-sticky-menu-wrap');
-    }
 
 
     //clone the mobile menu
@@ -144,11 +138,11 @@ jQuery(document).ready(function($) {
 $site_body = jQuery('body');
 site_body_pos = $site_body.offset();
 wrapped_menu = 0;
-
+sticky_menu_height = 0;
 if (jQuery('.jma-sticky-menu').length) {
     $sticky_menu = jQuery('.jma-sticky-menu');
     sticky_menu_pos = $sticky_menu.offset();
-    sticky_menu_height = $sticky_menu.length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
+    if ($sticky_menu.css('display') != 'none') sticky_menu_height = $sticky_menu.outerHeight();
     wrapped_menu = jQuery('.jma-ghb-featured-wrap .jma-sticky-menu').length;
 
     //if the menu is wrapped in the featured wrap then we need to to wrap the
@@ -178,14 +172,15 @@ visual_content_pos = $visual_content.offset();
 function stickmainmenutotop() {
     var $ = jQuery.noConflict();
     window_scroll_top = $window.scrollTop();
+    sticky_menu_height = 0;
+    if (jQuery('.jma-sticky-menu').length) {
+        if ($sticky_menu.css('display') != 'none') sticky_menu_height = $sticky_menu.outerHeight();
 
-    sticky_menu_height = $sticky_menu.length && $sticky_menu.css('display') != 'none' ? $sticky_menu.outerHeight() : 0;
+        if ($('.jma-gbs-mobile-panel').css('display') == 'none') {
 
-    if ($('.jma-gbs-mobile-panel').css('display') == 'none') {
+            //sticky menu
 
-        //sticky menu
-        if (jQuery('.jma-sticky-menu').length) {
-            if ($('.jma-sticky-menu').length && window_scroll_top > sticky_menu_pos.top - site_body_pos.top) {
+            if (window_scroll_top > sticky_menu_pos.top - site_body_pos.top) {
                 $sticky_menu.addClass('jma-fixed').css({
                     'top': site_body_pos.top + 'px',
                     'max-width': $('.site-header .jma-gbs-inner').width() + 'px',
@@ -219,25 +214,25 @@ function stickmainmenutotop() {
             }
         }
 
-        //sticky visual
-        sticky_menu_adjust = wrapped_menu ? 0 : sticky_menu_height;
-        if ($('.inner-visual.anchored').length) {
+    }
 
-            if (window_scroll_top > visual_content_pos.top - (site_body_pos.top + sticky_menu_adjust)) {
-                $visual_content.addClass('jma-fixed');
-                $visual_content.css({
-                    'top': (site_body_pos.top + sticky_menu_adjust) + 'px',
-                    'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
-                });
-            } else {
-                $visual_content.removeClass('jma-fixed');
-                $visual_content.css({
-                    'top': '',
-                    'max-width': ''
-                });
-            }
+    //sticky visual
+    sticky_menu_adjust = wrapped_menu ? 0 : sticky_menu_height;
+    if ($('.inner-visual.anchored').length) {
+
+        if (window_scroll_top > visual_content_pos.top - (site_body_pos.top + sticky_menu_adjust)) {
+            $visual_content.addClass('jma-fixed');
+            $visual_content.css({
+                'top': (site_body_pos.top + sticky_menu_adjust) + 'px',
+                'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
+            });
+        } else {
+            $visual_content.removeClass('jma-fixed');
+            $visual_content.css({
+                'top': '',
+                'max-width': ''
+            });
         }
-
     }
     site_pos = $site_inner.position();
 
