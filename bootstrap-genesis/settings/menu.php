@@ -4,12 +4,62 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-$jmamenus = array('0' => 'none');
+$jmamenus = array(0 => 'select');
 $menu_objects = wp_get_nav_menus();
 foreach ($menu_objects as  $menu_object) {
     $jmamenus[$menu_object->slug] = $menu_object->name;
 }
 return array(
+        'use_custom_mobile_menu' => array(
+            'default' => 0,
+            'label' => __('Use Custom Mobile Menu', 'jma_gbs'),
+            'description' => esc_html__('If no selected a mobile menu will be generated with jquery(if possible). FOR TYPICAL SINGLE HEADER MENU SITE TRY LEAVING THIS AS NO AND IGNORE CUSTOM SIDE MENU'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'radio',
+            'choices' => array(
+                0 => 'No',
+                1 => 'Yes',
+            )
+        ),
+        'custom_mobile_menu' => array(
+            'default' => 0,
+            'label' => __('Menu to use for mobile', 'jma_gbs'),
+            'description' => esc_html__('Select a menu'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'select',
+            'choices' => $jmamenus
+        ),
+        'use_desktop_side_menu' => array(
+            'default' => 0,
+            'label' => __('Desktop Side Menu', 'jma_gbs'),
+            'description' => esc_html__('Add a menu that slides out from the right on desktop and tablet'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'radio',
+            'choices' => array(
+                0 => 'No',
+                1 => 'Yes',
+            )
+        ),
+        'desktop_side_menu' => array(
+            'default' => 0,
+            'label' => __('Menu to use for Desktop Side', 'jma_gbs'),
+            'description' => esc_html__('This menu will slide out'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'select',
+            'choices' => $jmamenus
+        ),
+        'desktop_side_mobile_display' => array(
+            'default' => 0,
+            'label' => __('Diplay Choices', 'jma_gbs'),
+            'description' => esc_html__('Either just desktop or add to mobile (if applicable)'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'select',
+            'choices' => array(
+                0 => 'Desktop Only',
+                78 => 'Desktop and Mobile Top',
+                82 => 'Desktop and Mobile Bottom',
+            )
+        ),
         'menu_font_color' => array(
             'default' => '#ffffff',
             'label' => __('Menu Font Color', 'jma_gbs'),
@@ -161,13 +211,5 @@ return array(
                 0 => 'No',
                 1 => 'Yes'
             )
-        ),
-        'custom_mobile_menu' => array(
-            'default' => 0,
-            'label' => __('Menu to use for mobile', 'jma_gbs'),
-            'description' => esc_html__('If none selected a menu will be generaetd with jquery(if possible)'),
-            'section' => 'jma_gbs_menu',
-            'type' => 'select',
-            'choices' => $jmamenus
         )
 );

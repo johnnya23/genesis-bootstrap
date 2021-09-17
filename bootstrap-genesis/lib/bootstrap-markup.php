@@ -67,7 +67,16 @@ function JMA_GBS_add_markup_class($attr, $context)
 
 function JMA_GBS_wrap_archive_image_open($open, $args)
 {
-    $side = (strpos($args['content'], 'right') !== false)? 'right': 'left' ;
+    $side = 'none';
+    if (strpos($args['content'], '"align') !== false) {
+        if (substr($args['content'], strpos($args['content'], '"align') + 6, 1) == 'r') {
+            $side = 'right';
+        } elseif (substr($args['content'], strpos($args['content'], '"align') + 6, 1) == 'l') {
+            $side = 'left';
+        } elseif (substr($args['content'], strpos($args['content'], '"align') + 6, 1) == 'c') {
+            $side = 'center';
+        }
+    }
     return '<div class="archive-image-wrap align' . $side . '">' . $open;
 }
 

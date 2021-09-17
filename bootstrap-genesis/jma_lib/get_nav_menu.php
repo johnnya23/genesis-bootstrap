@@ -38,7 +38,7 @@ function jma_gbs_get_nav_menu($args = [])
     if (! $nav) {
         return null;
     }
-    
+
     $sanitized_location = 'primary';
     $nav_markup_open  = genesis_get_structural_wrap('menu-' . $sanitized_location, 'open') . '<div class="outer">';
     $nav_markup_close = '</div>' . genesis_get_structural_wrap('menu-' . $sanitized_location, 'close');

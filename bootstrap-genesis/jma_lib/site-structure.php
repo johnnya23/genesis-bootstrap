@@ -143,8 +143,12 @@ function jma_gbs_template_redirect()
     add_action('genesis_footer', 'jma_gbs_close_div', 13);
 
     $mods = jma_gbs_get_theme_mods();
-    if ($mods['jma_gbs_custom_mobile_menu']) {
+    if ($mods['jma_gbs_use_custom_mobile_menu']) {
         add_action('genesis_before', 'jma_gbs_custom_mobile', 80);
+    }
+    if ($mods['jma_gbs_use_desktop_side_menu'] && $mods['jma_gbs_desktop_side_mobile_display']) {
+        $priority = $mods['jma_gbs_desktop_side_mobile_display'];
+        add_action('genesis_before', 'jma_gbs_custom_side', $priority);
     }
 
     if ($mods['jma_gbs_add_search']) {
@@ -211,7 +215,7 @@ function jma_gbs_body_filter($cl)
     if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
         $cl[] = 'scroll_menu';
     }
-    if (!$mods['jma_gbs_custom_mobile_menu']) {
+    if (!$mods['jma_gbs_use_custom_mobile_menu']) {
         $cl[] = 'default_moble_menu';
     }
     return $cl;
@@ -248,14 +252,23 @@ add_action('genesis_after', 'jma_gbs_footer_search_form');
 function jma_gbs_custom_mobile()
 {
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
-    //echo '<nav class="clearfix navbar navbar-default"><div class="outer">';
+
     jma_gbs_get_nav_menu(array(
-        'menu_class'     => 'nav sf-menu sf-arrows sf-vertical',
+        'menu_class'     => 'nav sf-menu sf-arrows sf-vertical mobile-menu',
         'menu' => $mods['custom_mobile_menu']
     ));
-    //echo '</nav></div>';
 }
 
+function jma_gbs_custom_side()
+{
+    $mods = jma_gbs_get_theme_mods('jma_gbs_');
+    $mobile = $mods['desktop_side_mobile_display']? ' mobile-menu': '';
+
+    jma_gbs_get_nav_menu(array(
+        'menu_class'     => 'nav sf-menu sf-arrows sf-vertical' . $mobile,
+        'menu' => $mods['desktop_side_menu']
+    ));
+}
 
 function jma_gbs_nav_menu_markup_filter_inner($out, $html, $args)
 {
