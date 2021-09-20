@@ -22,6 +22,7 @@ add_action('customize_save_after', 'jma_gbs_customize_save_after');
 function JMA_GBS_enqueue_css_js()
 {
     $min = WP_DEBUG? '': '.min';
+    $mods = jma_gbs_get_theme_mods('jma_gbs_');
     // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
     wp_enqueue_style('JMA_GBS_superfish_css', JMA_GBS_BASE_URI . 'dist/css/superfish' . $min . '.css', array(), JMA_GBS_VERSION);
     wp_enqueue_style('JMA_GBS_combined_css', JMA_GBS_BASE_URI . 'css/style.css', array(), JMA_GBS_VERSION);
@@ -33,6 +34,9 @@ function JMA_GBS_enqueue_css_js()
 
     wp_enqueue_script('JMA_GBS_hover_js', JMA_GBS_BASE_URI . 'dist/js/hoverIntent' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
     wp_enqueue_script('JMA_GBS_superfish_js', JMA_GBS_BASE_URI . 'dist/js/superfish' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
+    if ($mods['use_desktop_side_menu']) {
+        wp_enqueue_script('JMA_GBS_superclick_js', JMA_GBS_BASE_URI . 'dist/js/superclick' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
+    }
     wp_enqueue_script('JMA_GBS_supersubs_js', JMA_GBS_BASE_URI . 'dist/js/supersubs' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
 
     wp_enqueue_script('JMA_GBS_custom_js', JMA_GBS_BASE_URI . 'dist/js/custom' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
@@ -41,7 +45,6 @@ function JMA_GBS_enqueue_css_js()
     $output = get_transient('jma_gbs_general_css');
     if (false == $output) {
         // It wasn't there, so regenerate the data and save the transient
-        $mods = jma_gbs_get_theme_mods('jma_gbs_');
         $css = array();
         require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
 

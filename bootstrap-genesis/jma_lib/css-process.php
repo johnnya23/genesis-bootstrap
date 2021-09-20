@@ -90,7 +90,7 @@ function structure_css_array($items)
 */
 function jma_gbs_process_css_array($items)
 {
-    $css = '';
+    $css = '/*start*/';
     if (is_array($items)) {
         $querys = structure_css_array($items);
 

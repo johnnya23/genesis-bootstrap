@@ -49,13 +49,13 @@ return array(
             'choices' => $jmamenus
         ),
         'desktop_side_mobile_display' => array(
-            'default' => 0,
+            'default' => 77,
             'label' => __('Diplay Choices', 'jma_gbs'),
             'description' => esc_html__('Either just desktop or add to mobile (if applicable)'),
             'section' => 'jma_gbs_menu',
             'type' => 'select',
             'choices' => array(
-                0 => 'Desktop Only',
+                77 => 'Desktop Only',
                 78 => 'Desktop and Mobile Top',
                 82 => 'Desktop and Mobile Bottom',
             )

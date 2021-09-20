@@ -17,14 +17,74 @@
         padding-right: 0;
     }
 }
+
+.input-group-btn .btn {
+    padding: 6px 12px;
+}
+
+.btn,
+.btn-default,
+.site-container > * .gbs-btn {
+    text-decoration: none;
+}
 /* mobile menu */
 .jma-gbs-mobile-panel,
 .jma-panel-button {
     display: none;
 }
 
+.jma-panel-button button:hover {
+    cursor: pointer;
+}
+
 .jma-panel-button {
-    z-index: 100;
+    position: fixed;
+    width: unset;
+    right: 0;
+    top: 0;
+}
+
+.open .jma-panel-button {
+    right: 0;
+}
+@media screen and (min-width:768px) {
+    .jma-panel-button {
+        right: 46px;
+    }
+}
+
+.admin-bar .jma-gbs-mobile-panel,
+.admin-bar .jma-panel-button {
+    top: 32px;
+}
+@media screen and (max-width:782px) {
+    .admin-bar .jma-gbs-mobile-panel,
+    .admin-bar .jma-panel-button {
+        top: 46px;
+    }
+}
+
+.use_side_menu .jma-panel-button {
+    display: inline-block;
+}
+
+.jma-gbs-mobile-panel .navbar,
+.use_side_menu .jma-gbs-mobile-panel {
+    display: block;
+}
+
+.jma-gbs-mobile-panel .nav {
+    display: none;
+}
+@media screen and (max-width:767px) {
+    .jma-gbs-mobile-panel .mobile-menu {
+        display: block;
+    }
+}
+@media screen and (min-width:768px) {
+    .jma-gbs-mobile-panel .use-side-menu {
+        display: block;
+    }
 }
 @media screen and (min-width:600px) {
     .jma-panel-button {
@@ -57,7 +117,7 @@
     margin: 0;
 }
 
-.jma-panel-button > a {
+.jma-panel-button > button {
     margin: 0;
     float: right;
     padding: 10px;
@@ -70,18 +130,42 @@
     height: 14px;
 }
 
+.navbar-toggle .icon-bar {
+    border: solid 1px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
 .open .jma-panel-button .bottom {
     opacity: 0;
 }
 
-.input-group-btn .btn {
-    padding: 6px 12px;
+.navbar-toggle .icon-bar.top {
+    top: 0;
 }
 
-.btn,
-.btn-default,
-.site-container > * .gbs-btn {
-    text-decoration: none;
+.navbar-toggle .icon-bar.bottom {
+    bottom: 0;
+}
+
+.navbar-toggle .icon-bar.middle {
+    margin-top: 6px;
+}
+
+.open .jma-panel-button .icon-bar.top {
+    top: 50%;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.open .jma-panel-button .icon-bar.middle {
+    margin-top: 0;
+    top: 50%;
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 @media screen and (max-width: 767px) {
     .site-header .navbar-static-top {
@@ -94,11 +178,6 @@
 
     .jma-panel-button {
         display: inline-block;
-        position: absolute;
-        width: unset;
-        right: 0;
-        top: 0;
-        z-index: 1000;
     }
 }
 /* we need to make this all available 1px early to accomodate mega menu */
@@ -118,94 +197,76 @@
         right: 0;
         top: 0;
     }
+}
 
-    .sf-vertical > li {
-        float: none;
-    }
+.sf-vertical > li {
+    float: none;
+}
 
-    .sf-vertical li {
-        width: 100%;
-    }
+.sf-vertical li {
+    width: 100%;
+}
 
-    .sf-vertical {
-        position: relative;
-        width: 100%;
-    }
+.sf-vertical {
+    position: relative;
+    width: 100%;
+}
 
-    .sf-vertical ul {
-        left: 0;
-        top: 0;
-        position: relative;
-    }
+.sf-vertical ul {
+    left: 0;
+    top: 0;
+    position: relative;
+}
 
-    .navbar-toggle .icon-bar {
-        border: solid 1px;
-        position: absolute;
-        width: 100%;
-    }
+.jma-gbs-mobile-panel {
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: transform 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    width: 280px;
+    z-index: 201;
+    right: -280px;
+}
 
-    .navbar-toggle .icon-bar.top {
-        top: 0;
-    }
-
-    .navbar-toggle .icon-bar.bottom {
-        bottom: 0;
-    }
-
-    .navbar-toggle .icon-bar.middle {
-        margin-top: 6px;
-    }
-
-    .open .jma-panel-button .icon-bar.top {
-        top: 50%;
-        -ms-transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-
-    .open .jma-panel-button .icon-bar.middle {
-        margin-top: 0;
-        top: 50%;
-        -ms-transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
+body.open .jma-gbs-mobile-panel {
+    -webkit-transform: translate3d(-280px, 0, 0);
+    transform: translate3d(-280px, 0, 0);
+}
+@media (min-width: 768px) {
+    body .jma-gbs-mobile-panel .sf-menu li a {
+        font-size: 20px;
     }
 
     .jma-gbs-mobile-panel {
-        margin: 0;
-        overflow: auto;
-        padding: 0;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        -webkit-transition: transform 0.2s ease-out;
-        transition: all 0.2s ease-out;
-        width: 280px;
-        z-index: 201;
-        right: -280px;
+        width: 400px;
+        right: -400px;
     }
 
     body.open .jma-gbs-mobile-panel {
-        -webkit-transform: translate3d(-280px, 0, 0);
-        transform: translate3d(-280px, 0, 0);
+        -webkit-transform: translate3d(-400px, 0, 0);
+        transform: translate3d(-400px, 0, 0);
     }
 
-    body.open .jma-panel-button {
-        position: fixed;
+    body.open button.navbar-toggle {
+        -webkit-transform: translate3d(-400px, 0, 0);
+        transform: translate3d(-400px, 0, 0);
     }
-
-    body.open.admin-bar .jma-panel-button {
-        top: 46px;
-    }
-
-    .navbar-toggle {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        -webkit-transition: transform 0.2s ease-out;
-        transition: transform 0.2s ease-out;
-    }
+}
+/*
+body.open .jma-panel-button {
+    position: fixed;
+}*/
+.navbar-toggle {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out;
 }
 
 body.open .navbar-toggle {
@@ -214,18 +275,25 @@ body.open .navbar-toggle {
 }
 /* indent levels progressively on mobile menu */
 #jma-gbs-mobile-panel .sf-menu ul {
-    padding: 10px;
+    padding-left: 20px;
 }
 /* correct 3rd level issue (mobile)*/
 #jma-gbs-mobile-panel .sf-menu ul ul {
     right: 0 !important;
+    left: inherit;
+    top: 0;
 }
+@media screen and (max-width: 767px) {
+    #jma-gbs-mobile-panel .sf-menu ul {
+        padding-left: 10px;
+    }
 
-body div.jma-gbs-mobile-panel .navbar li.current-menu-ancestor > a,
-body div.jma-gbs-mobile-panel .navbar li.current-menu-item a {
-    font-weight: bold;
-    font-size: 115%;
-    white-space: normal;
+    body div.jma-gbs-mobile-panel .navbar li.current-menu-ancestor > a,
+    body div.jma-gbs-mobile-panel .navbar li.current-menu-item a {
+        font-weight: bold;
+        font-size: 115%;
+        white-space: normal;
+    }
 }
 /* end mobile menu */
 i.fab,
@@ -245,7 +313,8 @@ i.fas {
 /* arrows for menus */
 .sf-arrows .sf-with-ul:after,
 .sf-menu ul li.menu-item-has-children > a:after,
-.sf-menu ul li.menu-item-has-children.reverse > a:after {
+.sf-menu ul li.menu-item-has-children.reverse > a:after,
+.sf-with-ul:after {
     border: none !important;
     font-family: "Font Awesome 5 Free";
     font-style: normal;
@@ -260,6 +329,12 @@ i.fas {
     height: unset;
     width: unset;
     font-size: 0.65em;
+}
+
+.jma-gbs-mobile-panel .sf-with-ul:after {
+    position: absolute;
+    top: 50%;
+    display: block;
 }
 
 .site-container .sf-menu ul li.menu-item-has-children > a:after {
@@ -376,10 +451,6 @@ i.fas {
 
 .jma-gbs-mobile-panel .navbar .sf-menu li a {
     border: none;
-}
-
-.admin-bar .jma-gbs-mobile-panel {
-    top: 46px;
 }
 
 .jma-gbs-mobile-panel .sf-menu ul {
@@ -672,6 +743,7 @@ a.gbs-btn,
 .wp-block-button__link,
 body .uagb-post-grid .uagb-post-pagination-wrap .page-numbers {
     border-style: solid;
+    outline: none;
 }
 
 figure.alignleft,

@@ -15,14 +15,14 @@ add_action('genesis_before', 'jma_gbs_close_panel', 99);
 function jma_gbs_panel_button()
 {
     echo '<div class="jma-panel-button navbar-header container-fluid">
-      <a style="display:inline-block" href="#jma-gbs-mobile-panel" type="button" class="navbar-toggle collapsed">
+      <button style="display:inline-block" class="navbar-toggle collapsed">
         <span class="hamb">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar top"></span>
         <span class="icon-bar middle"></span>
         <span class="icon-bar bottom"></span>
         </span>
-      </a>
+      </button>
         </div><!-- jma-panel-button -->';
 }
 

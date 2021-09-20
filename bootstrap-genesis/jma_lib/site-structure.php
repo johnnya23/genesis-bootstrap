@@ -146,8 +146,8 @@ function jma_gbs_template_redirect()
     if ($mods['jma_gbs_use_custom_mobile_menu']) {
         add_action('genesis_before', 'jma_gbs_custom_mobile', 80);
     }
-    if ($mods['jma_gbs_use_desktop_side_menu'] && $mods['jma_gbs_desktop_side_mobile_display']) {
-        $priority = $mods['jma_gbs_desktop_side_mobile_display'];
+    if ($mods['jma_gbs_use_desktop_side_menu']) {
+        $priority = $mods['jma_gbs_desktop_side_mobile_display'] ;
         add_action('genesis_before', 'jma_gbs_custom_side', $priority);
     }
 
@@ -218,6 +218,9 @@ function jma_gbs_body_filter($cl)
     if (!$mods['jma_gbs_use_custom_mobile_menu']) {
         $cl[] = 'default_moble_menu';
     }
+    if ($mods['jma_gbs_use_desktop_side_menu']) {
+        $cl[] = 'use_side_menu';
+    }
     return $cl;
 }
 
@@ -261,8 +264,11 @@ function jma_gbs_custom_mobile()
 
 function jma_gbs_custom_side()
 {
+    $mobile = ' use-side-menu';
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
-    $mobile = $mods['desktop_side_mobile_display']? ' mobile-menu': '';
+    if ($mods['desktop_side_mobile_display'] > 77) {
+        $mobile .= ' mobile-menu';
+    }
 
     jma_gbs_get_nav_menu(array(
         'menu_class'     => 'nav sf-menu sf-arrows sf-vertical' . $mobile,
