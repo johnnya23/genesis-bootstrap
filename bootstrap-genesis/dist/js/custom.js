@@ -95,7 +95,7 @@ jQuery(document).ready(function($) {
             }
 
         },
-        delay: 1200 // 0.6 second delay on mouseout
+        delay: 600 // 0.6 second delay on mouseout
     });
 
     if ($('body').hasClass('use_side_menu'))

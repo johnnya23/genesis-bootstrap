@@ -143,7 +143,7 @@ function jma_gbs_template_redirect()
     add_action('genesis_footer', 'jma_gbs_close_div', 13);
 
     $mods = jma_gbs_get_theme_mods();
-    if ($mods['jma_gbs_use_custom_mobile_menu']) {
+    if ($mods['jma_gbs_custom_mobile_menu'] != 'jma-none' && $mods['jma_gbs_custom_mobile_menu'] != 'jma-auto') {
         add_action('genesis_before', 'jma_gbs_custom_mobile', 80);
     }
     if ($mods['jma_gbs_use_desktop_side_menu']) {
@@ -215,7 +215,10 @@ function jma_gbs_body_filter($cl)
     if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
         $cl[] = 'scroll_menu';
     }
-    if (!$mods['jma_gbs_use_custom_mobile_menu']) {
+    if ($mods['jma_gbs_custom_mobile_menu'] != 'jma-none') {
+        $cl[] = 'use_mobile_menu';
+    }
+    if ($mods['jma_gbs_custom_mobile_menu'] == 'jma-auto') {
         $cl[] = 'default_moble_menu';
     }
     if ($mods['jma_gbs_use_desktop_side_menu']) {
@@ -255,7 +258,6 @@ add_action('genesis_after', 'jma_gbs_footer_search_form');
 function jma_gbs_custom_mobile()
 {
     $mods = jma_gbs_get_theme_mods('jma_gbs_');
-
     jma_gbs_get_nav_menu(array(
         'menu_class'     => 'nav sf-menu sf-arrows sf-vertical mobile-menu',
         'menu' => $mods['custom_mobile_menu']

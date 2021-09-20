@@ -24,8 +24,10 @@
 
 .btn,
 .btn-default,
-.site-container > * .gbs-btn {
+.site-container > * .gbs-btn,
+button {
     text-decoration: none;
+    outline: none!important;
 }
 /* mobile menu */
 .jma-gbs-mobile-panel,
@@ -38,10 +40,13 @@
 }
 
 .jma-panel-button {
+    z-index: 1000;
     position: fixed;
     width: unset;
     right: 0;
     top: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .open .jma-panel-button {
@@ -63,9 +68,15 @@
         top: 46px;
     }
 }
-
-.use_side_menu .jma-panel-button {
-    display: inline-block;
+@media screen and (min-width:768px) {
+    .use_side_menu .jma-panel-button {
+        display: inline-block;
+    }
+}
+@media screen and (max-width:767px) {
+    .use_mobile_menu .jma-panel-button {
+        display: inline-block;
+    }
 }
 
 .jma-gbs-mobile-panel .navbar,
@@ -76,45 +87,15 @@
 .jma-gbs-mobile-panel .nav {
     display: none;
 }
-@media screen and (max-width:767px) {
-    .jma-gbs-mobile-panel .mobile-menu {
-        display: block;
-    }
-}
 @media screen and (min-width:768px) {
     .jma-gbs-mobile-panel .use-side-menu {
         display: block;
     }
 }
-@media screen and (min-width:600px) {
-    .jma-panel-button {
-        z-index: 600;
+@media screen and (max-width:767px) {
+    .jma-gbs-mobile-panel .mobile-menu {
+        display: block;
     }
-}
-@media screen and (min-width:767px) {
-    .jma-panel-button {
-        z-index: 768;
-    }
-}
-@media screen and (min-width:991px) {
-    .jma-panel-button {
-        z-index: 991;
-    }
-}
-@media screen and (min-width:1200px) {
-    .jma-panel-button {
-        z-index: 1200;
-    }
-}
-@media screen and (min-width:767px) {
-    .jma-panel-button {
-        z-index: 768;
-    }
-}
-
-.jma-panel-button {
-    padding: 0;
-    margin: 0;
 }
 
 .jma-panel-button > button {
@@ -174,10 +155,6 @@
 
     .jma-gbs-mobile-panel {
         display: block;
-    }
-
-    .jma-panel-button {
-        display: inline-block;
     }
 }
 /* we need to make this all available 1px early to accomodate mega menu */

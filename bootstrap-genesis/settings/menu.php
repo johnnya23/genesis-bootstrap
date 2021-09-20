@@ -4,30 +4,21 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-$jmamenus = array(0 => 'select');
+$jmamobilemenus = array('jma-none' => 'none', 'jma-auto' => 'auto');
+$jmasidemenus = array();
 $menu_objects = wp_get_nav_menus();
 foreach ($menu_objects as  $menu_object) {
-    $jmamenus[$menu_object->slug] = $menu_object->name;
+    $jmamobilemenus[$menu_object->slug] = $menu_object->name;
+    $jmasidemenus[$menu_object->slug] = $menu_object->name;
 }
 return array(
-        'use_custom_mobile_menu' => array(
-            'default' => 0,
-            'label' => __('Use Custom Mobile Menu', 'jma_gbs'),
-            'description' => esc_html__('If no selected a mobile menu will be generated with jquery(if possible). FOR TYPICAL SINGLE HEADER MENU SITE TRY LEAVING THIS AS NO AND IGNORE CUSTOM SIDE MENU'),
-            'section' => 'jma_gbs_menu',
-            'type' => 'radio',
-            'choices' => array(
-                0 => 'No',
-                1 => 'Yes',
-            )
-        ),
         'custom_mobile_menu' => array(
             'default' => 0,
-            'label' => __('Menu to use for mobile', 'jma_gbs'),
-            'description' => esc_html__('Select a menu'),
+            'label' => __('Mobile Menu?', 'jma_gbs'),
+            'description' => esc_html__('If auto selected a mobile menu will be generated with jquery(if possible). FOR TYPICAL SINGLE HEADER MENU SITE TRY SETTING THIS AS "AUTO" AND IGNORE "CUSTOM SIDE MENU"'),
             'section' => 'jma_gbs_menu',
             'type' => 'select',
-            'choices' => $jmamenus
+            'choices' => $jmamobilemenus
         ),
         'use_desktop_side_menu' => array(
             'default' => 0,
@@ -41,16 +32,15 @@ return array(
             )
         ),
         'desktop_side_menu' => array(
-            'default' => 0,
             'label' => __('Menu to use for Desktop Side', 'jma_gbs'),
             'description' => esc_html__('This menu will slide out'),
             'section' => 'jma_gbs_menu',
             'type' => 'select',
-            'choices' => $jmamenus
+            'choices' => $jmasidemenus
         ),
         'desktop_side_mobile_display' => array(
             'default' => 77,
-            'label' => __('Diplay Choices', 'jma_gbs'),
+            'label' => __('Diplay Choices for Desktop Side', 'jma_gbs'),
             'description' => esc_html__('Either just desktop or add to mobile (if applicable)'),
             'section' => 'jma_gbs_menu',
             'type' => 'select',

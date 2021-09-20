@@ -48,8 +48,6 @@
 
         conditional_display('jma_gbs_site_title_font_family_control', 'custom|jma_gbs_site_custom_title_font_family_control');
 
-        conditional_display('jma_gbs_use_custom_mobile_menu_control', '1|jma_gbs_custom_mobile_menu_control');
-
         conditional_display('jma_gbs_use_desktop_side_menu_control', '1|jma_gbs_desktop_side_menu_control,jma_gbs_desktop_side_mobile_display_control');
     });
 })();
