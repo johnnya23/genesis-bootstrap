@@ -84,7 +84,8 @@ button {
     display: block;
 }
 
-.jma-gbs-mobile-panel .nav {
+.jma-gbs-mobile-panel .nav,
+body .jma-gbs-mobile-panel .navbar-static-top .jma-positioned {
     display: none;
 }
 @media screen and (min-width:768px) {
@@ -93,7 +94,8 @@ button {
     }
 }
 @media screen and (max-width:767px) {
-    .jma-gbs-mobile-panel .mobile-menu {
+    .jma-gbs-mobile-panel .mobile-menu,
+    body .jma-gbs-mobile-panel .navbar-static-top .jma-positioned.mobile-menu {
         display: block;
     }
 }

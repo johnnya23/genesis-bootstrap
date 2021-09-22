@@ -134,8 +134,13 @@ jQuery(document).ready(function($) {
 
 
     //clone the mobile menu
-    if ($('body').hasClass('default_moble_menu'))
-        $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical').find('ul').css('display', 'none');
+    if ($('body').hasClass('default_moble_menu')) {
+        $navbar.clone(true).prependTo(".jma-gbs-mobile-panel").find('ul.sf-menu').addClass('sf-vertical mobile-menu').find('ul').css('display', 'none');
+    }
+    //helps the background display on what would have been focus
+    $('.jma-gbs-mobile-panel a').on('click', function() {
+        $(this).blur();
+    });
 });
 
 
