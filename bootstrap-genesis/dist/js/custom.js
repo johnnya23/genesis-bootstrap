@@ -155,7 +155,7 @@ if (jQuery('.jma-sticky-menu').length) {
     //we need to to wrap the menu to preserve its height when it goes fixed
     if (!jQuery('#jma-placeholder').length) {
         $sticky_menu.wrap(jQuery('<div/>', {
-            style: "min-height:" + sticky_menu_height + "px;max-width:" + jQuery('.site-header .jma-gbs-inner').width() + "px;",
+            style: "min-height:" + sticky_menu_height + "px;",
             id: 'jma-placeholder'
         }));
     }
@@ -202,7 +202,7 @@ function stickmainmenutotop() {
     if ($('.jma-local-menu').length) {
         $jma_local_menu = $('.jma-local-menu');
 
-        if (window_scroll_top > site_pos.top - parseInt($('body').css('padding-top'), 10) - resizing_sticky_menu_height - admin_bar_height) {
+        if (window_scroll_top > site_pos.top - resizing_sticky_menu_height - admin_bar_height) {
             //local
             $jma_local_menu.addClass('fix-local');
             $jma_local_menu.css({
