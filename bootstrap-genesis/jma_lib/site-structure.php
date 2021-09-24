@@ -215,7 +215,7 @@ function jma_gbs_body_filter($cl)
     if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
         $cl[] = 'scroll_menu';
     }
-    if ($mods['jma_gbs_custom_mobile_menu'] != 'jma-none') {
+    if ($mods['jma_gbs_custom_mobile_menu'] != 'jma-none' || $mods['jma_gbs_desktop_side_mobile_display'] > 77) {
         $cl[] = 'use_mobile_menu';
     }
     if ($mods['jma_gbs_custom_mobile_menu'] == 'jma-auto') {

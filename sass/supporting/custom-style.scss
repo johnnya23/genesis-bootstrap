@@ -376,7 +376,7 @@ i.fas {
 }
 
 .jma-sticky-menu .nav > li > a {
-    transition: all 0.2s;
+    transition: all 0.4s;
 }
 
 .jma-sticky-menu.jma-fixed .nav > li > a {
@@ -384,8 +384,28 @@ i.fas {
     padding-bottom: 10px !important;
 }
 
-.jma-sticky-menu .site-title img {
-    transition: all 0.2s;
+.jma-sticky-menu .site-title img,
+.jma-sticky-menu .sub-title,
+.jma-sticky-menu h1 {
+    transition: all 0.4s;
+}
+
+.jma-sticky-menu h1 {
+    margin: 0;
+    padding: 2px 0;
+}
+
+.jma-sticky-menu .sub-title {
+    margin: 0;
+    padding: 0;
+}
+
+.jma-sticky-menu.jma-fixed .sub-title {
+    font-size: 0!important;
+}
+
+.jma-sticky-menu.jma-fixed h1 {
+    font-size: 40px!important;
 }
 
 .jma-sticky-menu.jma-fixed .site-title img {
