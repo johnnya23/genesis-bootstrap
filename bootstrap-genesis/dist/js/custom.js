@@ -196,13 +196,12 @@ function stickmainmenutotop() {
             });
         }
     }
-    site_pos = $site_inner.position();
-
+    jma_gbs_inner_pos = $site_inner.children('.jma-gbs-inner').offset();
     //time to display local menu
     if ($('.jma-local-menu').length) {
         $jma_local_menu = $('.jma-local-menu');
 
-        if (window_scroll_top > site_pos.top - resizing_sticky_menu_height - admin_bar_height) {
+        if (window_scroll_top > jma_gbs_inner_pos.top - resizing_sticky_menu_height - admin_bar_height) {
             //local
             $jma_local_menu.addClass('fix-local');
             $jma_local_menu.css({
