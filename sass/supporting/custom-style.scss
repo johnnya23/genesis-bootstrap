@@ -586,12 +586,9 @@ body .site-header .navbar {
     margin: auto;
 }
 @media screen and (max-width:767px) {
+    /* supress stray elements (and used by jquery)*/
     .site-inner > .jma-gbs-inner {
         overflow-x: hidden;
-    }
-
-    .content-sidebar-wrap .jma-gbs-inner {
-        margin-bottom: 30px;
     }
 }
 

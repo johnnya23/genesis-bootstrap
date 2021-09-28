@@ -141,13 +141,15 @@ jQuery(document).ready(function($) {
 //handle the sticky menu position and the local menu
 
 $site_body = jQuery('body');
-site_body_pos = $site_body.offset();
-admin_bar_height = site_body_pos.top;
+site_body_offset = $site_body.offset();
+admin_bar_height = site_body_offset.top;
+if (jQuery('#wpadminbar').css('position') == 'absolute')
+    admin_bar_height = 0;
 wrapped_menu = 0;
 sticky_menu_height = 0;
 if (jQuery('.jma-sticky-menu').length) {
     $sticky_menu = jQuery('.jma-sticky-menu');
-    sticky_menu_pos = $sticky_menu.offset();
+    sticky_menu_offset = $sticky_menu.offset();
     if ($sticky_menu.css('display') != 'none') sticky_menu_height = $sticky_menu.outerHeight();
 
     wrapped_menu = jQuery('.jma-ghb-featured-wrap .jma-sticky-menu').length;
@@ -163,60 +165,39 @@ if (jQuery('.jma-sticky-menu').length) {
 }
 
 $visual_content = jQuery('.inner-visual');
-visual_content_pos = $visual_content.offset();
+visual_content_offset = $visual_content.offset();
 
 function stickmainmenutotop() {
-    window_scroll_top = $window.scrollTop();
     var $ = jQuery.noConflict();
-
+    window_scroll_top = $window.scrollTop();
+    is_phone = $('.site-inner > .jma-gbs-inner').css('overflow-x') == 'hidden';
     resizing_sticky_menu_height = 0;
+
+    //sticky menu
     if (jQuery('.jma-sticky-menu').length) {
         if ($sticky_menu.css('display') != 'none') resizing_sticky_menu_height = $sticky_menu.outerHeight();
         if ($sticky_menu.find('.navbar').css('display') != 'none') {
-            //sticky menu
             handle_sticky_menu();
         }
 
     }
-    //sticky visual
 
+    //sticky visual
     sticky_menu_adjust = wrapped_menu ? 0 : resizing_sticky_menu_height;
-    if ($('.inner-visual.anchored').length) {
-        if (window_scroll_top > visual_content_pos.top - (admin_bar_height + sticky_menu_adjust)) {
-            $visual_content.addClass('jma-fixed');
-            $visual_content.css({
-                'top': (admin_bar_height + sticky_menu_adjust) + 'px',
-                'max-width': $('.site-header .jma-gbs-inner').width() + 'px'
-            });
-        } else {
-            $visual_content.removeClass('jma-fixed');
-            $visual_content.css({
-                'top': '',
-                'max-width': ''
-            });
-        }
+    if (!is_phone && $('.inner-visual.anchored').length) {
+        handle_sticky_visual();
     }
-    jma_gbs_inner_pos = $site_inner.children('.jma-gbs-inner').offset();
-    //time to display local menu
+
+    //local menu
+    jma_gbs_inner_offset = $site_inner.children('.jma-gbs-inner').offset();
     if ($('.jma-local-menu').length) {
         $jma_local_menu = $('.jma-local-menu');
-
-        if (window_scroll_top > jma_gbs_inner_pos.top - resizing_sticky_menu_height - admin_bar_height) {
-            //local
-            $jma_local_menu.addClass('fix-local');
-            $jma_local_menu.css({
-                'top': (admin_bar_height + resizing_sticky_menu_height) + 'px'
-            });
-        } else {
-            //undue local
-            $jma_local_menu.removeClass('fix-local');
-            $jma_local_menu.css('top', '');
-        }
+        handle_local_menu();
     }
 }
 
 function handle_sticky_menu() {
-    if (window_scroll_top > sticky_menu_pos.top - admin_bar_height) {
+    if (window_scroll_top > sticky_menu_offset.top - admin_bar_height) {
         $sticky_menu.addClass('jma-fixed').css({
             'top': admin_bar_height + 'px',
             'max-width': jQuery('.site-header .jma-gbs-inner').width() + 'px',
@@ -235,15 +216,45 @@ function handle_sticky_menu() {
         });
     }
 }
-$window.on('load', function() {
+
+function handle_sticky_visual() {
+    if (window_scroll_top > visual_content_offset.top - (admin_bar_height + sticky_menu_adjust)) {
+        $visual_content.addClass('jma-fixed');
+        $visual_content.css({
+            'top': (admin_bar_height + sticky_menu_adjust) + 'px',
+            'max-width': jQuery('.site-header .jma-gbs-inner').width() + 'px'
+        });
+    } else {
+        $visual_content.removeClass('jma-fixed');
+        $visual_content.css({
+            'top': '',
+            'max-width': ''
+        });
+    }
+
+}
+
+function handle_local_menu() {
+    if (is_phone) resizing_sticky_menu_height = 0;
+    if (window_scroll_top > jma_gbs_inner_offset.top - resizing_sticky_menu_height - admin_bar_height) {
+        //local
+        $jma_local_menu.addClass('fix-local');
+        $jma_local_menu.css({
+            'top': (admin_bar_height + resizing_sticky_menu_height) + 'px'
+        });
+    } else {
+        //undue local
+        $jma_local_menu.removeClass('fix-local');
+        $jma_local_menu.css('top', '');
+    }
+}
+$window.on('load scroll', function() {
     stickmainmenutotop();
 });
 
-$window.on('scroll', function() {
-    stickmainmenutotop();
-});
-
-$window.on('resize', function() {
+$window.on('resize orientationchange', function() {
+    if (jQuery('#wpadminbar').css('position') == 'absolute')
+        admin_bar_height = 0;
     stickmainmenutotop();
     jQuery('body').removeClass('open');
 });
