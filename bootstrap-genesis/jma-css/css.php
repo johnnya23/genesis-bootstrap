@@ -164,6 +164,17 @@ if (!$mods['use_menu_root_bg']) {
         'color' => $menu_root_current_font_color,
         $menu_border_attribute => $menu_current_border_value
     );
+    $supplemental_arrays[] = array(
+        'query' => '(min-width:768px)',
+        'selector' => 'ul.nav li li[class*="current"] > a, ul.nav li li[class*="current"] > a, ul.nav li li.current-menu-item > a:hover, ul.nav li li.current-menu-item > a:focus',
+        'color' => $mods['menu_current_font_color']
+    );
+}else{
+    $supplemental_arrays[] = array(
+        'query' => '(min-width:768px)',
+        'selector' => 'ul.nav  li[class*="current"] > a, ul.nav  li[class*="current"] > a, ul.nav  li.current-menu-item > a:hover, ul.nav  li.current-menu-item > a:focus',
+        'color' => $mods['menu_current_font_color']
+    );
 }
 if (isset($mods['menu_desktop_horizontal_padding']) && $mods['menu_desktop_horizontal_padding']) {
     $supplemental_arrays[] = array(
