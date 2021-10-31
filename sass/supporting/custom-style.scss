@@ -268,7 +268,7 @@ body.open .navbar-toggle {
     }
 
     body div.jma-gbs-mobile-panel .navbar li.current-menu-ancestor > a,
-    body div.jma-gbs-mobile-panel .navbar li.current-menu-item a {
+    body div.jma-gbs-mobile-panel .navbar li.current-menu-item > a {
         font-weight: bold;
         font-size: 115%;
         white-space: normal;
@@ -512,7 +512,7 @@ body .jma-gbs-mobile-panel .add-to-panel * a {
     }
 }
 
-body ul.nav a {
+ul.nav a {
     font-size: 16px;
 }
 

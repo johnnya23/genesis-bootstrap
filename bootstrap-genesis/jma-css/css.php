@@ -211,7 +211,7 @@ $css = array(
         'background-color' => $mods['menu_bg_color'],
     ),
     array(
-        'selector' => 'ul.nav a, body .jma-gbs-mobile-panel .add-to-panel *, body .jma-gbs-mobile-panel .add-to-panel * a',
+        'selector' => 'ul.nav a, body .jma-gbs-mobile-panel ul li a , body .jma-gbs-mobile-panel .add-to-panel *, body .jma-gbs-mobile-panel .add-to-panel * a',
         'color' => $mods['menu_font_color']
     ),
     array(
@@ -223,11 +223,6 @@ $css = array(
         'query' => '(min-width:768px)',
         'selector' => 'ul.nav li[class*="menu-item"] a:hover',
         'color' => $mods['menu_hover_font_color'],
-    ),
-    array(//ul.nav > li > a
-        'query' => '(min-width:768px)',
-        'selector' => 'ul.nav  li[class*="current"] > a, ul.nav  li.current-menu-item > a:hover, ul.nav  li.current-menu-item > a:focus',
-        'color' => $mods['menu_current_font_color'],
     ),
     array(
         'query' => '(min-width:768px)',
