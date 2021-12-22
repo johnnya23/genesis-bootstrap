@@ -25,7 +25,7 @@ function jma_gbs_get_display_vals()
         'lightbox_display' => 'off'
     );
 
-    $context = is_page()? '_pages': '_posts';
+    $context = '_' . get_post_type();
     //the items we are checking/modifying
     $items = array('title_display', 'image_display', 'featured_size', 'lightbox_display');
     if (get_post_meta(get_the_ID(), '_jma_gbs_page_options_key', true)) {
@@ -50,13 +50,11 @@ function jma_gbs_site_layout($pre)
     if (is_singular()) {
         global $post;
         $meta = get_post_meta($post->ID);
-        if (isset($meta['_genesis_layout'][0]) && !$meta['_genesis_layout'][0]) {
-            $mods = jma_gbs_get_theme_mods('jma_gbs_');
-            $post_type = get_post_type();
 
-            if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
-                $pre = $mods[$post_type . '_col_layout'];
-            }
+        $mods = jma_gbs_get_theme_mods('jma_gbs_');
+        $post_type = get_post_type();
+        if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
+            $pre = $mods[$post_type . '_col_layout'];
         }
     }
     return $pre;

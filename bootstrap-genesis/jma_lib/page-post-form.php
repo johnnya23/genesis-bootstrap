@@ -19,7 +19,7 @@ function jma_gbs_image_input_box()
     foreach ($screens as $screen) {
         add_meta_box(
             'jma_gbs_image_input_section',
-            __('Theme Modifications - Page Display Options', 'jma_textdomain'),
+            __('<span style="color:red">Theme Modifications - Page Display Options</span>', 'jma_textdomain'),
             'jma_gbs_page_options',
             $screen,
             'side'
@@ -59,37 +59,38 @@ add_action('add_meta_boxes', 'jma_gbs_image_input_box');
         echo '<option value="hide"'.selected($page_options['title_display'], 'hide').'>Hide Title</option>';
         echo '</select><br/><br/>';
 
-        echo '<label for="image_display">';
-        _e('Change Featured Image Display within body', 'jma_ghb_textdomain');
-        echo '</label><br/><br/> ';
-        echo '<select name="image_display">';
-        echo '<option value="0"'.selected($page_options['image_display'], '0').'>Default</option>';
-        echo '<option value="hide"'.selected($page_options['image_display'], 'hide').'>Hide</option>';
-        echo '<option value="full"'.selected($page_options['image_display'], 'full').'>Full Width</option>';
-        echo '<option value="right"'.selected($page_options['image_display'], 'right').'>Align Right</option>';
-        echo '<option value="left"'.selected($page_options['image_display'], 'left').'>Align Left</option>';
-        echo '</select><br/><br/>';
+        if (get_post_type() != 'product') {
+            echo '<label for="image_display">';
+            _e('Change Featured Image Display within body', 'jma_ghb_textdomain');
+            echo '</label><br/><br/> ';
+            echo '<select name="image_display">';
+            echo '<option value="0"'.selected($page_options['image_display'], '0').'>Default</option>';
+            echo '<option value="hide"'.selected($page_options['image_display'], 'hide').'>Hide</option>';
+            echo '<option value="full"'.selected($page_options['image_display'], 'full').'>Full Width</option>';
+            echo '<option value="right"'.selected($page_options['image_display'], 'right').'>Align Right</option>';
+            echo '<option value="left"'.selected($page_options['image_display'], 'left').'>Align Left</option>';
+            echo '</select><br/><br/>';
 
-        echo '<label for="lightbox_display">';
-        _e('Change Featured Image Display Lightbox within body', 'jma_ghb_textdomain');
-        echo '</label><br/><br/> ';
-        echo '<select name="lightbox_display">';
-        echo '<option value="0"'.selected($page_options['lightbox_display'], '0').'>Default</option>';
-        echo '<option value="off"'.selected($page_options['lightbox_display'], 'off').'>Off</option>';
-        echo '<option value="on"'.selected($page_options['lightbox_display'], 'on').'>On</option>';
-        echo '</select><br/><br/>';
+            echo '<label for="lightbox_display">';
+            _e('Change Featured Image Display Lightbox within body', 'jma_ghb_textdomain');
+            echo '</label><br/><br/> ';
+            echo '<select name="lightbox_display">';
+            echo '<option value="0"'.selected($page_options['lightbox_display'], '0').'>Default</option>';
+            echo '<option value="off"'.selected($page_options['lightbox_display'], 'off').'>Off</option>';
+            echo '<option value="on"'.selected($page_options['lightbox_display'], 'on').'>On</option>';
+            echo '</select><br/><br/>';
 
-        echo '<label for="featured_size">';
-        _e('Change Featured Image Size within body', 'jma_ghb_textdomain');
-        echo '</label><br/><br/> ';
-        echo '<select name="featured_size">';
-        echo '<option value="0"'.selected($page_options['featured_size'], '0').'>Default</option>';
-        echo '<option value="full"'.selected($page_options['featured_size'], 'full').'>Full</option>';
-        echo '<option value="large"'.selected($page_options['featured_size'], 'large').'>Large</option>';
-        echo '<option value="medium"'.selected($page_options['featured_size'], 'medium').'>Medium</option>';
-        echo '<option value="jma-gbs-grid"'.selected($page_options['featured_size'], 'jma-gbs-grid').'>Grid(640x360)</option>';
-        echo '</select><br/><br/>';
-
+            echo '<label for="featured_size">';
+            _e('Change Featured Image Size within body', 'jma_ghb_textdomain');
+            echo '</label><br/><br/> ';
+            echo '<select name="featured_size">';
+            echo '<option value="0"'.selected($page_options['featured_size'], '0').'>Default</option>';
+            echo '<option value="full"'.selected($page_options['featured_size'], 'full').'>Full</option>';
+            echo '<option value="large"'.selected($page_options['featured_size'], 'large').'>Large</option>';
+            echo '<option value="medium"'.selected($page_options['featured_size'], 'medium').'>Medium</option>';
+            echo '<option value="jma-gbs-grid"'.selected($page_options['featured_size'], 'jma-gbs-grid').'>Grid(640x360)</option>';
+            echo '</select><br/><br/>';
+        }
         $menus = get_terms('nav_menu');
 
         echo '<label for="scroll_menu">';

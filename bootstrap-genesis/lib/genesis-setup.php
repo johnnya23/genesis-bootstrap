@@ -10,6 +10,9 @@ add_theme_support('html5');
 // Remove structural Wraps
 remove_theme_support('genesis-structural-wraps');
 
+//avoid confussion by using plugin title toggling only
+remove_post_type_support( 'page', 'genesis-title-toggle' );
+
 // Remove item(s) from genesis admin screens
 add_action('genesis_admin_before_metaboxes', 'JMA_GBS_remove_genesis_theme_metaboxes', 999);
 //$config['genesis']['sections']['genesis_single']

@@ -614,6 +614,10 @@ body .site-header .navbar {
     max-width: 100%;
 }
 
+.site-inner .kt-row-column-wrap {
+    z-index: 0;
+}
+
 .gbs-modular-content .site-inner .content-sidebar-wrap .jma-gbs-inner {
     padding: 10px;
 }
