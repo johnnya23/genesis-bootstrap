@@ -162,7 +162,7 @@ add_action('admin_menu', 'jma_gbs_reuseable_url_function');
 if (is_admin()) {
     function jma_disable_editor_fullscreen_by_default()
     {
-        $script = "jQuery( window ).load(function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
+        $script = "window.addEventListener('load', (event) => { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
         wp_add_inline_script('wp-blocks', $script);
     }
     add_action('enqueue_block_editor_assets', 'jma_disable_editor_fullscreen_by_default');
