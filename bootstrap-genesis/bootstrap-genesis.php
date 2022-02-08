@@ -157,3 +157,12 @@ function jma_gbs_reuseable_url_function()
     $menu[7][2] = site_url('wp-admin/edit.php?post_type=wp_block');
 }
 add_action('admin_menu', 'jma_gbs_reuseable_url_function');
+
+if (is_admin()) {
+    function jma_gbs_disable_editor_fullscreen_by_default()
+    {
+        $script = "window.addEventListener('load', (event) => { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
+        wp_add_inline_script('wp-blocks', $script);
+    }
+    add_action('enqueue_block_editor_assets', 'jma_gbs_disable_editor_fullscreen_by_default');
+}
