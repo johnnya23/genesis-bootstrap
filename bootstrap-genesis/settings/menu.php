@@ -31,6 +31,20 @@ return array(
                 1 => 'Yes',
             )
         ),
+        'custom_trigger_when_closed' => array(
+            'default' => '',
+            'label' => __('Menu Trigger Text', 'jma_gbs'),
+            'description' => esc_html__('Use Custom Trigger Text (desktop only - leave blank for hamberger)'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'text'
+        ),
+        'custom_trigger_when_open' => array(
+            'default' => 'X',
+            'label' => __('Menu Trigger Close', 'jma_gbs'),
+            'description' => esc_html__('Trigger Text when the menu is open (only used if above is used)'),
+            'section' => 'jma_gbs_menu',
+            'type' => 'text'
+        ),
         'desktop_side_menu' => array(
             'label' => __('Menu to use for Desktop Side', 'jma_gbs'),
             'description' => esc_html__('This menu will slide out'),

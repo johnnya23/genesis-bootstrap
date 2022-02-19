@@ -335,7 +335,8 @@ $css = array(
     ),
     array(
         'selector' => '.jma-local-menu a:hover',
-        'color' => $mods['footer_bg_color']
+        'color' => $mods['footer_bg_color'],
+        'background-color' => $mods['footer_font_color']
     ),
     array(
         'selector' => '.site-inner a.overlay',

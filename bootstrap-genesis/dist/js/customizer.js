@@ -33,7 +33,7 @@
         });
     }
     /**
-     * Run functions when customizer is ready.
+     * Run functions when customizer is ready.   custom_trigger_when_closed
      */
     wp.customize.bind('ready', function() {
         conditional_display('jma_gbs_frame_content_control', '1|jma_gbs_frame_border_color_control,jma_gbs_frame_border_width_control,jma_gbs_frame_border_radius_control');
@@ -48,6 +48,6 @@
 
         conditional_display('jma_gbs_site_title_font_family_control', 'custom|jma_gbs_site_custom_title_font_family_control');
 
-        conditional_display('jma_gbs_use_desktop_side_menu_control', '1|jma_gbs_desktop_side_menu_control,jma_gbs_desktop_side_mobile_display_control');
+        conditional_display('jma_gbs_use_desktop_side_menu_control', '1|jma_gbs_desktop_side_menu_control,jma_gbs_desktop_side_mobile_display_control,jma_gbs_custom_trigger_when_closed_control,jma_gbs_custom_trigger_when_open_control');
     });
 })();

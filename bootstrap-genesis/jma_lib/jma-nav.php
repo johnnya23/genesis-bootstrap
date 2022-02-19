@@ -14,19 +14,36 @@ add_action('genesis_before', 'jma_gbs_close_panel', 99);
 
 function jma_gbs_panel_button()
 {
-    echo '<div class="jma-panel-button navbar-header container-fluid">
-      <button style="display:inline-block" class="navbar-toggle collapsed">
+    $mods = jma_gbs_get_theme_mods('jma_gbs_');
+    $trigger_class = $trigger_html = '';
+    if (isset($mods['custom_trigger_when_closed']) && $mods['custom_trigger_when_closed']) {
+
+        $trigger_class = ' custom-trigger';
+
+$when_open = isset($mods['custom_trigger_when_open']) && $mods['custom_trigger_when_open']?$mods['custom_trigger_when_open']:'X';
+        $trigger_html = '<button class="navbar-toggle custom-triggers collapsed">';
+        $trigger_html .= '<span class="trigger-default">';
+        $trigger_html .= $mods['custom_trigger_when_closed'];
+        $trigger_html .= '</span>';
+        $trigger_html .= '<span class="triggered-text">';
+        $trigger_html .= $when_open;
+        $trigger_html .= '</span>';
+        $trigger_html .= '</button>';
+    }
+    echo '<div class="jma-panel-button navbar-header container-fluid' . $trigger_class . '">
+      <button class="hamburger navbar-toggle collapsed">
         <span class="hamb">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar top"></span>
         <span class="icon-bar middle"></span>
         <span class="icon-bar bottom"></span>
         </span>
-      </button>
+      </button>' . $trigger_html . '
         </div><!-- jma-panel-button -->';
 }
 
-function jma_gbs_open_panel(){
+function jma_gbs_open_panel()
+{
     echo '<div id="jma-gbs-mobile-panel" class="jma-gbs-mobile-panel">';
 }
 

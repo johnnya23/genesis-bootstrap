@@ -4,6 +4,7 @@ window_scroll_top = $window.scrollTop();
 $site_inner = jQuery('.site-inner');
 
 jQuery(document).ready(function($) {
+    if ($('.jma-ghb-featured-wrap').length) $('body').addClass('ghb-featured');
     $('.jma-scroll-to-top, .jma-scroll-to-top a').on('click', function(event) {
         event.preventDefault();
         $("html").animate({
@@ -99,7 +100,7 @@ jQuery(document).ready(function($) {
     if ($('body').hasClass('use_side_menu'))
         $('.jma-gbs-mobile-panel ul.sf-menu').superclick();
 
-    $('.jma-panel-button button').on('click', function() {
+    $('.jma-panel-button .navbar-toggle').on('click', function() {
         $('body').toggleClass('open');
     });
 

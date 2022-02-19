@@ -29,6 +29,10 @@ button {
     text-decoration: none;
     outline: none!important;
 }
+
+body .sf-menu li {
+    white-space: normal;
+}
 /* mobile menu */
 .jma-gbs-mobile-panel,
 .jma-panel-button {
@@ -111,6 +115,38 @@ body .jma-gbs-mobile-panel .navbar-static-top .jma-positioned {
     display: block;
     width: 22px;
     height: 14px;
+}
+
+.jma-panel-button button {
+    display: inline-block;
+}
+@media screen and (max-width: 767px) {
+    .jma-panel-button .custom-triggers {
+        display: none;
+    }
+}
+@media screen and (min-width: 768px) {
+    .custom-trigger .hamburger {
+        display: none;
+    }
+}
+
+body button.custom-triggers {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+}
+
+.custom-triggers .triggered-text {
+    display: none;
+}
+
+.open .custom-triggers .trigger-default {
+    display: none;
+}
+
+.open .custom-triggers .triggered-text {
+    display: inline;
 }
 
 .navbar-toggle .icon-bar {
@@ -718,6 +754,26 @@ body .site-header .navbar {
     -webkit-transition: all 0.3s;
     padding: 6px 20px;
     display: inline-block;
+}
+@media screen and (max-width:767px) {
+    .jma-local-menu {
+        max-width: 600px;
+    }
+}
+@media screen and (max-width:680px) {
+    .jma-local-menu {
+        max-width: 500px;
+    }
+}
+@media screen and (max-width:580px) {
+    .jma-local-menu {
+        max-width: 400px;
+    }
+}
+@media screen and (max-width:480px) {
+    .jma-local-menu {
+        max-width: 300px;
+    }
 }
 /* general site display */
 .content-sidebar-wrap {
