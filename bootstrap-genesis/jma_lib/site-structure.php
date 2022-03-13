@@ -50,11 +50,13 @@ function jma_gbs_site_layout($pre)
     if (is_singular()) {
         global $post;
         $meta = get_post_meta($post->ID);
+        if (isset($meta['_genesis_layout'][0]) && !$meta['_genesis_layout'][0]) {
+            $mods = jma_gbs_get_theme_mods('jma_gbs_');
+            $post_type = get_post_type();
 
-        $mods = jma_gbs_get_theme_mods('jma_gbs_');
-        $post_type = get_post_type();
-        if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
-            $pre = $mods[$post_type . '_col_layout'];
+            if (isset($mods[$post_type . '_col_layout']) && $mods[$post_type . '_col_layout']) {
+                $pre = $mods[$post_type . '_col_layout'];
+            }
         }
     }
     return $pre;
@@ -150,7 +152,7 @@ function jma_gbs_template_redirect()
     }
 
     if ($mods['jma_gbs_add_search']) {
-        add_filter('JMA_GBS_nav_menu_markup_filter_inner', 'jma_gbs_nav_menu_markup_filter_inner', 10, 3);
+        add_filter('JMA_GBS_nav_menu_markup_filter_inner', 'jma_gbs_nav_menu_markup_filter_inner', 10, 2);
     }
 
     if (is_singular()) {
@@ -276,11 +278,11 @@ function jma_gbs_custom_side()
     ));
 }
 
-function jma_gbs_nav_menu_markup_filter_inner($out, $html, $args)
+function jma_gbs_nav_menu_markup_filter_inner($html, $args)
 {
     if ('primary'   == $args->theme_location) {
         $search_html = '<li class="jma-gbs-open-search menu-item"><a title="search the site" href="#"><span><i class="fas fa-search"></i></span></a></li>';
-        $out = str_replace('</ul></div>', $search_html . '</ul></div>', $out);
+        $html = str_replace('</ul></div>', $search_html . '</ul></div>', $html);
     }
-    return $out;
+    return $html;
 }

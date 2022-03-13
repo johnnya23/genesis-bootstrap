@@ -33,6 +33,11 @@ button {
 body .sf-menu li {
     white-space: normal;
 }
+@media screen and (min-width: 768px) {
+    ul.nav ul {
+        width: 275px;
+    }
+}
 /* mobile menu */
 .jma-gbs-mobile-panel,
 .jma-panel-button {
@@ -787,6 +792,18 @@ body .site-header .navbar {
 
 .search-submit.btn-default {
     padding: 9px 11px;
+}
+
+.jma-gbs-overlay .search-submit.btn-default {
+    color: #fff;
+    border-color: #fff;
+    background-color: #333;
+}
+
+.jma-gbs-overlay .search-submit.btn-default:hover {
+    color: #ccc;
+    border-color: #ccc;
+    background-color: #555;
 }
 
 button,

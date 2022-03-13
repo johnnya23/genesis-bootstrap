@@ -48,7 +48,7 @@ function jma_gbs_get_nav_menu($args = [])
             'open'    => '<nav %s>',
             'close'   => '</nav>',
             'context' => 'nav-' . $sanitized_location,
-            'content' => $nav_markup_open . $nav . $nav_markup_close,
+            'content' => $nav_markup_open .$nav . $nav_markup_close,
             'echo'    => true,
             //'params'  => $params,
         ]

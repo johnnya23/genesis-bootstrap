@@ -84,9 +84,6 @@ function JMA_GBS_nav_menu_markup_filter($html, $args)
     ) {
         return $html;
     }
-
-    $output = '<div class="outer">';
-    $output .= $html;
-    $output .= '</div>';
-    return apply_filters('JMA_GBS_nav_menu_markup_filter_inner', $output, $html, $args);
+    
+    return apply_filters('JMA_GBS_nav_menu_markup_filter_inner', $html, $args);
 }
