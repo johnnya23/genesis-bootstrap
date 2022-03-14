@@ -50,7 +50,9 @@ function jma_gbs_site_layout($pre)
     if (is_singular()) {
         global $post;
         $meta = get_post_meta($post->ID);
-        if (isset($meta['_genesis_layout'][0]) && !$meta['_genesis_layout'][0]) {
+        if (isset($meta['_genesis_layout'][0]) && $meta['_genesis_layout'][0]) {
+            $pre = $meta['_genesis_layout'][0];
+        }else{
             $mods = jma_gbs_get_theme_mods('jma_gbs_');
             $post_type = get_post_type();
 
