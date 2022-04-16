@@ -596,7 +596,7 @@ body .site-header .navbar {
     margin-bottom: 0;
 }
 
-.banner-wrap .entry-title {
+.banner-wrap > * {
     padding: 5px 20px;
 }
 /* padding position for gbs-boxed-content display mode */

@@ -261,7 +261,7 @@ $css = array(
     ),
 
     array(
-        'selector' => '.banner-wrap .entry-title',
+        'selector' => '.banner-wrap > *',
         'max-width' => ($mods['site_width'] + 40) . 'px',
     ),
     array(
