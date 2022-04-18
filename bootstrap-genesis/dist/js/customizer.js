@@ -49,5 +49,10 @@
         conditional_display('jma_gbs_site_title_font_family_control', 'custom|jma_gbs_site_custom_title_font_family_control');
 
         conditional_display('jma_gbs_use_desktop_side_menu_control', '1|jma_gbs_desktop_side_menu_control,jma_gbs_desktop_side_mobile_display_control,jma_gbs_custom_trigger_when_closed_control,jma_gbs_custom_trigger_when_open_control');
+
+
+
+
+        conditional_display('jma_gbs_site_banner_control', '1|jma_gbs_site_banner_bg_color_control,jma_gbs_site_banner_font_color_control,jma_gbs_site_banner_font_size_control,jma_gbs_site_banner_align_control,jma_gbs_site_banner_vertical_control');
     });
 })();

@@ -74,7 +74,43 @@ $page_post_choices = array(
                 0 => 'standard',
                 1 => 'title'
             ),
-            //'priority' => -5
+        ),
+        'site_banner_bg_color' => array(
+            'default' => 0,
+            'label' => __('Site Banner Background Color', 'jma_gbs'),
+            'section' => 'genesis_single',
+            'type' => 'color'
+        ),
+        'site_banner_font_color' => array(
+            'default' => 0,
+            'label' => __('Site Banner Font Color', 'jma_gbs'),
+            'section' => 'genesis_single',
+            'type' => 'color'
+        ),
+        'site_banner_font_size' => array(
+            'default' => 0,
+            'label' => __('Site Banner Font Size', 'jma_gbs'),
+            'description' => esc_html__('Percentage title font size FOR BANNERS (Blank or 100 for no change - 120 for big - 80 for small)'),
+            'section' => 'genesis_single',
+            'type' => 'number'
+        ),
+        'site_banner_align' => array(
+            'default' => 'left',
+            'label' => __('Site Banner Alignment', 'jma_gbs'),
+            'section' => 'genesis_single',
+            'type' => 'radio',
+            'choices' => array(
+                'left' => 'Left',
+                'center' => 'Center',
+                'right' => 'Right'
+            ),
+        ),
+        'site_banner_vertical' => array(
+            'default' => 5,
+            'label' => __('Site Banner Vertical Padding', 'jma_gbs'),
+            'description' => esc_html__('Top and Bottom in px'),
+            'section' => 'genesis_single',
+            'type' => 'number'
         ),
 
 );

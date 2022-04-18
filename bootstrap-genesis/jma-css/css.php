@@ -169,7 +169,7 @@ if (!$mods['use_menu_root_bg']) {
         'selector' => 'ul.nav li li[class*="current"] > a, ul.nav li li[class*="current"] > a, ul.nav li li.current-menu-item > a:hover, ul.nav li li.current-menu-item > a:focus',
         'color' => $mods['menu_current_font_color']
     );
-}else{
+} else {
     $supplemental_arrays[] = array(
         'query' => '(min-width:768px)',
         'selector' => 'ul.nav  li[class*="current"] > a, ul.nav  li[class*="current"] > a, ul.nav  li.current-menu-item > a:hover, ul.nav  li.current-menu-item > a:focus',
@@ -261,9 +261,19 @@ $css = array(
     ),
 
     array(
+        'selector' => '.banner-wrap',
+        'background' => $mods['site_banner_bg_color'],
+        'text-align' => $mods['site_banner_align'],
+        'padding-top' => $mods['site_banner_vertical'] . 'px',
+        'padding-bottom' => $mods['site_banner_vertical'] . 'px'
+    ),
+    array(
         'selector' => '.banner-wrap > *',
         'max-width' => ($mods['site_width'] + 40) . 'px',
+        'color' => $mods['site_banner_font_color'],
+        'font-size' => (2.5 * ($mods['site_banner_font_size']/100)) . 'rem',
     ),
+
     array(
         'selector' => 'h1,h2,h3,h4,h5,h6',
         'font-family' => $title_family,
