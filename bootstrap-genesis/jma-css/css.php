@@ -263,15 +263,15 @@ $css = array(
     array(
         'selector' => '.banner-wrap',
         'background' => $mods['site_banner_bg_color'],
-        'text-align' => $mods['site_banner_align'],
-        'padding-top' => $mods['site_banner_vertical'] . 'px',
-        'padding-bottom' => $mods['site_banner_vertical'] . 'px'
+        'text-align' => $mods['site_banner_align']
     ),
     array(
         'selector' => '.banner-wrap > *',
         'max-width' => ($mods['site_width'] + 40) . 'px',
         'color' => $mods['site_banner_font_color'],
         'font-size' => (2.5 * ($mods['site_banner_font_size']/100)) . 'rem',
+        'padding-top' => $mods['site_banner_vertical'] . 'px',
+        'padding-bottom' => $mods['site_banner_vertical'] . 'px'
     ),
 
     array(
