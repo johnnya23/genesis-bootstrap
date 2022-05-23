@@ -47,9 +47,10 @@ foreach ($header_footer as $value) {
 /*
 handle content options
 */
-$content_width_array = array('selector' => '.site-inner > .jma-gbs-inner', 'max-width' => ($site_width) . 'px');
+$content_width_array = array('selector' => '.site-inner > .jma-gbs-inner',
+'max-width' => ($site_width) . 'px');
 $content_appearence_array = array(
-    'selector' => '.site-inner .row',
+    'selector' => 'html .site-inner .row',
     'background-color' => $mods['page_bg']
 );
 $content_appearence_array["border-radius"] = $mods["frame_border_radius"] . "px";
@@ -61,19 +62,19 @@ if ($mods['frame_border_width'] && $mods['frame_content']) {
 if ($mods['body_shape'] == 'gbs-full-content') {
     if (!$mods['frame_content']) {
         $content_width_array['max-width'] = ($site_width +30) . 'px';
-        $content_appearence_array['selector'] = '.site-inner';
+        $content_appearence_array['selector'] = 'html .site-inner';
     } else {
-        $content_appearence_array['selector'] = '.site-inner > .jma-gbs-inner';
+        $content_appearence_array['selector'] = 'html .site-inner > .jma-gbs-inner';
         $content_width_array['padding-left'] = '15px';
         $content_width_array['padding-right'] = '15px';
     }
 }
 if ($mods['body_shape'] == 'gbs-modular-content') {
-    $content_appearence_array['selector'] = '.site-inner .content-sidebar-wrap .jma-gbs-inner';
+    $content_appearence_array['selector'] = 'html .site-inner .content-sidebar-wrap .jma-gbs-inner';
     $content_width_array['max-width'] = ($site_width +30) . 'px';
 }
 if ($mods['body_shape'] == 'gbs-boxed-content') {
-    $content_appearence_array['selector'] = '.site-inner';
+    $content_appearence_array['selector'] = 'html .site-inner';
     $content_width_array['selector'] = '.site-container';
     $content_width_array['max-width'] = ($site_width) . 'px';
 }
@@ -261,6 +262,13 @@ $css = array(
     ),
 
     array(
+        'selector' => '.jma_gbs_full_block.jma_gbs_non_frame_content.full-width-content .entry-content > *',
+        'max-width' => ($mods['site_width'] + 30) . 'px',
+        'padding-left' => '15px',
+        'padding-right' => '15px',
+    ),
+
+    array(
         'selector' => '.banner-wrap',
         'background' => $mods['site_banner_bg_color'],
         'text-align' => $mods['site_banner_align']
@@ -275,7 +283,7 @@ $css = array(
     ),
 
     array(
-        'selector' => 'h1,h2,h3,h4,h5,h6',
+        'selector' => 'html h1,html h2,html h3,html h4,html h5,html h6',
         'font-family' => $title_family,
         'color' => $mods['site_title_color']
     ),
@@ -293,15 +301,15 @@ $css = array(
         'background-color' => $mods['site_bg']
     ),
     array(
-        'selector' => 'a',
+        'selector' => 'html a',
         'color' => $mods['site_font_link_color']
     ),
     array(
-        'selector' => 'a:hover',
+        'selector' => 'html a:hover',
         'color' => $mods['site_font_link_hover_color']
     ),
     array(
-        'selector' => 'button, html input[type="button"], input[type="reset"], input[type="submit"], a.gbs-btn, .btn-default, body .jma-gbs-pagination-numeric li a, .wp-block-button__link, .wp-block-button__link:visited',
+        'selector' => 'html button, html input[type="button"], html input[type="reset"], html input[type="submit"], html a.gbs-btn, html .btn-default, html  .jma-gbs-pagination-numeric li a, html .wp-block-button__link, html .wp-block-button__link:visited',
         'color' => $mods['button_font'],
         'border-color' => $mods['button_font'],
         'padding' => $mods['button_vert_padding'] . 'px ' . $mods['button_hor_padding'] . 'px',
@@ -311,7 +319,7 @@ $css = array(
         'background-color' => $mods['button_back'],
     ),
     array(
-        'selector' => 'button:hover, html input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, a.gbs-btn:hover, .btn-default:hover, body .jma-gbs-pagination-numeric li a:hover, .wp-block-button__link:hover',
+        'selector' => 'html button:hover, html input[type="button"]:hover, html input[type="reset"]:hover, html input[type="submit"]:hover, html a.gbs-btn:hover, html .btn-default:hover, html  .jma-gbs-pagination-numeric li a:hover, html .wp-block-button__link:hover',
         'color' => $mods['button_font_hover'],
         'border-color' => $mods['button_font_hover'],
         'background-color' => $mods['button_back_hover'],

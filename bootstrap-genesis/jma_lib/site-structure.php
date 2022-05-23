@@ -52,7 +52,7 @@ function jma_gbs_site_layout($pre)
         $meta = get_post_meta($post->ID);
         if (isset($meta['_genesis_layout'][0]) && $meta['_genesis_layout'][0]) {
             $pre = $meta['_genesis_layout'][0];
-        }else{
+        } else {
             $mods = jma_gbs_get_theme_mods('jma_gbs_');
             $post_type = get_post_type();
 
@@ -210,10 +210,14 @@ function jma_gbs_body_filter($cl)
         }
     }
     $cl[] = $mods['jma_gbs_body_shape'];
-    if (jma_gbs_detect_block(array('name' => 'getwid/section')) || jma_gbs_detect_block(array('name' =>  'kadence/rowlayout'))) {
-        $cl[] = 'jma_gbs_full_block';
+    
+    $target_blocks = apply_filters('jma_gbs_target_blocks', array('getwid/section', 'kadence/rowlayout'));
+    foreach ($target_blocks as $target_block) {
+        if (jma_gbs_detect_block(array('name' => $target_block))) {
+            $cl[] = 'jma_gbs_full_block';
+            break;
+        }
     }
-
     if (isset($page_options['scroll_menu']) && $page_options['scroll_menu']) {
         $cl[] = 'scroll_menu';
     }

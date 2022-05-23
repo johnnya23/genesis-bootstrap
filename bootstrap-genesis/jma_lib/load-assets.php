@@ -55,6 +55,24 @@ function JMA_GBS_enqueue_css_js()
 }
 add_action('wp_enqueue_scripts', 'JMA_GBS_enqueue_css_js');
 
+function JMA_GBS_enqueue_block_editor_css_js()
+{
+    $output = get_transient('jma_gbs_general_css');
+    if (false == $output) {
+        // It wasn't there, so regenerate the data and save the transient
+        $css = array();
+        require_once(JMA_GBS_BASE_DIRECTORY . 'jma-css/css.php');
+
+        $output = jma_gbs_process_css_array($css);
+        set_transient('jma_gbs_general_css', $output);
+    }
+    wp_register_style('jma_gbs_block_editor_css', false);
+    wp_enqueue_style('jma_gbs_block_editor_css');
+    $output = str_replace(array('body','html'), array('body .editor-styles-wrapper','html body .editor-styles-wrapper'), $output);
+    wp_add_inline_style('jma_gbs_block_editor_css', $output);
+}
+add_action('enqueue_block_editor_assets', 'JMA_GBS_enqueue_block_editor_css_js');
+
 function JMA_GBS_admin_enqueue_css_js()
 {
     $min = WP_DEBUG? '': '.min';

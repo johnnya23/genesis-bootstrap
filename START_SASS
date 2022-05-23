@@ -2,7 +2,7 @@
 /* cd /opt/lampp/htdocs/newtheme/wp-content/plugins/jma-bootstrap-genesis
  sudo npm run start */
 
-
+/* npx browserslist@latest --update-db */
 
 /*
 https://stackoverflow.com/questions/42308879/how-to-solve-npm-error-npm-err-code-elifecycle
