@@ -5,7 +5,8 @@ if (! defined('ABSPATH')) {
 } // Exit if accessed directly
 
 // Add HTML5 markup structure
-add_theme_support('html5');
+add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
+
 
 // Remove structural Wraps
 remove_theme_support('genesis-structural-wraps');

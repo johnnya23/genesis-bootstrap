@@ -34,7 +34,7 @@ function JMA_GBS_enqueue_css_js()
 
     wp_enqueue_script('JMA_GBS_hover_js', JMA_GBS_BASE_URI . 'dist/js/hoverIntent' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
     wp_enqueue_script('JMA_GBS_superfish_js', JMA_GBS_BASE_URI . 'dist/js/superfish' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
-    if ($mods['use_desktop_side_menu']) {
+    if (isset($mods['use_desktop_side_menu']) && $mods['use_desktop_side_menu']) {
         wp_enqueue_script('JMA_GBS_superclick_js', JMA_GBS_BASE_URI . 'dist/js/superclick' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
     }
     wp_enqueue_script('JMA_GBS_supersubs_js', JMA_GBS_BASE_URI . 'dist/js/supersubs' . $min . '.js', array('jquery'), JMA_GBS_VERSION, true);
