@@ -1,11 +1,12 @@
 <?php
+
 /**
-*Plugin Name: JMA Bootstrap with Genesis
-*Description: Bootstap and customizations applied to Genesis Theme adds Desktop Side Menu
-*Version: 2.4.2
-*Author: John Antonacci
-*Author URI: https://gist.github.com/theandystratton/5924570
-*License: GPL2
+ *Plugin Name: JMA Bootstrap with Genesis
+ *Description: Bootstap and customizations applied to Genesis Theme adds Desktop Side Menu
+ *Version: 2.5
+ *Author: John Antonacci
+ *Author URI: https://gist.github.com/theandystratton/5924570
+ *License: GPL2
  */
 /**
  * Include all php files in the /includes directory
@@ -13,17 +14,17 @@
  * https://gist.github.com/theandystratton/5924570
  */
 
- /**
-  * Absolute file path to Genesis Bootstrap base directory.
-  */
-if (! defined('ABSPATH')) {
+/**
+ * Absolute file path to Genesis Bootstrap base directory.
+ */
+if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
 if (get_option('template') != 'genesis') {
     return;
 }
-if (! function_exists('get_plugin_data')) {
+if (!function_exists('get_plugin_data')) {
     require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
 $plugin_data = array('Version' => 1.0);
