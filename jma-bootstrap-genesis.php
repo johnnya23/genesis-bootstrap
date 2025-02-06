@@ -5,7 +5,7 @@
  *Description: Bootstap and customizations applied to Genesis Theme adds Desktop Side Menu
  *Version: 2.5
  *Author: John Antonacci
- *Author URI: https://gist.github.com/theandystratton/5924570
+ *Author URI: https://cleansupersites.com/
  *License: GPL2
  */
 /**
